@@ -17,6 +17,7 @@ class Users extends Migration
         {
             $table->increments('id');
 
+            $table->char('uuid', 20);
             $table->string('name', 20);
             $table->char('password', 60);
             $table->string('phone', 15);
@@ -30,6 +31,7 @@ class Users extends Migration
             $table->timestamps();
 
             // index
+            $table->unique('uuid');
             $table->index('email');
             $table->index('phone');
         });

@@ -17,6 +17,7 @@ class Customers extends Migration
         {
             $table->increments('id');
 
+            $table->char('uuid', 20);
             $table->integer('user_id');
             $table->string('name', 20);
             $table->string('phone', 10);
@@ -31,7 +32,9 @@ class Customers extends Migration
             $table->timestamps();
 
             // index
-            $table->index('email');
+            $table->unique('uuid')->unique();
+            $table->unique(['user_id', 'email']);
+            $table->index(['uuid', 'user_id']);
             $table->index('phone');
         });
     }
