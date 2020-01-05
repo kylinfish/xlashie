@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 
 class CustomerSeeder extends Seeder
@@ -17,6 +18,7 @@ class CustomerSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) {
             DB::table('customers')->insert([
                 'user_id' => random_int(1, 10),
+                'uuid' => Str::random(20),
                 'gender' => random_int(0, 3),
                 'name' => substr($faker->name, 0, 20),
                 'email' => $faker->email,
