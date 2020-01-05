@@ -21,9 +21,9 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
+$app->withFacades();
 
-// $app->withEloquent();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +45,14 @@ $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
     App\Console\Kernel::class
 );
+
+/*
+|--------------------------------------------------------------------------
+| Configure
+|--------------------------------------------------------------------------
+|
+*/
+
 
 /*
 |--------------------------------------------------------------------------
@@ -97,4 +105,21 @@ $app->router->group([
     require __DIR__.'/../routes/web.php';
 });
 
+if ((defined('DOMAIN_APPEND') and '' == constant('DOMAIN_APPEND')) and isset($_SERVER['REQUEST_URI']) and !preg_match('#^/health/check#i', $_SERVER['REQUEST_URI'])) {
+    $_SERVER['HTTPS'] = "on";
+}
+
+// stdOut SQL query to [docker] console
+if (('local' === env('APP_ENV')) and env('APP_LOG_QUERY')) {
+    app('db')->listen(function ($query) {
+        error_log(sprintf(
+            '[%s]: %s %s',
+            $query->time,
+            $query->sql,
+            json_encode($query->bindings)
+        ));
+    });
+}
+
 return $app;
+
