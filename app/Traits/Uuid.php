@@ -3,7 +3,7 @@ namespace App\Traits;
 
 use Illuminate\Support\Str;
 
-trait UsesUuid
+trait Uuid
 {
     /**
      * The "booting" method of the model, This help to magically create uuid for all new models
