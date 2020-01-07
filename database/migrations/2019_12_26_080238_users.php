@@ -17,16 +17,16 @@ class Users extends Migration
         {
             $table->increments('id');
 
-            $table->char('uuid', 20);
+            $table->char('uuid', 18);
             $table->string('name', 20);
             $table->char('password', 60);
             $table->string('phone', 15);
             $table->string('email', 50);
-            $table->tinyInteger('gender');
+            $table->tinyInteger('gender')->default(0);
             $table->date('birth')->nullable();
-            $table->string('avatar', 100)->nullable();
-            $table->string('line', 30)->nullable();
-            $table->string('fb', 30)->nullable();
+            $table->string('avatar', 100)->default('');
+            $table->string('line', 30)->default('');
+            $table->string('fb', 30)->default('');
 
             $table->timestamps();
 

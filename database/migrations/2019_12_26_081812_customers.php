@@ -17,24 +17,24 @@ class Customers extends Migration
         {
             $table->increments('id');
 
-            $table->char('uuid', 20);
-            $table->integer('user_id');
+            $table->char('uuid', 18);
+            $table->integer('shop_id');
             $table->string('name', 20);
-            $table->string('phone', 10);
+            $table->string('phone', 10)->default('');
             $table->string('email', 50);
-            $table->tinyInteger('gender');
+            $table->tinyInteger('gender')->default(0);
             $table->date('birth')->nullable();
-            $table->string('avatar', 100)->nullable();
-            $table->string('line', 30)->nullable();
-            $table->string('fb', 30)->nullable();
+            $table->string('avatar', 100)->default('');
+            $table->string('line', 30)->default('');
+            $table->string('fb', 30)->default('');
             $table->text('note')->nullable();
 
             $table->timestamps();
 
             // index
             $table->unique('uuid')->unique();
-            $table->unique(['user_id', 'email']);
-            $table->index(['uuid', 'user_id']);
+            $table->unique(['shop_id', 'uuid']);
+            $table->index('email');
             $table->index('phone');
         });
     }
