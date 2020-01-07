@@ -17,8 +17,8 @@ class CustomerSeeder extends Seeder
 
         for ($i = 0; $i < 10; $i++) {
             DB::table('customers')->insert([
-                'user_id' => random_int(1, 10),
-                'uuid' => Str::random(20),
+                'shop_id' => random_int(1, 4),
+                'uuid' => Str::random(18),
                 'gender' => random_int(0, 3),
                 'name' => substr($faker->name, 0, 20),
                 'email' => $faker->email,
