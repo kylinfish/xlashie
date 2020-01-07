@@ -23,21 +23,21 @@ $router->get('/', function () use ($router) {
 // Customer
 $router->get('customers', [
     'as' => 'customers.index',
-    'uses' => 'CustomersController@index'
+    'uses' => 'CustomerController@index'
 ]);
-$router->get('customers/{customer_id}', [
+$router->get('customers/{shop_id}/{cusotmer_uuid}', [
     'as' => 'customers.show',
-    'uses' => 'CustomersController@show'
+    'uses' => 'CustomerController@show'
 ]);
 $router->post('customer', [
     'as' => 'customers.store',
-    'uses' => 'CustomersController@store'
+    'uses' => 'CustomerController@store'
 ]);
-$router->put('customer/{customer_id}', [
+$router->put('customers/{shop_id}/{cusotmer_uuid}', [
     'as' => 'customers.update',
-    'uses' => 'CustomersController@update'
+    'uses' => 'CustomerController@update'
 ]);
-$router->delete('customer/{customer_id}', [
+$router->delete('customers/{shop_id}/{cusotmer_uuid}', [
     'as' => 'customers.delete',
-    'uses' => 'CustomersController@delete'
+    'uses' => 'CustomerController@delete'
 ]);
