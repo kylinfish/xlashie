@@ -15,9 +15,9 @@ class Customer extends Model implements AuthenticatableContract, AuthorizableCon
 
     protected $table = "customers";
 
-    protected $fillable = ['user_id', 'name', 'email', 'gender', 'birth', 'avatar', 'line', 'fb', 'phone', 'note'];
+    protected $fillable = ['shop_id', 'name', 'email', 'gender', 'birth', 'avatar', 'line', 'fb', 'phone', 'note'];
 
-    protected $hidden = ['id', 'password'];
+    protected $hidden = ['id', 'password', 'shop_id'];
 
     protected $guarded = ['uuid'];
 }

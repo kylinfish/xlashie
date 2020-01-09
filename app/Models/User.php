@@ -20,4 +20,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [];
 
     protected $guarded = ['uuid'];
+
+    public function shop()
+    {
+        return $this->belongsToMany('App\Models\Shop');
+    }
 }
