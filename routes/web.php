@@ -25,7 +25,7 @@ $router->get('customers', [
     'as' => 'customers.index',
     'uses' => 'CustomerController@index'
 ]);
-$router->get('customers/{shop_id}/{cusotmer_uuid}', [
+$router->get('customers/{cusotmer_uuid}', [
     'as' => 'customers.show',
     'uses' => 'CustomerController@show'
 ]);
@@ -33,11 +33,11 @@ $router->post('customer', [
     'as' => 'customers.store',
     'uses' => 'CustomerController@store'
 ]);
-$router->put('customers/{shop_id}/{cusotmer_uuid}', [
+$router->put('customers/{cusotmer_uuid}', [
     'as' => 'customers.update',
     'uses' => 'CustomerController@update'
 ]);
-$router->delete('customers/{shop_id}/{cusotmer_uuid}', [
+$router->delete('customers/{cusotmer_uuid}', [
     'as' => 'customers.delete',
     'uses' => 'CustomerController@delete'
 ]);
