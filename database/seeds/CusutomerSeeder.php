@@ -15,7 +15,7 @@ class CustomerSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             DB::table('customers')->insert([
                 'shop_id' => random_int(1, 4),
                 'uuid' => Str::random(18),
