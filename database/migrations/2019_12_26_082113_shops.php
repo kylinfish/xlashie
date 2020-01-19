@@ -15,10 +15,10 @@ class Shops extends Migration
     {
         Schema::create('shops', function($table)
         {
-            $table->increments('id');
+            $table->increments('id')->unsigned();
 
             $table->string('name', 20);
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->unsigned();
 
             $table->timestamps();
         });

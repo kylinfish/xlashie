@@ -15,14 +15,14 @@ class Customers extends Migration
     {
         Schema::create('customers', function($table)
         {
-            $table->increments('id');
+            $table->increments('id')->unsigned();
 
             $table->char('uuid', 18);
-            $table->integer('shop_id');
+            $table->integer('shop_id')->unsigned();
             $table->string('name', 20);
             $table->string('phone', 10)->default('');
             $table->string('email', 50);
-            $table->tinyInteger('gender')->default(0);
+            $table->tinyInteger('gender')->default(0)->unsigned();
             $table->date('birth')->nullable();
             $table->string('avatar', 100)->default('');
             $table->string('line', 30)->default('');
