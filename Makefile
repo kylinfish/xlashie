@@ -10,3 +10,6 @@ run:
 db_reset:
 	composer dumpautoload
 	php artisan migrate:refresh --seed
+
+doc:
+	(cd docs && make run)
