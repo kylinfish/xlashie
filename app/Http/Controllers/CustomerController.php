@@ -46,9 +46,9 @@ class CustomerController extends \App\Http\Controllers\Controller
      */
     public function show(Request $request, string $customer_uuid)
     {
-        $customers = $this->repo->getCustomer($this->shop_id, $customer_uuid);
+        $customer = $this->repo->getCustomer($this->shop_id, $customer_uuid);
 
-        return response()->json(['data' => $customers], 200);
+        return response()->json(['data' => $customer], 200);
     }
 
 }
