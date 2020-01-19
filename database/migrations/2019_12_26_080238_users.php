@@ -15,18 +15,18 @@ class Users extends Migration
     {
         Schema::create('users', function($table)
         {
-            $table->increments('id');
+            $table->increments('id')->unsigned();
 
-            $table->char('uuid', 20);
+            $table->char('uuid', 18);
             $table->string('name', 20);
             $table->char('password', 60);
             $table->string('phone', 15);
             $table->string('email', 50);
-            $table->tinyInteger('gender');
+            $table->tinyInteger('gender')->default(0)->unsigned();
             $table->date('birth')->nullable();
-            $table->string('avatar', 100)->nullable();
-            $table->string('line', 30)->nullable();
-            $table->string('fb', 30)->nullable();
+            $table->string('avatar', 100)->default('');
+            $table->string('line', 30)->default('');
+            $table->string('fb', 30)->default('');
 
             $table->timestamps();
 
