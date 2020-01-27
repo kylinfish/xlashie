@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('login')->group(function () {
+    Route::get('facebook', [
+        'as' => 'login.facebook',
+        'uses' => 'Auth\LoginController@facebook'
+    ]);
+    Route::get('facebook/callback', [
+        'as' => 'login.facebookcallback',
+        'uses' => 'Auth\LoginController@facebookCallback'
+    ]);
+});

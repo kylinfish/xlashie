@@ -21,16 +21,6 @@ Route::get('health/check', 'HealthController@check');
 Route::get('/', function () use ($router) {
     return 'Hello, this is macarame-api service.';
 });
-Route::prefix('login')->group(function () {
-    Route::get('facebook', [
-        'as' => 'login.facebook',
-        'uses' => 'Auth\LoginController@facebook'
-    ]);
-    Route::get('facebook/callback', [
-        'as' => 'login.facebookcallback',
-        'uses' => 'Auth\LoginController@facebookCallback'
-    ]);
-});
 
 // Customer
 Route::get('customers', [
