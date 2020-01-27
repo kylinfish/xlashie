@@ -27,6 +27,7 @@ class Users extends Migration
             $table->string('avatar', 100)->default('');
             $table->string('line', 30)->default('');
             $table->string('fb', 30)->default('');
+            $table->rememberToken();
 
             $table->timestamps();
 
