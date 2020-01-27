@@ -20,6 +20,17 @@ $router->get('/', function () use ($router) {
     return 'Hello, this is macarame-api service.';
 });
 
+$router->group(['prefix' => 'login'], function () use ($router) {
+    $router->get('facebook', [
+        'as' => 'login.facebook',
+        'uses' => 'Auth\LoginController@facebook'
+    ]);
+    $router->get('facebook/callback', [
+        'as' => 'login.facebookcallback',
+        'uses' => 'Auth\LoginController@facebookCallback'
+    ]);
+});
+
 // Customer
 $router->get('customers', [
     'as' => 'customers.index',
