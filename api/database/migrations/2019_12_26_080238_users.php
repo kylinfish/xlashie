@@ -17,7 +17,7 @@ class Users extends Migration
         {
             $table->increments('id')->unsigned();
 
-            $table->char('uuid', 18);
+            $table->string('uuid', 40);
             $table->string('name', 20);
             $table->char('password', 60);
             $table->string('phone', 15);
