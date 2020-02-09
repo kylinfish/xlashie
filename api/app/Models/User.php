@@ -8,11 +8,27 @@ class User extends Model
 {
     protected $table = "users";
 
-    protected $fillable = ['name', 'status'];
+    protected $fillable = [
+        'uuid',
+        'name',
+        'password',
+        'phone',
+        'email',
+        'gender',
+        'status',
+        'birth',
+        'avatar',
+        'fb',
+    ];
 
     protected $hidden = [];
 
-    protected $guarded = ['uuid'];
+    protected $guarded = [];
+
+    protected $attrubutes = [
+        'password' => '',
+        'phone' => '',
+    ];
 
     public function shop()
     {
