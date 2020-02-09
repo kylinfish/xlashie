@@ -10,4 +10,15 @@ class UserRepository extends EloquentRepository
     {
         $this->model = $user;
     }
+
+    /**
+     * getUserByEmail
+     *
+     * @param string $email
+     * @return User
+     */
+    public function getUserByEmail($email)
+    {
+        return $this->model->where(['email' => $email])->first();
+    }
 }
