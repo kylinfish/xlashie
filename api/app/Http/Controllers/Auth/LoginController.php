@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Services\UserService;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -34,8 +35,9 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UserService $service)
     {
+        $this->service = $service;
         $this->middleware('guest')->except('logout');
     }
 
@@ -57,8 +59,8 @@ class LoginController extends Controller
     public function facebookCallback()
     {
         $user = Socialite::driver('facebook')->user();
-        dd($user);
+        $login_user = $this->service->login($user, 'facebook');
 
-        // $user->token;
+        //todo session 存取登入訊息及產生 token
     }
 }
