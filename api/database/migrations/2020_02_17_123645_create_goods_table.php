@@ -20,6 +20,7 @@ class CreateGoodsTable extends Migration
 
             $table->string('name', 50);
             $table->string('avatar', 128);
+            $table->integer('cost'); //成本
             $table->integer('price');
             $table->tinyInteger('status')->default(0)->unsigned(); // 0: 關閉 1:開放 2:封存
             $table->tinyInteger('category_id')->default(0)->unsigned();
