@@ -63,4 +63,25 @@ class LoginController extends Controller
 
         //todo session 存取登入訊息及產生 token
     }
+
+    /**
+     * google
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function google()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    /**
+     * Obtain the user information from google.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function googleCallback()
+    {
+        $user = Socialite::driver('google')->user();
+        $login_user = $this->service->login($user, 'google');
+    }
 }
