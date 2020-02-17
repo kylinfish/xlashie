@@ -24,4 +24,12 @@ Route::prefix('login')->group(function () {
         'as' => 'login.facebookcallback',
         'uses' => 'Auth\LoginController@facebookCallback'
     ]);
+    Route::get('google', [
+        'as' => 'login.google',
+        'uses' => 'Auth\LoginController@google'
+    ]);
+    Route::get('google/callback', [
+        'as' => 'login.googlecallback',
+        'uses' => 'Auth\LoginController@googleCallback'
+    ]);
 });
