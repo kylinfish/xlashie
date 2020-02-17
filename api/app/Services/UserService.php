@@ -29,7 +29,7 @@ class UserService
             return $user;
         }
 
-        $uuid = $identify_provider . '-' . $auth_user->id;
+        $uuid = ord($identify_provider) . '-' . $auth_user->id;
         $auth_user->nickname ?? '';
         $auth_user->name ?? $email;
         $avatar ?? $auth_user->avatar ?? config('user.default_avatar');
