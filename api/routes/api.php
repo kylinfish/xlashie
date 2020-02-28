@@ -31,7 +31,7 @@ Route::get('customers/{cusotmer_uuid}', [
     'as' => 'customers.show',
     'uses' => 'CustomerController@show'
 ]);
-Route::post('customer', [
+Route::post('customers', [
     'as' => 'customers.store',
     'uses' => 'CustomerController@store'
 ]);
