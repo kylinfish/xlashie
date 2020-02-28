@@ -15,24 +15,21 @@ class CustomerRepository extends EloquentRepository
      * getCustomer 取得單一客戶
      *
      * @param int $shop_id
-     * @param int $shop_id
      *
      * @return void
      */
-    public function getCustomer(int $shop_id, string $customer_uuid)
+    public function getCustomer(int $user_id, string $customer_uuid)
     {
-        return $this->model->where(["uuid" => $customer_uuid, "shop_id" => $shop_id])->first();
+        return $this->model->where(["user_id" => $user_id, "uuid" => $customer_uuid])->first();
     }
 
     /**
      * getCustomers 取得客戶列表
      *
-     * @param int $shop_id
-     *
      * @return void
      */
-    public function getCustomers(int $shop_id)
+    public function getCustomers(int $user_id)
     {
-        return $this->model->where(["shop_id" => $shop_id])->paginate(20);
+        return $this->model->where(["user_id" => $user_id])->paginate(20);
     }
 }

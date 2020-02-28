@@ -20,7 +20,7 @@ class CustomerController extends \App\Http\Controllers\Controller
     public function __construct(CustomerRepository $customer_repo)
     {
         // hardcode should be instead of real query
-        $this->shop_id = User::find(1)->shop()->first()->id;
+        $this->user_id = User::find(1)->first()->id;
         $this->repo = $customer_repo;
     }
 
@@ -33,7 +33,7 @@ class CustomerController extends \App\Http\Controllers\Controller
      */
     public function index(Request $request)
     {
-        $customers = $this->repo->getCustomers($this->shop_id);
+        $customers = $this->repo->getCustomers($this->user_id);
 
         return response()->json($customers, 200);
     }
@@ -46,7 +46,9 @@ class CustomerController extends \App\Http\Controllers\Controller
      */
     public function show(Request $request, string $customer_uuid)
     {
-        $customer = $this->repo->getCustomer($this->shop_id, $customer_uuid);
+        $this->form->validate($request->all());
+
+        $customer = $this->repo->getCustomer($this->user_id, $customer_uuid);
 
         return response()->json(['data' => $customer], 200);
     }
