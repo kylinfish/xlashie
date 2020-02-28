@@ -28,8 +28,12 @@ class CustomerRepository extends EloquentRepository
      *
      * @return void
      */
-    public function getCustomers(int $user_id)
+    public function getCustomers(int $user_id, array $params)
     {
-        return $this->model->where(["user_id" => $user_id])->paginate(20);
+        $per_page = $params["per_page"] ?? 20;
+
+        $customers =  $this->model->where(["user_id" => $user_id])->paginate($per_page);
+
+        return $customers->appends(['per_page' => $per_page]);
     }
 }

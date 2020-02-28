@@ -23,4 +23,8 @@ class CustomerForm extends BaseForm
         'from'    => 'numeric',
         'limit'   => 'numeric',
     ];
+
+    protected $show = [
+        'uuid'    => 'required|string|size:18',
+    ];
 }

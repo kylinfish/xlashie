@@ -22,14 +22,18 @@ class CustomerController extends \App\Http\Controllers\Controller
 
     public function index(Request $request)
     {
-        $customers = $this->repo->getCustomers($this->user_id);
+        $this->form->validate($request->all());
+
+        $params["user_id"] = $this->user_id;
+
+        $customers = $this->repo->getCustomers($this->user_id, $request->all());
 
         return response()->json($customers, 200);
     }
 
     public function show(Request $request, string $customer_uuid)
     {
-        $this->form->validate($request->all());
+        $this->form->validate(['uuid' => $customer_uuid]);
 
         $customer = $this->repo->getCustomer($this->user_id, $customer_uuid);
 
