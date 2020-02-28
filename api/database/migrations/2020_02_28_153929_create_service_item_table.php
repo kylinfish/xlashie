@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductsTable extends Migration
+class CreateServiceItemTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,18 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('service_items', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('shop_id')->unsigned();
 
             $table->string('name', 50);
-            $table->string('avatar', 128);
-            $table->integer('cost'); //成本
-            $table->integer('price');
-            $table->tinyInteger('status')->default(0)->unsigned(); // 0: 關閉 1:開放 2:封存
-            $table->tinyInteger('category_id')->default(0)->unsigned();
-            $table->integer('inventory_count')->default(0)->unsigned();
+            $table->integer('price')->unsigned();
+            $table->integer('bonus')->unsigned();
+            $table->tinyInteger('item_type')->default(0)->unsigned();
 
             $table->timestamps();
 
             $table->index('shop_id');
-            $table->index('name');
         });
     }
 
@@ -39,6 +35,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('service_items');
     }
 }
