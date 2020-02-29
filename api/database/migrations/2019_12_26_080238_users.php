@@ -24,7 +24,7 @@ class Users extends Migration
             $table->string('email', 50);
             $table->tinyInteger('gender')->default(0)->unsigned();
             $table->date('birth')->nullable();
-            $table->string('avatar', 100)->default('');
+            $table->string('avatar', 256)->default('');
             $table->string('line', 30)->default('');
             $table->string('fb', 30)->default('');
             $table->rememberToken();
