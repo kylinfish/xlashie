@@ -60,8 +60,9 @@ class LoginController extends Controller
     {
         $user = Socialite::driver('facebook')->user();
         $login_user = $this->service->login($user, 'facebook');
+        $token = auth()->login($login_user);
 
-        //todo session 存取登入訊息及產生 token
+        return $this->respondWithToken($token);
     }
 
     /**
@@ -83,5 +84,21 @@ class LoginController extends Controller
     {
         $user = Socialite::driver('google')->user();
         $login_user = $this->service->login($user, 'google');
+    }
+
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60
+        ]);
     }
 }
