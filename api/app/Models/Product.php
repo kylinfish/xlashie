@@ -8,11 +8,23 @@ class Product extends Model
 {
     protected $table = "products";
 
-    protected $fillable = [];
+    protected $fillable = [
+        'shop_id',
+        'name',
+        'avatar',
+        'cost',
+        'price',
+        'status',
+        'category_id',
+        'inventory_count',
+    ];
 
     protected $hidden = [];
 
     protected $guarded = [];
 
-    protected $attrubutes = [];
+    protected $attrubutes = [
+        'name'   => '',
+        'avatar' => '',
+    ];
 }
