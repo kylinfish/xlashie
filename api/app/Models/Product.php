@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    //類型
+    const TYPE_ENTITY = 1;
+    const TYPE_VIRTUAL = 2;
+
     protected $table = "products";
 
     protected $fillable = [
