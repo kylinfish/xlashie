@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -54,15 +55,19 @@ class LoginController extends Controller
     /**
      * Obtain the user information from facebook.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function facebookCallback()
+    public function facebookCallback(Request $request)
     {
         $user = Socialite::driver('facebook')->user();
         $login_user = $this->service->login($user, 'facebook');
-        $token = auth()->login($login_user);
+        $token = auth()->login($login_user, true);
 
-        return $this->respondWithToken($token);
+        $request->session()->put('access_token', $token);
+        $request->session()->put('expires_in', auth()->factory()->getTTL() * 60);
+
+        return redirect('user/dashboard');
     }
 
     /**
@@ -78,27 +83,18 @@ class LoginController extends Controller
     /**
      * Obtain the user information from google.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function googleCallback()
+    public function googleCallback(Request $request)
     {
         $user = Socialite::driver('google')->user();
         $login_user = $this->service->login($user, 'google');
-    }
+        $token = auth()->login($login_user, true);
 
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function respondWithToken($token)
-    {
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
-        ]);
+        $request->session()->put('access_token', $token);
+        $request->session()->put('expires_in', auth()->factory()->getTTL() * 60);
+
+        return redirect('user/dashboard');
     }
 }
