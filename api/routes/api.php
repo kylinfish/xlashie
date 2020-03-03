@@ -17,6 +17,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::group(['prefix' => 'auth'], function () {
+    Route::get('/', 'AuthController@me');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+});
+
 Route::get('health/check', 'HealthController@check');
 Route::get('/', function () use ($router) {
     return 'Hello, this is macarame-api service.';
