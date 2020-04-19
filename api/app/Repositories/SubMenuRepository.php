@@ -2,13 +2,13 @@
 namespace App\Repositories;
 
 use App\Repositories\EloquentRepository;
-use App\Models\ItemProduct;
+use App\Models\SubMenu;
 
-class ItemProductRepository extends EloquentRepository
+class SubMenuRepository extends EloquentRepository
 {
-    public function __construct(ItemProduct $item_product)
+    public function __construct(SubMenu $sub_menu)
     {
-        $this->model = $item_product;
+        $this->model = $sub_menu;
     }
 
     public function getItemProduct(int $shop_id)

@@ -30,4 +30,9 @@ class ProductRepository extends EloquentRepository
     {
         return $this->model->where(["shop_id" => $shop_id])->paginate(20);
     }
+
+    public function getProductsByIds(int $shop_id, array $product_ids)
+    {
+        return $this->model->where(["shop_id" => $shop_id])->whereIn("id", $product_ids);
+    }
 }
