@@ -16,8 +16,8 @@ class Product extends Model
         'shop_id',
         'name',
         'avatar',
-        'cost',
-        'price',
+        'cost', // 成本?
+        'price', // 定價?
         'status',
         'category_id',
         'inventory_count',
