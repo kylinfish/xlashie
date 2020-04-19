@@ -49,3 +49,22 @@ Route::delete('customers/{cusotmer_uuid}', [
     'as' => 'customers.delete',
     'uses' => 'CustomerController@delete'
 ]);
+
+
+// Item Products (Menu)
+Route::get('menus', [
+    'as' => 'menus.index',
+    'uses' => 'MenuController@index'
+]);
+Route::get('menus/', [
+    'as' => 'menus.show',
+    'uses' => 'MenuController@show'
+]);
+Route::post('menus', [
+    'as' => 'menus.store',
+    'uses' => 'MenuController@store'
+]);
+Route::put('menus/', [
+    'as' => 'menus.update',
+    'uses' => 'MenuController@update'
+]);
