@@ -180,6 +180,52 @@
 			"name": "Menu 販賣項目(菜單)",
 			"item": [
 				{
+					"name": "取得菜單",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"重新來過一次\",\n\t\"price\": 6990\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/menus/?e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"menus",
+								""
+							],
+							"query": [
+								{
+									"key": "e",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "新增菜單項目",
 					"request": {
 						"method": "POST",
@@ -193,7 +239,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"重新來過一次\",\n\t\"price\": 6990\n}",
+							"raw": "{\n\t\"name\": \"產品名字給起來\",\n\t\"price\": 6990\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -236,7 +282,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"大禮包\",\n\t\"price\": 123120,\n\t\"sub_contents\": [\n\t\t{\n\t\t\t\"product_id\": 1,\n\t\t\t\"amount\": 5\n\t\t},\n\t\t{\n\t\t\t\"product_id\": 2,\n\t\t\t\"amount\": 3\n\t\t}\n\t]\n}",
+							"raw": "{\n\t\"name\": \"YAYA 大禮包\",\n\t\"price\": 123120,\n\t\"sub_contents\": [\n\t\t{\n\t\t\t\"product_id\": 4,\n\t\t\t\"amount\": 10\n\t\t},\n\t\t{\n\t\t\t\"product_id\": 6,\n\t\t\t\"amount\": 1\n\t\t}\n\t]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
