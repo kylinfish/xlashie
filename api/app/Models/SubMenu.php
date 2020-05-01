@@ -8,7 +8,7 @@ class SubMenu extends Model
 {
     protected $table = "sub_menus";
 
-    protected $fillable = ['name', 'amount', 'order', 'product_id', "item_id"];
+    protected $fillable = ['name', 'amount', 'order', 'product_id', "menu_id"];
 
     protected $hidden = ['id'];
 

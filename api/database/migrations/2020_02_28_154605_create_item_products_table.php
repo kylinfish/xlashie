@@ -16,7 +16,7 @@ class CreateItemProductsTable extends Migration
         Schema::create('sub_menus', function (Blueprint $table) {
             $table->increments('id')->unsigned();
 
-            $table->integer('item_id')->unsigned();
+            $table->integer('menu_id')->unsigned();
             $table->integer('product_id')->unsigned();
 
             $table->integer('amount');
@@ -24,7 +24,7 @@ class CreateItemProductsTable extends Migration
 
             $table->timestamps();
 
-            $table->index(['item_id', 'product_id']);
+            $table->index(['menu_id', 'product_id']);
         });
     }
 

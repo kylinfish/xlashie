@@ -64,10 +64,10 @@ class MenuService
     /**
      * createSubMenus 如果有子項目的話，從這個多對多的表來查
      */
-    private function createSubMenus(int $service_item_id, array $data)
+    private function createSubMenus(int $menu_id, array $data)
     {
         foreach ($data as $entry) {
-            $entry["item_id"] = $service_item_id;
+            $entry["menu_id"] = $menu_id;
             $this->submenu_repo->insert($entry);
         }
     }
