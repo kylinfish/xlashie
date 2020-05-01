@@ -16,9 +16,12 @@ class ProductRepository extends EloquentRepository
      *
      * @param int $shop_id
      */
-    public function getProduct(int $shop_id)
+    public function getProduct(int $shop_id, int $product_id)
     {
-        return $this->model->where(['shop_id' => $shop_id])->first();
+        return $this->model->where([
+            'id' => $product_id,
+            'shop_id' => $shop_id
+        ])->first();
     }
 
     /**
@@ -34,5 +37,10 @@ class ProductRepository extends EloquentRepository
     public function getProductsByIds(int $shop_id, array $product_ids)
     {
         return $this->model->where(["shop_id" => $shop_id])->whereIn("id", $product_ids);
+    }
+
+    public function deleteMyProduct(int $shop_id, int $product_id)
+    {
+        $this->model->where(["id" => $product_id, "shop_id" => $shop_id])->delete();
     }
 }
