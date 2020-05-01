@@ -13,13 +13,13 @@ class CreateServiceItemTable extends Migration
      */
     public function up()
     {
-        Schema::create('service_items', function (Blueprint $table) {
+        Schema::create('menus', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('shop_id')->unsigned();
 
             $table->string('name', 50);
             $table->integer('price')->unsigned();
-            $table->integer('bonus')->unsigned();
+            $table->integer('bonus')->unsigned()->default(0);
             $table->tinyInteger('item_type')->default(0)->unsigned();
 
             $table->timestamps();
@@ -35,6 +35,6 @@ class CreateServiceItemTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service_items');
+        Schema::dropIfExists('menus');
     }
 }

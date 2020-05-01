@@ -13,14 +13,14 @@ class CreateItemProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('item_products', function (Blueprint $table) {
+        Schema::create('sub_menus', function (Blueprint $table) {
             $table->increments('id')->unsigned();
 
             $table->integer('item_id')->unsigned();
             $table->integer('product_id')->unsigned();
 
             $table->integer('amount');
-            $table->smallInteger('order');
+            $table->smallInteger('order')->unsigned()->default(0);
 
             $table->timestamps();
 
@@ -35,6 +35,6 @@ class CreateItemProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('item_products');
+        Schema::dropIfExists('sub_menus');
     }
 }

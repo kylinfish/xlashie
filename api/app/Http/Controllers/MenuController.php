@@ -8,18 +8,18 @@ use Illuminate\Http\Response;
 use App\Forms\MenuForm;
 use App\Services\MenuService;
 use App\Repositories\MenuRepository;
-use App\Models\Menu;
+use App\Models\Shop;
 
 class MenuController extends Controller
 {
     public function __construct(MenuRepository $menu_repo, MenuForm $form, MenuService $service)
     {
         // hardcode should be instead of real query
-        $this->user_id = User::find(1)->first()->id;
-
+        $this->shop_id = Shop::find(1)->first()->id;
         $this->form = $form;
-        $this->service = $service;
         $this->repo = $menu_repo;
+        $this->service = $service;
+        $this->service->setShopId($this->shop_id);
     }
 
     public function index(Request $request)
@@ -33,12 +33,23 @@ class MenuController extends Controller
         return response()->json($menus, 200);
     }
 
-    public function show(Request $request, string $menu_uuid)
+    public function show(Request $request)
     {
         $this->form->validate(['uuid' => $menu_uuid]);
 
         $menu = $this->repo->getMenu($this->user_id, $menu_uuid);
 
         return response()->json(['data' => $menu], 200);
+    }
+
+    public function store(Request $request)
+    {
+        $params = $request->post();
+
+        $this->form->validate($params);
+
+        $menu = $this->service->createMenu($params);
+
+        return response()->json(['message' => "菜單新增成功"], 200);
     }
 }

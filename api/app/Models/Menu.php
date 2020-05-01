@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ItemProduct extends Model
+class Menu extends Model
 {
-    protected $table = "item_products";
+    const ITEMTYPE_PURE_ITEM = 0;
+    const ITEMTYPE_WITH_SUB_MENUS = 1;
+
+    protected $table = "menus";
 
     protected $fillable = [];
 
