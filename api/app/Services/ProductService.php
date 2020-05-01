@@ -18,16 +18,14 @@ class ProductService
         $this->shop_id = $id;
     }
 
-    public function createProducts(Product $product, array $data)
+    public function createProduct(array $data)
     {
-        foreach ($data as $entry) {
-            $entry["shop_id"] = $this->shop_id;
-            $this->itemproduct_repo->insert($entry);
-        }
+        $data["shop_id"] = $this->shop_id;
+        return $this->repo->create($data);
     }
 
     /**
-     * checkProductsShopOwner 檢查產品是否屬於該店家擁有的
+     * checkProductsOwner 檢查產品是否屬於該店家擁有的
      */
     public function checkProductsOwner(int $shop_id, array $product_ids)
     {
