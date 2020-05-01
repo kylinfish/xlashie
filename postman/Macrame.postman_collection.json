@@ -1,0 +1,239 @@
+{
+	"info": {
+		"_postman_id": "233539a3-6662-4107-b369-c1decbea13b5",
+		"name": "Macrame",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Customer - 新增客戶",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"彼多4\",\n\t\"phone\": \"0920832313\",\n\t\"email\": \"bwweewq@hunter.com\",\n\t\"fb\": \"beedow\",\n\t\"gender\": \"2\",\n\t\"avatar\": \"qwejqqwewke\",\n\t\"line\": \"qwlkejwqkwjrkjewkrjekrwelr\",\n\t\"birth\": \"2020/12/02\",\n\t\"note\": \"WHAT THTE  FUCK\"\n\t\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/customers/?e",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"customers",
+						""
+					],
+					"query": [
+						{
+							"key": "e",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer - 查詢客戶清單",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"彼多3\",\n\t\"phone\": \"0920832313\",\n\t\"email\": \"beed3w@hunter.com\",\n\t\"fb\": \"beedow\",\n\t\"gender\": 3\",\n\t\"avatar\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/customers/?limit=2&e",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"customers",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "2"
+						},
+						{
+							"key": "e",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer - 查詢單一客戶",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"彼多3\",\n\t\"phone\": \"0920832313\",\n\t\"email\": \"beed3w@hunter.com\",\n\t\"fb\": \"beedow\",\n\t\"gender\": 3\",\n\t\"avatar\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/customers/3KKUCdrxvsbquNe8lB/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"customers",
+						"3KKUCdrxvsbquNe8lB",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Menu - 新增菜單項目",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"重新來過一次\",\n\t\"price\": 6990\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/menus/?e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"menus",
+						""
+					],
+					"query": [
+						{
+							"key": "e",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Menu - 新增菜單項目 (有子項目 SubMenus)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"大禮包\",\n\t\"price\": 123120,\n\t\"sub_contents\": [\n\t\t{\n\t\t\t\"product_id\": 1,\n\t\t\t\"amount\": 5\n\t\t},\n\t\t{\n\t\t\t\"product_id\": 2,\n\t\t\t\"amount\": 3\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/menus/?e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"menus",
+						""
+					],
+					"query": [
+						{
+							"key": "e",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
