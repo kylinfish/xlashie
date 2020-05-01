@@ -18,4 +18,9 @@ class Menu extends Model
     protected $guarded = [];
 
     protected $attrubutes = [];
+
+    public function sub_menus()
+    {
+        return $this->hasMany('App\Models\SubMenu', 'menu_id', 'id');
+    }
 }

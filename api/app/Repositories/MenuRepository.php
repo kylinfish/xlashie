@@ -16,8 +16,9 @@ class MenuRepository extends EloquentRepository
         return $this->model->where(["id" => $id, "shop_id" => $shop_id])->first();
     }
 
-    public function getMenus(int $shop_id)
+    public function getMenuSets(int $shop_id)
     {
-        return $this->model->where(["shop_id" => $shop_id])->paginate(20);
+        return $this->model->where(["shop_id" => $shop_id])
+            ->with("sub_menus")->paginate(20);
     }
 }

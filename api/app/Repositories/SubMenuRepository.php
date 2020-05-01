@@ -11,13 +11,13 @@ class SubMenuRepository extends EloquentRepository
         $this->model = $sub_menu;
     }
 
-    public function getItemProduct(int $shop_id)
+    public function getSubMenus(int $menu_id)
     {
-        return $this->model->where(['shop_id' => $shop_id])->first();
+        return $this->model->where(["menu_id" => $menu_id]);
     }
 
-    public function getItemProductsByProduct_id(int $product_id)
+    public function getSubMenusByMenuId(array $menu_ids)
     {
-        return $this->model->where(["product_id" => $product_id])->paginate(20);
+        return $this->model->whereIn("menu_id", $menu_ids)->paginate(20);
     }
 }

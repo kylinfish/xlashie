@@ -56,7 +56,7 @@ Route::get('menus', [
     'as' => 'menus.index',
     'uses' => 'MenuController@index'
 ]);
-Route::get('menus/', [
+Route::get('menus/{menu_id}', [
     'as' => 'menus.show',
     'uses' => 'MenuController@show'
 ]);
@@ -64,7 +64,7 @@ Route::post('menus', [
     'as' => 'menus.store',
     'uses' => 'MenuController@store'
 ]);
-Route::put('menus/', [
+Route::put('menus/{menu_id}', [
     'as' => 'menus.update',
     'uses' => 'MenuController@update'
 ]);

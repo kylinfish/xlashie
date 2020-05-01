@@ -24,11 +24,7 @@ class MenuController extends Controller
 
     public function index(Request $request)
     {
-        $this->form->validate($request->all());
-
-        $params["user_id"] = $this->user_id;
-
-        $menus = $this->repo->getMenus($this->user_id, $request->all());
+        $menus = $this->service->getMenuSets($this->shop_id);
 
         return response()->json($menus, 200);
     }

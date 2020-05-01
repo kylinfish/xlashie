@@ -26,6 +26,11 @@ class MenuService
         $this->shop_id = $id;
     }
 
+    public function getMenuSets()
+    {
+        return $this->menu_repo->getMenuSets($this->shop_id);
+    }
+
     public function createMenu(array $data)
     {
         $has_sub_contents = array_key_exists("sub_contents", $data);
