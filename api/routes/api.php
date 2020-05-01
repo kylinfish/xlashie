@@ -68,3 +68,26 @@ Route::put('menus/', [
     'as' => 'menus.update',
     'uses' => 'MenuController@update'
 ]);
+
+
+// Product API
+Route::get('products', [
+    'as' => 'products.index',
+    'uses' => 'ProductController@index'
+]);
+Route::get('products/{product_id}', [
+    'as' => 'products.show',
+    'uses' => 'ProductController@show'
+]);
+Route::post('products', [
+    'as' => 'products.store',
+    'uses' => 'ProductController@store'
+]);
+Route::put('products/{product_id}', [
+    'as' => 'products.update',
+    'uses' => 'ProductController@update'
+]);
+Route::delete('products/{product_id}', [
+    'as' => 'products.delete',
+    'uses' => 'ProductController@delete'
+]);
