@@ -5,7 +5,7 @@ build:
 	(composer install)
 
 run:
-	(php -S localhost:8080 public/index.php)
+	(php -S localhost:8000 api/public/index.php)
 
 db_reset:
 	composer dumpautoload
