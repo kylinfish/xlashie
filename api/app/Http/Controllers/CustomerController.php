@@ -42,7 +42,7 @@ class CustomerController extends \App\Http\Controllers\Controller
 
     public function store(Request $request)
     {
-        $params = $request->all();
+        $params = $request->only(["name", "phone", "email", "fb", "line", "birth", "note"]);
 
         $this->form->validate($params);
 

@@ -40,7 +40,7 @@ class MenuController extends Controller
 
     public function store(Request $request)
     {
-        $params = $request->post();
+        $params = $request->only(["name", "price", "sub_contents"]);
 
         $this->form->validate($params);
 
