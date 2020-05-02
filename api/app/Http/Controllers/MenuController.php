@@ -29,11 +29,11 @@ class MenuController extends Controller
         return response()->json($menus, 200);
     }
 
-    public function show(Request $request)
+    public function show(Request $request, String $menu_id)
     {
-        $this->form->validate(['uuid' => $menu_uuid]);
+        $this->form->validate(['uuid' => $menu_id]);
 
-        $menu = $this->repo->getMenu($this->user_id, $menu_uuid);
+        $menu = $this->repo->getMenu($menu_id, $this->shop_id);
 
         return response()->json(['data' => $menu], 200);
     }
