@@ -13,14 +13,15 @@ class Shops extends Migration
      */
     public function up()
     {
-        Schema::create('shops', function($table)
+        Schema::create('companies', function($table)
         {
             $table->increments('id')->unsigned();
 
-            $table->string('name', 20);
-            $table->tinyInteger('status')->unsigned();
+            $table->string('name');
+            $table->boolean('enabled')->default(1);
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

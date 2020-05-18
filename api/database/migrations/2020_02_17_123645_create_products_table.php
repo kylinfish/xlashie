@@ -15,20 +15,23 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->integer('shop_id')->unsigned();
+            $table->integer('company_id')->unsigned();
 
             $table->string('name', 50);
-            $table->string('avatar', 255);
-            $table->integer('cost'); //成本
-            $table->integer('price');
+            $table->string('sku', 30);
+            $table->string('avatar', 255)->default('');
+            $table->double('sale_price', 15, 4)->default(0);
+            $table->double('purchase_price', 15, 4)->default(0);
             $table->tinyInteger('status')->default(0)->unsigned(); // 0: 關閉 1:開放 2:封存
             $table->tinyInteger('category_id')->default(0)->unsigned();
-            $table->integer('inventory_count')->default(0)->unsigned();
+            $table->integer('quantity')->default(0)->unsigned();
+            $table->text('description')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
 
-            $table->index('shop_id');
-            $table->index('name');
+            $table->index('company_id');
+            $table->unique(['company_id', 'sku']);
         });
     }
 
