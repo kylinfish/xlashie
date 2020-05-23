@@ -121,7 +121,7 @@ class CreateTables extends Migration
             $table->integer('company_id')->unsigned();
 
             $table->string('name', 50);
-            $table->string('sku', 30);
+            $table->string('sku', 30)->default('');
             $table->string('avatar', 255)->default('');
             $table->double('sale_price', 15, 4)->default(0);
             $table->double('purchase_price', 15, 4)->default(0);
@@ -133,8 +133,7 @@ class CreateTables extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->index('company_id');
-            $table->unique(['company_id', 'sku']);
+            $table->index(['company_id', 'name']);
         });
 
         Schema::create('menus', function (Blueprint $table) {
@@ -196,6 +195,7 @@ class CreateTables extends Migration
 
             $table->index('company_id');
         });
+
 
         Schema::create('invoice_items', function (Blueprint $table) {
             $table->increments('id');

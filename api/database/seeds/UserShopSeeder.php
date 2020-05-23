@@ -15,25 +15,25 @@ class UserShopSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        DB::table('shop_user')->insert([
+        DB::table('user_companies')->insert([
             'user_id' => 1,
-            'shop_id' => 1,
+            'company_id' => 1,
 
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
 
-        DB::table('shop_user')->insert([
+        DB::table('user_companies')->insert([
             'user_id' => 2,
-            'shop_id' => 2,
+            'company_id' => 2,
 
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
 
-        DB::table('shop_user')->insert([
+        DB::table('user_companies')->insert([
             'user_id' => 3,
-            'shop_id' => 3,
+            'company_id' => 3,
 
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

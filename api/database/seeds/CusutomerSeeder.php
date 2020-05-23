@@ -23,8 +23,11 @@ class CustomerSeeder extends Seeder
                 'name' => substr($faker->name, 0, 20),
                 'email' => $faker->email,
                 'birth' => $faker->dateTime,
+                'cellphone' => substr($faker->e164PhoneNumber, 0, 10),
                 'phone' => substr($faker->e164PhoneNumber, 0, 10),
-                'note' => $faker->text($maxNbChars = random_int(10, 100)),
+                'address' => $faker->address,
+                'note_1' => $faker->text($maxNbChars = random_int(10, 100)),
+                'note_2' => $faker->text($maxNbChars = random_int(10, 100)),
 
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
