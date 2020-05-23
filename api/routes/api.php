@@ -33,7 +33,7 @@ Route::get('customers', [
     'as' => 'customers.index',
     'uses' => 'CustomerController@index'
 ]);
-Route::get('customers/{cusotmer_uuid}', [
+Route::get('customers/{customer_uuid}', [
     'as' => 'customers.show',
     'uses' => 'CustomerController@show'
 ]);
@@ -41,11 +41,11 @@ Route::post('customers', [
     'as' => 'customers.store',
     'uses' => 'CustomerController@store'
 ]);
-Route::put('customers/{cusotmer_uuid}', [
+Route::put('customers/{customer_uuid}', [
     'as' => 'customers.update',
     'uses' => 'CustomerController@update'
 ]);
-Route::delete('customers/{cusotmer_uuid}', [
+Route::delete('customers/{customer_uuid}', [
     'as' => 'customers.delete',
     'uses' => 'CustomerController@delete'
 ]);
