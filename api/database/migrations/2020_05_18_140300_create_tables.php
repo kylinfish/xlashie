@@ -139,6 +139,7 @@ class CreateTables extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('company_id')->unsigned();
+            $table->integer('product_id')->unsigned();
 
             $table->string('name', 50);
             $table->integer('price')->unsigned();
@@ -147,7 +148,7 @@ class CreateTables extends Migration
 
             $table->timestamps();
 
-            $table->index('company_id');
+            $table->index(['company_id', 'product_id']);
         });
 
         Schema::create('sub_menus', function (Blueprint $table) {
