@@ -1,15 +1,19 @@
 <?php
 namespace App\Http\Controllers;
 
+use Dingo\Api\Routing\Helpers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Forms\CustomerForm;
 use App\Services\CustomerService;
 use App\Repositories\CustomerRepository;
 use App\Models\User;
+use App\Transformers\Customer as Transformer;
 
 class CustomerController extends \App\Http\Controllers\Controller
 {
+    use Helpers;
+
     public function __construct(CustomerRepository $customer_repo, CustomerForm $form, CustomerService $service)
     {
         // hardcode should be instead of real query
@@ -28,7 +32,7 @@ class CustomerController extends \App\Http\Controllers\Controller
 
         $customers = $this->repo->getCustomers($this->user_id, $request->all());
 
-        return response()->json($customers, 200);
+        return $this->response->paginator($customers, new Transformer);
     }
 
     public function show(Request $request, string $customer_uuid)
@@ -37,7 +41,7 @@ class CustomerController extends \App\Http\Controllers\Controller
 
         $customer = $this->repo->getCustomer($this->user_id, $customer_uuid);
 
-        return response()->json(['data' => $customer], 200);
+        return $this->response->item($customer, new Transformer);
     }
 
     public function store(Request $request)
@@ -50,8 +54,8 @@ class CustomerController extends \App\Http\Controllers\Controller
 
         $customer = $this->service->createCustomer($params);
 
-        return response()->json([
-            'message' => "客戶: {$customer->name} 新增成功",
-        ], 200);
+        return $this->response->item($customer, new Transformer)->setMeta([
+            "message" => "{$customer->name} 新增成功",
+        ]);
     }
 }

@@ -28,28 +28,16 @@ Route::get('/', function () use ($router) {
     return 'Hello, this is macarame-api service.';
 });
 
-// Customer
-Route::get('customers', [
-    'as' => 'customers.index',
-    'uses' => 'CustomerController@index'
-]);
-Route::get('customers/{customer_uuid}', [
-    'as' => 'customers.show',
-    'uses' => 'CustomerController@show'
-]);
-Route::post('customers', [
-    'as' => 'customers.store',
-    'uses' => 'CustomerController@store'
-]);
-Route::put('customers/{customer_uuid}', [
-    'as' => 'customers.update',
-    'uses' => 'CustomerController@update'
-]);
-Route::delete('customers/{customer_uuid}', [
-    'as' => 'customers.delete',
-    'uses' => 'CustomerController@delete'
-]);
 
+$api = app('Dingo\Api\Routing\Router');
+$api->version('v1', function ($api) {
+    // Customer
+    $api->get('customers', 'App\Http\Controllers\CustomerController@index');
+    $api->get('customers/{customer_uuid}', 'App\Http\Controllers\CustomerController@show');
+    $api->post('customers', 'App\Http\Controllers\CustomerController@store');
+    $api->put('customers/{customer_uuid}', 'App\Http\Controllers\CustomerController@update');
+    $api->delete('customers/{customer_uuid}', 'App\Http\Controllers\CustomerController@delete');
+});
 
 // Item Products (Menu)
 Route::get('menus', [
