@@ -53,20 +53,21 @@ class CreateTables extends Migration
         
         Schema::create('customers', function($table) {
             $table->increments('id')->unsigned();
-
-            $table->char('uuid', 18);
+            
             $table->integer('user_id')->unsigned();
+            $table->char('uuid', 18);
             $table->string('name', 20);
             $table->string('phone', 10)->default('');
             $table->string('cellphone', 10)->default('');
             $table->string('email', 50);
-            $table->string('tax_number')->nullable(); // 統一編號
-            $table->tinyInteger('gender')->default(0)->unsigned();
+            $table->string('tax_number')->default(''); // 統一編號
             $table->date('birth')->nullable();
+            $table->tinyInteger('gender')->default(0)->unsigned();
+            $table->tinyInteger('discount_id')->default(0)->unsigned();
             $table->string('avatar', 256)->default('');
             $table->string('line', 50)->default('');
             $table->string('fb', 50)->default('');
-            $table->text('address')->nullable();
+            $table->string('address', 150)->default('');
             $table->text('note_1')->nullable();
             $table->text('note_2')->nullable();
 
