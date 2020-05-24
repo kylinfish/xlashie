@@ -13,14 +13,16 @@ class Product extends Model
     protected $table = "products";
 
     protected $fillable = [
-        'shop_id',
+        'company_id',
         'name',
         'avatar',
-        'cost', // 成本?
-        'price', // 定價?
+        'sale_price',
+        'purchase_price',
         'status',
         'category_id',
-        'inventory_count',
+        'quantity',
+        'description',
+        'sku',
     ];
 
     protected $hidden = [];

@@ -20,7 +20,7 @@ class ProductService
 
     public function createProduct(array $data)
     {
-        $data["shop_id"] = $this->shop_id;
+        $data["company_id"] = $this->shop_id;
         return $this->repo->create($data);
     }
 

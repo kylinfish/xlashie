@@ -37,6 +37,13 @@ $api->version('v1', function ($api) {
     $api->post('customers', 'App\Http\Controllers\CustomerController@store');
     $api->put('customers/{customer_uuid}', 'App\Http\Controllers\CustomerController@update');
     $api->delete('customers/{customer_uuid}', 'App\Http\Controllers\CustomerController@delete');
+
+    // Product 
+    $api->get('products', 'App\Http\Controllers\ProductController@index');
+    $api->get('products/{product_id}', 'App\Http\Controllers\ProductController@show');
+    $api->post('products', 'App\Http\Controllers\ProductController@store');
+    $api->put('products/{product_id}', 'App\Http\Controllers\ProductController@update');
+    $api->delete('products/{product_id}', 'App\Http\Controllers\ProductController@delete');
 });
 
 // Item Products (Menu)
@@ -58,24 +65,3 @@ Route::put('menus/{menu_id}', [
 ]);
 
 
-// Product API
-Route::get('products', [
-    'as' => 'products.index',
-    'uses' => 'ProductController@index'
-]);
-Route::get('products/{product_id}', [
-    'as' => 'products.show',
-    'uses' => 'ProductController@show'
-]);
-Route::post('products', [
-    'as' => 'products.store',
-    'uses' => 'ProductController@store'
-]);
-Route::put('products/{product_id}', [
-    'as' => 'products.update',
-    'uses' => 'ProductController@update'
-]);
-Route::delete('products/{product_id}', [
-    'as' => 'products.delete',
-    'uses' => 'ProductController@delete'
-]);

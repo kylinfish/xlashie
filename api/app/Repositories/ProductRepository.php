@@ -20,7 +20,7 @@ class ProductRepository extends EloquentRepository
     {
         return $this->model->where([
             'id' => $product_id,
-            'shop_id' => $shop_id
+            'company_id' => $shop_id
         ])->first();
     }
 
@@ -31,16 +31,16 @@ class ProductRepository extends EloquentRepository
      */
     public function getProducts(int $shop_id)
     {
-        return $this->model->where(["shop_id" => $shop_id])->paginate(20);
+        return $this->model->where(["company_id" => $shop_id])->paginate(20);
     }
 
     public function getProductsByIds(int $shop_id, array $product_ids)
     {
-        return $this->model->where(["shop_id" => $shop_id])->whereIn("id", $product_ids);
+        return $this->model->where(["company_id" => $shop_id])->whereIn("id", $product_ids);
     }
 
     public function deleteMyProduct(int $shop_id, int $product_id)
     {
-        $this->model->where(["id" => $product_id, "shop_id" => $shop_id])->delete();
+        $this->model->where(["id" => $product_id, "company_id" => $shop_id])->delete();
     }
 }
