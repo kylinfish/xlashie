@@ -9,7 +9,7 @@ use App\Repositories\SubMenuRepository;
 
 class MenuService
 {
-    private $shop_id;
+    private $company_id;
 
     public function __construct(
         MenuRepository $menu_repo,
@@ -21,21 +21,21 @@ class MenuService
         $this->product_service = $product_service;
     }
 
-    public function setShopId(int $id)
+    public function setCompanyId(int $id)
     {
-        $this->shop_id = $id;
+        $this->company_id = $id;
     }
 
     public function getMenuSets()
     {
-        return $this->menu_repo->getMenuSets($this->shop_id);
+        return $this->menu_repo->getMenuSets($this->company_id);
     }
 
     public function createMenu(array $data)
     {
         $has_sub_contents = array_key_exists("sub_contents", $data);
 
-        $data["shop_id"] = $this->shop_id;
+        $data["company_id"] = $this->company_id;
         $data["item_type"] = $has_sub_contents ? Menu::ITEMTYPE_WITH_SUB_MENUS : Menu::ITEMTYPE_PURE_ITEM;
 
         #XXX: 有點髒，看有沒有更好的作法，避免沒有 sub_contents 直接丟整組 $data 進去會噴錯
@@ -49,7 +49,7 @@ class MenuService
         if ($has_sub_contents) {
             try {
                 $product_ids = Arr::pluck($sub_contents, "product_id");
-                if (! $this->product_service->checkProductsOwner($this->shop_id, $product_ids)) {
+                if (! $this->product_service->checkProductsOwner($this->company_id, $product_ids)) {
                     throw new \InvalidArgumentException("Don't assign products which aren't yours.");
                 }
 

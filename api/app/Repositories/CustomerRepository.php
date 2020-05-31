@@ -14,8 +14,6 @@ class CustomerRepository extends EloquentRepository
     /**
      * getCustomer 取得單一客戶
      *
-     * @param int $shop_id
-     *
      * @return void
      */
     public function getCustomer(int $user_id, string $customer_uuid)

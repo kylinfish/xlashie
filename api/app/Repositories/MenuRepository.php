@@ -11,14 +11,14 @@ class MenuRepository extends EloquentRepository
         $this->model = $menu;;
     }
 
-    public function getMenu(int $id, int $shop_id)
+    public function getMenu(int $id, int $company_id)
     {
-        return $this->model->where(["id" => $id, "shop_id" => $shop_id])->first();
+        return $this->model->where(["id" => $id, "company_id" => $company_id])->first();
     }
 
-    public function getMenuSets(int $shop_id)
+    public function getMenuSets(int $company_id)
     {
-        return $this->model->where(["shop_id" => $shop_id])
+        return $this->model->where(["company_id" => $company_id])
             ->with("sub_menus")->paginate(20);
     }
 }

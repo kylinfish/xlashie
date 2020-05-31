@@ -8,23 +8,23 @@ use Illuminate\Http\Response;
 use App\Forms\MenuForm;
 use App\Services\MenuService;
 use App\Repositories\MenuRepository;
-use App\Models\Shop;
+use App\Models\Company;
 
 class MenuController extends Controller
 {
     public function __construct(MenuRepository $menu_repo, MenuForm $form, MenuService $service)
     {
         // hardcode should be instead of real query
-        $this->shop_id = Shop::find(1)->first()->id;
+        $this->company_id = Company::find(1)->first()->id;
         $this->form = $form;
         $this->repo = $menu_repo;
         $this->service = $service;
-        $this->service->setShopId($this->shop_id);
+        $this->service->setCompanyId($this->company_id);
     }
 
     public function index(Request $request)
     {
-        $menus = $this->service->getMenuSets($this->shop_id);
+        $menus = $this->service->getMenuSets($this->company_id);
 
         return response()->json($menus, 200);
     }
@@ -33,7 +33,7 @@ class MenuController extends Controller
     {
         $this->form->validate(['uuid' => $menu_id]);
 
-        $menu = $this->repo->getMenu($menu_id, $this->shop_id);
+        $menu = $this->repo->getMenu($menu_id, $this->company_id);
 
         return response()->json(['data' => $menu], 200);
     }

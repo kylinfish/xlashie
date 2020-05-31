@@ -14,20 +14,20 @@ class DiscountRepository extends EloquentRepository
     /**
      * getDiscount
      *
-     * @param int $shop_id
+     * @param int $company_id
      */
-    public function getDiscount(int $shop_id)
+    public function getDiscount(int $company_id)
     {
-        return $this->model->where(['shop_id' => $shop_id])->first();
+        return $this->model->where(['company_id' => $company_id])->first();
     }
 
     /**
      * getDiscounts
      *
-     * @param int $shop_id
+     * @param int $company_id
      */
-    public function getDiscounts(int $shop_id)
+    public function getDiscounts(int $company_id)
     {
-        return $this->model->where(["shop_id" => $shop_id])->paginate(20);
+        return $this->model->where(["company_id" => $company_id])->paginate(20);
     }
 }

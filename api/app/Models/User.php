@@ -50,9 +50,9 @@ class User extends Authenticatable implements JWTSubject
         'phone' => '',
     ];
 
-    public function shop()
+    public function company()
     {
-        return $this->belongsToMany('App\Models\Shop');
+        return $this->belongsToMany('App\Models\Company');
     }
 
      /**

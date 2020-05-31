@@ -9,13 +9,13 @@ class DiscountController extends \App\Http\Controllers\Controller
 {
     public function __construct(DiscountRepositoy $discount_repo)
     {
-        $this->shop_id = 1; # HARDCODE should be replaced.
+        $this->company_id = 1; # HARDCODE should be replaced.
         $this->repo = $discount_repo;
     }
 
     public function index(Request $request)
     {
-        $discounts = $this->repo->getDiscounts($this->shop_id);
+        $discounts = $this->repo->getDiscounts($this->company_id);
 
         return response()->json($discounts, 200);
     }

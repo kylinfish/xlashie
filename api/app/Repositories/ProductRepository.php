@@ -14,33 +14,33 @@ class ProductRepository extends EloquentRepository
     /**
      * getCustomer
      *
-     * @param int $shop_id
+     * @param int $company_id
      */
-    public function getProduct(int $shop_id, int $product_id)
+    public function getProduct(int $company_id, int $product_id)
     {
         return $this->model->where([
             'id' => $product_id,
-            'company_id' => $shop_id
+            'company_id' => $company_id
         ])->first();
     }
 
     /**
      * getProducts
      *
-     * @param int $shop_id
+     * @param int $company_id
      */
-    public function getProducts(int $shop_id)
+    public function getProducts(int $company_id)
     {
-        return $this->model->where(["company_id" => $shop_id])->paginate(20);
+        return $this->model->where(["company_id" => $company_id])->paginate(20);
     }
 
-    public function getProductsByIds(int $shop_id, array $product_ids)
+    public function getProductsByIds(int $company_id, array $product_ids)
     {
-        return $this->model->where(["company_id" => $shop_id])->whereIn("id", $product_ids);
+        return $this->model->where(["company_id" => $company_id])->whereIn("id", $product_ids);
     }
 
-    public function deleteMyProduct(int $shop_id, int $product_id)
+    public function deleteMyProduct(int $company_id, int $product_id)
     {
-        $this->model->where(["id" => $product_id, "company_id" => $shop_id])->delete();
+        $this->model->where(["id" => $product_id, "company_id" => $company_id])->delete();
     }
 }

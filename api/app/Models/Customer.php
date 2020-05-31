@@ -10,7 +10,7 @@ class Customer extends Model
 
     protected $fillable = ['user_id', 'uuid', 'name', 'email', 'gender', 'birth', 'avatar', 'line', 'fb', 'phone', 'note'];
 
-    protected $hidden = ['id', 'password', 'shop_id'];
+    protected $hidden = ['id', 'password'];
 
     #protected $guarded = ['uuid'];
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Models\Shop;
+use App\Models\Company;
 use App\Forms\ProductForm;
 use App\Services\ProductService;
 use App\Repositories\ProductRepository;
@@ -16,7 +16,7 @@ class ProductController extends \App\Http\Controllers\Controller
 
     public function __construct(ProductRepository $product_repo, ProductForm $form, ProductService $service)
     {
-        $this->shop_id = Shop::find(1)->first()->id;
+        $this->company_id = Company::find(1)->first()->id;
         $this->repo = $product_repo;
         $this->form = $form;
         $this->service = $service;
@@ -24,14 +24,14 @@ class ProductController extends \App\Http\Controllers\Controller
 
     public function index(Request $request)
     {
-        $products = $this->repo->getProducts($this->shop_id);
+        $products = $this->repo->getProducts($this->company_id);
 
         return $this->response->paginator($products, new Transformer);
     }
 
     public function show(Request $request, string $product_id)
     {
-        $products = $this->repo->getProduct($this->shop_id, $product_id);
+        $products = $this->repo->getProduct($this->company_id, $product_id);
 
         if (!$products) {
             return response()->json(['message' => "查無此商品"], 404);
@@ -45,7 +45,7 @@ class ProductController extends \App\Http\Controllers\Controller
 
         $this->form->validate($params);
 
-        $this->service->setShopId($this->shop_id);
+        $this->service->setCompanyId($this->company_id);
 
         $product = $this->service->createProduct($params);
 
@@ -56,7 +56,7 @@ class ProductController extends \App\Http\Controllers\Controller
 
     public function delete(Request $request, int $product_id)
     {
-        $this->repo->deleteMyProduct($this->shop_id, $product_id);
+        $this->repo->deleteMyProduct($this->company_id, $product_id);
 
         return response()->json(['message' => "產品刪除成功"], 200);
     }
