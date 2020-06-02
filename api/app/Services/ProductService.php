@@ -26,11 +26,13 @@ class ProductService
 
     /**
      * checkProductsOwner 檢查產品是否屬於該店家擁有的
+     * @param $product_ids int|array
      */
-    public function checkProductsOwner(int $company_id, array $product_ids)
+    public function checkProductsOwner(int $company_id, $product_ids)
     {
-        $products_count = $this->repo->getProductsByIds($company_id, $product_ids)->count();
+        $checker = (! is_array($product_ids)) ? [$product_ids] : $product_ids;
+        $products_count = $this->repo->getProductsByIds($company_id, $checker)->count();
 
-        return $products_count == count($product_ids);
+        return $products_count == count($checker);
     }
 }

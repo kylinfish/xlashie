@@ -23,4 +23,9 @@ class Menu extends Model
     {
         return $this->hasMany('App\Models\SubMenu', 'menu_id', 'id');
     }
+
+    public function product()
+    {
+        return $this->hasMany('App\Models\Product', 'id', 'id');
+    }
 }

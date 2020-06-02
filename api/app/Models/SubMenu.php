@@ -17,4 +17,9 @@ class SubMenu extends Model
     protected $guarded = [];
 
     protected $attrubutes = [];
+
+    public function product()
+    {
+        return $this->hasMany('App\Models\Product', 'id', 'product_id');
+    }
 }
