@@ -140,10 +140,11 @@ class CreateTables extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('company_id')->unsigned();
-            $table->integer('product_id')->unsigned();
+            $table->integer('product_id')->unsigned()->default(0);
 
             $table->string('name', 50);
-            $table->integer('price')->unsigned();
+            $table->double('sale_price', 15, 4)->default(0);
+            $table->double('purchase_price', 15, 4)->default(0);
             $table->integer('bonus')->unsigned()->default(0);
             $table->tinyInteger('item_type')->default(0)->unsigned();
 
