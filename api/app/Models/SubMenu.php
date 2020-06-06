@@ -20,6 +20,6 @@ class SubMenu extends Model
 
     public function product()
     {
-        return $this->hasMany('App\Models\Product', 'id', 'product_id');
+        return $this->hasOne('App\Models\Product', 'id', 'product_id');
     }
 }
