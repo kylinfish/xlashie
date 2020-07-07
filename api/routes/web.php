@@ -14,9 +14,19 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/customers/{id}', function ($id) {
     return view('customers.show', ["customer_id" => $id]);
 });
+
+Route::get('/products', function () {
+    return view('products.index');
+});
+
+Route::get('/menus', function () {
+    return view('menus.index');
+});
+
 Route::prefix('login')->group(function () {
     Route::get('facebook', [
         'as' => 'login.facebook',
