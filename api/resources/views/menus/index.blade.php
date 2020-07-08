@@ -1,6 +1,16 @@
 @extends('layouts.app')
 @section('content')
-<h1>營業項目管理</h1>
+<link rel="stylesheet" href="../../assets/vendor/sweetalert2/dist/sweetalert2.min.css">
+
+<div class="row align-items-center mb-3">
+    <div class="col-lg-6 col-7">
+        <h1>營業項目管理</h1>
+    </div>
+    <div class="col-lg-6 col-5 text-right">
+        <a href="#" class="btn btn-primary">新增菜單</a>
+    </div>
+</div>
+
 <div class="card">
     <!-- Card header -->
     <div class="card-header border-0">
@@ -10,7 +20,7 @@
         <table class="table align-items-center table-flush">
             <thead class="thead-light">
                 <tr>
-                    <th class="texㄔ-enter">名稱</th>
+                    <th class="text-enter">名稱</th>
                     <th class="text-enter">售價</th>
                     <th class="text-enter">定價</th>
                     <th class="text-enter">建立時間</th>
@@ -27,13 +37,11 @@
                     <td>2018/03/15 20:32:40</td>
                     <td class="text-right">
                         <div class="dropdown">
-                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
+                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                <a class="dropdown-item" href="#">檢視</a>
-                                <a class="dropdown-item" href="#">刪除</a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"></a>
+                                <a class="dropdown-item" href="#" data-toggle="sweet-alert" data-sweet-alert="confirm">刪除</a>
                                 <a class="dropdown-item" href="#">編輯</a>
                             </div>
                         </div>
@@ -48,13 +56,11 @@
                     <td>2020/04/30 20:32:40</td>
                     <td class="text-right">
                         <div class="dropdown">
-                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
+                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                <a class="dropdown-item" href="#">檢視</a>
-                                <a class="dropdown-item" href="#">刪除</a>
+                                <a class="dropdown-item" href="#" data-toggle="sweet-alert" data-sweet-alert="confirm">刪除</a>
                                 <a class="dropdown-item" href="#">編輯</a>
                             </div>
                         </div>
@@ -71,13 +77,11 @@
                     <td>2020/03/15 20:32:40</td>
                     <td class="text-right">
                         <div class="dropdown">
-                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
+                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                <a class="dropdown-item" href="#">檢視</a>
-                                <a class="dropdown-item" href="#">刪除</a>
+                                <a class="dropdown-item" href="#" data-toggle="sweet-alert" data-sweet-alert="confirm">刪除</a>
                                 <a class="dropdown-item" href="#">編輯</a>
                             </div>
                         </div>
@@ -86,8 +90,7 @@
                 <tr>
                     <td>
                         <p class="font-weight-600 name mb-0">超強效組合包</p>
-                        <div class="ml-5 mt-3 timeline timeline-one-side" data-timeline-content="axis"
-                            data-timeline-axis-style="dashed">
+                        <div class="ml-5 mt-3 timeline timeline-one-side" data-timeline-content="axis" data-timeline-axis-style="dashed">
                             <div class="timeline-block">
                                 <span class="timeline-step badge-info">
                                     <i class="ni ni-bold-right"></i>
@@ -99,7 +102,7 @@
                                     <span class="badge ml-3 badge-secondary badge-pill">x</span>
                                     <span class="badge ml-3 badge-primary badge-pill">2</span>
                                     <span class="badge mt-3 float-right badge-info badge-pill">庫存: 22</span>
-                                    
+
                                 </div>
                             </div>
 
@@ -110,8 +113,7 @@
 
                                 <div class="timeline-content">
                                     <h4 class="mb-0">補給飲料一瓶</h4>
-                                    <img src="https://www.lardlabo.asia/wp-content/uploads/2019/11/lardlabo_skincarecream2.jpg"
-                                        class="avatar">
+                                    <img src="https://www.lardlabo.asia/wp-content/uploads/2019/11/lardlabo_skincarecream2.jpg" class="avatar">
                                     <span class="badge ml-3 badge-secondary badge-pill">x</span>
                                     <span class="badge ml-3 badge-primary badge-pill">2</span>
                                     <span class="badge mt-3 float-right badge-info badge-pill">庫存: 22</span>
@@ -124,13 +126,11 @@
                     <td>2020/03/20 15:55:00</td>
                     <td class="text-right">
                         <div class="dropdown">
-                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
+                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                <a class="dropdown-item" href="#">檢視</a>
-                                <a class="dropdown-item" href="#">刪除</a>
+                                <a class="dropdown-item" href="#" data-toggle="sweet-alert" data-sweet-alert="confirm">刪除</a>
                                 <a class="dropdown-item" href="#">編輯</a>
                             </div>
                         </div>
@@ -140,6 +140,5 @@
         </table>
     </div>
 </div>
-
 
 @endsection
