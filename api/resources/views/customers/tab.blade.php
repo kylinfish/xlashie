@@ -1,6 +1,13 @@
 <ul role="tablist" class="nav nav-pills nav-pills-primary nav-fill flex-column flex-sm-row nav-wrapper">
     <li data-toggle="tab" role="tablist" class="nav-item active">
-        <a data-toggle="tab" role="tablist" href="#inventory" class="nav-link active">
+        <a data-toggle="tab" role="tablist" href="#profile" class="nav-link active">
+            <div>
+                <span><i class="fa fa-user pr-2"></i>個人資料</span>
+            </div>
+        </a>
+    </li>
+    <li data-toggle="tab" role="tablist" class="nav-item active">
+        <a data-toggle="tab" role="tablist" href="#inventory" class="nav-link">
             <div>
                 <span><i class="fa fa-shopping-bag pr-2"></i>庫存清單</span>
             </div>
@@ -29,8 +36,13 @@
     </li>
 </ul>
 <div class="tab-content tab-space card shadow">
-
-    <div id="inventory" class="tab-pane active">
+    <div id="profile" class="tab-pane active">
+        @include('customers.profile')
+        
+        @include('modal.customers.inventory_mark')
+        
+    </div>
+    <div id="inventory" class="tab-pane">
         @include('customers.inventory')
     </div>
     <div id="transaction" class="tab-pane">
@@ -43,4 +55,4 @@
         @include('customers.purchase')
     </div>
 </div>
-@include('modal.inventory_mark')
+

@@ -12,5 +12,7 @@ class Customer extends Model
 
     protected $hidden = ['id', 'password'];
 
+    protected $dates = ['updated_at', 'created_at'];
+
     #protected $guarded = ['uuid'];
 }

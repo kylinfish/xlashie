@@ -2,13 +2,12 @@
 @section('content')
 <div class="row align-items-center mb-3">
     <div class="col-lg-6 col-7">
-        <h1>客戶總攬</h1>
+        <h1>客戶總覽</h1>
     </div>
     <div class="col-lg-6 col-5 text-right">
-        <a href="#" class="btn btn-primary">新增客戶</a>
+        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#create-customer-modal">新增客戶</a>
     </div>
 </div>
-
 <div class="card">
     <!-- Card header -->
     <div class="card-header border-0">
@@ -52,5 +51,6 @@
         </table>
     </div>
 </div>
-
+@include('modal.customers.create')
+@include('modal.customers.inventory_mark')
 @endsection

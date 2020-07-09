@@ -9,7 +9,6 @@
         </div>
     </div>
     @include('layouts.foot')
-    
 </body>
 
 </html>
