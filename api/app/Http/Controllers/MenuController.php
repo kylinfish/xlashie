@@ -26,7 +26,7 @@ class MenuController extends Controller
     {
         $menus = $this->service->getMenuSets($this->company_id);
 
-        return response()->json($menus, 200);
+        return view('menus.index', ['menus' => $menus]);
     }
 
     public function show(Request $request, String $menu_id)

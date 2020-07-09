@@ -15,17 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/customers/{id}', function ($id) {
-    return view('customers.show', ["customer_id" => $id]);
-});
+Route::resource('customers', 'CustomerController');
+Route::resource('products', 'ProductController');
+Route::resource('menus', 'MenuController');
 
-Route::get('/products', function () {
-    return view('products.index');
-});
-
-Route::get('/menus', function () {
-    return view('menus.index');
-});
 
 Route::prefix('login')->group(function () {
     Route::get('facebook', [

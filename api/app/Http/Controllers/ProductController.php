@@ -12,7 +12,6 @@ use App\Transformers\Product as Transformer;
 
 class ProductController extends \App\Http\Controllers\Controller
 {
-    use Helpers;
 
     public function __construct(ProductRepository $product_repo, ProductForm $form, ProductService $service)
     {
@@ -26,7 +25,7 @@ class ProductController extends \App\Http\Controllers\Controller
     {
         $products = $this->repo->getProducts($this->company_id);
 
-        return $this->response->paginator($products, new Transformer);
+        return view('products.index', ['products' => $products]);
     }
 
     public function show(Request $request, string $product_id)

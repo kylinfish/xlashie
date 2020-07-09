@@ -32,7 +32,8 @@ class CustomerController extends \App\Http\Controllers\Controller
 
         $customers = $this->repo->getCustomers($this->user_id, $request->all());
 
-        return $this->response->paginator($customers, new Transformer);
+        return view("customers.index", ["customers" => $customers]);
+
     }
 
     public function show(Request $request, string $customer_uuid)
@@ -41,7 +42,7 @@ class CustomerController extends \App\Http\Controllers\Controller
 
         $customer = $this->repo->getCustomer($this->user_id, $customer_uuid);
 
-        return $this->response->item($customer, new Transformer);
+        return view("customers.show", ["customer" => $customer]);
     }
 
     public function store(Request $request)

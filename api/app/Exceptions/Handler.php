@@ -128,6 +128,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        /*
         if (isset($_GET['e']) and env('APP_DEBUG')) {
             if ($e instanceof ValidationException) {
                 return $this->responseError(422, $e->errors());
@@ -166,7 +167,8 @@ class Handler extends ExceptionHandler
         $message = $e->getMessage() ?: $this->status_messages[$http_status_code];
 
         return $this->responseError($http_status_code, $message);
-        #return parent::render($request, $exception);
+        */
+        return parent::render($request, $e);
     }
 
     /**

@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../../../akaunting"
+		},
+		{
+			"path": "../.."
+		}
+	],
+	"settings": {
+		"terminal.integrated.fontSize": 16
+	}
+}

@@ -29,7 +29,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/customers/1">
+                            <a class="nav-link" href="/customers/">
                                 <i class="ni ni-circle-08 text-pink"></i>
                                 <span class="nav-link-text">客戶</span>
                             </a>
