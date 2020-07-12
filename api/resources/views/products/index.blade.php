@@ -21,7 +21,6 @@
             <thead class="thead-light">
                 <tr>
                     <th class="text-center">產品名稱</th>
-                    <th class="text-center">描述</th>
                     <th class="text-center">成本</th>
                     <th class="text-center">售價</th>
                     <th class="text-center">庫存數量</th>
@@ -33,17 +32,17 @@
             <tbody class="list">
                 @foreach ($products as $product)
                 <tr>
-                    <th scope="row">
+                    <td>
                         <div class="media align-items-center">
                             <a href="#" class="avatar rounded-circle mr-3">
                                 <img alt="Image placeholder" src="{{ $product->avatar }}">
                             </a>
                             <div class="media-body">
-                                <span class="name mb-0 text-sm">{{ $product->name }}</span>
+                                <p class="h4">{{ $product->name }}</p>
                             </div>
                         </div>
-                    </th>
-                    <td class="text-center">{{ $product->description }}</td>
+                    </td>
+
                     <td class="text-center">{{ $product->sale_price }}</td>
                     <td class="text-center">{{ $product->purchase_price }}</td>
                     <td class="text-center">{{ $product->quantity }}</td>

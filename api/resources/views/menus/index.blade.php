@@ -31,7 +31,13 @@
                 @foreach ($menus as $menu)
                 <tr>
                     <td>
-                        <p class="font-weight-600 name mb-0">{{ $menu->name }}</p>
+                        <p class="font-weight-600 name mb-0">
+                            @if ($menu->product)
+                            <img class="avatar avatar-sm rounded-circle" src="{{ $menu->product->avatar }}">
+                            @endif
+                            {{ $menu->name }}
+
+                        </p>
                         @if ($menu->sub_menus)
                         <div class="ml-5 mt-3 timeline timeline-one-side" data-timeline-content="axis" data-timeline-axis-style="dashed">
                             @foreach ($menu->sub_menus as $sub_menu)
@@ -42,7 +48,8 @@
                                 <div class="timeline-content">
                                     <small class="text-muted font-weight-bold"></small>
                                     <h5 class="mb-0">{{ $sub_menu->product->name }}</h5>
-                                    <p class="text-sm mt-1 mb-0">{{ $sub_menu->product->description }}</p>
+                                    <p class="text-sm mt-1 mb-0 text-truncate" style="max-width: calc(100% - 10px);">{{ $sub_menu->product->description }}</p>
+                                    <img class="avatar avatar-sm rounded-circle" src="{{ $sub_menu->product->avatar }}">
                                     <span class="badge ml-3 badge-secondary badge-pill">x</span>
                                     <span class="badge ml-3 badge-primary badge-pill">{{ $sub_menu->amount }}</span>
                                     <span class="badge mt-3 float-right badge-info badge-pill">庫存: {{ $sub_menu->product->quantity }}</span>
@@ -50,7 +57,7 @@
                                 </div>
                             </div>
                             @endforeach
-                        @endif
+                            @endif
                     </td>
                     <td>{{ $menu->sale_price}}</td>
                     <td>{{ $menu->purchase_price}}</td>

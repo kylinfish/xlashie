@@ -1,4 +1,4 @@
-<ul role="tablist" class="nav nav-pills nav-pills-primary nav-fill flex-column flex-sm-row nav-wrapper">
+<ul role="tablist" class="mt--3 nav nav-pills nav-pills-primary nav-fill flex-column flex-sm-row nav-wrapper">
     <li data-toggle="tab" role="tablist" class="nav-item active">
         <a data-toggle="tab" role="tablist" href="#profile" class="nav-link active">
             <div>
@@ -38,9 +38,6 @@
 <div class="tab-content tab-space card shadow">
     <div id="profile" class="tab-pane active">
         @include('customers.profile')
-        
-        @include('modal.customers.inventory_mark')
-        
     </div>
     <div id="inventory" class="tab-pane">
         @include('customers.inventory')

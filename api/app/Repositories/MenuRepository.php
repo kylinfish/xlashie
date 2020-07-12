@@ -23,6 +23,6 @@ class MenuRepository extends EloquentRepository
                 "sub_menus",
                 "product",
                 "sub_menus.product"
-            ])->paginate(20);
+            ])->orderBy("created_at", "DESC")->paginate(20);
     }
 }
