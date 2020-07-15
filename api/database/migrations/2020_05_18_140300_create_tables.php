@@ -50,10 +50,10 @@ class CreateTables extends Migration
             $table->index('email');
             $table->index('phone');
         });
-        
+
         Schema::create('customers', function($table) {
             $table->increments('id')->unsigned();
-            
+
             $table->integer('user_id')->unsigned();
             $table->char('uuid', 18);
             $table->string('name', 20);
@@ -83,7 +83,7 @@ class CreateTables extends Migration
         Schema::create('companies', function($table) {
             $table->increments('id')->unsigned();
 
-            $table->string('name');
+            $table->string('name', 50);
             $table->boolean('enabled')->default(1);
 
             $table->timestamps();
@@ -186,6 +186,49 @@ class CreateTables extends Migration
             $table->unique(['company_id', 'invoice_number', 'deleted_at']);
         });
 
+        Schema::create('orders', function (Blueprint $table) {
+            $table->increments('id')->unsigned();
+            $table->integer('company_id')->unsigned();
+            $table->integer('customer_id')->unsigned();
+            $table->string('ticket', 10);
+            $table->string('pay_type', 10);
+            $table->double('discount', 15, 2)->default(0);
+            $table->double('purchase_price', 15, 2)->default(0);
+            $table->text('note')->nullable();
+
+            $table->timestamps();
+            $table->softDeletes();
+
+            $table->index(['company_id', 'customer_id']);
+        });
+
+        Schema::create('order_items', function (Blueprint $table) {
+            $table->increments('id')->unsigned();
+            $table->integer('order_id')->unsigned();
+            $table->string('product_name', 50);
+            $table->integer('quantity')->unsigned();
+            $table->double('unit_price', 15, 2)->default(0);
+
+            $table->index(['order_id']);
+        });
+
+        Schema::create('customer_inventories', function (Blueprint $table) {
+            $table->increments('id')->unsigned();
+            $table->integer('company_id')->unsigned();
+            $table->integer('customer_id')->unsigned();
+
+            $table->string('product_name', 50);
+            $table->tinyInteger('status')->default(0)->unsigned();
+            $table->datetime('use_at')->nullable();
+            $table->text('note')->nullable();
+
+            $table->timestamps();
+            $table->softDeletes();
+
+            $table->index(['company_id', 'customer_id']);
+        });
+
+
         Schema::create('invoice_histories', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('company_id')->unsigned();
@@ -226,7 +269,7 @@ class CreateTables extends Migration
     {
         Schema::dropIfExists('password_resets');
         Schema::dropIfExists('failed_jobs');
-        
+
         // Role
         Schema::dropIfExists('users');
         Schema::dropIfExists('customers');
@@ -243,5 +286,11 @@ class CreateTables extends Migration
         Schema::dropIfExists('invoices');
         Schema::dropIfExists('invoice_items');
         Schema::dropIfExists('invoice_histories');
+
+        // Orders
+        Schema::dropIfExists('orders');
+        Schema::dropIfExists('order_items');
+        Schema::dropIfExists('customer_inventories');
+
     }
 }
