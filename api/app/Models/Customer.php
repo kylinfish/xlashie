@@ -15,4 +15,9 @@ class Customer extends Model
     protected $dates = ['updated_at', 'created_at'];
 
     #protected $guarded = ['uuid'];
+
+    public function inventory()
+    {
+        return $this->hasMany('App\Models\CustomerInventory', 'customer_id', 'id');
+    }
 }

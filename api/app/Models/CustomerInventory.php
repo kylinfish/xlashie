@@ -34,4 +34,9 @@ class CustomerInventory extends Model
     {
         return $this->hasOne('App\Models\Customer', 'id', 'customer_id');
     }
+
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('created_at', 'desc')->get();
+    }
 }

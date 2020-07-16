@@ -39,7 +39,11 @@
                                             class="fa fa-trash"></i></button>
                                 </td>
                                 <td>
-                                    <input class="form-control" type="text" placeholder="Default input" value="面膜(十包)">
+                                    <select class="form-control">
+                                        @foreach ($menus as $menu)
+                                        <option value="{{ $menu->id }}">{{ $menu->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </td>
                                 <td>
                                     <input class="form-control text-center" type="number" value="2">
@@ -62,11 +66,9 @@
                                     <div class="form-group">
                                         <select class="form-control" id="">
                                             <option></option>
-                                            <option>面膜</option>
-                                            <option>護呼乳霜</option>
-                                            <option>眼霜</option>
-                                            <option>保養美白課程</option>
-                                            <option>粉刺課程</option>
+                                            @foreach ($menus as $menu)
+                                            <option value="{{ $menu->id }}">{{ $menu->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </td>

@@ -10,6 +10,8 @@ use App\Repositories\OrderRepository;
 use App\Repositories\CustomerRepository;
 use App\Repositories\CustomerInventoryRepository;
 use App\Models\User;
+use App\Models\Menu;
+use App\Models\Order;
 use App\Models\Company;
 use App\Models\Customer;
 use App\Transformers\Customer as Transformer;
@@ -34,16 +36,11 @@ class CustomerController extends \App\Http\Controllers\Controller
         $this->repo = $customer_repo;
         $this->ci_repo = $ci_repo;
         $this->order_repo = $order_repo;
-
-        
     }
 
     public function index(Request $request)
     {
         $this->form->validate($request->all());
-
-        $params["user_id"] = $this->user_id;
-
 
         $limit = request('limit', 5);
         $customers = Customer::where("user_id", $this->user_id)->orderBy("id", "ASC")->get();
@@ -55,12 +52,17 @@ class CustomerController extends \App\Http\Controllers\Controller
     public function show(Request $request, string $customer_uuid)
     {
         $this->form->validate(['uuid' => $customer_uuid]);
+        
+        $customer = Customer::where(["user_id" => $this->user_id, "uuid" => $customer_uuid])->first();
+        if ($customer == null) {
+            ### FIXME
+            return redirect()->route("customers");
+        }
 
-        $customer = $this->repo->getCustomer($this->user_id, $customer_uuid);
-        $inventories = $this->ci_repo->getInventories($this->company_id, $customer->id);
-        $orders = $this->order_repo->getOrders($this->company_id, $customer->id);
-
-        return view("customers.show", compact('customer', 'inventories', 'orders'));
+        $inventories = $customer->inventory()->get();
+        $orders = Order::where(["company_id" => $this->company_id, "customer_id"=> $customer->id])->ordered();
+        $menus = Menu::where("company_id", $this->company_id)->get();
+        return view("customers.show", compact('customer', 'inventories', 'orders', 'menus'));
     }
 
     public function store(Request $request)

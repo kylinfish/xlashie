@@ -25,4 +25,9 @@ class OrderItem extends Model
     {
         return $this->hasOne('App\Models\Order', 'order_id', 'id');
     }
+
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('created_at', 'desc')->get();
+    }
 }

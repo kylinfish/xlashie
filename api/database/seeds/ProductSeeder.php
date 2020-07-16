@@ -99,5 +99,60 @@ class ProductSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
+        DB::table('products')->insert([
+            'company_id' => 1,
+            'name' => "護膚潔美課程",
+            'sale_price' => 600,
+            'purchase_price' => 0,
+            'avatar' => "https://static.wixstatic.com/media/71138d_79c42b67b1be4f7ba5643943009d4c01~mv2.jpg/v1/fill/w_480,h_413,al_c,q_85,usm_0.66_1.00_0.01/71138d_79c42b67b1be4f7ba5643943009d4c01~mv2.jpg",
+            'status' => random_int(0, 3),
+            'category_id' => random_int(0, 3),
+            'quantity' => 0,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+
+        // Menus
+
+        DB::table('menus')->insert([
+            'company_id' => 1,
+            'product_id' => 3,
+            'name' => "薰衣草潤膚皂【液體狀】500ml",
+            'sale_price' => 1930,
+            'purchase_price' => 950,
+            'item_type' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+
+        DB::table('menus')->insert([
+            'company_id' => 1,
+            'product_id' => 7,
+            'name' => "液體狀Dermaroller玻尿酸原液膠原蛋白蠶絲面膜 10片 ",
+            'sale_price' => 2200,
+            'purchase_price' => 3000,
+            'item_type' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+
+        DB::table('menus')->insert([
+            'company_id' => 1,
+            'product_id' => 0,
+            'name' => "限時優惠大課程 ",
+            'sale_price' => 3000,
+            'purchase_price' => 3000,
+            'item_type' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+
+        DB::table('sub_menus')->insert([
+            'menu_id' => 3,
+            'product_id' => 7,
+            'amount' => 7,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
     }
 }

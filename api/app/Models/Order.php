@@ -28,4 +28,9 @@ class Order extends Model
     {
         return $this->hasMany('App\Models\OrderItem', 'order_id', 'id');
     }
+
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('created_at', 'desc')->get();
+    }
 }
