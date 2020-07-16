@@ -6,17 +6,16 @@
                 <th class="col-md-3 text-center">消費金額</th>
                 <th class="col-md-3 text-center">消費日期</th>
                 <th class="col-md-3 text-center">付款方式</th>
-                <th class="col-md-3 text-center">狀態</th>
                 <th class="col-md-3 text-center">動作</th>
             </tr>
         </thead>
         <tbody>
+            @foreach ($orders as $order)
             <tr>
-                <td class="col-md-3 text-center"><a href="#">INV-00002</a></td>
-                <td class="col-md-3 text-center">$1,900.00</td>
-                <td class="col-md-3 text-center">2020/05/23</td>
-                <td class="col-md-3 text-center">現金</span></td>
-                <td class="col-md-3"><span class="badge badge-pill badge-success">已付款</span></td>
+                <td class="col-md-3 text-center"><a href="#">{{ $order->ticket }}</a></td>
+                <td class="col-md-3 text-center">{{ $order->purchase_price }}</td>
+                <td class="col-md-3 text-center">{{ $order->created_at }}</span></td>
+                <td class="col-md-3 text-center">{{ $order->pay_type }}</td>
                 <td class="col-md-2text-center">
                     <div class="dropdown">
                         <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -31,8 +30,8 @@
                         </div>
                     </div>
                 </td>
-
             </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

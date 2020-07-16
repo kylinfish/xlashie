@@ -30,7 +30,9 @@ class CustomerRepository extends EloquentRepository
     {
         $per_page = $params["per_page"] ?? 20;
 
-        $customers =  $this->model->where(["user_id" => $user_id])->paginate($per_page);
+        $customers = $this->model->where(["user_id" => $user_id])
+            ->orderBy("id", "ASC") #TODO Update to DESC
+            ->paginate($per_page);
 
         return $customers->appends(['per_page' => $per_page]);
     }

@@ -1,3 +1,4 @@
+@if ($items->firstItem())
 <nav aria-label="...">
     <ul class="pagination">
         <li class="page-item disabled">
@@ -15,7 +16,9 @@
             <a class="page-link" href="#">
                 <i class="fa fa-angle-right"></i>
                 <span class="sr-only">Next</span>
+                
             </a>
         </li>
     </ul>
 </nav>
+@endif

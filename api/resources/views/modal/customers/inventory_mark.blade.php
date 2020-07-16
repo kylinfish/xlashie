@@ -33,9 +33,11 @@
                             <div class="form-group col-md-12">
                                 <p class="col-md-4 mt-2">核銷狀態</p>
                                 <select class="form-control col-md-8">
-                                    <option><span>已使用</span></option>
-                                    <option><span>註銷失效</span></option>
-                                    <option><span>未使用</span></option>
+                                    <option value="0"><span>未使用</span></option>
+                                    <option value="1"><span>已發放</span></option>
+                                    <option value="2"><span>已使用</span></option>
+                                    <option value="3"><span>積欠未發</span></option>
+                                    <option value="4"><span>註銷失效</span></option>
                                 </select>
                             </div>
 

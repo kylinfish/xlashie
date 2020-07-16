@@ -1,0 +1,20 @@
+# 
+{
+    "customer_id": "1",
+    "ticket": "INV-0909",
+    "pay_type": "現金",
+    "discount": 60,
+    "purchase_price": 1800,
+    "note": "Beautiful Day",
+    "order_items": [{
+        "product_name": "面膜 10 包",
+        "quantity": 3,
+        "unit_price": 360,
+        "product_type": 1,
+    },{
+        "product_name": "美白課程",
+        "quantity": 5,
+        "unit_price": 1500,
+        "product_type": 1,
+    }]
+}

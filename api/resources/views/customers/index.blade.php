@@ -26,6 +26,7 @@
                 </tr>
             </thead>
             <tbody class="list">
+
                 @foreach ($customers as $customer)
                 <tr>
                     <td><a href="/customers/{{ $customer->uuid }}">{{ $customer->name }}</a></td>
@@ -35,11 +36,13 @@
                     <td>{{ $customer->created_at }}</td>
                     <td class="text-right">
                         <div class="dropdown">
-                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                <a class="dropdown-item" href="#" data-toggle="sweet-alert" data-sweet-alert="confirm">刪除</a>
+                                <a class="dropdown-item" href="#" data-toggle="sweet-alert"
+                                    data-sweet-alert="confirm">刪除</a>
                                 <a class="dropdown-item" href="#">編輯</a>
                             </div>
                         </div>
@@ -50,7 +53,14 @@
             </tbody>
         </table>
     </div>
+    <div class="card-footer py-4 table-action">
+        <div class="row float-right">
+        {{ $customers->withPath(request()->url())->links() }}
+        </div>
+    </div>
 </div>
+
+
 @include('modal.customers.create')
 @include('modal.customers.inventory_mark')
 @endsection

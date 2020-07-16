@@ -31,20 +31,21 @@ Route::get('/', function () use ($router) {
 
 $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', function ($api) {
-    // Customer
-    $api->get('customers', 'App\Http\Controllers\CustomerController@index');
+    // Order
+    $api->post('orders', 'App\Http\Controllers\OrderController@store');
     $api->get('customers/{customer_uuid}', 'App\Http\Controllers\CustomerController@show');
     $api->post('customers', 'App\Http\Controllers\CustomerController@store');
     $api->put('customers/{customer_uuid}', 'App\Http\Controllers\CustomerController@update');
     $api->delete('customers/{customer_uuid}', 'App\Http\Controllers\CustomerController@delete');
 
-    // Product 
+    // Product
     $api->get('products', 'App\Http\Controllers\ProductController@index');
     $api->get('products/{product_id}', 'App\Http\Controllers\ProductController@show');
     $api->post('products', 'App\Http\Controllers\ProductController@store');
     $api->put('products/{product_id}', 'App\Http\Controllers\ProductController@update');
     $api->delete('products/{product_id}', 'App\Http\Controllers\ProductController@delete');
 });
+
 
 // Item Products (Menu)
 Route::get('menus', [
