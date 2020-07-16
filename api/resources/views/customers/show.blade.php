@@ -1,7 +1,56 @@
-@extends('layouts.app')
+@extends('layouts.nosidebar')
 @section('content')
-<h1><i class="ni ni-single-02"></i> <ins>{{ $customer->name }}</ins></h1>
-@include('customers.tab')
+<div class="row">
+    <div class="col-md-3">
+        <div class="card card-profile mb-1">
+            <img src="../../assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top">
+            <div class="row justify-content-center">
+                <div class="col-lg-3 order-lg-2">
+                    <div class="card-profile-image">
+                        <a href="#">
+                            <img src="https://i.pravatar.cc/150" class="rounded-circle">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body pt-7">
+                <div class="row">
+                    <div class="col">
+                        <div class="text-center">
+                            <h1>{{ $customer->name }}</h1>
+                        </div>
+                        <div class="card-profile-stats d-flex justify-content-center">
+                            <div>
+                                <span class="heading">22</span>
+                                <span class="description">消費次數</span>
+                            </div>
+                            <div>
+                                <span class="heading">10</span>
+                                <span class="description">庫存清單</span>
+                            </div>
+                            <div>
+                                <span class="heading">89</span>
+                                <span class="description">預收金</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+
+                    <div class="mt-2">
+                        <p class="h5">建立時間: {{ $customer->created_at->format('Y/m/d') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-9">
+        @include('customers.tab')
+    </div>
+</div>
+
 @include('modal.customers.inventory_mark')
 
 @endsection
