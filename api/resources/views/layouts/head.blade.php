@@ -12,5 +12,6 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}"
         type="text/css">
     <link rel="stylesheet" href="{{ asset('assets/css/argon.css?v=1.2.0') }}" type="text/css">
-    <link rel="stylesheet" href="assets/vendor/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/loading.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/sweetalert2/dist/sweetalert2.min.css') }}">
 </head>

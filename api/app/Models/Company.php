@@ -8,7 +8,5 @@ class Company extends Model
 {
     protected $table = "companies";
 
-    protected $fillable = ['user_id', 'name', 'email', 'gender', 'birth', 'avatar', 'line', 'fb', 'phone', 'note'];
-
-    protected $hidden = ['password'];
+    protected $fillable = ['id', 'enabled', 'created_at', 'u[updated_at', 'deleted_at'];
 }

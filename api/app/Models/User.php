@@ -52,7 +52,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function company()
     {
-        return $this->belongsToMany('App\Models\Company');
+        return $this->belongsToMany('App\Models\Company', 'user_company');
     }
 
      /**

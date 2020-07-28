@@ -35,21 +35,24 @@
         </a>
     </li>
 </ul>
-<div class="tab-content tab-space card shadow">
-    <div id="profile" class="tab-pane active">
-        @include('customers.profile')
+
+<div id="app" class="tab-content tab-space card shadow">
+    <div id="profile" class="tab-pane">
+        <profile-page></profile-page>
     </div>
     <div id="inventory" class="tab-pane">
-        @include('customers.inventory')
+        <inventory-page></inventory-page>
     </div>
     <div id="transaction" class="tab-pane">
-        @include('customers.transaction')
+        <transaction-page></transaction-page>
     </div>
     <div id="note" class="tab-pane">
         @include('customers.note')
     </div>
-    <div id="purchase" class="tab-pane">
-        @include('customers.purchase')
+    <div id="purchase" class="tab-pane active">
+        <purchase-page></purchase-page>
     </div>
 </div>
 
+
+<script src="{{ mix('js/app.js') }}"></script>

@@ -1,32 +1,38 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Controller as BaseController;
 
-use App\Forms\MenuForm;
-use App\Services\MenuService;
-use App\Repositories\MenuRepository;
+use App\Models\Customer;
+use App\Models\Menu;
 use App\Models\Company;
+use App\Services\MenuService;
+use App\Http\Resources\MenuResource;
 
-class MenuController extends Controller
+class Menus extends BaseController
 {
-    public function __construct(MenuRepository $menu_repo, MenuForm $form, MenuService $service)
+    public function __construct(MenuService $service)
     {
-        // hardcode should be instead of real query
-        $this->company_id = Company::find(1)->first()->id;
-        $this->form = $form;
-        $this->repo = $menu_repo;
+        # Now: use and company is the one-one relation, we can adjust user belongsToMany in the future
+        $this->user_id = user()->id;
+        $this->company_id = user()->company->first()->id;
         $this->service = $service;
         $this->service->setCompanyId($this->company_id);
     }
 
+
     public function index(Request $request)
     {
-        $menus = $this->service->getMenuSets($this->company_id);
-
-        return view('menus.index', ['menus' => $menus]);
+        $menus = Menu::where(["company_id" => $this->company_id])
+            ->with([
+                "sub_menus",
+                "product",
+                "sub_menus.product"
+            ])->orderBy("created_at", "DESC");
+        return MenuResource::collection($menus->get());
     }
 
     public function show(Request $request, String $menu_id)

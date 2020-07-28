@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered"  id="items">
                         <thead class="thead-light">
                             <tr>
                                 <th class="text-center border-right-0 border-bottom-0" scope="col"></th>
@@ -31,7 +31,7 @@
                                 <th class="text-center border-right-0 border-bottom-0" scope="col">總計</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="invoice-item-rows">
                             <tr>
                                 <td class="text-center border-right-0 border-bottom-0">
                                     <button type="button" data-toggle="tooltip" title="刪除"

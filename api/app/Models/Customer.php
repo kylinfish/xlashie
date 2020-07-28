@@ -20,4 +20,9 @@ class Customer extends Model
     {
         return $this->hasMany('App\Models\CustomerInventory', 'customer_id', 'id');
     }
+
+    public function order()
+    {
+        return $this->hasMany('App\Models\Order', 'customer_id', 'id');
+    }
 }

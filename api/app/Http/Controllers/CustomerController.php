@@ -21,9 +21,9 @@ class CustomerController extends \App\Http\Controllers\Controller
     use Helpers;
 
     public function __construct(
-        OrderRepository $order_repo, 
-        CustomerRepository $customer_repo, 
-        CustomerInventoryRepository $ci_repo, 
+        OrderRepository $order_repo,
+        CustomerRepository $customer_repo,
+        CustomerInventoryRepository $ci_repo,
         CustomerForm $form,
         CustomerService $service
     ) {
@@ -52,7 +52,7 @@ class CustomerController extends \App\Http\Controllers\Controller
     public function show(Request $request, string $customer_uuid)
     {
         $this->form->validate(['uuid' => $customer_uuid]);
-        
+
         $customer = Customer::where(["user_id" => $this->user_id, "uuid" => $customer_uuid])->first();
         if ($customer == null) {
             ### FIXME
