@@ -2241,51 +2241,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var url = new URL(window.location.href),
         uuid = url.pathname.split('/')[2];
     return {
-      menuSelected: '',
+      selectedMenuId: '',
+      selectedMenuItem: {},
+      selectedSalePrice: '',
+      selectedQuantity: '',
       menus: [],
       uuid: uuid,
       inventories: {},
       form: {},
-      buy: {
-        menuId: '',
-        quantity: '',
-        purchase_price: 0,
-        item_total: 0
-      }
+      totalPrice: 0
     };
+  },
+  computed: {
+    selectedItemTotal: {
+      get: function get() {
+        return this.selectedQuantity * this.selectedSalePrice;
+      }
+    },
+    finalPrice: {
+      get: function get() {
+        return this.totalPrice;
+      }
+    }
   },
   mounted: function mounted() {
     this.loadMenus();
     this.form = new _plugins_form__WEBPACK_IMPORTED_MODULE_0__["default"]('invoice');
     this.form.items = [];
-
-    if (typeof invoice_items !== 'undefined' && invoice_items) {
-      var items = [];
-      var item_backup = this.form.item_backup[0];
-      var currency_code = this.form.currency_code;
-      this.edit.status = true;
-      invoice_items.forEach(function (item) {
-        console.log(item);
-        /*items.push({
-            show: false,
-            currency: currency_code,
-            item_id: item.item_id,
-            name: item.name,
-            price: (item.price).toFixed(2),
-            quantity: item.quantity,
-            tax_id: item.tax_id,
-            discount: item.discount_rate,
-            total: (item.total).toFixed(2)
-        });*/
-      });
-      this.form.items = items;
-    }
   },
   methods: {
     loadMenus: function loadMenus() {
@@ -2307,34 +2300,43 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     onAddItem: function onAddItem() {
-      this.form.items.push({
-        "item_id": this.buy.menuId,
-        "item_name": this.buy.item.name,
-        "purchase_price": this.buy.purchase_price.toFixed(2),
-        "quantity": this.buy.quantity,
-        "item_total": this.buy.purchase_price.toFixed(2)
-      });
-      console.log(this.form.items);
-      this.buy.menuId = '';
+      var buyItem = {
+        "itemId": this.selectedMenuId,
+        "itemName": this.selectedMenuItem.name,
+        "salePrice": this.selectedSalePrice,
+        "quantity": this.selectedQuantity,
+        "itemTotal": this.selectedItemTotal
+      };
+      this.form.items.push(buyItem);
+      this.updateTotalPrice();
+      this.selectedMenuId = '';
+      this.selectedMenuItem = {};
+      this.selectedSalePrice = '';
+      this.selectedQuantity = '';
+      this.selectedItemTotal = '';
     },
     onDeleteItem: function onDeleteItem(index) {
-      console.log(index);
       this.form.items.splice(index, 1);
-      console.log(this.form.items);
+      this.updateTotalPrice();
     },
     onSelectItem: function onSelectItem(menuId, index) {
       var _this3 = this;
 
       var item = this.menus.find(function (element, index, array) {
-        return element.id == _this3.buy.menuId;
+        return element.id == _this3.selectedMenuId;
       });
-      this.buy.item = item;
-      this.buy.purchase_price = item.purchase_price;
-      this.buy.quantity = 1;
-      this.buy.item_total = item.purchase_price;
+      this.selectedMenuItem = item;
+      this.selectedSalePrice = item.sale_price;
+      this.selectedQuantity = 1;
+      this.selectedItemTotal = item.sale_price;
     },
-    onCalculateItemTotal: function onCalculateItemTotal() {
-      this.buy.item_total = this.buy.quantity * this.buy.purchase_price;
+    updateTotalPrice: function updateTotalPrice() {
+      var _this4 = this;
+
+      this.totalPrice = 0;
+      this.form.items.forEach(function (element) {
+        _this4.totalPrice += element.itemTotal;
+      });
     }
   }
 });
@@ -20427,8 +20429,8 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.buy.menuId,
-                                expression: "buy.menuId"
+                                value: _vm.selectedMenuId,
+                                expression: "selectedMenuId"
                               }
                             ],
                             staticClass: "form-control",
@@ -20444,13 +20446,9 @@ var render = function() {
                                         "_value" in o ? o._value : o.value
                                       return val
                                     })
-                                  _vm.$set(
-                                    _vm.buy,
-                                    "menuId",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
+                                  _vm.selectedMenuId = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
                                 },
                                 _vm.onSelectItem
                               ]
@@ -20489,19 +20487,49 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [
                         _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.selectedQuantity,
+                              expression: "selectedQuantity"
+                            }
+                          ],
                           staticClass: "form-control text-center",
                           attrs: { type: "number" },
-                          domProps: { value: _vm.buy.quantity },
-                          on: { change: _vm.onCalculateItemTotal }
+                          domProps: { value: _vm.selectedQuantity },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.selectedQuantity = $event.target.value
+                            }
+                          }
                         })
                       ]),
                       _vm._v(" "),
                       _c("td", [
                         _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.selectedSalePrice,
+                              expression: "selectedSalePrice"
+                            }
+                          ],
                           staticClass: "form-control text-center",
                           attrs: { type: "number" },
-                          domProps: { value: _vm.buy.purchase_price },
-                          on: { change: _vm.onCalculateItemTotal }
+                          domProps: { value: _vm.selectedSalePrice },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.selectedSalePrice = $event.target.value
+                            }
+                          }
                         })
                       ]),
                       _vm._v(" "),
@@ -20509,7 +20537,7 @@ var render = function() {
                         _c("input", {
                           staticClass: "form-control text-center",
                           attrs: { "data-item": "item_total", type: "number" },
-                          domProps: { value: _vm.buy.item_total }
+                          domProps: { value: _vm.selectedItemTotal }
                         })
                       ]),
                       _vm._v(" "),
@@ -20526,7 +20554,6 @@ var render = function() {
                               staticClass:
                                 "btn btn-icon btn-outline-success btn-lg",
                               attrs: {
-                                disabled: _vm.buy.menuId == "",
                                 type: "button",
                                 "data-toggle": "tooltip",
                                 title: "選擇品項並新增"
@@ -20552,6 +20579,22 @@ var render = function() {
                   [
                     _vm._l(_vm.form.items, function(row, index) {
                       return _c("tr", { attrs: { index: index } }, [
+                        _c("td", { staticClass: "text-center" }, [
+                          _vm._v(_vm._s(row.itemName))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-center" }, [
+                          _vm._v(_vm._s(row.quantity))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-center" }, [
+                          _vm._v(_vm._s(row.salePrice))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-center" }, [
+                          _vm._v(_vm._s(row.itemTotal))
+                        ]),
+                        _vm._v(" "),
                         _c(
                           "td",
                           {
@@ -20563,7 +20606,7 @@ var render = function() {
                               "button",
                               {
                                 staticClass:
-                                  "btn btn-icon btn-outline-danger btn-lg",
+                                  "btn btn-icon btn-outline-danger btn-sm",
                                 attrs: {
                                   type: "button",
                                   "data-toggle": "tooltip",
@@ -20578,23 +20621,35 @@ var render = function() {
                               [_c("i", { staticClass: "fa fa-trash" })]
                             )
                           ]
-                        ),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(row.item_name))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(row.quantity))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(row.purchase_price))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(row.item_total))])
+                        )
                       ])
                     }),
                     _vm._v(" "),
-                    _vm._m(5),
+                    _c("tr", { attrs: { id: "tr-subtotal" } }, [
+                      _vm._m(5),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "text-center border-bottom-0 long-texts"
+                        },
+                        [_vm._v(_vm._s(_vm.totalPrice))]
+                      ),
+                      _vm._v(" "),
+                      _c("td")
+                    ]),
                     _vm._v(" "),
                     _vm._m(6),
                     _vm._v(" "),
-                    _vm._m(7)
+                    _c("tr", { attrs: { id: "tr-total" } }, [
+                      _vm._m(7),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [
+                        _vm._v(_vm._s(_vm.finalPrice))
+                      ]),
+                      _vm._v(" "),
+                      _c("td")
+                    ])
                   ],
                   2
                 )
@@ -20701,10 +20756,14 @@ var staticRenderFns = [
           [_vm._v("總計")]
         ),
         _vm._v(" "),
-        _c("th", {
-          staticClass: "text-center border-right-0 border-bottom-0",
-          attrs: { scope: "col" }
-        })
+        _c(
+          "th",
+          {
+            staticClass: "text-center border-right-0 border-bottom-0",
+            attrs: { scope: "col" }
+          },
+          [_vm._v("操作")]
+        )
       ])
     ])
   },
@@ -20714,11 +20773,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-light" }, [
       _c("tr", [
-        _c("th", {
-          staticClass: "text-center border-right-0 border-bottom-0",
-          attrs: { scope: "col" }
-        }),
-        _vm._v(" "),
         _c(
           "th",
           {
@@ -20753,6 +20807,15 @@ var staticRenderFns = [
             attrs: { scope: "col" }
           },
           [_vm._v("總計")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass: "text-center border-right-0 border-bottom-0",
+            attrs: { scope: "col" }
+          },
+          [_vm._v("刪除")]
         )
       ])
     ])
@@ -20761,20 +20824,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("tr", { attrs: { id: "tr-subtotal" } }, [
-      _c(
-        "td",
-        {
-          staticClass: "text-right border-right-0 border-bottom-0",
-          attrs: { colspan: "4" }
-        },
-        [_c("strong", [_vm._v("小計")])]
-      ),
-      _vm._v(" "),
-      _c("td", { staticClass: "text-center border-bottom-0 long-texts" }, [
-        _vm._v("0")
-      ])
-    ])
+    return _c(
+      "td",
+      {
+        staticClass: "text-right border-right-0 border-bottom-0",
+        attrs: { colspan: "3" }
+      },
+      [_c("strong", [_vm._v("小計")])]
+    )
   },
   function() {
     var _vm = this
@@ -20785,34 +20842,41 @@ var staticRenderFns = [
         "td",
         {
           staticClass: "text-right border-right-0 border-bottom-0",
-          attrs: { colspan: "4" }
+          attrs: { colspan: "3" }
         },
         [
-          _c("a", { attrs: { href: "#" } }, [
-            _c("strong", [_vm._v("新增折扣")])
-          ])
+          _c(
+            "a",
+            {
+              attrs: {
+                href: "#",
+                disabled: "",
+                "data-toggle": "tooltip",
+                title: "尚未開放"
+              }
+            },
+            [_c("strong", [_vm._v("新增折扣")])]
+          )
         ]
       ),
       _vm._v(" "),
-      _c("td", { staticClass: "text-center" }, [_vm._v("0")])
+      _c("td", { staticClass: "text-center" }),
+      _vm._v(" "),
+      _c("td")
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("tr", { attrs: { id: "tr-total" } }, [
-      _c(
-        "td",
-        {
-          staticClass: "text-right border-right-0 border-bottom-0",
-          attrs: { colspan: "4" }
-        },
-        [_c("strong", [_vm._v("購買金額總計")])]
-      ),
-      _vm._v(" "),
-      _c("td", { staticClass: "text-center" }, [_vm._v("0")])
-    ])
+    return _c(
+      "td",
+      {
+        staticClass: "text-right border-right-0 border-bottom-0",
+        attrs: { colspan: "3" }
+      },
+      [_c("strong", [_vm._v("購買金額總計")])]
+    )
   },
   function() {
     var _vm = this
@@ -33951,8 +34015,8 @@ var Form = /*#__PURE__*/function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/ning/work/macarame-api/api/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/ning/work/macarame-api/api/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/win_yu/github/macarame-api/api/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/win_yu/github/macarame-api/api/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
