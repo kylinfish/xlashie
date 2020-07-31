@@ -6,14 +6,13 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller as BaseController;
 
 use App\Models\Customer;
-use App\Http\Resources\CustomerInventoryResource;
+use App\Http\Resources\TicketResource;
 
 
-class Orders extends BaseController
+class Tickets extends BaseController
 {
     public function __construct()
     {
-        # Now: use and company is the one-one relation, we can adjust user belongsToMany in the future
         $this->user_id = user()->id;
     }
 
@@ -24,6 +23,6 @@ class Orders extends BaseController
             return [];
         }
 
-        return CustomerInventoryResource::collection($customer->order()->get());
+        return TicketResource::collection($customer->ticket()->get());
     }
 }

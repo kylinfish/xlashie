@@ -6,19 +6,19 @@ use Illuminate\Support\Str;
 use Carbon\Carbon;
 use App\Models\Product;
 use App\Models\CustomerInventory;
-use App\Repositories\OrderRepository;
+use App\Repositories\TicketRepository;
 use App\Repositories\OrderItemRepository;
 use App\Repositories\CustomerInventoryRepository;
 
 
-class OrderService
+class TicketService
 {
     public function __construct(
-        OrderRepository $order_repo,
+        TicketRepository $ticket_repo,
         OrderItemRepository $order_item_repo,
         CustomerInventoryRepository $c_inv_repo
     ) {
-        $this->order_repo = $order_repo;
+        $this->ticket_repo = $ticket_repo;
         $this->order_item_repo = $order_item_repo;
         $this->c_inv_repo = $c_inv_repo;
     }
@@ -34,7 +34,7 @@ class OrderService
         $data["company_id"] = $this->company_id;
 
         // 1. Create Order
-        $order = $this->order_repo->create($data);
+        $order = $this->ticket_repo->create($data);
 
         // 2. Create Order Item for logging
         $order_items = [];

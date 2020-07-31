@@ -27,19 +27,20 @@ class Menus extends BaseController
     public function index(Request $request)
     {
         $menus = Menu::where(["company_id" => $this->company_id])
-            ->with([
-                "sub_menus",
-                "product",
-                "sub_menus.product"
-            ])->orderBy("created_at", "DESC");
+            ->with(["sub_menus", "product", "sub_menus.product"])
+            ->orderBy("created_at", "DESC");
         return MenuResource::collection($menus->get());
     }
 
     public function show(Request $request, String $menu_id)
     {
         $this->form->validate(['uuid' => $menu_id]);
-
-        $menu = $this->repo->getMenu($menu_id, $this->company_id);
+        
+        $menu = Menu::where(["company_id" => $this->company_id, "id" => $menu_id])
+            ->with(["sub_menus", "product", "sub_menus.product"])->first();
+        if (!$menu) {
+            return null;
+        }
 
         return response()->json(['data' => $menu], 200);
     }

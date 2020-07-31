@@ -18,6 +18,7 @@ class Inventories extends BaseController
 
     public function index(Request $request, string $customer_uuid)
     {
+        
         $customer = Customer::where(["user_id" => $this->user_id, "uuid" => $customer_uuid])->first();
         if (!$customer) {
             return [];

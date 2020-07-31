@@ -25,14 +25,15 @@ Route::group(['prefix' => 'auth'], function () {
 
 
 
-
 $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', function ($api) {
 
     $api->get('customers/{customer_uuid}/', 'App\Http\Controllers\Api\Customers@show');
     $api->get('customers/{customer_uuid}/inventories', 'App\Http\Controllers\Api\Inventories@index');
-    $api->get('customers/{customer_uuid}/orders', 'App\Http\Controllers\Api\Orders@index');
+    $api->get('customers/{customer_uuid}/tickets', 'App\Http\Controllers\Api\Tickets@index');
 
     $api->get('menus', 'App\Http\Controllers\Api\Menus@index');
 
+    $api->get('products', 'App\Http\Controllers\Api\Products@index');
+    $api->get('products/{product_id}', 'App\Http\Controllers\Api\Products@show');
 });

@@ -1949,16 +1949,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var url = new URL(window.location.href);
@@ -1977,7 +1967,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("/api/customers/".concat(this.uuid, "/inventories")).then(function (res) {
-        _this.inventories = res.data;
+        _this.inventories = res.data.data;
       })["catch"](function (res) {
         console.log(res);
         console.log("inventory: something is wrong");
@@ -2246,6 +2236,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2290,15 +2290,6 @@ __webpack_require__.r(__webpack_exports__);
         console.log("Menus load failed.");
       });
     },
-    loadInventories: function loadInventories() {
-      var _this2 = this;
-
-      axios.get("/api/customers/".concat($this.uuid, "inventories")).then(function (res) {
-        _this2.inventories = _this2.res.data.data;
-      })["catch"](function (res) {
-        alert("something is wrong");
-      });
-    },
     onAddItem: function onAddItem() {
       var buyItem = {
         "itemId": this.selectedMenuId,
@@ -2320,10 +2311,10 @@ __webpack_require__.r(__webpack_exports__);
       this.updateTotalPrice();
     },
     onSelectItem: function onSelectItem(menuId, index) {
-      var _this3 = this;
+      var _this2 = this;
 
       var item = this.menus.find(function (element, index, array) {
-        return element.id == _this3.selectedMenuId;
+        return element.id == _this2.selectedMenuId;
       });
       this.selectedMenuItem = item;
       this.selectedSalePrice = item.sale_price;
@@ -2331,11 +2322,11 @@ __webpack_require__.r(__webpack_exports__);
       this.selectedItemTotal = item.sale_price;
     },
     updateTotalPrice: function updateTotalPrice() {
-      var _this4 = this;
+      var _this3 = this;
 
       this.totalPrice = 0;
       this.form.items.forEach(function (element) {
-        _this4.totalPrice += element.itemTotal;
+        _this3.totalPrice += element.itemTotal;
       });
     }
   }
@@ -2389,29 +2380,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var url = new URL(window.location.href);
     var uuid = url.pathname.split('/')[2];
     return {
-      loading: true,
       uuid: uuid,
-      orders: {}
+      tickets: {}
     };
   },
-  mounted: function mounted() {//this.loadOrders()
+  mounted: function mounted() {
+    this.loadTickets();
   },
   methods: {
-    loadOrders: function loadOrders() {
+    loadTickets: function loadTickets() {
       var _this = this;
 
-      axios.get("/api/customers/".concat(this.uuid, "/orders")).then(function (res) {
-        _this.orders = _this.res.data.data;
+      axios.get("/api/customers/".concat(this.uuid, "/tickets")).then(function (res) {
+        _this.tickets = res.data.data;
       })["catch"](function (res) {
-        alert("something is wrong");
+        console.log("something is wrong", res);
       });
-      this.loading = false;
     }
   }
 });
@@ -20072,10 +20061,10 @@ var render = function() {
       _vm._v(" "),
       _c(
         "tbody",
-        _vm._l(_vm.inventories, function(inventory) {
+        _vm._l(_vm.inventories, function(inventory, index) {
           return _c("tr", [
             _c("td", { staticClass: "text-center" }, [
-              _vm._v(_vm._s(inventory.id))
+              _vm._v(_vm._s(index + 1))
             ]),
             _vm._v(" "),
             _c("td", { staticClass: "col-md-3 text-center" }, [
@@ -20473,9 +20462,9 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                            " +
+                                    "\n                                                " +
                                       _vm._s(menu.name) +
-                                      "\n                                        "
+                                      "\n                                            "
                                   )
                                 ]
                               )
@@ -20949,22 +20938,22 @@ var render = function() {
       _vm._v(" "),
       _c(
         "tbody",
-        _vm._l(_vm.orders, function(order) {
+        _vm._l(_vm.tickets, function(ticket, index) {
           return _c("tr", [
             _c("td", { staticClass: "col-md-3 text-center" }, [
-              _c("a", { attrs: { href: "#" } }, [_vm._v(_vm._s(order.ticket))])
+              _c("a", { attrs: { href: "#" } }, [_vm._v(_vm._s(index + 1))])
             ]),
             _vm._v(" "),
             _c("td", { staticClass: "col-md-3 text-center" }, [
-              _vm._v(_vm._s(order.purchase_price))
+              _vm._v(_vm._s(ticket.purchase_price))
             ]),
             _vm._v(" "),
             _c("td", { staticClass: "col-md-3 text-center" }, [
-              _vm._v(_vm._s(order.created_at))
+              _vm._v(_vm._s(ticket.created_at))
             ]),
             _vm._v(" "),
             _c("td", { staticClass: "col-md-3 text-center" }, [
-              _vm._v(_vm._s(order.pay_type))
+              _vm._v(_vm._s(ticket.pay_type))
             ]),
             _vm._v(" "),
             _vm._m(1, true)

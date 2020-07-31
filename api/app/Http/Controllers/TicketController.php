@@ -5,17 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-use App\Forms\OrderForm;
-use App\Services\OrderService;
-use App\Repositories\OrderRepository;
+use App\Forms\TicketForm;
+use App\Services\TicketService;
+use App\Repositories\TicketRepository;
 use App\Models\Company;
 
-class OrderController extends Controller
+class TicketController extends Controller
 {
-    public function __construct(OrderRepository $order_repo, OrderForm $form, OrderService $service)
+    public function __construct(TicketRepository $order_repo, TicketForm $form, TicketService $service)
     {
-        // hardcode should be instead of real query
-        $this->company_id = Company::find(1)->first()->id;
+        $this->company_id = user()->company->first()->id;
         $this->form = $form;
         $this->repo = $order_repo;
         $this->service = $service;

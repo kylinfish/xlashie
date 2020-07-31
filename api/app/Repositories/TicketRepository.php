@@ -2,13 +2,13 @@
 namespace App\Repositories;
 
 use App\Repositories\EloquentRepository;
-use App\Models\Order;
+use App\Models\Ticket;
 
-class OrderRepository extends EloquentRepository
+class TicketRepository extends EloquentRepository
 {
-    public function __construct(Order $order)
+    public function __construct(Ticket $ticket)
     {
-        $this->model = $order;
+        $this->model = $ticket;
     }
 
     public function getOrders(int $company_id, int $customer_id)

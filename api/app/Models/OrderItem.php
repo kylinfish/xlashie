@@ -21,9 +21,9 @@ class OrderItem extends Model
 
     protected $attrubutes = [];
 
-    public function order()
+    public function ticket()
     {
-        return $this->hasOne('App\Models\Order', 'order_id', 'id');
+        return $this->hasOne('App\Models\Ticket', 'order_id', 'id');
     }
 
     public function scopeOrdered($query)

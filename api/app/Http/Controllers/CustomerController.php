@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Forms\CustomerForm;
 use App\Services\CustomerService;
-use App\Repositories\OrderRepository;
+use App\Repositories\TicketRepository;
 use App\Repositories\CustomerRepository;
 use App\Repositories\CustomerInventoryRepository;
 use App\Models\User;
 use App\Models\Menu;
-use App\Models\Order;
+use App\Models\Ticket;
 use App\Models\Company;
 use App\Models\Customer;
 use App\Transformers\Customer as Transformer;
@@ -21,7 +21,7 @@ class CustomerController extends \App\Http\Controllers\Controller
     use Helpers;
 
     public function __construct(
-        OrderRepository $order_repo,
+        TicketRepository $order_repo,
         CustomerRepository $customer_repo,
         CustomerInventoryRepository $ci_repo,
         CustomerForm $form,
@@ -60,7 +60,7 @@ class CustomerController extends \App\Http\Controllers\Controller
         }
 
         $inventories = $customer->inventory()->get();
-        $orders = Order::where(["company_id" => $this->company_id, "customer_id"=> $customer->id])->ordered();
+        $orders = Ticket::where(["company_id" => $this->company_id, "customer_id"=> $customer->id])->ordered();
         $menus = Menu::where("company_id", $this->company_id)->get();
         return view("customers.show", compact('customer', 'inventories', 'orders', 'menus'));
     }
