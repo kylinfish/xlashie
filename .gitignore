@@ -1,3 +1,4 @@
+api/public/js/app.js
 /.idea
 Homestead.json
 Homestead.yaml
@@ -31,3 +32,5 @@ Homestead.json
 # End of https://www.gitignore.io/api/laravel
 
 *.DS_Store
+
+

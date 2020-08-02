@@ -268,7 +268,7 @@ export default class Form {
             url: this.action,
             data: form_data,
             headers: {
-                'X-CSRF-TOKEN': window.Laravel.csrfToken,
+                //'X-CSRF-TOKEN': window.Laravel.csrfToken,
                 'X-Requested-With': 'XMLHttpRequest',
                 'Content-Type': 'multipart/form-data'
             }
