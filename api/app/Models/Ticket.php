@@ -12,9 +12,9 @@ class Ticket extends Model
         'customer_id',
         'company_id',
         'ticket',
-        'pay_type',
+        'payment',
         'discount',
-        'purchase_price',
+        'price',
         'note'
     ];
 

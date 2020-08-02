@@ -1,8 +1,7 @@
 <template>
     <div class="card-body description">
 
-        <form method="POST" action="/transactions" accept-charset="UTF-8" id="invoice"
-            enctype="multipart/form-data"
+        <form method="POST" accept-charset="UTF-8" id="invoice"
             v-on:submit.prevent="onSubmit">
             <div class="row">
                 <div class="col-sm-12 mb-4">
@@ -11,15 +10,8 @@
                             <label for="">訂單流水號</label>
                             <input type="text"
                              :class="['form-control', {'is-invalid': validation.hasError('ticket')}]"
-                             value="INV-00003" v-model="ticket">
+                             v-model="ticket" required>
                             <div class="invalid-feedback">{{ validation.firstError('ticket') }}</div>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>訂單日期</label>
-                            <div class="col-md-10">
-                                <input class="form-control" id="datetime" type="datetime-local" v-model="transaction_at">
-                                {{ transaction_at }}
-                            </div>
                         </div>
                         <div class="form-group col-md-4">
                             <label>付費方式</label>
@@ -28,6 +20,12 @@
                                 <option value="轉帳/匯款">轉帳/匯款</option>
                                 <option value="預扣">預扣</option>
                             </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>訂單日期</label>
+                            <div class="form-group">
+                                <input class="form-control" id="datetime" type="datetime-local" v-model="transaction_at">
+                            </div>
                         </div>
                         <div class="form-group col-md">
                             <table class="table table-bordered">
@@ -43,9 +41,6 @@
                                 <tbody>
                                     <tr>
                                         <td>
-
-
-
                                             <select
                                                 @change="onSelectItem"
                                                 :class="['form-control', {'is-invalid': validation.hasError('selectedMenuId')}]"
@@ -142,7 +137,7 @@
 
                     <div class="form-group">
                         <label>消費備註</label>
-                        <textarea class="form-control" rows="2">{{inputErrs}}</textarea>
+                        <textarea class="form-control" rows="2" v-model="note"></textarea>
                     </div>
                     <div class="card-footer">
                         <div class="row float-right">
@@ -165,9 +160,11 @@
 <script>
     import Form from './../../plugins/form';
     import SimpleVueValidation from 'simple-vue-validator';
+    import VueSweetalert2 from 'vue-sweetalert2';
 
     const InputValidator = SimpleVueValidation.Validator;
     Vue.use(SimpleVueValidation);
+    Vue.use(VueSweetalert2);
 
     Date.prototype.toDatetimeLocalInputValue = (function() {
         var local = new Date(this);
@@ -189,6 +186,7 @@
                 selectedMenuItem: {},
                 selectedSalePrice: '',
                 selectedQuantity: '',
+                selectedItemType: 0,
 
                 menus: [],
                 uuid: uuid,
@@ -196,11 +194,13 @@
                 form: {},
                 inputErrs: {},
                 totalPrice: 0,
+                note: '',
             };
         },
 
         computed: {
             selectedItemTotal: vm => vm.selectedQuantity * vm.selectedSalePrice,
+
             finalPrice: vm => vm.totalPrice,
         },
 
@@ -216,7 +216,7 @@
             },
             selectedQuantity(value) {
                 return InputValidator.value(value)
-                    .integer().greaterThan(0).required('至少要 1');
+                    .integer().greaterThan(0).required('至少要 1 個');
             },
             selectedSalePrice(value) {
                 return InputValidator.value(value)
@@ -243,33 +243,51 @@
             },
 
             onSubmit() {
-                let transactionData = {
+                if (this.form.items.length < 1) {
+                    this.$swal({
+                        title: "本次交易沒有購買項目",
+                        icon: "error",
+                        text: "請加入購買品項",
+                    })
+                    return
+                }
+                let formData = {
                     "ticket": this.ticket,
                     "payment": this.payment,
-                    "note": this.note,
                     "transaction_at": this.transaction_at,
                     "items": this.form.items,
+                    "price": this.totalPrice,
+                    "note": this.note,
                 }
-                console.log(transactionData);
 
-                return;
-
-
-                window.axios({
+                axios({
                     method: "POST",
-                    url: "/api/transactions/",
-                    data: form_data,
+                    url: `/api/customers/${this.uuid}/transactions/`,
+                    data: formData,
                     headers: {
                         //'X-CSRF-TOKEN': window.Laravel.csrfToken,
                         'X-Requested-With': 'XMLHttpRequest',
-                        'Content-Type': 'multipart/form-data'
+                        'Content-Type': 'application/json',
                     }
                 })
-                .then(
-                    console.log(this)
-                )
-                .catch(console.log(this));
-
+                .then((res) => {
+                    this.$swal({
+                        title: "新增成功",
+                        text: "稍後重新整理",
+                        icon: "success",
+                        timer: 1200,
+                        showConfirmButton: false
+                    }).then(() => {
+                        //location.reload();
+                    })
+                })
+                .catch((e) => {
+                    this.$swal({
+                        title: "新增失敗",
+                        icon: "error",
+                        text: e,
+                    })
+                });
             },
 
             onAddItem() {
@@ -288,7 +306,8 @@
                         "itemName": self.selectedMenuItem.name,
                         "salePrice": self.selectedSalePrice,
                         "quantity": self.selectedQuantity,
-                        "itemTotal": self.selectedItemTotal
+                        "itemTotal": self.selectedItemTotal,
+                        "product_type": self.selectedItemType,
                     }
 
                     self.form.items.push(buyItem);
@@ -318,6 +337,7 @@
                 this.selectedSalePrice = item.sale_price;
                 this.selectedQuantity = 1;
                 this.selectedItemTotal = item.sale_price;
+                this.selectedItemType = item.item_type;
             },
 
             updateTotalPrice() {

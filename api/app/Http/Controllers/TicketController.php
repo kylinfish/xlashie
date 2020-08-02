@@ -28,6 +28,7 @@ class TicketController extends Controller
         $this->form->validate($params);
 
         $this->service->createOrder($params);
-        exit(1);
+
+        return response()->json(["message" => "okay"]);
     }
 }

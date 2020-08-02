@@ -124,8 +124,8 @@ class CreateTables extends Migration
             $table->string('name', 50);
             $table->string('sku', 30)->default('');
             $table->string('avatar', 255)->default('');
-            $table->double('sale_price', 15, 4)->default(0);
-            $table->double('purchase_price', 15, 4)->default(0);
+            $table->integer('sale_price')->default(0);
+            $table->integer('purchase_price')->default(0);
             $table->tinyInteger('status')->default(0)->unsigned(); // 0: 關閉 1:開放 2:封存
             $table->tinyInteger('category_id')->default(0)->unsigned();
             $table->integer('quantity')->default(0)->unsigned();
@@ -143,8 +143,8 @@ class CreateTables extends Migration
             $table->integer('product_id')->unsigned()->default(0);
 
             $table->string('name', 50);
-            $table->double('sale_price', 15, 4)->default(0);
-            $table->double('purchase_price', 15, 4)->default(0);
+            $table->integer('sale_price')->default(0);
+            $table->integer('purchase_price')->default(0);
             $table->integer('bonus')->unsigned()->default(0);
             $table->tinyInteger('item_type')->default(0)->unsigned();
 
@@ -176,7 +176,7 @@ class CreateTables extends Migration
             $table->string('invoice_status_code');
             $table->dateTime('invoiced_at');
             $table->dateTime('due_at');
-            $table->double('amount', 15, 4);
+            $table->integer('amount');
             $table->integer('category_id')->default(1);
             $table->text('notes')->nullable();
             $table->timestamps();
@@ -191,9 +191,9 @@ class CreateTables extends Migration
             $table->integer('company_id')->unsigned();
             $table->integer('customer_id')->unsigned();
             $table->string('ticket', 10);
-            $table->string('pay_type', 10);
-            $table->double('discount', 15, 2)->default(0);
-            $table->double('purchase_price', 15, 2)->default(0);
+            $table->string('payment', 10);
+            $table->integer('discount')->default(0);
+            $table->integer('price')->default(0);
             $table->text('note')->nullable();
 
             $table->timestamps();
@@ -207,7 +207,7 @@ class CreateTables extends Migration
             $table->integer('order_id')->unsigned();
             $table->string('product_name', 50);
             $table->integer('quantity')->unsigned();
-            $table->double('unit_price', 15, 2)->default(0);
+            $table->integer('unit_price')->default(0);
 
             $table->index(['order_id']);
         });
@@ -250,8 +250,8 @@ class CreateTables extends Migration
             $table->integer('product_id')->unsigned();
             $table->string('name');
             $table->integer('quantity')->unsigned();
-            $table->double('price', 15, 4);
-            $table->double('total', 15, 4);
+            $table->integer('price');
+            $table->integer('total');
             $table->timestamps();
             $table->softDeletes();
 
