@@ -15,7 +15,8 @@ class Ticket extends Model
         'payment',
         'discount',
         'price',
-        'note'
+        'note',
+        'created_at',
     ];
 
     protected $hidden = [];
@@ -24,6 +25,8 @@ class Ticket extends Model
 
     protected $attrubutes = [];
 
+    protected $dateFormat = 'Y-m-d H:i:s';
+    
     public function order_items()
     {
         return $this->hasMany('App\Models\OrderItem', 'order_id', 'id');

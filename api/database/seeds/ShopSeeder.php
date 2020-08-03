@@ -14,8 +14,8 @@ class ShopSeeder extends Seeder
     {
 
         DB::table('companies')->insert([
-            'name' => "亮麗美容教室",
-            'enabled' => random_int(0, 1),
+            'name' => "Albert Nail 美甲工作室",
+            'enabled' => 1,
 
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

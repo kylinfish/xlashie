@@ -21,6 +21,8 @@ class OrderItem extends Model
 
     protected $attrubutes = [];
 
+    protected $dateFormat = 'Y-m-d H:i:s';
+    
     public function ticket()
     {
         return $this->hasOne('App\Models\Ticket', 'order_id', 'id');

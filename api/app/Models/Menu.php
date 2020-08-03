@@ -19,7 +19,9 @@ class Menu extends Model
 
     protected $attrubutes = [];
 
-    public function sub_menu()
+    protected $dateFormat = 'Y-m-d H:i:s';
+    
+    public function sub_menus()
     {
         return $this->hasMany('App\Models\SubMenu', 'menu_id', 'id');
     }

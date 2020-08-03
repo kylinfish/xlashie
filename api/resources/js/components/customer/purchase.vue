@@ -259,7 +259,7 @@ export default {
                         timer: 1200,
                         showConfirmButton: false
                     }).then(() => {
-                        //location.reload();
+                        location.reload();
                     })
                 })
                 .catch((e) => {

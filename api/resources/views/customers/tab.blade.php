@@ -37,7 +37,7 @@
 </ul>
 
 <div id="app" class="tab-content tab-space card shadow">
-    <div id="profile" class="tab-pane">
+    <div id="profile" class="tab-pane active">
         <profile-page></profile-page>
     </div>
     <div id="inventory" class="tab-pane">
@@ -49,7 +49,7 @@
     <div id="note" class="tab-pane">
         @include('customers.note')
     </div>
-    <div id="purchase" class="tab-pane active">
+    <div id="purchase" class="tab-pane">
         <purchase-page></purchase-page>
     </div>
 </div>

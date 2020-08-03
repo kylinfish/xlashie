@@ -33,4 +33,6 @@ class Product extends Model
         'name'   => '',
         'avatar' => '',
     ];
+
+    protected $dateFormat = 'Y-m-d H:i:s';
 }

@@ -16,7 +16,7 @@ class OrderInventorySeeder extends Seeder
 
         DB::table('orders')->insert([
             'company_id' => 1,
-            'customer_id' => 1,
+            'customer_id' => 2,
             'ticket' => 'INV-001',
             'payment' => '現金',
             'discount' => 40,
@@ -32,8 +32,8 @@ class OrderInventorySeeder extends Seeder
             'ticket' => 'INV-002',
             'payment' => '轉帳',
             'discount' => 0,
-            'price' => 2850,
-            'note' => 'Richart',
+            'price' => 1,
+            'note' => 'Richart 測試入帳',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
@@ -44,20 +44,5 @@ class OrderInventorySeeder extends Seeder
             'quantity' => 2,
             'unit_price' => 2020,
         ]);
-        for ($i = 0; $i <=2 ; $i++) {
-            DB::table('order_items')->insert([
-                'order_id' => 2,
-                'product_name' => '護膚課程 - 美白系列',
-                'quantity' => 1,
-                'unit_price' => 950,
-            ]);
-
-            DB::table('customer_inventories')->insert([
-                'company_id' => 1,
-                'customer_id' => 1,
-                'product_name' => '護膚課程 - 美白系列',
-                'status' => 1,
-            ]);
-        }
     }
 }

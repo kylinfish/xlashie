@@ -16,6 +16,8 @@ class Customer extends Model
 
     #protected $guarded = ['uuid'];
 
+    protected $dateFormat = 'Y-m-d H:i:s';
+
     public function inventory()
     {
         return $this->hasMany('App\Models\CustomerInventory', 'customer_id', 'id');

@@ -21,7 +21,7 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
-        "simple-vue-validator": "^0.16.0"
-
+        "simple-vue-validator": "^0.16.0",
+        "vue-sweetalert2": "^3.0.6"
     }
 }

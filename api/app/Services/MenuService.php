@@ -79,6 +79,7 @@ class MenuService
             "product_id" => 0,
             "name" => $data["name"],
             "sale_price" => $data["sale_price"],
+            "has_submenu" => true,
             "purchase_price" => $data["purchase_price"],
         ]);
 

@@ -2,16 +2,18 @@
 namespace App\Services;
 
 use Cache;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use App\Models\Menu;
 use App\Models\SubMenu;
 use App\Models\Ticket;
 use App\Models\Product;
+use App\Models\OrderItem;
 use App\Models\Customer;
 use App\Models\CustomerInventory;
 use App\Repositories\TicketRepository;
-use App\Repositories\OrderItemRepository;
+
 use App\Repositories\CustomerInventoryRepository;
 
 
@@ -19,11 +21,9 @@ class TicketService
 {
     public function __construct(
         TicketRepository $ticket_repo,
-        OrderItemRepository $order_item_repo,
         CustomerInventoryRepository $c_inv_repo
     ) {
         $this->ticket_repo = $ticket_repo;
-        $this->order_item_repo = $order_item_repo;
         $this->c_inv_repo = $c_inv_repo;
     }
 
@@ -37,6 +37,7 @@ class TicketService
     {
         $data["customer_id"] = Customer::where('uuid', $data['customer_uuid'])->first()->id;
         $data["company_id"] = $this->company_id;
+        $data["created_at"] = Carbon::parse($data["transaction_at"]);
 
         // 1. Create Order
         $order = Ticket::create($data);
@@ -51,8 +52,7 @@ class TicketService
                 "order_id" => $order->id,
             ];
         }
-
-        $this->order_item_repo->insert($order_items);
+        OrderItem::insert($order_items);
 
 
         // 3. Create Customer Inventory
@@ -68,64 +68,61 @@ class TicketService
         // 以上兩組共同點都需要做(inventories) Insert 的動作，分 TYPE_ENTITY / TYPE_VIRTUAL
         */
 
+        /*
+        $product_ids = Arr::pluck($data["items"], "itemId");
+        $products = Product::whereIn("id", $product_ids)->get();
+        dd($products);
+        */
+        
+
         $inventories = [];
         foreach ($data["items"] as $item) {
             $menu_id = $item["itemId"];
+            $menu = Menu::find($menu_id);
+            
+            // 知道名稱跟數量 append 進去就好
+            if ($menu->has_submenu) {
+                foreach ($menu->sub_menus->map->only(["product_id", "amount"]) as $entry) {
+                    $product = Product::find($entry["product_id"]);
+                    $status = CustomerInventory::STATUS_UNUSED;
+                    if (Product::TYPE_ENTITY == $product->status) {
+                        $status = CustomerInventory::STATUS_DONE;
+                    }
+                    if (Product::TYPE_VIRTUAL == $product->status) {
+                        $status = CustomerInventory::STATUS_UNUSED;
+                    }
+                    
 
-            if ($sub_menus = Menu::find($menu_id)->sub_menu->all()) {
-                foreach ($sub_menus as $s_menu) {
-
-
+                    for ($i = 0; $i < $entry["amount"]; $i++) {
+                        $inventories[] = [
+                            "customer_id" => $data["customer_id"],
+                            "company_id" => $this->company_id,
+                            "product_name" => $product->name,
+                            "status" => $status,
+                            "created_at" => $data["created_at"],
+                            "updated_at" => Carbon::now(),
+                        ];
+                    }
                 }
-
-            }
-
-
-            if ($item["product_type"] == Product::TYPE_ENTITY) {
-                $inventories = [
+            } else {
+                $status = CustomerInventory::STATUS_UNUSED;
+                if (Product::TYPE_ENTITY == $item["product_type"]) {
+                    $status = CustomerInventory::STATUS_DONE;
+                }
+                if (Product::TYPE_VIRTUAL == $item["product_type"]) {
+                    $status = CustomerInventory::STATUS_UNUSED;
+                }
+                $inventories[] = [
                     "customer_id" => $data["customer_id"],
                     "company_id" => $this->company_id,
                     "product_name" => $item["itemName"],
-                    "status" => CustomerInventory::STATUS_DONE,
-                    "created_at" => Carbon::today(),
-                    "updated_at" => Carbon::today(),
+                    "status" => $status,
+                    "created_at" => $data["created_at"],
+                    "updated_at" => Carbon::now(),
                 ];
-            } elseif ($item["product_type"] == Product::TYPE_VIRTUAL) {
-                for ($i = 0; $i < $item["quantity"]; $i++) {
-                    $inventories[] = [
-                        "customer_id" => $data["customer_id"],
-                        "company_id" => $this->company_id,
-                        "product_name" => $item["itemName"],
-                        "status" => CustomerInventory::STATUS_UNUSED,
-                        "created_at" => Carbon::today(),
-                        "updated_at" => Carbon::today(),
-                    ];
-                }
             }
+
             $this->c_inv_repo->insert($inventories);
-
         }
-    }
-
-    private function createSubProduct(SubMenu $sub_menus, string $customer_id)
-    {
-        foreach ($sub_menus as $s_menu) {
-            $inventories = [];
-            for ($i = 0; $i <= $s_menu->amount; $i++) {
-                $inventories[] = [
-                    "customer_id" => $customer_id,
-                    "company_id" => $this->company_id,
-                    "product_name" => Product::find($s_menu["product_id"])->name,
-                    "status" => CustomerInventory::STATUS_DONE,
-                ];
-            }
-            CustomerInventory::insert($inventories);
-        }
-
-    }
-
-    private function generateInventoriesArray()
-    {
-
-    }
+    }  
 }

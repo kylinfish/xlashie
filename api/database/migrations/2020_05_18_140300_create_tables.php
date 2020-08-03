@@ -147,6 +147,7 @@ class CreateTables extends Migration
             $table->integer('purchase_price')->default(0);
             $table->integer('bonus')->unsigned()->default(0);
             $table->tinyInteger('item_type')->default(0)->unsigned();
+            $table->boolean('has_submenu')->default(false);
 
             $table->timestamps();
 
@@ -165,25 +166,6 @@ class CreateTables extends Migration
             $table->timestamps();
 
             $table->index(['menu_id', 'product_id']);
-        });
-
-        Schema::create('invoices', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('company_id');
-            $table->integer('customer_id');
-            $table->string('invoice_number');
-            $table->string('order_number')->nullable();
-            $table->string('invoice_status_code');
-            $table->dateTime('invoiced_at');
-            $table->dateTime('due_at');
-            $table->integer('amount');
-            $table->integer('category_id')->default(1);
-            $table->text('notes')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
-
-            $table->index('company_id');
-            $table->unique(['company_id', 'invoice_number', 'deleted_at']);
         });
 
         Schema::create('orders', function (Blueprint $table) {

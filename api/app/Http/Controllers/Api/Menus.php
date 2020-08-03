@@ -39,7 +39,7 @@ class Menus extends BaseController
         $menu = Menu::where(["company_id" => $this->company_id, "id" => $menu_id])
             ->with(["sub_menus", "product", "sub_menus.product"])->first();
         if (!$menu) {
-            return null;
+            return response()->json(["message" => "找不到該菜單資訊"], 404);
         }
 
         return response()->json(['data' => $menu], 200);

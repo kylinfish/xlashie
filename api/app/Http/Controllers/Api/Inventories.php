@@ -23,6 +23,6 @@ class Inventories extends BaseController
         if (!$customer) {
             return [];
         }
-        return CustomerInventoryResource::collection($customer->inventory()->get());
+        return CustomerInventoryResource::collection($customer->inventory()->orderBy('created_at', 'desc')->get());
     }
 }

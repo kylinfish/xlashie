@@ -27,7 +27,7 @@ class Transactions extends BaseController
             return [];
         }
 
-        return TicketResource::collection($customer->ticket()->get());
+        return TicketResource::collection($customer->ticket()->orderby("id", "desc")->get());
     }
 
     public function store(Request $request, string $customer_uuid)
@@ -39,6 +39,6 @@ class Transactions extends BaseController
         $params["customer_uuid"] = $customer_uuid;
         $this->service->createOrder($params);
 
-        return response()->json(["message" => "ok"]);
+        return response()->json(["message" => "ok"], 200);
     }
 }
