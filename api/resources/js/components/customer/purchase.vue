@@ -242,33 +242,33 @@ export default {
             }
 
             axios({
-                    method: "POST",
-                    url: `/api/customers/${this.uuid}/transactions/`,
-                    data: formData,
-                    headers: {
-                        //'X-CSRF-TOKEN': window.Laravel.csrfToken,
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'Content-Type': 'application/json',
-                    }
+                method: "POST",
+                url: `/api/customers/${this.uuid}/transactions/`,
+                data: formData,
+                headers: {
+                    //'X-CSRF-TOKEN': window.Laravel.csrfToken,
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then((res) => {
+                this.$swal({
+                    title: "新增成功",
+                    text: "稍後重新整理",
+                    icon: "success",
+                    timer: 1200,
+                    showConfirmButton: false
+                }).then(() => {
+                    location.reload();
                 })
-                .then((res) => {
-                    this.$swal({
-                        title: "新增成功",
-                        text: "稍後重新整理",
-                        icon: "success",
-                        timer: 1200,
-                        showConfirmButton: false
-                    }).then(() => {
-                        location.reload();
-                    })
+            })
+            .catch((e) => {
+                this.$swal({
+                    title: "新增失敗",
+                    icon: "error",
+                    text: e,
                 })
-                .catch((e) => {
-                    this.$swal({
-                        title: "新增失敗",
-                        icon: "error",
-                        text: e,
-                    })
-                });
+            });
         },
 
         onAddItem() {

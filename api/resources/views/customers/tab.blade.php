@@ -47,7 +47,7 @@
         <transaction-page></transaction-page>
     </div>
     <div id="note" class="tab-pane">
-        @include('customers.note')
+        <note-page></note-page>
     </div>
     <div id="purchase" class="tab-pane">
         <purchase-page></purchase-page>

@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('company', function () {
+    return view('companies.index');
+});
 Route::resource('customers', 'CustomerController');
 Route::resource('products', 'ProductController');
 Route::resource('menus', 'MenuController');

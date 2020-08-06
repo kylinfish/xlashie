@@ -5,4 +5,3 @@
 <script src="{{ asset('assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
 <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
 <script src="/assets/js/demo.min.js"></script>
-<script src="/assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>

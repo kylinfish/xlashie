@@ -7,7 +7,7 @@ export default class Form {
         if (!form) {
             return;
         }
-
+        
         this['method'] = form.getAttribute('method');
         this['action'] = form.getAttribute('action');
 
@@ -293,6 +293,7 @@ export default class Form {
 
     // Form fields check validation issue
     onFail(error) {
+        console.log(error)
         this.errors.record(error.response.data.errors);
 
         this.loading = false;

@@ -56,7 +56,7 @@ class CustomerController extends \App\Http\Controllers\Controller
         $customer = Customer::where(["user_id" => $this->user_id, "uuid" => $customer_uuid])->first();
         if ($customer == null) {
             ### FIXME
-            return redirect()->route("customers");
+            return redirect()->route("customers.index");
         }
 
         $inventories = $customer->inventory()->get();

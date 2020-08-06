@@ -1,5 +1,7 @@
 @extends('layouts.nosidebar')
 @section('content')
+<link rel="stylesheet" href="{{ asset('/assets/vendor/quill/dist/quill.core.css') }}" type="text/css">
+
 <div class="row">
     <div class="col-md-3">
         <div class="card card-profile mb-1">
@@ -52,5 +54,6 @@
 </div>
 
 @include('modal.customers.inventory_mark')
+<script src="{{ asset('/assets/vendor/quill/dist/quill.min.js') }}"></script>
 
 @endsection
