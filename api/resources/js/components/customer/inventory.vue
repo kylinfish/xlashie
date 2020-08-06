@@ -16,37 +16,95 @@
                 <td class="text-center">{{ index + 1 }}</td>
                 <td class="col-md-3 text-center">{{ inventory.product_name }}</td>
                 <td class="col-md-3 text-center">
-                    <span class="badge badge-pill badge-success">{{ inventory.status }}</span>
+                    <span :class="['form-badge badge-pill', inventory.badgeStyle]" class="">{{ inventory.status_str }}</span>
                 </td>
                 <td class="col-md-3 text-center">{{ inventory.created_at }}</td>
                 <td class="col-md-3 text-center">{{ inventory.used_at }}</td>
                 <td class="col-md-2 text-center">
-                    <div class="dropdown">
-                        <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-neutral btn-sm text-light items-align-center py-2">
-                            <i class="fa fa-ellipsis-h text-muted"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                            <a href="#" class="dropdown-item" data-toggle="modal" data-target="#inventory-status-modal">核銷</a>
-                            <a href="#" class="dropdown-item">編輯</a>
-                        </div>
-                    </div>
+                    <a href="#" role="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#inventory-status-modal" @click="fillModal(inventory.id)"><span class="btn-inner--icon"><i class="ni ni-settings-gear-65"></i></span> 核銷</a>
                 </td>
             </tr>
         </tbody>
     </table>
+
+    <div class="modal" id="inventory-status-modal" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+        <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="card bg-secondary border-0 mb-0">
+                        <div class="card-header">
+                            <div class="text-muted text-center mt-2 mb-3">
+                                <h3 class="text-blue">商品資訊</h3>
+                            </div>
+                            <dl class="row">
+                                <dd class="col-md-12 text-center"><span class="h3">{{ selectedItem.product_name }}</span></dd>
+                            </dl>
+                            <dl class="row">
+                                <dt class="col-sm-4 text-right">購買日期</dt>
+                                <dd class="col-sm-8 text-center">{{ selectedItem.created_at }}</dd>
+                            </dl>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center text-muted mb-3">
+                                <h3 class="text-blue">核銷</h3>
+                            </div>
+                            <form role="form">
+                                <div class="form-group-sm">
+                                    <label class="form-control-label">更新日期</label>
+                                    <input class="form-control" id="datetime" type="datetime-local" v-model="logAt">
+                                </div>
+
+                                <div class="form-group-sm">
+                                    <label class="form-control-label">核銷狀態</label>
+                                    <select class="form-control" v-model="selectedItem.status">
+                                        <option value="0"><span>未使用</span></option>
+                                        <option value="1"><span>已發放</span></option>
+                                        <option value="2"><span>已使用</span></option>
+                                        <option value="3"><span>積欠未發</span></option>
+                                        <option value="4"><span>註銷失效</span></option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group-sm">
+                                    <label class="form-control-label">備註說明</label>
+                                    <textarea class="form-control" rows="3" v-model="selectedItem.note"></textarea>
+                                </div>
+                                <div class="offset-md-5 mt-3">
+                                    <button type="submit" class="btn btn-primary my-4">送出</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </template>
 
 <script>
+Date.prototype.toDatetimeLocalInputValue = (function () {
+    var local = new Date(this);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0, 16);
+});
+
+let statusMap = {
+    1: 'okay',
+    2: 'not good'
+}
 export default {
     data: function () {
         let url = new URL(window.location.href)
         let uuid = url.pathname.split('/')[2]
 
         return {
+            logAt: new Date().toDatetimeLocalInputValue(),
+            isShowModal: true,
             loading: true,
             uuid: uuid,
-            inventories: {}
+            inventories: {},
+            selectedItem: {},
         };
     },
 
@@ -59,13 +117,27 @@ export default {
             axios
                 .get(`/api/customers/${this.uuid}/inventories`)
                 .then((res) => {
-                    this.inventories = res.data.data;
+                    let statusMap = {
+                        0: 'badge-secondary',
+                        1: 'badge-success',
+                        2: 'badge-success',
+                        3: 'badge-warning',
+                        4: 'badge-secondary'
+                    }
+                    this.inventories = res.data.data
+                    this.inventories.forEach((inventory) => {
+                        inventory.badgeStyle = statusMap[inventory.status]
+                    });
                 })
                 .catch((res) => {
                     console.log(res)
                     console.log("inventory: something is wrong")
                 });
-        }
+        },
+        fillModal(i_id) {
+            this.selectedItem = this.inventories.filter(inventory => inventory.id == i_id)[0];
+            console.log(this.selectedItem);
+        },
     }
 };
 </script>

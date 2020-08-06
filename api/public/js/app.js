@@ -1947,14 +1947,72 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+Date.prototype.toDatetimeLocalInputValue = function () {
+  var local = new Date(this);
+  local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+  return local.toJSON().slice(0, 16);
+};
+
+var statusMap = {
+  1: 'okay',
+  2: 'not good'
+};
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var url = new URL(window.location.href);
     var uuid = url.pathname.split('/')[2];
     return {
+      logAt: new Date().toDatetimeLocalInputValue(),
+      isShowModal: true,
       loading: true,
       uuid: uuid,
-      inventories: {}
+      inventories: {},
+      selectedItem: {}
     };
   },
   mounted: function mounted() {
@@ -1965,11 +2023,28 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("/api/customers/".concat(this.uuid, "/inventories")).then(function (res) {
+        var statusMap = {
+          0: 'badge-secondary',
+          1: 'badge-success',
+          2: 'badge-success',
+          3: 'badge-warning',
+          4: 'badge-secondary'
+        };
         _this.inventories = res.data.data;
+
+        _this.inventories.forEach(function (inventory) {
+          inventory.badgeStyle = statusMap[inventory.status];
+        });
       })["catch"](function (res) {
         console.log(res);
         console.log("inventory: something is wrong");
       });
+    },
+    fillModal: function fillModal(i_id) {
+      this.selectedItem = this.inventories.filter(function (inventory) {
+        return inventory.id == i_id;
+      })[0];
+      console.log(this.selectedItem);
     }
   }
 });
@@ -2466,10 +2541,9 @@ Date.prototype.toDatetimeLocalInputValue = function () {
           title: "新增成功",
           text: "稍後重新整理",
           icon: "success",
-          timer: 1200,
+          timer: 900,
           showConfirmButton: false
-        }).then(function () {
-          location.reload();
+        }).then(function () {//location.reload();
         });
       })["catch"](function (e) {
         _this2.$swal({
@@ -26474,9 +26548,11 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("td", { staticClass: "col-md-3 text-center" }, [
-              _c("span", { staticClass: "badge badge-pill badge-success" }, [
-                _vm._v(_vm._s(inventory.status))
-              ])
+              _c(
+                "span",
+                { class: ["form-badge badge-pill", inventory.badgeStyle] },
+                [_vm._v(_vm._s(inventory.status_str))]
+              )
             ]),
             _vm._v(" "),
             _c("td", { staticClass: "col-md-3 text-center" }, [
@@ -26487,12 +26563,202 @@ var render = function() {
               _vm._v(_vm._s(inventory.used_at))
             ]),
             _vm._v(" "),
-            _vm._m(1, true)
+            _c("td", { staticClass: "col-md-2 text-center" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-sm btn-primary",
+                  attrs: {
+                    href: "#",
+                    role: "button",
+                    "data-toggle": "modal",
+                    "data-target": "#inventory-status-modal"
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.fillModal(inventory.id)
+                    }
+                  }
+                },
+                [_vm._m(1, true), _vm._v(" 核銷")]
+              )
+            ])
           ])
         }),
         0
       )
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal",
+        attrs: {
+          id: "inventory-status-modal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "modal-form",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal- modal-dialog-centered modal-sm",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-body p-0" }, [
+                _c("div", { staticClass: "card bg-secondary border-0 mb-0" }, [
+                  _c("div", { staticClass: "card-header" }, [
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _c("dl", { staticClass: "row" }, [
+                      _c("dd", { staticClass: "col-md-12 text-center" }, [
+                        _c("span", { staticClass: "h3" }, [
+                          _vm._v(_vm._s(_vm.selectedItem.product_name))
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("dl", { staticClass: "row" }, [
+                      _c("dt", { staticClass: "col-sm-4 text-right" }, [
+                        _vm._v("購買日期")
+                      ]),
+                      _vm._v(" "),
+                      _c("dd", { staticClass: "col-sm-8 text-center" }, [
+                        _vm._v(_vm._s(_vm.selectedItem.created_at))
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-body" }, [
+                    _vm._m(3),
+                    _vm._v(" "),
+                    _c("form", { attrs: { role: "form" } }, [
+                      _c("div", { staticClass: "form-group-sm" }, [
+                        _c("label", { staticClass: "form-control-label" }, [
+                          _vm._v("更新日期")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.logAt,
+                              expression: "logAt"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { id: "datetime", type: "datetime-local" },
+                          domProps: { value: _vm.logAt },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.logAt = $event.target.value
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group-sm" }, [
+                        _c("label", { staticClass: "form-control-label" }, [
+                          _vm._v("核銷狀態")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.selectedItem.status,
+                                expression: "selectedItem.status"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.selectedItem,
+                                  "status",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _vm._m(4),
+                            _vm._v(" "),
+                            _vm._m(5),
+                            _vm._v(" "),
+                            _vm._m(6),
+                            _vm._v(" "),
+                            _vm._m(7),
+                            _vm._v(" "),
+                            _vm._m(8)
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group-sm" }, [
+                        _c("label", { staticClass: "form-control-label" }, [
+                          _vm._v("備註說明")
+                        ]),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.selectedItem.note,
+                              expression: "selectedItem.note"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { rows: "3" },
+                          domProps: { value: _vm.selectedItem.note },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.selectedItem,
+                                "note",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(9)
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -26520,49 +26786,76 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "col-md-2 text-center" }, [
-      _c("div", { staticClass: "dropdown" }, [
-        _c(
-          "a",
-          {
-            staticClass:
-              "btn btn-neutral btn-sm text-light items-align-center py-2",
-            attrs: {
-              href: "#",
-              role: "button",
-              "data-toggle": "dropdown",
-              "aria-haspopup": "true",
-              "aria-expanded": "false"
-            }
-          },
-          [_c("i", { staticClass: "fa fa-ellipsis-h text-muted" })]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "dropdown-menu dropdown-menu-right dropdown-menu-arrow"
-          },
-          [
-            _c(
-              "a",
-              {
-                staticClass: "dropdown-item",
-                attrs: {
-                  href: "#",
-                  "data-toggle": "modal",
-                  "data-target": "#inventory-status-modal"
-                }
-              },
-              [_vm._v("核銷")]
-            ),
-            _vm._v(" "),
-            _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-              _vm._v("編輯")
-            ])
-          ]
-        )
-      ])
+    return _c("span", { staticClass: "btn-inner--icon" }, [
+      _c("i", { staticClass: "ni ni-settings-gear-65" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-muted text-center mt-2 mb-3" }, [
+      _c("h3", { staticClass: "text-blue" }, [_vm._v("商品資訊")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-center text-muted mb-3" }, [
+      _c("h3", { staticClass: "text-blue" }, [_vm._v("核銷")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("option", { attrs: { value: "0" } }, [
+      _c("span", [_vm._v("未使用")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("option", { attrs: { value: "1" } }, [
+      _c("span", [_vm._v("已發放")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("option", { attrs: { value: "2" } }, [
+      _c("span", [_vm._v("已使用")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("option", { attrs: { value: "3" } }, [
+      _c("span", [_vm._v("積欠未發")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("option", { attrs: { value: "4" } }, [
+      _c("span", [_vm._v("註銷失效")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "offset-md-5 mt-3" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary my-4", attrs: { type: "submit" } },
+        [_vm._v("送出")]
+      )
     ])
   }
 ]

@@ -14,7 +14,7 @@ class CustomerInventory extends Model
     const STATUS_CANCLED = 4; // 註銷
 
     protected $table = "customer_inventories";
-    
+
     protected $fillable = [
         'customer_id',
         'company_id',
@@ -32,7 +32,7 @@ class CustomerInventory extends Model
     protected $attrubutes = [];
 
     protected $dateFormat = 'Y-m-d H:i:s';
-    
+
     public function customer()
     {
         return $this->hasOne('App\Models\Customer', 'id', 'customer_id');
@@ -41,5 +41,17 @@ class CustomerInventory extends Model
     public function scopeOrdered($query)
     {
         return $query->orderBy('created_at', 'desc')->get();
+    }
+
+    public static function getStatusWording(int $status)
+    {
+        $status_map = [
+            CustomerInventory::STATUS_UNUSED => "未使用",
+            CustomerInventory::STATUS_DONE => "已發放",
+            CustomerInventory::STATUS_USED => "已使用",
+            CustomerInventory::STATUS_OWED => "積欠未發",
+            CustomerInventory::STATUS_CANCLED => "註銷失效",
+        ];
+        return $status_map[$status];
     }
 }

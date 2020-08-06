@@ -256,10 +256,10 @@ export default {
                     title: "新增成功",
                     text: "稍後重新整理",
                     icon: "success",
-                    timer: 1200,
+                    timer: 900,
                     showConfirmButton: false
                 }).then(() => {
-                    location.reload();
+                    //location.reload();
                 })
             })
             .catch((e) => {
