@@ -10,6 +10,12 @@ Vue.component('purchase-page', require('./components/customer/purchase.vue').def
 Vue.component('transaction-page', require('./components/customer/transaction.vue').default);
 Vue.component('note-page', require('./components/customer/note.vue').default);
 
+Date.prototype.toDatetimeLocalInputValue = (function () {
+    var local = new Date(this);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0, 19);
+});
+
 const app = new Vue({
     el: '#app',
 });

@@ -31,7 +31,6 @@ class CustomerInventory extends Model
 
     protected $attrubutes = [];
 
-    protected $dateFormat = 'Y-m-d H:i:s';
 
     public function customer()
     {
@@ -54,4 +53,10 @@ class CustomerInventory extends Model
         ];
         return $status_map[$status];
     }
+
+    public function getUseAtAttribute($date)
+    {
+        return is_null($date) ? null : Carbon::parse($date);
+    }
+
 }

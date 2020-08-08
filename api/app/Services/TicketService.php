@@ -68,12 +68,7 @@ class TicketService
         // 以上兩組共同點都需要做(inventories) Insert 的動作，分 TYPE_ENTITY / TYPE_VIRTUAL
         */
 
-        /*
-        $product_ids = Arr::pluck($data["items"], "itemId");
-        $products = Product::whereIn("id", $product_ids)->get();
-        dd($products);
-        */
-        
+        // #TODO: 核銷庫存數量， status 狀態處理
 
         $inventories = [];
         foreach ($data["items"] as $item) {
@@ -81,7 +76,7 @@ class TicketService
             $menu = Menu::find($menu_id);
             var_dump($item);
             var_dump($menu->has_submenu);
-            
+
             // 知道名稱跟數量 append 進去就好
             if ($menu->has_submenu) {
                 foreach ($menu->sub_menus->map->only(["product_id", "amount"]) as $entry) {
@@ -93,7 +88,7 @@ class TicketService
                     if (Product::TYPE_VIRTUAL == $product->status) {
                         $status = CustomerInventory::STATUS_UNUSED;
                     }
-                    
+
 
                     for ($i = 0; $i < $entry["amount"]; $i++) {
                         $inventories[] = [
@@ -126,5 +121,5 @@ class TicketService
 
         }
         $this->c_inv_repo->insert($inventories);
-    }  
+    }
 }

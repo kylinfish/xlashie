@@ -7,7 +7,7 @@
                 <th class="col-md-3 text-center">產品名稱</th>
                 <th class="col-md-3 text-center">狀態</th>
                 <th class="col-md-3 text-center">購買日期</th>
-                <th class="col-md-3 text-center">使用日期</th>
+                <th class="col-md-3 text-center">備註</th>
                 <th class="col-md-3 text-center">動作</th>
             </tr>
         </thead>
@@ -19,7 +19,7 @@
                     <span :class="['form-badge badge-pill', inventory.badgeStyle]" class="">{{ inventory.status_str }}</span>
                 </td>
                 <td class="col-md-3 text-center">{{ inventory.created_at }}</td>
-                <td class="col-md-3 text-center">{{ inventory.used_at }}</td>
+                <td class="col-md-3 text-center" style="{white-space: nowrap;text-overflow:ellipsis;width:15px;overflow:hidden;}">{{ inventory.note }}</td>
                 <td class="col-md-2 text-center">
                     <a href="#" role="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#inventory-status-modal" @click="fillModal(inventory.id)"><span class="btn-inner--icon"><i class="ni ni-settings-gear-65"></i></span> 核銷</a>
                 </td>
@@ -32,7 +32,7 @@
             <div class="modal-content">
                 <div class="modal-body p-0">
                     <div class="card bg-secondary border-0 mb-0">
-                        <div class="card-header">
+                        <div class="pt-3">
                             <div class="text-muted text-center mt-2 mb-3">
                                 <h3 class="text-blue">商品資訊</h3>
                             </div>
@@ -40,18 +40,18 @@
                                 <dd class="col-md-12 text-center"><span class="h3">{{ selectedItem.product_name }}</span></dd>
                             </dl>
                             <dl class="row">
-                                <dt class="col-sm-4 text-right">購買日期</dt>
-                                <dd class="col-sm-8 text-center">{{ selectedItem.created_at }}</dd>
+                                <dt class="col-sm-4 text-right h4">購買日期</dt>
+                                <dd class="col-sm-8 text-center h4">{{ selectedItem.created_at }}</dd>
                             </dl>
                         </div>
                         <div class="card-body">
                             <div class="text-center text-muted mb-3">
                                 <h3 class="text-blue">核銷</h3>
                             </div>
-                            <form role="form">
+                            <form role="form" @submit.prevent="onSubmit">
                                 <div class="form-group-sm">
                                     <label class="form-control-label">更新日期</label>
-                                    <input class="form-control" id="datetime" type="datetime-local" v-model="logAt">
+                                    <input class="form-control" type="datetime-local"  step="1" v-model="selectedItem.use_at">
                                 </div>
 
                                 <div class="form-group-sm">
@@ -67,7 +67,7 @@
 
                                 <div class="form-group-sm">
                                     <label class="form-control-label">備註說明</label>
-                                    <textarea class="form-control" rows="3" v-model="selectedItem.note"></textarea>
+                                    <textarea class="form-control" rows="3" maxlength="255" placeholder="最多 255 個字" v-model="selectedItem.note"></textarea>
                                 </div>
                                 <div class="offset-md-5 mt-3">
                                     <button type="submit" class="btn btn-primary my-4">送出</button>
@@ -83,23 +83,14 @@
 </template>
 
 <script>
-Date.prototype.toDatetimeLocalInputValue = (function () {
-    var local = new Date(this);
-    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-    return local.toJSON().slice(0, 16);
-});
-
-let statusMap = {
-    1: 'okay',
-    2: 'not good'
-}
+import VueSweetalert2 from 'vue-sweetalert2';
 export default {
     data: function () {
         let url = new URL(window.location.href)
         let uuid = url.pathname.split('/')[2]
 
         return {
-            logAt: new Date().toDatetimeLocalInputValue(),
+            currentTime: new Date().toDatetimeLocalInputValue(),
             isShowModal: true,
             loading: true,
             uuid: uuid,
@@ -135,8 +126,42 @@ export default {
                 });
         },
         fillModal(i_id) {
-            this.selectedItem = this.inventories.filter(inventory => inventory.id == i_id)[0];
-            console.log(this.selectedItem);
+            let inventory = this.inventories.filter(inventory => inventory.id == i_id)[0];
+
+            this.selectedItem = inventory
+            if (!inventory.use_at) {
+                this.selectedItem.use_at = this.currentTime;
+            }
+        },
+        onSubmit() {
+            axios({
+                method: "PUT",
+                url: `/api/customers/${this.uuid}/inventories/status`,
+                data: this.selectedItem,
+                headers: {
+                    //'X-CSRF-TOKEN': window.Laravel.csrfToken,
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then((res) => {
+                this.$swal({
+                    title: "修改成功",
+                    icon: "success",
+                    timer: 900,
+                    showConfirmButton: false
+                })
+                this.loadInventories()
+                $('#inventory-status-modal').modal('hide');
+
+            })
+            .catch((e) => {
+                this.$swal({
+                    title: "修改失敗",
+                    icon: "error",
+                    text: e,
+                })
+            });
         },
     }
 };

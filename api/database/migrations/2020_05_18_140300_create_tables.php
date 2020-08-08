@@ -201,7 +201,7 @@ class CreateTables extends Migration
 
             $table->string('product_name', 50);
             $table->tinyInteger('status')->default(0)->unsigned();
-            $table->datetime('use_at')->nullable();
+            $table->timestamp('use_at')->nullable();
             $table->text('note')->nullable();
 
             $table->timestamps();

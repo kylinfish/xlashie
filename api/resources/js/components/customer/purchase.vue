@@ -20,7 +20,7 @@
                     <div class="form-group col-md-4">
                         <label>訂單日期</label>
                         <div class="form-group">
-                            <input class="form-control" id="datetime" type="datetime-local" v-model="transaction_at">
+                            <input class="form-control" id="datetime" type="datetime-local" step="1" v-model="transaction_at">
                         </div>
                     </div>
                     <div class="form-group col-md">
@@ -147,12 +147,6 @@ const InputValidator = SimpleVueValidation.Validator;
 Vue.use(SimpleVueValidation);
 Vue.use(VueSweetalert2);
 
-Date.prototype.toDatetimeLocalInputValue = (function () {
-    var local = new Date(this);
-    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-    return local.toJSON().slice(0, 16);
-});
-
 export default {
     data: function () {
         let url = new URL(window.location.href),
@@ -259,7 +253,7 @@ export default {
                     timer: 900,
                     showConfirmButton: false
                 }).then(() => {
-                    //location.reload();
+                    location.reload();
                 })
             })
             .catch((e) => {

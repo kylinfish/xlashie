@@ -34,7 +34,8 @@ $api->version('v1', function ($api) {
 
     // Inventories
     $api->get('customers/{customer_uuid}/inventories', 'App\Http\Controllers\Api\Inventories@index');
-    
+    $api->put('customers/{customer_uuid}/inventories/status', 'App\Http\Controllers\Api\Inventories@update');
+
     // Transactions
     $api->get('customers/{customer_uuid}/transactions', 'App\Http\Controllers\Api\Transactions@index');
     $api->post('customers/{customer_uuid}/transactions/', 'App\Http\Controllers\Api\Transactions@store');

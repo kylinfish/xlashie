@@ -15,15 +15,17 @@ class CustomerInventoryResource extends JsonResource
      */
     public function toArray($request)
     {
+        $use_at = is_null($this->use_at) ? null : $this->use_at->format("Y-m-d\TH:i");
+
         return [
             "id" => $this->id,
             "note" => $this->note,
             "product_name" => $this->product_name,
             "status" => $this->status,
             "status_str" => CustomerInventory::getStatusWording($this->status),
-            "use_at" => $this->use_at,
-            "created_at" => $this->created_at->format("Y-m-d H:i:s"),
-            "updated_at" => $this->updated_at->format("Y-m-d H:i:s"),
+            "use_at" => $use_at,
+            "created_at" => $this->created_at->toDatetimeString(),
+            "updated_at" => $this->updated_at->toDatetimeString(),
         ];
     }
 }

@@ -3,7 +3,7 @@ namespace App\Forms;
 
 use App\Forms\BaseForm;
 
-class CustomerInventoryForm extends BaseForm
+class InventoryForm extends BaseForm
 {
     protected $store = [
         'customer_id' => 'required|integer',
@@ -18,6 +18,10 @@ class CustomerInventoryForm extends BaseForm
     protected $index = [
     ];
 
-    protected $show = [
+    protected $update = [
+        'id' => 'required|integer',
+        'status' => 'integer',
+        'use_at' => 'date_format:Y-m-d\TH:i',
+        'note' => 'nullable|string',
     ];
 }
