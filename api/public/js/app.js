@@ -5234,6 +5234,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -5338,7 +5339,80 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    var url = new URL(window.location.href);
+    var uuid = url.pathname.split("/")[2];
+    return {
+      uuid: uuid,
+      isBind: false,
+      inventories: {},
+      noteLogs: [{
+        id: 1,
+        name: "2020-08-08 21:14:01 - 足部 - 指緣基礎修護 30 min",
+        created_at: "2020/02/03 15:23",
+        updated_at: "2020/02/03 15:23"
+      }, {
+        id: 2,
+        name: "2020-08-08 21:14:01 - 足部 - 指緣基礎修護 30 min",
+        created_at: "2020/02/03 15:23",
+        updated_at: "2020/02/03 15:23"
+      }, {
+        id: 3,
+        name: "2020-08-08 21:14:01 - 足部 - 指緣基礎修護 30 min",
+        created_at: "2020/02/03 15:23",
+        updated_at: "2020/02/03 15:23"
+      }, {
+        id: 4,
+        name: "2020-08-08 21:14:01 - 足部 - 指緣基礎修護 30 min",
+        created_at: "2020/02/03 15:23",
+        updated_at: "2020/02/03 15:23"
+      }]
+    };
+  },
+  mounted: function mounted() {
+    this.loadInventories();
+  },
+  methods: {
+    loadInventories: function loadInventories() {
+      var _this = this;
+
+      axios.get("/api/customers/".concat(this.uuid, "/inventories")).then(function (res) {
+        console.log(res.data);
+        _this.inventories = res.data.data;
+      })["catch"](function (res) {
+        console.log(res);
+        console.log("inventory: something is wrong");
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -5954,7 +6028,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#noteForm[data-v-56fbc470] {\n    height: 500px;\n}\n", ""]);
+exports.push([module.i, "\n#noteForm[data-v-56fbc470] {\n  height: 350px;\n}\n", ""]);
 
 // exports
 
@@ -26983,13 +27057,121 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {
-    attrs: {
-      id: "noteForm",
-      "data-toggle": "quill",
-      "data-quill-placeholder": "對客戶的消費狀況做紀錄吧 ..."
-    }
-  })
+  return _c("div", { staticClass: "row" }, [
+    _c(
+      "div",
+      { staticClass: "col-md-4 pt-5 pl-4" },
+      _vm._l(_vm.noteLogs, function(note) {
+        return _c("div", { staticClass: "list-group" }, [
+          _c(
+            "a",
+            {
+              staticClass: "list-group-item list-group-item-action",
+              attrs: { href: "#" }
+            },
+            [_vm._v(_vm._s(note.created_at))]
+          )
+        ])
+      }),
+      0
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-8 pt-3 pr-4" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c(
+          "label",
+          {
+            staticClass: "custom-toggle custom-toggle-warning mb--3 float-right"
+          },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.isBind,
+                  expression: "isBind"
+                }
+              ],
+              attrs: { type: "checkbox", checked: "" },
+              domProps: {
+                checked: Array.isArray(_vm.isBind)
+                  ? _vm._i(_vm.isBind, null) > -1
+                  : _vm.isBind
+              },
+              on: {
+                change: function($event) {
+                  var $$a = _vm.isBind,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 && (_vm.isBind = $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        (_vm.isBind = $$a
+                          .slice(0, $$i)
+                          .concat($$a.slice($$i + 1)))
+                    }
+                  } else {
+                    _vm.isBind = $$c
+                  }
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("span", {
+              staticClass: "custom-toggle-slider rounded-circle",
+              attrs: { "data-label-off": "否", "data-label-on": "是" }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c("span", { staticClass: "h3 float-right pr-3" }, [
+          _vm._v("綁定客戶消費品項?")
+        ]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            staticClass: "form-control mt-2",
+            attrs: { disabled: !_vm.isBind }
+          },
+          [
+            _c("option", [_vm._v("請選擇")]),
+            _vm._v(" "),
+            _vm._l(_vm.inventories, function(inventory) {
+              return _c(
+                "option",
+                {
+                  key: inventory.id,
+                  domProps: { value: inventory.value, value: inventory.id }
+                },
+                [
+                  _vm._v(
+                    _vm._s(inventory.created_at) +
+                      " - " +
+                      _vm._s(inventory.product_name)
+                  )
+                ]
+              )
+            })
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _c("div", {
+          attrs: {
+            id: "noteForm",
+            "data-toggle": "quill",
+            "data-quill-placeholder": "對客戶的消費狀況做紀錄吧 ..."
+          }
+        })
+      ])
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

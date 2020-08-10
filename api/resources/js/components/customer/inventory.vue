@@ -51,7 +51,8 @@
                             <form role="form" @submit.prevent="onSubmit">
                                 <div class="form-group-sm">
                                     <label class="form-control-label">更新日期</label>
-                                    <input class="form-control" type="datetime-local"  step="1" v-model="selectedItem.use_at">
+                                    <input class="form-control" type="datetime-local"  step="1"
+                                    v-model="selectedItem.use_at">
                                 </div>
 
                                 <div class="form-group-sm">
