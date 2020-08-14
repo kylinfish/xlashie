@@ -129,7 +129,7 @@ export default {
         fillModal(i_id) {
             let inventory = this.inventories.filter(inventory => inventory.id == i_id)[0];
 
-            this.selectedItem = inventory
+            this.selectedItem = Object.assign({}, inventory)
             if (!inventory.use_at) {
                 this.selectedItem.use_at = this.currentTime;
             }

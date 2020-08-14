@@ -11,5 +11,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix
+    // Customer
+    .js('resources/js/customer/app.js', 'public/js/customers/')
+
     .sass('resources/sass/app.scss', 'public/css');

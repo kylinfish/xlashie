@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import Form from './../../plugins/form';
+import Form from './../plugins/form';
 import SimpleVueValidation from 'simple-vue-validator';
 const InputValidator = SimpleVueValidation.Validator;
 export default {

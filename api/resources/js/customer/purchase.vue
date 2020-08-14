@@ -139,7 +139,7 @@
 </template>
 
 <script>
-import Form from './../../plugins/form';
+import Form from './../plugins/form';
 import SimpleVueValidation from 'simple-vue-validator';
 import VueSweetalert2 from 'vue-sweetalert2';
 

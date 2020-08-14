@@ -1,13 +1,6 @@
 <ul role="tablist" class="mt--3 nav nav-pills nav-pills-primary nav-fill flex-column flex-sm-row nav-wrapper">
     <li data-toggle="tab" role="tablist" class="nav-item active">
-        <a data-toggle="tab" role="tablist" href="#profile" class="nav-link active">
-            <div>
-                <span><i class="fa fa-user pr-2"></i>個人資料</span>
-            </div>
-        </a>
-    </li>
-    <li data-toggle="tab" role="tablist" class="nav-item active">
-        <a data-toggle="tab" role="tablist" href="#inventory" class="nav-link">
+        <a data-toggle="tab" role="tablist" href="#inventory" class="nav-link active">
             <div>
                 <span><i class="fa fa-shopping-bag pr-2"></i>庫存清單</span>
             </div>
@@ -34,19 +27,26 @@
             </div>
         </a>
     </li>
+    <li data-toggle="tab" role="tablist" class="nav-item active">
+        <a data-toggle="tab" role="tablist" href="#profile" class="nav-link">
+            <div>
+                <span><i class="fa fa-user pr-2"></i>個人資料</span>
+            </div>
+        </a>
+    </li>
 </ul>
 
 <div id="app" class="tab-content tab-space card shadow">
     <div id="profile" class="tab-pane ">
         <profile-page></profile-page>
     </div>
-    <div id="inventory" class="tab-pane ">
+    <div id="inventory" class="tab-pane active">
         <inventory-page></inventory-page>
     </div>
     <div id="transaction" class="tab-pane">
         <transaction-page></transaction-page>
     </div>
-    <div id="note" class="tab-pane active">
+    <div id="note" class="tab-pane">
         <note-page></note-page>
     </div>
     <div id="purchase" class="tab-pane">
@@ -55,4 +55,4 @@
 </div>
 
 
-<script src="{{ mix('js/app.js') }}"></script>
+<script src="{{ mix('js/customers/app.js') }}"></script>
