@@ -1,4 +1,4 @@
-api/public/js/app.js
+/api/public/js/app.js
 /.idea
 Homestead.json
 Homestead.yaml
@@ -13,17 +13,19 @@ docs/_book
 # Edit at https://www.gitignore.io/?templates=laravel
 
 ### Laravel ###
-/vendor/
-node_modules/
-npm-debug.log
-yarn-error.log
+/api//vendor/
+/api/node_modules/
+/api/npm-debug.log
+/api/yarn-error.log
 
 
 # Laravel 5 & Lumen specific
-public/storage
-public/hot
-storage/*.key
-.env
+/api/public/js
+/api/public/mix-manifest.json
+/api/public/storage
+/api/public/hot
+/api/storage/*.key
+/api/.env
 Homestead.yaml
 Homestead.json
 /.vagrant
