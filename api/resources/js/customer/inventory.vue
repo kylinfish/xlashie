@@ -16,7 +16,7 @@
                 <td class="text-center">{{ index + 1 }}</td>
                 <td class="col-md-3 text-center">{{ inventory.product_name }}</td>
                 <td class="col-md-3 text-center">
-                    <span :class="['form-badge badge-pill', inventory.badgeStyle]" class="">{{ inventory.status_str }}</span>
+                    <span :class="['form-badge badge-pill', inventory.badgeStyle]">{{ inventory.status_str }}</span>
                 </td>
                 <td class="col-md-3 text-center">{{ inventory.created_at }}</td>
                 <td class="col-md-3 text-center" style="{white-space: nowrap;text-overflow:ellipsis;width:15px;overflow:hidden;}">{{ inventory.note }}</td>

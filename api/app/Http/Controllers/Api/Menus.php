@@ -35,7 +35,7 @@ class Menus extends BaseController
     public function show(Request $request, String $menu_id)
     {
         $this->form->validate(['uuid' => $menu_id]);
-        
+
         $menu = Menu::where(["company_id" => $this->company_id, "id" => $menu_id])
             ->with(["sub_menus", "product", "sub_menus.product"])->first();
         if (!$menu) {

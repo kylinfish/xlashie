@@ -16,7 +16,6 @@ class CustomerInventoryResource extends JsonResource
     public function toArray($request)
     {
         $use_at = is_null($this->use_at) ? null : $this->use_at->format("Y-m-d\TH:i");
-
         return [
             "id" => $this->id,
             "note" => $this->note,

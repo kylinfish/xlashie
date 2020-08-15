@@ -80,6 +80,22 @@ class CreateTables extends Migration
             $table->index('phone');
         });
 
+        Schema::create('customer_notes', function($table) {
+            $table->increments('id')->unsigned();
+            $table->integer('company_id')->unsigned();
+            $table->integer('customer_id')->unsigned();
+
+            $table->integer('inventory_id')->default(0);
+            $table->string('title', 25)->default('');
+            $table->text('note')->nullable();
+
+            $table->timestamps();
+            $table->softDeletes();
+
+            // index
+            $table->index(['company_id', 'customer_id', 'inventory_id']);
+        });
+
         Schema::create('companies', function($table) {
             $table->increments('id')->unsigned();
 
@@ -90,7 +106,7 @@ class CreateTables extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('user_companies', function($table) {
+        Schema::create('user_company', function($table) {
             $table->increments('id')->unsigned();
 
             $table->integer('user_id')->unsigned();
@@ -256,7 +272,7 @@ class CreateTables extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('customers');
         Schema::dropIfExists('companies');
-        Schema::dropIfExists('user_companies');
+        Schema::dropIfExists('user_company');
 
         // Products
         Schema::dropIfExists('products');
@@ -273,6 +289,7 @@ class CreateTables extends Migration
         Schema::dropIfExists('orders');
         Schema::dropIfExists('order_items');
         Schema::dropIfExists('customer_inventories');
+        Schema::dropIfExists('customer_notes');
 
     }
 }

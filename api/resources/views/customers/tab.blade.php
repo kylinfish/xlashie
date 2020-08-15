@@ -40,13 +40,13 @@
     <div id="profile" class="tab-pane ">
         <profile-page></profile-page>
     </div>
-    <div id="inventory" class="tab-pane active">
+    <div id="inventory" class="tab-pane ">
         <inventory-page></inventory-page>
     </div>
     <div id="transaction" class="tab-pane">
         <transaction-page></transaction-page>
     </div>
-    <div id="note" class="tab-pane">
+    <div id="note" class="tab-pane active">
         <note-page></note-page>
     </div>
     <div id="purchase" class="tab-pane">

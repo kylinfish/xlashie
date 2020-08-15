@@ -27,4 +27,9 @@ class Customer extends Model
     {
         return $this->hasMany('App\Models\Ticket', 'customer_id', 'id');
     }
+
+    public function notes()
+    {
+        return $this->hasMany('App\Models\InvNote', 'customer_id', 'id');
+    }
 }

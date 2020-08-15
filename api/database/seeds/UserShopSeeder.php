@@ -15,7 +15,7 @@ class UserShopSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        DB::table('user_companies')->insert([
+        DB::table('user_company')->insert([
             'user_id' => 1,
             'company_id' => 1,
 
@@ -23,7 +23,7 @@ class UserShopSeeder extends Seeder
             'updated_at' => Carbon::now(),
         ]);
 
-        DB::table('user_companies')->insert([
+        DB::table('user_company')->insert([
             'user_id' => 2,
             'company_id' => 2,
 
@@ -31,7 +31,7 @@ class UserShopSeeder extends Seeder
             'updated_at' => Carbon::now(),
         ]);
 
-        DB::table('user_companies')->insert([
+        DB::table('user_company')->insert([
             'user_id' => 3,
             'company_id' => 3,
 

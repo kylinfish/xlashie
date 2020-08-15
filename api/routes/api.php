@@ -36,6 +36,12 @@ $api->version('v1', function ($api) {
     $api->get('customers/{customer_uuid}/inventories', 'App\Http\Controllers\Api\Inventories@index');
     $api->put('customers/{customer_uuid}/inventories/status', 'App\Http\Controllers\Api\Inventories@update');
 
+    // Note
+    $api->get('customers/{customer_uuid}/notes', 'App\Http\Controllers\Api\InvNotes@index');
+    $api->get('customers/{customer_uuid}/notes/{note_id}', 'App\Http\Controllers\Api\InvNotes@show');
+    $api->post('customers/{customer_uuid}/notes/', 'App\Http\Controllers\Api\InvNotes@store');
+    $api->put('customers/{customer_uuid}/notes/{note_id}', 'App\Http\Controllers\Api\InvNotes@update');
+
     // Transactions
     $api->get('customers/{customer_uuid}/transactions', 'App\Http\Controllers\Api\Transactions@index');
     $api->post('customers/{customer_uuid}/transactions/', 'App\Http\Controllers\Api\Transactions@store');

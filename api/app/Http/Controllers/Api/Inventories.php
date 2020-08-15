@@ -21,10 +21,8 @@ class Inventories extends BaseController
     {
         $customer = Customer::where(["user_id" => $this->user_id, "uuid" => $customer_uuid])->first();
         if (!$customer) {
-            return [];
+            return response()->json(["message" => "查無此使用者"], 422);
         }
-
-        #dd($customer->inventory()->orderBy('created_at', 'desc')->get()->toArray);
 
         return CustomerInventoryResource::collection($customer->inventory()->orderBy('created_at', 'desc')->get());
     }
@@ -39,10 +37,7 @@ class Inventories extends BaseController
         if (! $customer = Customer::where("uuid", $customer_uuid)->first()) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
-        $inv = $customer->inventory()->find($params["id"]);
-
-
-        $inv->update($params);
+        $customer->inventory()->find($params["id"])->update($params);
 
         return response()->json(["message" => "ok"], 200);
     }
