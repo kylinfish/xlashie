@@ -37,10 +37,10 @@
 </ul>
 
 <div id="app" class="tab-content tab-space card shadow">
-    <div id="profile" class="tab-pane active">
+    <div id="profile" class="tab-pane">
         <profile-page></profile-page>
     </div>
-    <div id="inventory" class="tab-pane ">
+    <div id="inventory" class="tab-pane active">
         <inventory-page></inventory-page>
     </div>
     <div id="transaction" class="tab-pane">
