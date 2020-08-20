@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller as BaseController;
 use App\Models\Customer;
 use App\Services\TicketService;
 use App\Http\Resources\TicketResource;
-
+use App\Models\OrderItem;
 
 class Transactions extends BaseController
 {
@@ -24,7 +24,7 @@ class Transactions extends BaseController
     {
         $customer = Customer::where(["user_id" => $this->user_id, "uuid" => $customer_uuid])->first();
         if (!$customer) {
-            return [];
+            return response()->json(["message" => "找不到該名顧客"], 404);
         }
 
         return TicketResource::collection($customer->ticket()->orderby("id", "desc")->get());
@@ -40,5 +40,15 @@ class Transactions extends BaseController
         $this->service->createOrder($params);
 
         return response()->json(["message" => "ok"], 200);
+    }
+
+    public function detail(Request $request, string $customer_uuid, string $id)
+    {
+        $customer = Customer::where(["user_id" => $this->user_id, "uuid" => $customer_uuid])->first();
+        if (!$customer) {
+            return response()->json(["message" => "找不到該名顧客"], 404);
+        }
+        $order_items = $customer->ticket()->find($id)->order_items()->get();
+        return $order_items->toArray();
     }
 }

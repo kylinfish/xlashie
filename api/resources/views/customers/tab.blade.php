@@ -37,7 +37,7 @@
 </ul>
 
 <div id="app" class="tab-content tab-space card shadow">
-    <div id="profile" class="tab-pane ">
+    <div id="profile" class="tab-pane active">
         <profile-page></profile-page>
     </div>
     <div id="inventory" class="tab-pane ">
@@ -46,7 +46,7 @@
     <div id="transaction" class="tab-pane">
         <transaction-page></transaction-page>
     </div>
-    <div id="note" class="tab-pane active">
+    <div id="note" class="tab-pane">
         <note-page></note-page>
     </div>
     <div id="purchase" class="tab-pane">

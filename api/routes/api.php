@@ -44,7 +44,9 @@ $api->version('v1', function ($api) {
 
     // Transactions
     $api->get('customers/{customer_uuid}/transactions', 'App\Http\Controllers\Api\Transactions@index');
+    $api->get('customers/{customer_uuid}/transactions/{id}/', 'App\Http\Controllers\Api\Transactions@detail');
     $api->post('customers/{customer_uuid}/transactions/', 'App\Http\Controllers\Api\Transactions@store');
+
 
     // Menus
     $api->get('menus', 'App\Http\Controllers\Api\Menus@index');
