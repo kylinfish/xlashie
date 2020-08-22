@@ -41,6 +41,7 @@ $api->version('v1', function ($api) {
     $api->get('customers/{customer_uuid}/notes/{note_id}', 'App\Http\Controllers\Api\InvNotes@show');
     $api->post('customers/{customer_uuid}/notes/', 'App\Http\Controllers\Api\InvNotes@store');
     $api->put('customers/{customer_uuid}/notes/{note_id}', 'App\Http\Controllers\Api\InvNotes@update');
+    $api->delete('customers/{customer_uuid}/notes/{note_id}', 'App\Http\Controllers\Api\InvNotes@delete');
 
     // Transactions
     $api->get('customers/{customer_uuid}/transactions', 'App\Http\Controllers\Api\Transactions@index');

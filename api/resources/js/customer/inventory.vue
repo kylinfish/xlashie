@@ -1,31 +1,35 @@
 <template>
 <div class="card-body description">
-    <table class="table table-bordered">
+<div>
+    <table class="table table-sm table-hover align-items-center table-bordered">
         <thead class="thead-light">
             <tr>
-                <th class="text-center">#</th>
-                <th class="col-md-3 text-center">產品名稱</th>
-                <th class="col-md-3 text-center">狀態</th>
-                <th class="col-md-3 text-center">購買日期</th>
-                <th class="col-md-3 text-center">備註</th>
-                <th class="col-md-3 text-center">動作</th>
+                <th scope="col" class="text-center">#</th>
+                <th scope="col" class="text-center">產品名稱</th>
+                <th scope="col" class="text-center">狀態</th>
+                <th scope="col" class="text-center">購買日期</th>
+                <th scope="col" class="text-center">動作</th>
+                <th scope="col" class="text-center">備註</th>
+
             </tr>
         </thead>
-        <tbody>
+        <tbody class="list">
             <tr v-for="inventory, index in inventories">
                 <td class="text-center">{{ index + 1 }}</td>
-                <td class="col-md-3 text-center">{{ inventory.product_name }}</td>
-                <td class="col-md-3 text-center">
+                <td class="text-center">{{ inventory.product_name }}</td>
+                <td class="text-center">
                     <span :class="['form-badge badge-pill', inventory.badgeStyle]">{{ inventory.status_str }}</span>
                 </td>
-                <td class="col-md-3 text-center">{{ inventory.created_at }}</td>
-                <td class="col-md-3 text-center" style="{white-space: nowrap;text-overflow:ellipsis;width:15px;overflow:hidden;}">{{ inventory.note }}</td>
-                <td class="col-md-2 text-center">
+                <td class="text-center">{{ inventory.created_at }}</td>
+                <td class=" text-center">
                     <a href="#" role="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#inventory-status-modal" @click="fillModal(inventory.id)"><span class="btn-inner--icon"><i class="ni ni-settings-gear-65"></i></span> 核銷</a>
                 </td>
+                <td class="text-center"><i class="ni ni-book-bookmark" v-show="inventory.note"></i></td>
             </tr>
         </tbody>
     </table>
+  </div>
+
 
     <div class="modal" id="inventory-status-modal" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
@@ -126,8 +130,8 @@ export default {
                     console.log("inventory: something is wrong")
                 });
         },
-        fillModal(i_id) {
-            let inventory = this.inventories.filter(inventory => inventory.id == i_id)[0];
+        fillModal(iid) {
+            let inventory = this.inventories.filter(inventory => inventory.id == iid)[0];
 
             this.selectedItem = Object.assign({}, inventory)
             if (!inventory.use_at) {

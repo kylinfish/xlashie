@@ -6,17 +6,18 @@
             </div>
         </a>
     </li>
-    <li data-toggle="tab" role="tablist" class="nav-item active">
-        <a data-toggle="tab" role="tablist" href="#transaction" class="nav-link ">
-            <div>
-                <span><i class="fa fa-hand-holding-usd pr-2"></i>訂單交易紀錄</span>
-            </div>
-        </a>
-    </li>
+
     <li data-toggle="tab" role="tablist" class="nav-item active">
         <a data-toggle="tab" role="tablist" href="#purchase" class="nav-link">
             <div>
                 <span><i class="ni ni-cart pr-2"></i>購買</span>
+            </div>
+        </a>
+    </li>
+    <li data-toggle="tab" role="tablist" class="nav-item active">
+        <a data-toggle="tab" role="tablist" href="#transaction" class="nav-link ">
+            <div>
+                <span><i class="fa fa-hand-holding-usd pr-2"></i>訂單交易紀錄</span>
             </div>
         </a>
     </li>

@@ -67,4 +67,16 @@ class Invnotes extends BaseController
         $customer->notes()->find($note_id)->update($params);
         return response()->json(["message" => "ok"], 200);
     }
+
+    public function delete(Request $request, string $customer_uuid, string $note_id)
+    {
+        $params = $request->only(["customer_id", "inventory_id", "note"]);
+
+        if (! $customer = Customer::where("uuid", $customer_uuid)->first()) {
+            return response()->json(["message" => "查無此使用者"], 422);
+        }
+
+        $customer->notes()->find($note_id)->delete();
+        return response()->json(["message" => "ok"], 200);
+    }
 }

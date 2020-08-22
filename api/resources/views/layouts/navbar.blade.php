@@ -1,6 +1,7 @@
 <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <a href="/" class="btn btn-lg text-white h3">Macrame <i class="fas fa-hand-peace"></i></a>
             <!-- Search form -->
             <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
                 <div class="form-group mb-0">

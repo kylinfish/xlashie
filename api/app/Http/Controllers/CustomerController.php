@@ -42,7 +42,7 @@ class CustomerController extends \App\Http\Controllers\Controller
     {
         $this->form->validate($request->all());
 
-        $limit = request('limit', 5);
+        $limit = request('limit', 20);
         $customers = Customer::where("user_id", $this->user_id)->orderBy("id", "ASC")->get();
         $customers = $this->paginate($customers, $limit);
 
