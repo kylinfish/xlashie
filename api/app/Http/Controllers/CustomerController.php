@@ -27,9 +27,8 @@ class CustomerController extends \App\Http\Controllers\Controller
         CustomerForm $form,
         CustomerService $service
     ) {
-        // hardcode should be instead of real query
-        $this->user_id = User::find(1)->first()->id;
-        $this->company_id = Company::find(1)->first()->id;
+        $this->user_id = user()->id;
+        $this->company_id = user()->company->first()->id;
 
         $this->form = $form;
         $this->service = $service;

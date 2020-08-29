@@ -9,7 +9,7 @@ class DiscountController extends \App\Http\Controllers\Controller
 {
     public function __construct(DiscountRepositoy $discount_repo)
     {
-        $this->company_id = 1; # HARDCODE should be replaced.
+        $this->company_id = user()->company->first()->id;
         $this->repo = $discount_repo;
     }
 

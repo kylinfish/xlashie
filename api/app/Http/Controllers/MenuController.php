@@ -14,8 +14,7 @@ class MenuController extends Controller
 {
     public function __construct(MenuRepository $menu_repo, MenuForm $form, MenuService $service)
     {
-        // hardcode should be instead of real query
-        $this->company_id = Company::find(1)->first()->id;
+        $this->company_id = user()->company->first()->id;
         $this->form = $form;
         $this->repo = $menu_repo;
         $this->service = $service;

@@ -12,10 +12,10 @@ use App\Transformers\Product as Transformer;
 
 class ProductController extends \App\Http\Controllers\Controller
 {
-
     public function __construct(ProductRepository $product_repo, ProductForm $form, ProductService $service)
     {
-        $this->company_id = Company::find(1)->first()->id;
+        $this->user_id = user()->id;
+        $this->company_id = user()->company->first()->id;
         $this->repo = $product_repo;
         $this->form = $form;
         $this->service = $service;
