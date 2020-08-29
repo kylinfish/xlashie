@@ -74,8 +74,6 @@ class TicketService
         foreach ($data["items"] as $item) {
             $menu_id = $item["itemId"];
             $menu = Menu::find($menu_id);
-            var_dump($item);
-            var_dump($menu->has_submenu);
 
             // 知道名稱跟數量 append 進去就好
             if ($menu->has_submenu) {
