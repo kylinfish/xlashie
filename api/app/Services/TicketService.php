@@ -86,9 +86,7 @@ class TicketService
                     if (Product::TYPE_VIRTUAL == $product->status) {
                         $status = CustomerInventory::STATUS_UNUSED;
                     }
-
-
-                    for ($i = 0; $i < $entry["amount"]; $i++) {
+                    for ($i = 0; $i < ($entry["amount"] * $item['quantity']); $i++) {
                         $inventories[] = [
                             "customer_id" => $data["customer_id"],
                             "company_id" => $this->company_id,
@@ -107,17 +105,20 @@ class TicketService
                 if (Product::TYPE_VIRTUAL == $item["product_type"]) {
                     $status = CustomerInventory::STATUS_UNUSED;
                 }
-                $inventories[] = [
-                    "customer_id" => $data["customer_id"],
-                    "company_id" => $this->company_id,
-                    "product_name" => $item["itemName"],
-                    "status" => $status,
-                    "created_at" => $data["created_at"],
-                    "updated_at" => Carbon::now(),
-                ];
-            }
 
+                for ($i = 0; $i < $item['quantity']; $i++) {
+                    $inventories[] = [
+                        "customer_id" => $data["customer_id"],
+                        "company_id" => $this->company_id,
+                        "product_name" => $item["itemName"],
+                        "status" => $status,
+                        "created_at" => $data["created_at"],
+                        "updated_at" => Carbon::now(),
+                    ];
+                }
+            }
         }
+
         $this->c_inv_repo->insert($inventories);
     }
 }

@@ -1,7 +1,6 @@
 @include('layouts.head')
 
 <body>
-    @include('layouts.sidebar')
     <div class="main-content" id="panel">
         @include('layouts.navbar')
         <div class="container-fluid mt-3">
