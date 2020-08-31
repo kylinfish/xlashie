@@ -67,7 +67,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" v-show="form.items.length >0">
                     <table class="table table-bordered">
                         <thead class="thead-light">
                             <tr>
@@ -116,7 +116,7 @@
                     </table>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group"  v-show="form.items.length >0">
                     <label>消費備註</label>
                     <textarea class="form-control" rows="2" v-model="note"></textarea>
                 </div>
