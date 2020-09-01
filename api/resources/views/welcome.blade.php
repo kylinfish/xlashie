@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<h1 class="text-center mt-5 mb-5">主選單</h1>
+<h1 class="text-center mt-3 mb-5">主選單</h1>
 
 <section class="section section-lg pt-lg-0">
     <div class="container">
@@ -45,6 +45,26 @@
                                     <i class="fas fa-7x fa-bars"></i>
                                 </div>
                                 <h4 class="h2 text-primary text-uppercase">服務項目</h4>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3">
+                        <a class="card card-lift--hover shadow border-0" href="/dashboard/">
+                            <div class="card-body py-5 text-center">
+                                <div class="text-primary mb-4">
+                                    <i class="fas fa-7x fa-chart-line"></i>
+                                </div>
+                                <h4 class="h2 text-primary text-uppercase">報表</h4>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3">
+                        <a class="card card-lift--hover shadow border-0" href="/calendar/">
+                            <div class="card-body py-5 text-center">
+                                <div class="text-primary mb-4">
+                                    <i class="fas fa-7x fa-calendar-alt"></i>
+                                </div>
+                                <h4 class="h2 text-primary text-uppercase">行事曆</h4>
                             </div>
                         </a>
                     </div>

@@ -24546,7 +24546,7 @@ textarea[resize='horizontal']
 .table td,
 .table th
 {
-    font-size: .9rem;
+    font-size: .8125rem;
 
     white-space: nowrap;
 }

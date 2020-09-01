@@ -4,6 +4,7 @@
 
 <div class="row">
     <div class="col-md-3">
+        <a href="/customers/" class="btn btn-block btn-outline-default mt--2 mb-2">回到客戶清單</a>
         <div class="card card-profile mb-1">
             <img src="../../assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top">
             <div class="row justify-content-center">

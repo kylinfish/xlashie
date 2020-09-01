@@ -18,6 +18,19 @@ Route::get('/', function () {
 Route::get('company', function () {
     return view('companies.index');
 });
+Route::get('/dashboard/', function () {
+    return view('dashboard');
+});
+Route::get('/calendar/', function () {
+    return view('calendar');
+});
+Route::get('/login/', function () {
+    return view('login');
+});
+Route::get('/register/', function () {
+    return view('register');
+});
+
 Route::resource('customers', 'CustomerController');
 Route::resource('products', 'ProductController');
 Route::resource('menus', 'MenuController');

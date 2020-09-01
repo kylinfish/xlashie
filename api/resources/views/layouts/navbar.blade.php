@@ -1,7 +1,7 @@
 <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <a href="/" class="btn btn-lg text-white h3">Macrame <i class="fas fa-hand-peace"></i></a>
+            <a href="/" class="text-white h2 mr-3 mt-2">Venus CRM </a>
             <!-- Search form -->
             <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
                 <div class="form-group mb-0">
@@ -62,7 +62,7 @@
                             <span>設定</span>
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#!" class="dropdown-item">
+                        <a href="/login" class="dropdown-item">
                             <i class="ni ni-user-run"></i>
                             <span>登出</span>
                         </a>
