@@ -31,6 +31,7 @@ class CreateTables extends Migration
         Schema::create('users', function($table) {
             $table->increments('id')->unsigned();
 
+            $table->integer('company_id')->unsigned();
             $table->string('uuid', 40);
             $table->string('name', 20);
             $table->char('password', 60);
@@ -47,7 +48,7 @@ class CreateTables extends Migration
 
             // index
             $table->unique('uuid');
-            $table->index('email');
+            $table->unique('email');
             $table->index('phone');
         });
 
@@ -104,17 +105,6 @@ class CreateTables extends Migration
 
             $table->timestamps();
             $table->softDeletes();
-        });
-
-        Schema::create('user_company', function($table) {
-            $table->increments('id')->unsigned();
-
-            $table->integer('user_id')->unsigned();
-            $table->integer('company_id')->unsigned();
-            $table->timestamps();
-
-            // index
-            $table->unique(['user_id', 'company_id']);
         });
 
         Schema::create('discounts', function (Blueprint $table) {
@@ -225,37 +215,6 @@ class CreateTables extends Migration
 
             $table->index(['company_id', 'customer_id']);
         });
-
-
-        Schema::create('invoice_histories', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('company_id')->unsigned();
-            $table->integer('invoice_id')->unsigned();
-            $table->string('status_code');
-            $table->boolean('notify');
-            $table->text('description')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
-
-            $table->index('company_id');
-        });
-
-
-        Schema::create('invoice_items', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('company_id')->unsigned();
-            $table->integer('invoice_id')->unsigned();
-            $table->integer('product_id')->unsigned();
-            $table->string('name');
-            $table->integer('quantity')->unsigned();
-            $table->integer('price');
-            $table->integer('total');
-            $table->timestamps();
-            $table->softDeletes();
-
-            $table->index(['company_id', 'invoice_id']);
-        });
-
     }
 
     /**
@@ -272,18 +231,12 @@ class CreateTables extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('customers');
         Schema::dropIfExists('companies');
-        Schema::dropIfExists('user_company');
 
         // Products
         Schema::dropIfExists('products');
         Schema::dropIfExists('discounts');
         Schema::dropIfExists('menus');
         Schema::dropIfExists('sub_menus');
-
-        // Invoices
-        Schema::dropIfExists('invoices');
-        Schema::dropIfExists('invoice_items');
-        Schema::dropIfExists('invoice_histories');
 
         // Orders
         Schema::dropIfExists('orders');
