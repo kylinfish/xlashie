@@ -10,7 +10,6 @@ if (!function_exists('user')) {
      */
     function user()
     {
-        #XXX
         return User::find(1);
 
         // Get user from api/web

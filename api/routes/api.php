@@ -48,13 +48,10 @@ $api->version('v1', function ($api) {
     $api->get('customers/{customer_uuid}/transactions/{id}/', 'App\Http\Controllers\Api\Transactions@detail');
     $api->post('customers/{customer_uuid}/transactions/', 'App\Http\Controllers\Api\Transactions@store');
 
-
     // Menus
     $api->get('menus', 'App\Http\Controllers\Api\Menus@index');
 
     // Products
     $api->get('products', 'App\Http\Controllers\Api\Products@index');
     $api->get('products/{product_id}', 'App\Http\Controllers\Api\Products@show');
-
-
 });

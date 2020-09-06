@@ -45,7 +45,7 @@
                                 <img alt="Image placeholder" src="../../assets/img/theme/team-4.jpg">
                             </span>
                             <div class="media-body  ml-2  d-none d-lg-block">
-                                <span class="mb-0 text-sm  font-weight-bold">Win Yu</span>
+                                <span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->name}}</span>
                             </div>
                         </div>
                     </a>
@@ -53,16 +53,16 @@
                         <div class="dropdown-header noti-title">
                             <h6 class="text-overflow m-0">今天好嗎!</h6>
                         </div>
-                        <a href="#!" class="dropdown-item">
+                        <a href="#!" class="dropdown-item disabled">
                             <i class="ni ni-single-02"></i>
                             <span>帳號資料</span>
                         </a>
-                        <a href="#!" class="dropdown-item">
+                        <a href="#!" class="dropdown-item disabled">
                             <i class="ni ni-settings-gear-65"></i>
                             <span>設定</span>
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="/login" class="dropdown-item">
+                        <a href="/auth/logout" class="dropdown-item">
                             <i class="ni ni-user-run"></i>
                             <span>登出</span>
                         </a>

@@ -28,7 +28,7 @@
                 <div class="col-lg-6 col-md-8">
                     <div class="card bg-secondary border-0">
                         <div class="card-header bg-transparent pb-5">
-                            <div class="text-muted text-center mt-2 mb-4"><small>使用第三方註冊</small></div>
+                            <div class="text-muted text-center mt-2 mb-4"><small>使用第三方註冊，開始你的 Venus 使用體驗吧</small></div>
                             <div class="text-center">
                                 <a href="/" class="btn btn-neutral btn-icon mr-4">
                                     <span class="btn-inner--icon"><img
@@ -42,50 +42,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="card-body px-lg-5 py-lg-5">
-                            <form role="form">
-                                <div class="form-group">
-                                    <div class="input-group input-group-merge input-group-alternative mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
-                                        </div>
-                                        <input class="form-control" placeholder="Name" type="text" required>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group input-group-merge input-group-alternative mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                                        </div>
-                                        <input class="form-control" placeholder="Email" type="email" required>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group input-group-merge input-group-alternative">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                                        </div>
-                                        <input class="form-control" placeholder="Password" type="password" required>
-                                    </div>
-                                </div>
-                                <div class="text-muted font-italic"><small>password strength: <span
-                                            class="text-success font-weight-700">strong</span></small></div>
-                                <div class="row my-4">
-                                    <div class="col-12">
-                                        <div class="custom-control custom-control-alternative custom-checkbox">
-                                            <input class="custom-control-input" id="customCheckRegister"
-                                                type="checkbox">
-                                            <label class="custom-control-label" for="customCheckRegister">
-                                                <span class="text-muted">同意<a href="#!">隱私權條款</a></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit"" class="btn btn-primary mt-4">建立帳號</button>
-                                </div>
-                            </form>
-                        </div>
+
                     </div>
                 </div>
             </div>

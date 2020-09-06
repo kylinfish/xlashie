@@ -8,7 +8,6 @@
         <a href="#" class="btn btn-primary">新增產品</a>
     </div>
 </div>
-
 <div class="alert alert-default" role="alert">
     <strong>補充說明: </strong><br>
     - 產品為建立菜單目錄的基本單位。不需管理庫存項目可將其設定成 0。<br>

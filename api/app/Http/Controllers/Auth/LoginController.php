@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Socialite;
@@ -29,7 +30,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = "/";
 
     /**
      * Create a new controller instance.
@@ -40,6 +41,25 @@ class LoginController extends Controller
     {
         $this->service = $service;
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(Request $request)
+    {
+        if (! auth()->attempt($request->only('email', 'password'), $request->get('remember_token', true))) {
+            return redirect('/auth/login')->withInput($request->input())->withErrors(["status" => "帳號密碼驗證錯誤"]);
+        }
+
+        $user = User::where('email', $request['email'])->first();
+
+        auth()->login($user, $request->get('remember_token', true));
+
+        return redirect('/');
+    }
+
+    public function logout(Request $request)
+    {
+        auth()->logout();
+        return redirect('/auth/login/');
     }
 
     /**

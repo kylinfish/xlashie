@@ -11,32 +11,44 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('company', function () {
-    return view('companies.index');
-});
-Route::get('/dashboard/', function () {
-    return view('dashboard');
-});
-Route::get('/calendar/', function () {
-    return view('calendar');
-});
-Route::get('/login/', function () {
+Route::get('/auth/login/', function () {
     return view('login');
-});
-Route::get('/register/', function () {
+})->name('auth.login');
+
+
+Route::get('/auth/register/', function () {
     return view('register');
 });
 
-Route::resource('customers', 'CustomerController');
-Route::resource('products', 'ProductController');
-Route::resource('menus', 'MenuController');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+    Route::get('/company/', function () {
+        return view('companies.index');
+    });
+    Route::get('/dashboard/', function () {
+        return view('dashboard');
+    });
+    Route::get('/calendar/', function () {
+        return view('calendar');
+    });
+
+    Route::resource('customers', 'CustomerController');
+    Route::resource('products', 'ProductController');
+    Route::resource('menus', 'MenuController');
+
+});
 
 Route::prefix('login')->group(function () {
+    Route::post('/', [
+        'as' => 'login.general',
+        'uses' => 'Auth\LoginController@login'
+    ]);
+
     Route::get('facebook', [
         'as' => 'login.facebook',
         'uses' => 'Auth\LoginController@facebook'
@@ -54,3 +66,5 @@ Route::prefix('login')->group(function () {
         'uses' => 'Auth\LoginController@googleCallback'
     ]);
 });
+
+Route::get('/auth/logout/', 'Auth\LoginController@logout');
