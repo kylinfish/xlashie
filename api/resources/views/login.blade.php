@@ -30,12 +30,12 @@
                         <div class="card-header bg-transparent pb-4">
                             <div class="text-muted text-center mt-2 mb-3"><small>使用第三方登入驗證</small></div>
                             <div class="btn-wrapper text-center">
-                                <a href="/" class="btn btn-neutral btn-icon disabled">
+                                <a href="/login/facebook" class="btn btn-neutral btn-icon disabled">
                                     <span class="btn-inner--icon"><img
                                             src="../../assets/img/icons/common/github.svg"></span>
                                     <span class="btn-inner--text">Facebook</span>
                                 </a>
-                                <a href="/" class="btn btn-neutral btn-icon disabled">
+                                <a href="/login/google" class="btn btn-neutral btn-icon">
                                     <span class="btn-inner--icon"><img
                                             src="../../assets/img/icons/common/google.svg"></span>
                                     <span class="btn-inner--text">Google</span>
