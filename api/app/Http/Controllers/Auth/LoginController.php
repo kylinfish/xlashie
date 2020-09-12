@@ -45,13 +45,12 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        if (! auth()->attempt($request->only('email', 'password'), $request->get('remember_token', true))) {
+        // Attempt to login
+        if (!auth()->attempt($request->only('email', 'password'), $request->get('remember_token', false))) {
             return redirect('/auth/login')->withInput($request->input())->withErrors(["status" => "帳號密碼驗證錯誤"]);
         }
 
-        $user = User::where('email', $request['email'])->first();
-
-        auth()->login($user, $request->get('remember_token', true));
+        auth('api')->attempt($request->only('email', 'password'), $request->get('remember_token', false));
 
         return redirect('/');
     }

@@ -26,7 +26,7 @@ Route::group(['prefix' => 'auth'], function () {
 
 
 $api = app('Dingo\Api\Routing\Router');
-$api->version('v1', function ($api) {
+$api->version('v1', ['middleware' => 'api'], function ($api) {
     // Customers
     $api->get('customers/{customer_uuid}/', 'App\Http\Controllers\Api\Customers@show');
     $api->post('customers/{customer_uuid}/', 'App\Http\Controllers\Api\Customers@store');

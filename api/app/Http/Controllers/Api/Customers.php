@@ -10,21 +10,16 @@ use App\Forms\CustomerForm;
 use App\Http\Resources\CustomerResource;
 
 
-class Customers extends BaseController
+class Customers extends \App\Http\Controllers\Controller
 {
-    public function __construct()
-    {
-        $this->user_id = user()->id;
-    }
-
     public function index()
     {
-        return CustomerResource::collection(Customer::where("user_id", $this->user_id));
+        return CustomerResource::collection(Customer::where("user_id", auth()->user()->id));
     }
 
     public function show(Request $request, string $customer_uuid)
     {
-        $customer = Customer::where(["user_id" => $this->user_id,"uuid" => $customer_uuid])->first();
+        $customer = Customer::where(["user_id" => auth()->user()->id, "uuid" => $customer_uuid])->first();
         if (!$customer) {
             return response()->json(["message" => "查無此使用者"], 422);
         }

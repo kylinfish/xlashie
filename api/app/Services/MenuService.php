@@ -4,7 +4,6 @@ namespace App\Services;
 use Illuminate\Support\Arr;
 use App\Models\Menu;
 use App\Services\ProductService;
-use App\Repositories\MenuRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\SubMenuRepository;
 
@@ -13,25 +12,13 @@ class MenuService
     private $company_id;
 
     public function __construct(
-        MenuRepository $menu_repo,
         SubMenuRepository $submenu_repo,
         ProductRepository $product_repo,
         ProductService $product_service
     ) {
-        $this->menu_repo = $menu_repo;
         $this->submenu_repo = $submenu_repo;
         $this->product_repo = $product_repo;
         $this->product_service = $product_service;
-    }
-
-    public function setCompanyId(int $id)
-    {
-        $this->company_id = $id;
-    }
-
-    public function getMenuSets()
-    {
-        return $this->menu_repo->getMenuSets($this->company_id);
     }
 
     /**
@@ -42,15 +29,14 @@ class MenuService
      *
      * @return App\Models\Menu
      */
-    public function createMenu(array $data)
+    public function createMenu(int $company_id, array $data)
     {
-        $this->checkValidProductIds($data);
+        $this->checkValidProductIds($company_id, $data);
 
-        $data["company_id"] = $this->company_id;
         // 不綁定產品，也沒有子項目
         if (empty($data["product_id"]) && empty($data["sub_menus"])) {
-            return $this->menu_repo->create([
-                "company_id" => $this->company_id,
+            return Menu::create([
+                "company_id" => $company_id,
                 "item_type" => Menu::ITEMTYPE_PURE_ITEM,
                 "product_id" => 0,
                 "name" => $data["name"],
@@ -61,9 +47,9 @@ class MenuService
 
         // 直接綁定產品
         if (! empty($data["product_id"])) {
-            $product = $this->product_repo->getProduct($this->company_id, $data["product_id"]);
-            return $this->menu_repo->create([
-                "company_id" => $this->company_id,
+            $product = $this->product_repo->getProduct($company_id, $data["product_id"]);
+            return Menu::create([
+                "company_id" => $company_id,
                 "item_type" => Menu::ITEMTYPE_PURE_ITEM,
                 "product_id" => $product->id,
                 "name" => $product->name,
@@ -73,8 +59,8 @@ class MenuService
         }
 
         // 含有子項目
-        $menu = $this->menu_repo->create([
-            "company_id" => $this->company_id,
+        $menu = Menu::create([
+            "company_id" => $company_id,
             "item_type" => Menu::ITEMTYPE_WITH_SUB_MENUS,
             "product_id" => 0,
             "name" => $data["name"],
@@ -93,7 +79,7 @@ class MenuService
      *
      * @param  array $data Data from request
      */
-    private function checkValidProductIds(array $data)
+    private function checkValidProductIds(int $company_id, array $data)
     {
         // 允許不綁定產品的 Menu 新增
         if (empty($data["product_id"]) && empty($data["sub_menus"])) {
@@ -106,7 +92,7 @@ class MenuService
             throw new \InvalidArgumentException("相同產品不能重複指定");
         }
 
-        if (! $this->product_service->checkProductsOwner($this->company_id, $product_ids)) {
+        if (! $this->product_service->checkProductsOwner($company_id, $product_ids)) {
             throw new \InvalidArgumentException("請確定該產品是否屬於您的店家所管理");
         }
     }

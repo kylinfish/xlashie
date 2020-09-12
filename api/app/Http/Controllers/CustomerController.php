@@ -3,16 +3,13 @@ namespace App\Http\Controllers;
 
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\Forms\CustomerForm;
 use App\Services\CustomerService;
 use App\Repositories\TicketRepository;
 use App\Repositories\CustomerRepository;
 use App\Repositories\CustomerInventoryRepository;
-use App\Models\User;
 use App\Models\Menu;
 use App\Models\Ticket;
-use App\Models\Company;
 use App\Models\Customer;
 use App\Transformers\Customer as Transformer;
 
@@ -27,9 +24,6 @@ class CustomerController extends \App\Http\Controllers\Controller
         CustomerForm $form,
         CustomerService $service
     ) {
-        $this->user_id = user()->id;
-        $this->company_id = user()->company->first()->id;
-
         $this->form = $form;
         $this->service = $service;
         $this->repo = $customer_repo;
@@ -42,7 +36,7 @@ class CustomerController extends \App\Http\Controllers\Controller
         $this->form->validate($request->all());
 
         $limit = request('limit', 10);
-        $customers = Customer::where("user_id", $this->user_id)->orderBy("id", "ASC")->get();
+        $customers = Customer::where("user_id", auth()->user()->id)->orderBy("id", "ASC")->get();
         $customers = $this->paginate($customers, $limit);
 
         return view("customers.index", compact("customers"));
@@ -50,17 +44,20 @@ class CustomerController extends \App\Http\Controllers\Controller
 
     public function show(Request $request, string $customer_uuid)
     {
+
         $this->form->validate(['uuid' => $customer_uuid]);
 
-        $customer = Customer::where(["user_id" => $this->user_id, "uuid" => $customer_uuid])->first();
+        $customer = Customer::where(["user_id" => auth()->user()->id, "uuid" => $customer_uuid])->first();
+
         if ($customer == null) {
             ### FIXME
             return redirect()->route("customers.index");
         }
 
         $inventories = $customer->inventory()->get();
-        $orders = Ticket::where(["company_id" => $this->company_id, "customer_id"=> $customer->id])->ordered();
-        $menus = Menu::where("company_id", $this->company_id)->get();
+        $orders = Ticket::where(["company_id" => auth()->user()->company_id, "customer_id"=> $customer->id])->ordered();
+        $menus = Menu::where("company_id", auth()->user()->company_id)->get();
+
         return view("customers.show", compact('customer', 'inventories', 'orders', 'menus'));
     }
 
@@ -70,7 +67,7 @@ class CustomerController extends \App\Http\Controllers\Controller
 
         $this->form->validate($params);
 
-        $params["user_id"] = $this->user_id;
+        $params["user_id"] = auth()->user()->id;
 
         $customer = $this->service->createCustomer($params);
 

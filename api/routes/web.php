@@ -22,7 +22,7 @@ Route::get('/auth/register/', function () {
 });
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:web')->group(function () {
     Route::get('/', function () {
         return view('welcome');
     });

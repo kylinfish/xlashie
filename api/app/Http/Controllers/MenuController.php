@@ -4,26 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
+use App\Models\Menu;
 use App\Forms\MenuForm;
 use App\Services\MenuService;
-use App\Repositories\MenuRepository;
-use App\Models\Company;
 
 class MenuController extends Controller
 {
-    public function __construct(MenuRepository $menu_repo, MenuForm $form, MenuService $service)
+    public function __construct(MenuForm $form, MenuService $service)
     {
-        $this->company_id = user()->company->first()->id;
         $this->form = $form;
-        $this->repo = $menu_repo;
         $this->service = $service;
-        $this->service->setCompanyId($this->company_id);
     }
 
     public function index(Request $request)
     {
-        $menus = $this->service->getMenuSets($this->company_id);
+        $menus = Menu::where(["company_id" => user()->company_id])->with([
+                "sub_menus",
+                "product",
+                "sub_menus.product"
+            ])->orderBy("id", "asc")->get();
+
 
         return view('menus.index', ['menus' => $menus]);
     }
@@ -32,7 +32,7 @@ class MenuController extends Controller
     {
         $this->form->validate(['uuid' => $menu_id]);
 
-        $menu = $this->repo->getMenu($menu_id, $this->company_id);
+        $menu = Menu::where(['id' => $menu_id, 'company_id' => user()->company_id])->first();
 
         return response()->json(['data' => $menu], 200);
     }
@@ -43,7 +43,7 @@ class MenuController extends Controller
 
         $this->form->validate($params);
 
-        $menu = $this->service->createMenu($params);
+        $menu = $this->service->createMenu(user()->company_id, $params);
 
         return response()->json(['message' => "菜單新增成功"], 200);
     }

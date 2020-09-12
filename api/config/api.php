@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'name' => env('API_NAME', "macrame"),
+    'name' => env('API_NAME', "Vensus"),
 
     /*
     |--------------------------------------------------------------------------
@@ -168,7 +168,8 @@ return [
     */
 
     'auth' => [
-
+        'jwt' => 'Dingo\Api\Auth\Provider\JWT',
+        'basic' => 'Dingo\Api\Auth\Provider\Basic',
     ],
 
     /*
