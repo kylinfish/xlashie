@@ -14,15 +14,12 @@ class Transactions extends BaseController
 {
     public function __construct(TicketService $service)
     {
-        $this->user_id = user()->id;
-        $this->company_id = user()->company->first()->id;
         $this->service = $service;
-        $this->service->setCompanyId($this->company_id);
     }
 
     public function index(Request $request, string $customer_uuid)
     {
-        $customer = Customer::where(["user_id" => $this->user_id, "uuid" => $customer_uuid])->first();
+        $customer = Customer::where(["user_id" => auth()->user()->id, "uuid" => $customer_uuid])->first();
         if (!$customer) {
             return response()->json(["message" => "找不到該名顧客"], 404);
         }
@@ -37,14 +34,14 @@ class Transactions extends BaseController
         //$this->form->validate($params);
 
         $params["customer_uuid"] = $customer_uuid;
-        $this->service->createOrder($params);
+        $this->service->createOrder(auth()->user()->company_id, $params);
 
         return response()->json(["message" => "ok"], 200);
     }
 
     public function detail(Request $request, string $customer_uuid, string $id)
     {
-        $customer = Customer::where(["user_id" => $this->user_id, "uuid" => $customer_uuid])->first();
+        $customer = Customer::where(["user_id" => auth()->user()->id, "uuid" => $customer_uuid])->first();
         if (!$customer) {
             return response()->json(["message" => "找不到該名顧客"], 404);
         }

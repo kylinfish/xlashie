@@ -16,17 +16,13 @@ class Menus extends BaseController
 {
     public function __construct(MenuService $service)
     {
-        # Now: use and company is the one-one relation, we can adjust user belongsToMany in the future
-        $this->user_id = user()->id;
-        $this->company_id = user()->company->first()->id;
         $this->service = $service;
-        $this->service->setCompanyId($this->company_id);
     }
 
 
     public function index(Request $request)
     {
-        $menus = Menu::where(["company_id" => $this->company_id])
+        $menus = Menu::where(["company_id" => auth()->user()->company_id])
             ->with(["sub_menus", "product", "sub_menus.product"])
             ->orderBy("created_at", "DESC");
         return MenuResource::collection($menus->get());
@@ -36,7 +32,7 @@ class Menus extends BaseController
     {
         $this->form->validate(['uuid' => $menu_id]);
 
-        $menu = Menu::where(["company_id" => $this->company_id, "id" => $menu_id])
+        $menu = Menu::where(["company_id" => auth()->user()->company_id, "id" => $menu_id])
             ->with(["sub_menus", "product", "sub_menus.product"])->first();
         if (!$menu) {
             return response()->json(["message" => "找不到該菜單資訊"], 404);

@@ -33,7 +33,7 @@ class Customers extends \App\Http\Controllers\Controller
 
         $this->form->validate($params);
 
-        $params["user_id"] = $this->user_id;
+        $params["user_id"] = auth()->user()->id;
 
         $customer = $this->service->createCustomer($params);
 

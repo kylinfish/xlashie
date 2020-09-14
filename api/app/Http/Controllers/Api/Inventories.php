@@ -12,14 +12,10 @@ use App\Http\Resources\CustomerInventoryResource;
 
 class Inventories extends BaseController
 {
-    public function __construct()
-    {
-        $this->user_id = user()->id;
-    }
 
     public function index(Request $request, string $customer_uuid)
     {
-        $customer = Customer::where(["user_id" => $this->user_id, "uuid" => $customer_uuid])->first();
+        $customer = Customer::where(["user_id" => auth()->user()->id, "uuid" => $customer_uuid])->first();
         if (!$customer) {
             return response()->json(["message" => "查無此使用者"], 422);
         }

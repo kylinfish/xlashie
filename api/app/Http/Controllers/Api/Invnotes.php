@@ -12,15 +12,10 @@ use App\Models\InvNote;
 
 class Invnotes extends BaseController
 {
-    public function __construct()
-    {
-        $this->user_id = user()->id;
-        $this->company_id = user()->company->first()->id;
-    }
 
     public function index(Request $request, string $customer_uuid)
     {
-        $customer = Customer::where(["user_id" => $this->user_id, "uuid" => $customer_uuid])->first();
+        $customer = Customer::where(["user_id" => auth()->user()->id, "uuid" => $customer_uuid])->first();
         if (!$customer) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
@@ -30,7 +25,7 @@ class Invnotes extends BaseController
 
     public function show(Request $request, string $customer_uuid, string $note_id)
     {
-        $customer = Customer::where(["user_id" => $this->user_id, "uuid" => $customer_uuid])->first();
+        $customer = Customer::where(["user_id" => auth()->user()->id, "uuid" => $customer_uuid])->first();
         if (!$customer) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
@@ -43,11 +38,11 @@ class Invnotes extends BaseController
         $params = $request->only(["customer_id", "title", "inventory_id", "note"]);
 
 
-        if (! $customer = Customer::where("uuid", $customer_uuid)->first()) {
+        if (! $customer = Customer::where(["user_id" => auth()->user()->id, "uuid" => $customer_uuid])->first()) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
         InvNote::create([
-            'company_id' => $this->company_id,
+            'company_id' => auth()->user()->company_id,
             'customer_id' => $customer->id,
             'note' => $params['note'],
             'inventory_id' => $params['inventory_id'] ?? 0,
@@ -60,7 +55,7 @@ class Invnotes extends BaseController
     {
         $params = $request->only(["customer_id", "inventory_id", "note"]);
 
-        if (! $customer = Customer::where("uuid", $customer_uuid)->first()) {
+        if (! $customer = Customer::where(["user_id" => auth()->user()->id, "uuid" => $customer_uuid])->first()) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
 
@@ -70,9 +65,7 @@ class Invnotes extends BaseController
 
     public function delete(Request $request, string $customer_uuid, string $note_id)
     {
-        $params = $request->only(["customer_id", "inventory_id", "note"]);
-
-        if (! $customer = Customer::where("uuid", $customer_uuid)->first()) {
+        if (! $customer = Customer::where(["user_id" => auth()->user()->id, "uuid" => $customer_uuid])->first()) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
 

@@ -9,8 +9,6 @@ use App\Repositories\SubMenuRepository;
 
 class MenuService
 {
-    private $company_id;
-
     public function __construct(
         SubMenuRepository $submenu_repo,
         ProductRepository $product_repo,

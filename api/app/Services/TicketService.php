@@ -2,8 +2,6 @@
 namespace App\Services;
 
 use Cache;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Carbon\Carbon;
 use App\Models\Menu;
 use App\Models\SubMenu;
@@ -13,7 +11,6 @@ use App\Models\OrderItem;
 use App\Models\Customer;
 use App\Models\CustomerInventory;
 use App\Repositories\TicketRepository;
-
 use App\Repositories\CustomerInventoryRepository;
 
 
@@ -27,16 +24,10 @@ class TicketService
         $this->c_inv_repo = $c_inv_repo;
     }
 
-    public function setCompanyId(int $id)
-    {
-        $this->company_id = $id;
-    }
-
-
-    public function createOrder(array $data)
+    public function createOrder($company_id, array $data)
     {
         $data["customer_id"] = Customer::where('uuid', $data['customer_uuid'])->first()->id;
-        $data["company_id"] = $this->company_id;
+        $data["company_id"] = $company_id;
         $data["created_at"] = Carbon::parse($data["transaction_at"]);
 
         // 1. Create Order
@@ -89,7 +80,7 @@ class TicketService
                     for ($i = 0; $i < ($entry["amount"] * $item['quantity']); $i++) {
                         $inventories[] = [
                             "customer_id" => $data["customer_id"],
-                            "company_id" => $this->company_id,
+                            "company_id" => $company_id,
                             "product_name" => $product->name,
                             "status" => $status,
                             "created_at" => $data["created_at"],
@@ -109,7 +100,7 @@ class TicketService
                 for ($i = 0; $i < $item['quantity']; $i++) {
                     $inventories[] = [
                         "customer_id" => $data["customer_id"],
-                        "company_id" => $this->company_id,
+                        "company_id" => $company_id,
                         "product_name" => $item["itemName"],
                         "status" => $status,
                         "created_at" => $data["created_at"],
@@ -118,7 +109,6 @@ class TicketService
                 }
             }
         }
-
         $this->c_inv_repo->insert($inventories);
     }
 }
