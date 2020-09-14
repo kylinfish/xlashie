@@ -148,11 +148,6 @@ class Handler extends ExceptionHandler
             return $this->responseError(404);
         }
 
-        // Handle JWT Auth Exception
-        if ($e instanceof \Firebase\JWT\ExpiredException or $e instanceof \UnexpectedValueException) {
-            return $this->responseError(401, 'Token Expired/Invalid');
-        }
-
         // Handle Validation Error
         if ($e instanceof ValidationException) {
             return $this->responseError(422, $e->errors());

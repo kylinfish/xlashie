@@ -50,8 +50,6 @@ class LoginController extends Controller
             return redirect('/auth/login')->withInput($request->input())->withErrors(["status" => "帳號密碼驗證錯誤"]);
         }
 
-        auth('api')->attempt($request->only('email', 'password'), $request->get('remember_token', false));
-
         return redirect('/');
     }
 
