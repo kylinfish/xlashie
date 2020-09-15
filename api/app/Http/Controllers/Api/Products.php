@@ -6,12 +6,10 @@ use App\Models\Company;
 use App\Models\Product;
 use App\Forms\ProductForm;
 use App\Services\ProductService;
-use Dingo\Api\Http\Response;
 use App\Transformers\Product as Transformer;
 
 class Products extends \App\Http\Controllers\Controller
 {
-
     public function __construct(ProductService $service)
     {
         $this->service = $service;

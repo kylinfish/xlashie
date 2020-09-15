@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 
-use Dingo\Api\Routing\Helpers;
 use Illuminate\Http\Request;
 use App\Forms\CustomerForm;
 use App\Services\CustomerService;
@@ -15,8 +14,6 @@ use App\Transformers\Customer as Transformer;
 
 class CustomerController extends \App\Http\Controllers\Controller
 {
-    use Helpers;
-
     public function __construct(
         TicketRepository $order_repo,
         CustomerRepository $customer_repo,

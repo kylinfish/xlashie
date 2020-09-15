@@ -24,10 +24,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Hand over all Exceptions to App Exceptions Handler
-        app(\Dingo\Api\Exception\Handler::class)->register(function (\Exception $exception) {
-            $request = \Illuminate\Http\Request::capture();
-            return app('App\Exceptions\Handler')->render($request, $exception);
-        });
     }
 }

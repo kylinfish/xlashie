@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 
-use Dingo\Api\Routing\Helpers;
 use Illuminate\Http\Request;
 use App\Forms\ProductForm;
 use App\Services\ProductService;
@@ -10,8 +9,6 @@ use App\Transformers\Product as Transformer;
 
 class ProductController extends \App\Http\Controllers\Controller
 {
-    use Helpers;
-
     public function __construct(ProductRepository $product_repo, ProductForm $form, ProductService $service)
     {
         $this->repo = $product_repo;
