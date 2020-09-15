@@ -24,14 +24,14 @@
                         </div>
                     </div>
                     <div class="form-group col-md">
-                        <table class="table table-bordered">
-                            <thead class="thead-light">
+                        <table class="table table-bordered table-primary">
+                            <thead>
                                 <tr>
-                                    <th class="text-center border-right-0 border-bottom-0" scope="col">品項</th>
-                                    <th class="text-center border-right-0 border-bottom-0" scope="col">數量</th>
-                                    <th class="text-center border-right-0 border-bottom-0" scope="col">單價</th>
-                                    <th class="text-center border-right-0 border-bottom-0" scope="col">總計</th>
-                                    <th class="text-center border-right-0 border-bottom-0" scope="col">操作</th>
+                                    <th class="text-center" scope="col">品項</th>
+                                    <th class="text-center" scope="col">數量</th>
+                                    <th class="text-center" scope="col">單價</th>
+                                    <th class="text-center" scope="col">總計</th>
+                                    <th class="text-center" scope="col">操作</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -57,7 +57,7 @@
                                         <input type="number" disabled :class="'form-control text-center'" :value="selectedItemTotal">
                                         <div class="invalid-feedback">{{ validation.firstError('selectedItemTotal') }}</div>
                                     </td>
-                                    <td class="text-center border-right-0 border-bottom-0">
+                                    <td class="text-center">
                                         <button class="btn btn-icon btn-outline-success btn-lg" type="button" @click="onAddItem" data-toggle="tooltip" title="選擇品項並新增">
                                             <i class="fa fa-plus"></i>
                                         </button>
@@ -71,11 +71,11 @@
                     <table class="table table-bordered">
                         <thead class="thead-light">
                             <tr>
-                                <th class="text-center border-right-0 border-bottom-0" scope="col">品項</th>
-                                <th class="text-center border-right-0 border-bottom-0" scope="col">數量</th>
-                                <th class="text-center border-right-0 border-bottom-0" scope="col">單價</th>
-                                <th class="text-center border-right-0 border-bottom-0" scope="col">總計</th>
-                                <th class="text-center border-right-0 border-bottom-0" scope="col">刪除</th>
+                                <th class="text-center" scope="col">品項</th>
+                                <th class="text-center" scope="col">數量</th>
+                                <th class="text-center" scope="col">單價</th>
+                                <th class="text-center" scope="col">總計</th>
+                                <th class="text-center" scope="col">刪除</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -84,7 +84,7 @@
                                 <td class="text-center">{{ row.quantity }}</td>
                                 <td class="text-center">{{ row.salePrice }}</td>
                                 <td class="text-center">{{ row.itemTotal }}</td>
-                                <td class="text-center border-right-0 border-bottom-0">
+                                <td class="text-center">
                                     <button class="btn btn-icon btn-outline-danger btn-sm" type="button" @click="onDeleteItem(index)" data-toggle="tooltip" title="刪除項目">
                                         <i class="fa fa-trash"></i>
                                     </button>

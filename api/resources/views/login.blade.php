@@ -43,13 +43,16 @@
                             </div>
                         </div>
                         <div class="card-body px-lg-5 py-lg-5">
+                            <div class="text-center text-muted mb-4">
+                                <small>Preview 尚未開放正式註冊，請先使用社群登入</small>
+                            </div>
                             <form role="form" method="POST" action="/login">
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-merge input-group-alternative">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Email" name="email" type="email" value="admin@a.com" required>
+                                        <input class="form-control" placeholder="Email" name="email" type="email" required disabled>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -57,12 +60,12 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Password" name="password" type="password" value="admin" required>
+                                        <input class="form-control" placeholder="Password" name="password" type="password" disabled>
                                     </div>
                                 </div>
                                 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                                 <div class="custom-control custom-control-alternative custom-checkbox">
-                                    <input class="custom-control-input" id="remember_token" name="remember_token" type="checkbox" checked>
+                                    <input class="custom-control-input" id="remember_token" name="remember_token" type="checkbox" checked disabled>
                                     <label class="custom-control-label" for="remember_token">
                                         <span class="text-muted">記住我</span>
                                     </label>
@@ -72,7 +75,7 @@
                                     @enderror
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary my-4">登入</a>
+                                    <button type="submit" class="btn btn-primary my-4" disabled>登入</a>
                                 </div>
                             </form>
                         </div>
