@@ -13,6 +13,7 @@
     <div class="card-header border-0">
         <h3 class="mb-0">客戶列表</h3>
     </div>
+    @if($customers->count())
     <div class="table-responsive">
         <table class="table table-sm align-items-center table-flush">
             <thead class="thead-light">
@@ -53,11 +54,18 @@
             </tbody>
         </table>
     </div>
+
     <div class="card-footer py-4 table-action">
         <div class="row float-right">
         {{ $customers->withPath(request()->url())->links() }}
         </div>
     </div>
+</div>
+    @else
+    <div class="alert alert-info">
+        <p class="h3">還沒有相關的客戶，從新增客戶開始吧</p>
+    </div>
+    @endif
 </div>
 
 

@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function () {
         return view('calendar');
     });
 
+
+    Route::get('/customers/search', 'CustomerController@search');
     Route::resource('customers', 'CustomerController');
     Route::resource('products', 'ProductController');
     Route::resource('menus', 'MenuController');

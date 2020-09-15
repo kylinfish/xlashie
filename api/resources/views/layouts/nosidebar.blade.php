@@ -4,9 +4,7 @@
     <div class="main-content" id="panel">
         <nav class="navbar fixed-top navbar-expand navbar-dark bg-primary border-bottom">
             <div class="container-fluid">
-                <a href="/" role="button">
-                    <span class="h3 text-white">Macrame 客戶管家</span>
-                </a>
+                <a href="/" class="text-white h2 mr-3 mt-2">Venus CRM </a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Navbar links -->
                     <ul class="navbar-nav align-items-center  ml-md-auto ">
@@ -28,10 +26,10 @@
                                 aria-expanded="false">
                                 <div class="media align-items-center">
                                     <span class="avatar avatar-sm rounded-circle">
-                                        <img alt="Image placeholder" src="../../assets/img/theme/team-4.jpg">
+                                        <img alt="Image placeholder" src="{{ auth()->user()->avatar }}">
                                     </span>
                                     <div class="media-body  ml-2  d-none d-lg-block">
-                                        <span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->name}}</span>
+                                        <span class="mb-0 text-sm font-weight-bold">{{ auth()->user()->name }}</span>
                                     </div>
                                 </div>
                             </a>

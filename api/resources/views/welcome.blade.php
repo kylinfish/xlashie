@@ -10,9 +10,9 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <a class="card card-lift--hover shadow border-0" href="/company/">
-                            <div class="card-body py-5 text-center">
+                            <div class="card-body py-4 text-center">
                                 <div class="text-primary mb-4">
-                                    <i class="fas fa-store fa-7x"></i>
+                                    <i class="fas fa-store fa-4x"></i>
                                 </div>
                                 <h4 class="h2 text-primary text-uppercase">店家設定</h4>
                             </div>
@@ -20,9 +20,9 @@
                     </div>
                     <div class="col-lg-3">
                         <a class="card card-lift--hover shadow border-0" href="/customers/">
-                            <div class="card-body py-5 text-center">
+                            <div class="card-body py-4 text-center">
                                 <div class="text-primary mb-4">
-                                    <i class="fas fa-7x fa-users"></i>
+                                    <i class="fas fa-4x fa-users"></i>
                                 </div>
                                 <h4 class="h2 text-primary text-uppercase">客戶管理</h4>
                             </div>
@@ -30,9 +30,9 @@
                     </div>
                     <div class="col-lg-3">
                         <a class="card card-lift--hover shadow border-0" href="/products/">
-                            <div class="card-body py-5 text-center">
+                            <div class="card-body py-4 text-center">
                                 <div class="text-primary mb-4">
-                                    <i class="fas fa-7x fa-box-open"></i>
+                                    <i class="fas fa-4x fa-box-open"></i>
                                 </div>
                                 <h4 class="h2 text-primary text-uppercase">產品設定</h4>
                             </div>
@@ -40,9 +40,9 @@
                     </div>
                     <div class="col-lg-3">
                         <a class="card card-lift--hover shadow border-0" href="/menus/">
-                            <div class="card-body py-5 text-center">
+                            <div class="card-body py-4 text-center">
                                 <div class="text-primary mb-4">
-                                    <i class="fas fa-7x fa-bars"></i>
+                                    <i class="fas fa-4x fa-bars"></i>
                                 </div>
                                 <h4 class="h2 text-primary text-uppercase">服務項目</h4>
                             </div>
@@ -50,9 +50,9 @@
                     </div>
                     <div class="col-lg-3">
                         <a class="card card-lift--hover shadow border-0" href="/dashboard/">
-                            <div class="card-body py-5 text-center">
+                            <div class="card-body py-4 text-center">
                                 <div class="text-primary mb-4">
-                                    <i class="fas fa-7x fa-chart-line"></i>
+                                    <i class="fas fa-4x fa-chart-line"></i>
                                 </div>
                                 <h4 class="h2 text-primary text-uppercase">報表</h4>
                             </div>
@@ -60,9 +60,9 @@
                     </div>
                     <div class="col-lg-3">
                         <a class="card card-lift--hover shadow border-0" href="/calendar/">
-                            <div class="card-body py-5 text-center">
+                            <div class="card-body py-4 text-center">
                                 <div class="text-primary mb-4">
-                                    <i class="fas fa-7x fa-calendar-alt"></i>
+                                    <i class="fas fa-4x fa-calendar-alt"></i>
                                 </div>
                                 <h4 class="h2 text-primary text-uppercase">行事曆</h4>
                             </div>

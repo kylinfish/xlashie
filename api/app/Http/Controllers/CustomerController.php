@@ -72,4 +72,22 @@ class CustomerController extends \App\Http\Controllers\Controller
             "message" => "{$customer->name} 新增成功",
         ]);
     }
+
+    public function search(Request $request)
+    {
+        $limit = request('limit', 10);
+        $user_id = user()->id;
+        $keyword = $request['q'];
+        $customers = Customer::where('user_id', user()->id)
+            ->where(function($q) use ($keyword ){
+                $q->where('email', 'like', "%{$keyword}%")
+                ->orWhere('phone', 'like', "%{$keyword}%")
+                ->orWhere('cellphone', 'like', "%{$keyword}%");
+
+            })->get();
+
+        $customers = $this->paginate($customers, $limit);
+
+        return view("customers.index", compact("customers"));
+    }
 }
