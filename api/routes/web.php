@@ -11,18 +11,7 @@
 |
 */
 
-
-Route::get('/auth/login/', function () {
-    return view('login');
-})->name('auth.login');
-
-
-Route::get('/auth/register/', function () {
-    return view('register');
-});
-
-
-Route::middleware('auth:web')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('welcome');
     });
@@ -43,6 +32,11 @@ Route::middleware('auth:web')->group(function () {
 
 });
 
+/*
+    Login
+*/
+
+// Social Login
 Route::prefix('login')->group(function () {
     Route::post('/', [
         'as' => 'login.general',
@@ -66,5 +60,13 @@ Route::prefix('login')->group(function () {
         'uses' => 'Auth\LoginController@googleCallback'
     ]);
 });
+
+// General Login
+Route::get('/auth/register/', function () {
+    return view('register');
+});
+Route::get('/auth/login/', function () {
+    return view('login');
+})->name('auth.login');
 
 Route::get('/auth/logout/', 'Auth\LoginController@logout');

@@ -2,19 +2,22 @@
 
 namespace App\Models;
 
-use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable
 {
+    use Notifiable;
     protected $table = "users";
 
     protected $fillable = [
         'uuid',
         'name',
+        'company_id',
+        'identify_provider',
+        'identify_id',
         'password',
         'phone',
         'email',
@@ -22,7 +25,6 @@ class User extends Authenticatable implements JWTSubject
         'status',
         'birth',
         'avatar',
-        'fb',
     ];
 
     /**
@@ -48,29 +50,9 @@ class User extends Authenticatable implements JWTSubject
     protected $attrubutes = [
         'password' => '',
         'phone' => '',
+        'company_id' => 0,
+        'identify_id' => '',
+        'identify_provider' => '',
+        'birth' => null,
     ];
-
-    public function company()
-    {
-        return $this->belongsToMany('App\Models\Company', 'user_company');
-    }
-
-     /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
-    public function getJWTCustomClaims()
-    {
-        return [];
-    }
 }

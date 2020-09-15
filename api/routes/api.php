@@ -13,45 +13,36 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix' => 'auth'], function () {
-    Route::get('/', 'AuthController@me');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-});
-
-
-
-$api = app('Dingo\Api\Routing\Router');
-$api->version('v1', ['middleware' => 'api'], function ($api) {
+Route::group(['middleware' => 'auth'], function () {
     // Customers
-    $api->get('customers/{customer_uuid}/', 'App\Http\Controllers\Api\Customers@show');
-    $api->post('customers/{customer_uuid}/', 'App\Http\Controllers\Api\Customers@store');
-    $api->put('customers/{customer_uuid}/', 'App\Http\Controllers\Api\Customers@update');
+    Route::get('customers/{customer_uuid}/', 'Customers@show');
+    Route::post('customers/{customer_uuid}/', 'Customers@store');
+    Route::put('customers/{customer_uuid}/', 'Customers@update');
 
     // Inventories
-    $api->get('customers/{customer_uuid}/inventories', 'App\Http\Controllers\Api\Inventories@index');
-    $api->put('customers/{customer_uuid}/inventories/status', 'App\Http\Controllers\Api\Inventories@update');
+    Route::get('customers/{customer_uuid}/inventories', 'Inventories@index');
+    Route::put('customers/{customer_uuid}/inventories/status', 'Inventories@update');
 
     // Note
-    $api->get('customers/{customer_uuid}/notes', 'App\Http\Controllers\Api\InvNotes@index');
-    $api->get('customers/{customer_uuid}/notes/{note_id}', 'App\Http\Controllers\Api\InvNotes@show');
-    $api->post('customers/{customer_uuid}/notes/', 'App\Http\Controllers\Api\InvNotes@store');
-    $api->put('customers/{customer_uuid}/notes/{note_id}', 'App\Http\Controllers\Api\InvNotes@update');
-    $api->delete('customers/{customer_uuid}/notes/{note_id}', 'App\Http\Controllers\Api\InvNotes@delete');
+    Route::get('customers/{customer_uuid}/notes', 'InvNotes@index');
+    Route::get('customers/{customer_uuid}/notes/{note_id}', 'InvNotes@show');
+    Route::post('customers/{customer_uuid}/notes/', 'InvNotes@store');
+    Route::put('customers/{customer_uuid}/notes/{note_id}', 'InvNotes@update');
+    Route::delete('customers/{customer_uuid}/notes/{note_id}', 'InvNotes@delete');
 
     // Transactions
-    $api->get('customers/{customer_uuid}/transactions', 'App\Http\Controllers\Api\Transactions@index');
-    $api->get('customers/{customer_uuid}/transactions/{id}/', 'App\Http\Controllers\Api\Transactions@detail');
-    $api->post('customers/{customer_uuid}/transactions/', 'App\Http\Controllers\Api\Transactions@store');
+    Route::get('customers/{customer_uuid}/transactions', 'Transactions@index');
+    Route::get('customers/{customer_uuid}/transactions/{id}/', 'Transactions@detail');
+    Route::post('customers/{customer_uuid}/transactions/', 'Transactions@store');
 
     // Menus
-    $api->get('menus', 'App\Http\Controllers\Api\Menus@index');
+    Route::get('menus', 'Menus@index');
 
     // Products
-    $api->get('products', 'App\Http\Controllers\Api\Products@index');
-    $api->get('products/{product_id}', 'App\Http\Controllers\Api\Products@show');
+    Route::get('products', 'Products@index');
+    Route::get('products/{product_id}', 'Products@show');
 });

@@ -2,7 +2,8 @@
 namespace App\Services;
 
 use Cache;
-use Laravel\Socialite\Two\User;
+use Illuminate\Support\Str;
+use Laravel\Socialite\Two\User as SocialUser;
 use App\Repositories\UserRepository;
 
 class UserService
@@ -13,37 +14,33 @@ class UserService
     }
 
     /**
-     * login
+     * getOrCreate
      *
      * @param Laravel\Socialite\Two\User $auth_user
      * @param string $identify_provider
      * @return void
      */
-    public function login(User $auth_user, $identify_provider)
+    public function getOrCreate(SocialUser $auth_user, $identify_provider)
     {
         if (empty($auth_user->email)) {
-            throw new InvalidArgumentException('email not found');
+            throw new InvalidArgumentException('使帳號缺乏帳戶辨識使用的 Eamil');
         }
-        $user = $this->repo->getUserByEmail($auth_user->email);
+        $user = \App\Models\User::where(['identify_id' => $auth_user->id])->first();
         if (! empty($user)) {
             return $user;
         }
 
-        $uuid = ord($identify_provider) . '-' . $auth_user->id;
-        $auth_user->nickname ?? '';
-        $auth_user->name ?? $email;
-        $avatar ?? $auth_user->avatar ?? config('user.default_avatar');
-
-        $user = $this->repo->create([
-            'uuid' => $uuid,
-            'name' => $auth_user->name,
+        return \App\Models\User::create([
+            'uuid' => Str::random(18),
+            'name' => $auth_user->name ?? explode('@', $auth_user->email)[0],
+            'email' => $auth_user->email,
+            'avatar' => $auth_user->avatar ?? config('user.default_avatar'),
             'password' => '',
             'phone' => '',
-            'email' => $auth_user->email,
+            'company_id' => 0,
+            'identify_id' => $auth_user->id,
+            'identify_provider' => $identify_provider,
             'birth' => null,
-            'avatar' => $auth_user->avatar,
         ]);
-
-        return $user;
     }
 }

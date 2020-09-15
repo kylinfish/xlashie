@@ -37,9 +37,8 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct(UserService $service)
+    public function __construct()
     {
-        $this->service = $service;
         $this->middleware('guest')->except('logout');
     }
 
@@ -75,16 +74,13 @@ class LoginController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function facebookCallback(Request $request)
+    public function facebookCallback(Request $request, UserService $service)
     {
         $user = Socialite::driver('facebook')->user();
-        $login_user = $this->service->login($user, 'facebook');
+        $login_user = $service->getOrCreate($user, 'facebook');
         $token = auth()->login($login_user, true);
 
-        $request->session()->put('access_token', $token);
-        $request->session()->put('expires_in', auth()->factory()->getTTL() * 60);
-
-        return redirect('user/dashboard');
+        return redirect('/');
     }
 
     /**
@@ -103,15 +99,14 @@ class LoginController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function googleCallback(Request $request)
+    public function googleCallback(Request $request, UserService $service)
     {
-        $user = Socialite::driver('google')->user();
-        $login_user = $this->service->login($user, 'google');
-        $token = auth()->login($login_user, true);
+        $google_user = Socialite::driver('google')->user();
 
-        $request->session()->put('access_token', $token);
-        $request->session()->put('expires_in', auth()->factory()->getTTL() * 60);
+        $login_user = $service->getOrCreate($google_user, 'google');
 
-        return redirect('user/dashboard');
+        auth()->login($login_user, true);
+
+        return redirect('/');
     }
 }

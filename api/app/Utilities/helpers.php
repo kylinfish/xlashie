@@ -10,13 +10,6 @@ if (!function_exists('user')) {
      */
     function user()
     {
-        // Get user from api/web
-        if (request()->is('api/*')) {
-            $user = app('Dingo\Api\Auth\Auth')->user();
-        } else {
-            $user = auth('web')->user();
-        }
-
-        return $user;
+        return auth()->user();
     }
 }

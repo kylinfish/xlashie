@@ -37,11 +37,12 @@ class CreateTables extends Migration
             $table->char('password', 60);
             $table->string('phone', 15);
             $table->string('email', 50);
+            $table->string('avatar', 256)->default('');
             $table->tinyInteger('gender')->default(0)->unsigned();
             $table->date('birth')->nullable();
-            $table->string('avatar', 256)->default('');
-            $table->string('line', 30)->default('');
-            $table->string('fb', 30)->default('');
+            $table->string('identify_provider', 15)->default('');
+            $table->string('identify_id', 30)->default('');
+
             $table->rememberToken();
 
             $table->timestamps();
@@ -88,7 +89,7 @@ class CreateTables extends Migration
 
             $table->integer('inventory_id')->default(0);
             $table->string('title', 25)->default('');
-            $table->text('note')->nullable();
+            $table->longText('note')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
