@@ -19,9 +19,8 @@ class Transactions extends BaseController
 
     public function index(Request $request, string $customer_uuid)
     {
-        $customer = Customer::where(["user_id" => auth()->user()->id, "uuid" => $customer_uuid])->first();
-        if (!$customer) {
-            return response()->json(["message" => "找不到該名顧客"], 404);
+        if (! $customer = u_customer($customer_uuid)) {
+            return response()->json(["message" => "查無此使用者"], 422);
         }
 
         return TicketResource::collection($customer->ticket()->orderby("id", "desc")->get());
@@ -34,18 +33,17 @@ class Transactions extends BaseController
         //$this->form->validate($params);
 
         $params["customer_uuid"] = $customer_uuid;
-        $this->service->createOrder(auth()->user()->company_id, $params);
+        $this->service->createOrder(user()->company_id, $params);
 
         return response()->json(["message" => "ok"], 200);
     }
 
     public function detail(Request $request, string $customer_uuid, string $id)
     {
-        $customer = Customer::where(["user_id" => auth()->user()->id, "uuid" => $customer_uuid])->first();
-        if (!$customer) {
-            return response()->json(["message" => "找不到該名顧客"], 404);
+        if (! $customer = u_customer($customer_uuid)) {
+            return response()->json(["message" => "查無此使用者"], 422);
         }
-        $order_items = $customer->ticket()->find($id)->order_items()->get();
-        return $order_items->toArray();
+
+        return $customer->ticket()->find($id)->order_items()->get();
     }
 }

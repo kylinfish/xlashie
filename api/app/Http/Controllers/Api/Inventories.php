@@ -12,15 +12,15 @@ use App\Http\Resources\CustomerInventoryResource;
 
 class Inventories extends BaseController
 {
-
     public function index(Request $request, string $customer_uuid)
     {
-        $customer = Customer::where(["user_id" => auth()->user()->id, "uuid" => $customer_uuid])->first();
-        if (!$customer) {
+        if (! $customer = u_customer($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
 
-        return CustomerInventoryResource::collection($customer->inventory()->orderBy('created_at', 'desc')->get());
+        return CustomerInventoryResource::collection(
+            $customer->inventory()->orderBy('created_at', 'desc')->get()
+        );
     }
 
     /**
@@ -30,7 +30,7 @@ class Inventories extends BaseController
     {
         $params = $request->only(["id", "note", "status", "use_at"]);
 
-        if (! $customer = Customer::where("uuid", $customer_uuid)->first()) {
+        if (! $customer = u_customer($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
         $customer->inventory()->find($params["id"])->update($params);

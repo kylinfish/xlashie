@@ -12,15 +12,16 @@ use App\Http\Resources\CustomerResource;
 
 class Customers extends \App\Http\Controllers\Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return CustomerResource::collection(Customer::where("user_id", auth()->user()->id));
+        $limit = request('limit', 5);
+        $customers = Customer::where("user_id", user()->id)->get();
+        return CustomerResource::collection($this->paginate($customers, $limit));
     }
 
     public function show(Request $request, string $customer_uuid)
     {
-        $customer = Customer::where(["user_id" => auth()->user()->id, "uuid" => $customer_uuid])->first();
-        if (!$customer) {
+        if (! $customer = u_customer($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
 
@@ -33,7 +34,7 @@ class Customers extends \App\Http\Controllers\Controller
 
         $this->form->validate($params);
 
-        $params["user_id"] = auth()->user()->id;
+        $params["user_id"] = user()->id;
 
         $customer = $this->service->createCustomer($params);
 
@@ -47,7 +48,7 @@ class Customers extends \App\Http\Controllers\Controller
 
         $form->validate($params);
 
-        if (! $customer = Customer::where("uuid", $customer_uuid)->first()) {
+        if (! $customer = u_customer($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
 

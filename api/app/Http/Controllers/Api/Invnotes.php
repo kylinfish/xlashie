@@ -15,8 +15,7 @@ class Invnotes extends BaseController
 
     public function index(Request $request, string $customer_uuid)
     {
-        $customer = Customer::where(["user_id" => auth()->user()->id, "uuid" => $customer_uuid])->first();
-        if (!$customer) {
+        if (! $customer = u_customer($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
 
@@ -25,8 +24,7 @@ class Invnotes extends BaseController
 
     public function show(Request $request, string $customer_uuid, string $note_id)
     {
-        $customer = Customer::where(["user_id" => auth()->user()->id, "uuid" => $customer_uuid])->first();
-        if (!$customer) {
+        if (! $customer = u_customer($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
         $note = $customer->notes()->find($note_id);
@@ -37,8 +35,7 @@ class Invnotes extends BaseController
     {
         $params = $request->only(["customer_id", "title", "inventory_id", "note"]);
 
-
-        if (! $customer = Customer::where(["user_id" => auth()->user()->id, "uuid" => $customer_uuid])->first()) {
+        if (! $customer = u_customer($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
         InvNote::create([
@@ -55,7 +52,7 @@ class Invnotes extends BaseController
     {
         $params = $request->only(["customer_id", "inventory_id", "note"]);
 
-        if (! $customer = Customer::where(["user_id" => auth()->user()->id, "uuid" => $customer_uuid])->first()) {
+        if (! $customer = u_customer($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
 
@@ -65,7 +62,7 @@ class Invnotes extends BaseController
 
     public function delete(Request $request, string $customer_uuid, string $note_id)
     {
-        if (! $customer = Customer::where(["user_id" => auth()->user()->id, "uuid" => $customer_uuid])->first()) {
+        if (! $customer = u_customer($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
 

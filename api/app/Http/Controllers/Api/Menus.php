@@ -6,9 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller as BaseController;
 
-use App\Models\Customer;
 use App\Models\Menu;
-use App\Models\Company;
 use App\Services\MenuService;
 use App\Http\Resources\MenuResource;
 
@@ -19,10 +17,9 @@ class Menus extends BaseController
         $this->service = $service;
     }
 
-
     public function index(Request $request)
     {
-        $menus = Menu::where(["company_id" => auth()->user()->company_id])
+        $menus = Menu::where(["company_id" => user()->company_id])
             ->with(["sub_menus", "product", "sub_menus.product"])
             ->orderBy("created_at", "DESC");
         return MenuResource::collection($menus->get());
@@ -30,9 +27,7 @@ class Menus extends BaseController
 
     public function show(Request $request, String $menu_id)
     {
-        $this->form->validate(['uuid' => $menu_id]);
-
-        $menu = Menu::where(["company_id" => auth()->user()->company_id, "id" => $menu_id])
+        $menu = Menu::where(["id" => $menu_id, "company_id" => user()->company_id])
             ->with(["sub_menus", "product", "sub_menus.product"])->first();
         if (!$menu) {
             return response()->json(["message" => "找不到該菜單資訊"], 404);

@@ -19,6 +19,7 @@ Route::middleware('auth')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => 'auth'], function () {
     // Customers
+    Route::get('customers/', 'Customers@index');
     Route::get('customers/{customer_uuid}/', 'Customers@show');
     Route::post('customers/{customer_uuid}/', 'Customers@store');
     Route::put('customers/{customer_uuid}/', 'Customers@update');
@@ -41,6 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Menus
     Route::get('menus', 'Menus@index');
+    Route::get('menus/{menu_id}', 'Menus@show');
 
     // Products
     Route::get('products', 'Products@index');
