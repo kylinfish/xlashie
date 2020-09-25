@@ -17,7 +17,6 @@ class UserSeeder extends Seeder
 
         for ($i = 0; $i < 10; $i++) {
             DB::table('users')->insert([
-                'company_id' => $i +1,
                 'uuid' => Str::random(18),
                 'gender' => random_int(0, 3),
                 'name' => substr($faker->name, 0, 20),

@@ -55,4 +55,9 @@ class User extends Authenticatable
         'identify_provider' => '',
         'birth' => null,
     ];
+
+    public function company()
+    {
+        return $this->hasOne('App\Models\Company', 'owner_id', 'company_id');
+    }
 }

@@ -31,7 +31,7 @@ class CreateTables extends Migration
         Schema::create('users', function($table) {
             $table->increments('id')->unsigned();
 
-            $table->integer('company_id')->unsigned();
+            $table->integer('company_id')->unsigned()->default(0);
             $table->string('uuid', 40);
             $table->string('name', 20);
             $table->char('password', 60);
@@ -53,6 +53,26 @@ class CreateTables extends Migration
             $table->index('phone');
         });
 
+        Schema::create('companies', function($table) {
+            $table->increments('id')->unsigned();
+
+            $table->integer('owner_id')->unsigned();
+            $table->string('name', 20);
+            $table->string('en_name', 30);
+            $table->string('phone', 15)->default('');
+            $table->string('description', 256)->default('');
+            $table->string('photo', 256)->default('');
+            $table->string('business_time', 200)->default('');
+            $table->string('ticket_title', 5)->default('');
+            $table->tinyInteger('ticket_start_at')->default(0);
+            $table->timestamps();
+
+            // index
+            $table->unique('en_name');
+            $table->unique('owner_id');
+
+        });
+
         Schema::create('customers', function($table) {
             $table->increments('id')->unsigned();
 
@@ -70,6 +90,8 @@ class CreateTables extends Migration
             $table->string('line', 50)->default('');
             $table->string('fb', 50)->default('');
             $table->string('address', 150)->default('');
+            $table->string('identify_provider', 15)->default('');
+            $table->string('identify_id', 30)->default('');
             $table->text('note_1')->nullable();
             $table->text('note_2')->nullable();
 
@@ -96,16 +118,6 @@ class CreateTables extends Migration
 
             // index
             $table->index(['company_id', 'customer_id', 'inventory_id']);
-        });
-
-        Schema::create('companies', function($table) {
-            $table->increments('id')->unsigned();
-
-            $table->string('name', 50);
-            $table->boolean('enabled')->default(1);
-
-            $table->timestamps();
-            $table->softDeletes();
         });
 
         Schema::create('discounts', function (Blueprint $table) {
