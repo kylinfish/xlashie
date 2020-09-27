@@ -9,7 +9,7 @@
                 <div class="header-body text-center mb-7">
                     <div class="row justify-content-center">
                         <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-                            <h1 class="text-white">加入 Venus</h1>
+                            <h1 class="text-white">{{ $company->name }} </h1>
                         </div>
                     </div>
                 </div>
@@ -28,14 +28,18 @@
                 <div class="col-lg-6 col-md-8">
                     <div class="card bg-secondary border-0">
                         <div class="card-header bg-transparent pb-5">
-                            <div class="text-muted text-center mt-2 mb-4"><small>使用第三方註冊，開始你的 Venus 使用體驗吧</small></div>
+                            <div class="text-muted text-center mt-2 mb-5">
+                                <p>使用第三方社群登入在</p>
+                                <p class="pt-1 pb-1 h3  ">{{ $company->name}}</p>
+                                <p>建立會員資料吧 !</p>
+                            </div>
                             <div class="text-center">
                                 <a href="/" class="btn btn-neutral btn-icon mr-4">
                                     <span class="btn-inner--icon"><img
                                             src="../../assets/img/icons/common/github.svg"></span>
                                     <span class="btn-inner--text">Facebook</span>
                                 </a>
-                                <a href="/" class="btn btn-neutral btn-icon">
+                                <a href="/customer/register/google/{{$company->en_name}}" class="btn btn-neutral btn-icon">
                                     <span class="btn-inner--icon"><img
                                             src="../../assets/img/icons/common/google.svg"></span>
                                     <span class="btn-inner--text">Google</span>

@@ -27,7 +27,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group-sm">
-                                    <label class="form-control-label" for="gender"">性別</label>
+                                    <label class="form-control-label" for="gender">性別</label>
                                             <input type=" text" class="form-control">
                                 </div>
                             </div>

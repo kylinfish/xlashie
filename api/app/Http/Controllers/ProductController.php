@@ -33,6 +33,12 @@ class ProductController extends \App\Http\Controllers\Controller
         return $this->response->item($products, new Transformer);
     }
 
+    public function create(Request $request)
+    {
+        $products = $this->repo->getProducts(user()->company_id);
+        return view('products.create', ['products' => $products]);
+    }
+
     public function store(Request $request)
     {
         $params = $request->only(["name", "avatar", "sale_price", "purchase_price", "description", "quantity", "sku"]);

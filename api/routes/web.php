@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/customers/search', 'CustomerController@search');
     Route::resource('customers', 'CustomerController');
     Route::resource('products', 'ProductController');
+    Route::get('products/create', 'ProductController@create');
     Route::resource('menus', 'MenuController');
 
 });
@@ -72,3 +73,24 @@ Route::get('/auth/login/', function () {
 })->name('auth.login');
 
 Route::get('/auth/logout/', 'Auth\LoginController@logout');
+
+Route::get('/company/{en_name}/landing', 'CompanyController@landing');
+Route::get('/company/{en_name}/login', 'CompanyController@landing');
+Route::get('/company/{en_name}/register', 'CompanyController@register');
+Route::post('/company/{en_name}/register', 'CompanyController@register');
+Route::get('/company/{en_name}/done', 'CompanyController@done');
+
+Route::prefix('customer/register')->group(function () {
+    Route::get('facebook/{id}', [
+        'uses' => 'CompanyController@facebook'
+    ]);
+    Route::get('facebook/callback', [
+        'uses' => 'CompanyController@facebookCallback'
+    ]);
+    Route::get('google/{id}', [
+        'uses' => 'CompanyController@google'
+    ]);
+    Route::get('google/callback', [
+        'uses' => 'CompanyController@googleCallback'
+    ]);
+});
