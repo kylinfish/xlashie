@@ -39,7 +39,7 @@
                                             src="../../assets/img/icons/common/github.svg"></span>
                                     <span class="btn-inner--text">Facebook</span>
                                 </a>
-                                <a href="/customer/register/google/{{$company->en_name}}" class="btn btn-neutral btn-icon">
+                                <a href="/login/google?type=customer&id={{$company->en_name}}" class="btn btn-neutral btn-icon">
                                     <span class="btn-inner--icon"><img
                                             src="../../assets/img/icons/common/google.svg"></span>
                                     <span class="btn-inner--text">Google</span>

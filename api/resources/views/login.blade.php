@@ -35,7 +35,7 @@
                                             src="../../assets/img/icons/common/github.svg"></span>
                                     <span class="btn-inner--text">Facebook</span>
                                 </a>
-                                <a href="/login/google" class="btn btn-neutral btn-icon">
+                                <a href="/login/google?type=user" class="btn btn-neutral btn-icon">
                                     <span class="btn-inner--icon"><img
                                             src="../../assets/img/icons/common/google.svg"></span>
                                     <span class="btn-inner--text">Google</span>

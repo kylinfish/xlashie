@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Customer;
+use App\Models\Company;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Socialite;
 
@@ -88,9 +91,11 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function google()
+    public function google(Request $request)
     {
-        return Socialite::driver('google')->redirect();
+        $query_str = base64_encode(json_encode($request->query()));
+
+        return Socialite::driver('google')->with(['state' => $query_str])->redirect();
     }
 
     /**
@@ -101,12 +106,38 @@ class LoginController extends Controller
      */
     public function googleCallback(Request $request, UserService $service)
     {
-        $google_user = Socialite::driver('google')->user();
+        $google_user = Socialite::driver('google')->stateless()->user();
 
-        $login_user = $service->getOrCreate($google_user, 'google');
+        $params = json_decode(base64_decode($request->state), true);
 
-        auth()->login($login_user, true);
+        $type = $params['type'] ?? 'user';
 
+
+        if ($type == 'user') {
+            $login_user = $service->getOrCreate($google_user, 'google');
+
+            auth()->login($login_user, true);
+        }
+
+        if ($type == 'customer') {
+            $company = Company::where('en_name', $params['id'])->first();
+
+            $customer = Customer::create([
+                'uuid' => Str::random(18),
+                'user_id' => $company->owner_id,
+                'name' => $google_user->name ?? explode('@', $google_user->email)[0],
+                'email' => $google_user->email,
+                'avatar' => $google_user->avatar ?? config('user.default_avatar'),
+                'password' => '',
+                'phone' => '',
+                'company_id' => $company->id,
+                'identify_id' => $google_user->id,
+                'identify_provider' => 'google',
+                'birth' => null,
+            ]);
+
+            return redirect("/company/{$company->en_name}/register?uuid={$customer->uuid}");
+        }
         return redirect('/');
     }
 }
