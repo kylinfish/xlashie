@@ -21,10 +21,17 @@ class CompanyController extends \App\Http\Controllers\Controller
 
     public function register(Request $request, string $en_name)
     {
-        if (!$company = Company::where('en_name', $en_name)->first()) {
+        if ($request->isMethod('post')) {
+            $params = $request->only(["name", "cellphone", "email", "uuid", "birth"]);
+            if ($customer = Customer::where('uuid', $params['uuid'])->first()) {
+                $customer->update($params);
+            }
+            return redirect("/company/{$en_name}/done");
         }
 
-        return view('companies.register', compact('company'));
+        $company = Company::where('en_name', $en_name)->first();
+        $customer = Customer::where('uuid', $request->uuid)->first();
+        return view('companies.register', compact('company', 'customer'));
     }
 
     public function done(Request $request, string $en_name)

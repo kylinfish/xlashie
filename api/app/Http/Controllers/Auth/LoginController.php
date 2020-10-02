@@ -130,7 +130,6 @@ class LoginController extends Controller
                 'avatar' => $google_user->avatar ?? config('user.default_avatar'),
                 'password' => '',
                 'phone' => '',
-                'company_id' => $company->id,
                 'identify_id' => $google_user->id,
                 'identify_provider' => 'google',
                 'birth' => null,

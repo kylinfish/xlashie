@@ -28,20 +28,14 @@
                     <div class="row justify-content-center mb-6">
                         <div class="col-lg-3 order-lg-2">
                             <div class="card-profile-image">
-                                <img src="../../assets/img/theme/team-3.jpg" class="rounded-circle">
+                                <img src="{{ $customer->avatar ?: '../../assets/img/theme/team-3.jpg'}}" class="rounded-circle">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label"><span class="text-danger">*</span> 名字</label>
-                            <input type="text" class="form-control" name="name" required>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <label class="form-control-label"><span class="text-danger">*</span> Email</label>
-                            <input type="email" class="form-control" name="email" required>
+                            <input type="text" class="form-control" name="name" value="{{ $customer->name ?: '' }}" required>
                         </div>
                     </div>
                     <div class="col-lg-12">
@@ -52,10 +46,17 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
+                            <label class="form-control-label">地址</label>
+                            <input type="text" class="form-control" name="address">
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
                             <label class="form-control-label">生日</label>
                             <input type="date" class="form-control" name="birth">
                         </div>
                     </div>
+                    <input type="hidden" name="uuid" value="{{ $customer->uuid ?? '' }}">
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary mt-4">送出</button>
                     </div>
