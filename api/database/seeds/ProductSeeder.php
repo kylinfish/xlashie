@@ -12,9 +12,9 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-       $this->products();
+       // $this->products();
        $this->menus();
-       $this->submenus();
+       // $this->submenus();
     }
 
     private function products()
@@ -22,7 +22,7 @@ class ProductSeeder extends Seeder
         DB::table('products')->insert([
             'company_id' => 1,
             'name' => "手部 - 指緣基礎修護 30 min",
-            'sale_price' => 400,
+            'price' => 400,
             'avatar' => "https://www.lardlabo.asia/wp-content/uploads/2019/11/lardlabo_skincarecream2.jpg",
             'status' => random_int(0, 3),
             'category_id' => random_int(0, 3),
@@ -34,7 +34,7 @@ class ProductSeeder extends Seeder
         DB::table('products')->insert([
             'company_id' => 1,
             'name' => "手部 - 精緻角質淨化護理 60 min",
-            'sale_price' => 700,
+            'price' => 700,
             'avatar' => "https://www.decor99.com/thumb420X420canvasgallery/images/dm/DM097.jpg",
             'status' => random_int(0, 3),
             'category_id' => random_int(0, 3),
@@ -128,64 +128,49 @@ class ProductSeeder extends Seeder
     {
         DB::table('menus')->insert([
             'company_id' => 1,
-            'name' => "手部護理組合 (修護 + 淨化 + 美白)",
-            'sale_price' => 2300,
-            'purchase_price' => 2500,
-            'item_type' => 1,
-            'has_submenu' => 1,
+            'name' => "手部護理組合",
+            'description' =>  "(修護 + 淨化 + 美白)",
+            'price' => 2300,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
 
         DB::table('menus')->insert([
             'company_id' => 1,
-            'product_id' => 0,
-            'name' => "足部護理組合 (修護 + 淨化 + 美白)",
-            'sale_price' => 3000,
-            'purchase_price' => 3350,
-            'item_type' => 1,
-            'has_submenu' => 1,
+            'name' => "足部護理組合",
+            'description' => "(修護 + 淨化 + 美白)",
+            'price' => 3000,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
 
         DB::table('menus')->insert([
             'company_id' => 1,
-            'product_id' => 7,
             'name' => "日本凝膠指甲 - 透明凝膠",
-            'sale_price' => 1200,
-            'item_type' => 1,
+            'price' => "1200",
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
 
         DB::table('menus')->insert([
             'company_id' => 1,
-            'product_id' => 8,
+            'price' => "1200",
             'name' => "日本凝膠指甲 - 單色凝膠",
-            'sale_price' => 1400,
-            'item_type' => 1,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
 
         DB::table('menus')->insert([
             'company_id' => 1,
-            'product_id' => 9,
             'name' => "日本凝膠指甲 - 璀璨凝膠",
-            'sale_price' => 1600,
-            'item_type' => 1,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
 
         DB::table('menus')->insert([
             'company_id' => 1,
-            'product_id' => 7,
+            'price' => "1200",
             'name' => "日本凝膠指甲 - 透明凝膠 x 5",
-            'sale_price' => 5500,
-            'item_type' => 1,
-            'has_submenu' => 1,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);

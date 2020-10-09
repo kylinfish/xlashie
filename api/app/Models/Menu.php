@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Menu extends Model
 {
-    const ITEMTYPE_PURE_ITEM = 0;
-    const ITEMTYPE_WITH_SUB_MENUS = 1;
+    use SoftDeletes;
 
     protected $table = "menus";
 
@@ -20,14 +20,9 @@ class Menu extends Model
     protected $attrubutes = [];
 
     protected $dateFormat = 'Y-m-d H:i:s';
-    
-    public function sub_menus()
-    {
-        return $this->hasMany('App\Models\SubMenu', 'menu_id', 'id');
-    }
 
-    public function product()
+    public function company()
     {
-        return $this->hasOne('App\Models\Product', 'id', 'product_id');
+        return $this->belongsTo('App\Company', 'company_id');
     }
 }

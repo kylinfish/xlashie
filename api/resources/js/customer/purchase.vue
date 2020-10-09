@@ -50,8 +50,8 @@
                                         <div class="invalid-feedback">{{ validation.firstError('selectedQuantity') }}</div>
                                     </td>
                                     <td>
-                                        <input type="number" :class="['form-control text-center', {'is-invalid': validation.hasError('selectedSalePrice')}]" v-model="selectedSalePrice">
-                                        <div class="invalid-feedback">{{ validation.firstError('selectedSalePrice') }}</div>
+                                        <input type="number" :class="['form-control text-center', {'is-invalid': validation.hasError('selectedPrice')}]" v-model="selectedPrice">
+                                        <div class="invalid-feedback">{{ validation.firstError('selectedPrice') }}</div>
                                     </td>
                                     <td>
                                         <input type="number" disabled :class="'form-control text-center'" :value="selectedItemTotal">
@@ -82,7 +82,7 @@
                             <tr v-for="(row, index) in form.items" :index="index">
                                 <td class="text-center">{{ row.itemName }}</td>
                                 <td class="text-center">{{ row.quantity }}</td>
-                                <td class="text-center">{{ row.salePrice }}</td>
+                                <td class="text-center">{{ row.price }}</td>
                                 <td class="text-center">{{ row.itemTotal }}</td>
                                 <td class="text-center">
                                     <button class="btn btn-icon btn-outline-danger btn-sm" type="button" @click="onDeleteItem(index)" data-toggle="tooltip" title="刪除項目">
@@ -159,9 +159,9 @@ export default {
             payment: '現金',
             selectedMenuId: '',
             selectedMenuItem: {},
-            selectedSalePrice: '',
+            selectedPrice: '',
             selectedQuantity: '',
-            selectedItemType: 0,
+            selectedInitStatus: 0,
 
             menus: [],
             uuid: uuid,
@@ -174,7 +174,7 @@ export default {
     },
 
     computed: {
-        selectedItemTotal: vm => vm.selectedQuantity * vm.selectedSalePrice,
+        selectedItemTotal: vm => vm.selectedQuantity * vm.selectedPrice,
 
         finalPrice: vm => vm.totalPrice,
     },
@@ -193,7 +193,7 @@ export default {
             return InputValidator.value(value)
                 .integer().greaterThan(0).required('至少要 1 個');
         },
-        selectedSalePrice(value) {
+        selectedPrice(value) {
             return InputValidator.value(value)
                 .integer().greaterThan(0).required('正確的單價必須 > 0 元');
         },
@@ -278,10 +278,10 @@ export default {
                     const buyItem = {
                         "itemId": self.selectedMenuId,
                         "itemName": self.selectedMenuItem.name,
-                        "salePrice": self.selectedSalePrice,
+                        "price": self.selectedPrice,
                         "quantity": self.selectedQuantity,
                         "itemTotal": self.selectedItemTotal,
-                        "product_type": self.selectedItemType,
+                        "initStatus": self.selectedInitStatus,
                     }
 
                     self.form.items.push(buyItem);
@@ -289,7 +289,7 @@ export default {
                     self.inputErrs = {};
                     self.selectedMenuId = '';
                     self.selectedMenuItem = {};
-                    self.selectedSalePrice = '';
+                    self.selectedPrice = '';
                     self.selectedQuantity = '';
                     self.selectedItemTotal = '';
 
@@ -308,10 +308,10 @@ export default {
             })
 
             this.selectedMenuItem = item;
-            this.selectedSalePrice = item.sale_price;
+            this.selectedPrice = item.price;
             this.selectedQuantity = 1;
-            this.selectedItemTotal = item.sale_price;
-            this.selectedItemType = item.item_type;
+            this.selectedItemTotal = item.price;
+            this.selectedInitStatus = item.init_status;
         },
 
         updateTotalPrice() {

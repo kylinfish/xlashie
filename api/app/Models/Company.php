@@ -27,4 +27,9 @@ class Company extends Model
     {
         return $this->belongsTo('App\Models\User', 'owner_id', 'id');
     }
+
+    public function menu()
+    {
+        return $this->hasMany('App\Models\Menu', 'company_id', 'id')->orderBy('id', 'asc');
+    }
 }

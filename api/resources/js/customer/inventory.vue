@@ -115,10 +115,10 @@ export default {
                 .then((res) => {
                     let statusMap = {
                         0: 'badge-secondary',
-                        1: 'badge-success',
-                        2: 'badge-success',
-                        3: 'badge-warning',
-                        4: 'badge-secondary'
+                        1: 'badge-primary',
+                        2: 'badge-primary',
+                        3: 'badge-danger',
+                        4: 'badge-warning'
                     }
                     this.inventories = res.data.data
                     this.inventories.forEach((inventory) => {

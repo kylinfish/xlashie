@@ -29,16 +29,6 @@
                         </a>
                     </div>
                     <div class="col-lg-3">
-                        <a class="card card-lift--hover shadow border-0" href="/products/">
-                            <div class="card-body py-4 text-center">
-                                <div class="text-primary mb-4">
-                                    <i class="fas fa-4x fa-box-open"></i>
-                                </div>
-                                <h4 class="h2 text-primary text-uppercase">產品設定</h4>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3">
                         <a class="card card-lift--hover shadow border-0" href="/menus/">
                             <div class="card-body py-4 text-center">
                                 <div class="text-primary mb-4">
@@ -55,16 +45,6 @@
                                     <i class="fas fa-4x fa-chart-line"></i>
                                 </div>
                                 <h4 class="h2 text-primary text-uppercase">報表</h4>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3">
-                        <a class="card card-lift--hover shadow border-0" href="/calendar/">
-                            <div class="card-body py-4 text-center">
-                                <div class="text-primary mb-4">
-                                    <i class="fas fa-4x fa-calendar-alt"></i>
-                                </div>
-                                <h4 class="h2 text-primary text-uppercase">行事曆</h4>
                             </div>
                         </a>
                     </div>

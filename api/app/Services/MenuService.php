@@ -39,7 +39,7 @@ class MenuService
                 "product_id" => 0,
                 "name" => $data["name"],
                 "sale_price" => $data["sale_price"],
-                "purchase_price" => $data["purchase_price"],
+                "purchase_price" => $data["purchase_price"] ?? 0,
             ]);
         }
 
@@ -52,7 +52,7 @@ class MenuService
                 "product_id" => $product->id,
                 "name" => $product->name,
                 "sale_price" => $product->sale_price,
-                "purchase_price" => $product->purchase_price,
+                "purchase_price" => $data["purchase_price"] ?? 0,
             ]);
         }
 
@@ -64,7 +64,7 @@ class MenuService
             "name" => $data["name"],
             "sale_price" => $data["sale_price"],
             "has_submenu" => true,
-            "purchase_price" => $data["purchase_price"],
+            "purchase_price" => $data["purchase_price"] ?? 0,
         ]);
 
         $this->createSubMenus($menu, $data["sub_menus"]);
