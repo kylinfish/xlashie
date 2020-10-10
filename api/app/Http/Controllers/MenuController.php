@@ -10,8 +10,20 @@ use App\Services\MenuService;
 
 class MenuController extends Controller
 {
+    public function __construct()
+    {
+        // 要先有 Company 才能使用 Menu 功能
+        $this->middleware(function ($request, $next) {
+            if (! auth()->user()->company) {
+                return redirect('/company/create/');
+            }
+            return $next($request);
+        });
+    }
+
     public function index(Request $request)
     {
+
         $menus = user()->company->menu;
 
         return view('menus.index', ['menus' => $menus]);

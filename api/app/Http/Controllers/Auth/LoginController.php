@@ -117,6 +117,12 @@ class LoginController extends Controller
             $login_user = $service->getOrCreate($google_user, 'google');
 
             auth()->login($login_user, true);
+
+            if ($login_user->company_id) {
+                return redirect('/');
+            } else {
+                return redirect('/company/create/');
+            }
         }
 
         if ($type == 'customer') {
