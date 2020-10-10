@@ -33,7 +33,7 @@ class Transactions extends BaseController
         //$this->form->validate($params);
 
         $params["customer_uuid"] = $customer_uuid;
-        $this->service->createOrder(user()->company_id, $params);
+        $this->service->createOrder(user()->company->id, $params);
 
         return response()->json(["message" => "ok"], 200);
     }

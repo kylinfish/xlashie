@@ -39,7 +39,7 @@ class Invnotes extends BaseController
             return response()->json(["message" => "查無此使用者"], 422);
         }
         InvNote::create([
-            'company_id' => auth()->user()->company_id,
+            'company_id' => auth()->user()->company->id,
             'customer_id' => $customer->id,
             'note' => $params['note'],
             'inventory_id' => $params['inventory_id'] ?? 0,

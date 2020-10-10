@@ -52,8 +52,8 @@ class CustomerController extends \App\Http\Controllers\Controller
         }
 
         $inventories = $customer->inventory()->get();
-        $orders = Ticket::where(["company_id" => auth()->user()->company_id, "customer_id"=> $customer->id])->ordered();
-        $menus = Menu::where("company_id", auth()->user()->company_id)->get();
+        $orders = Ticket::where(["company_id" => auth()->user()->company->id, "customer_id"=> $customer->id])->ordered();
+        $menus = Menu::where("company_id", auth()->user()->company->id)->get();
 
         return view("customers.show", compact('customer', 'inventories', 'orders', 'menus'));
     }

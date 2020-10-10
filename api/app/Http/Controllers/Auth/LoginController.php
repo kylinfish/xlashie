@@ -118,7 +118,7 @@ class LoginController extends Controller
 
             auth()->login($login_user, true);
 
-            if ($login_user->company_id) {
+            if ($login_user->company) {
                 return redirect('/');
             } else {
                 return redirect('/company/create/');

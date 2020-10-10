@@ -46,7 +46,6 @@ class CompanyController extends \App\Http\Controllers\Controller
             'contact' => $params['contact'] ?? '',
             'description' => $params['description'] ?? '',
         ]);
-        user()->update(['company_id' => $company->id]);
 
         return redirect('/')->with(['alert' => 'success', 'message' => '新增成功，從新增你的 [服務項目] 開始吧']);
     }

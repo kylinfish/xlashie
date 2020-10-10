@@ -18,7 +18,7 @@ class Products extends \App\Http\Controllers\Controller
     public function index(Request $request)
     {
         $limit = request('limit', 5);
-        $products = Product::where('company_id', auth()->user()->company_id)->get();
+        $products = Product::where('company_id', auth()->user()->company->id)->get();
         $products = $this->paginate($products, $limit);
 
         return $products;
@@ -26,7 +26,7 @@ class Products extends \App\Http\Controllers\Controller
 
     public function show(Request $request, string $product_id)
     {
-        $product = Product::where(['id' => $product_id, 'company_id' => auth()->user()->company_id])->first();
+        $product = Product::where(['id' => $product_id, 'company_id' => auth()->user()->company->id])->first();
 
         if (!$product) {
             return $this->response(['message' => "查無此商品"]);

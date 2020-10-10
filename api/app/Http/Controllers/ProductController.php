@@ -18,14 +18,14 @@ class ProductController extends \App\Http\Controllers\Controller
 
     public function index(Request $request)
     {
-        $products = $this->repo->getProducts(user()->company_id);
+        $products = $this->repo->getProducts(user()->company->id);
 
         return view('products.index', ['products' => $products]);
     }
 
     public function show(Request $request, string $product_id)
     {
-        $products = $this->repo->getProduct(user()->company_id, $product_id);
+        $products = $this->repo->getProduct(user()->company->id, $product_id);
 
         if (!$products) {
             return response()->json(['message' => "查無此商品"], 404);
@@ -35,7 +35,7 @@ class ProductController extends \App\Http\Controllers\Controller
 
     public function create(Request $request)
     {
-        $products = $this->repo->getProducts(user()->company_id);
+        $products = $this->repo->getProducts(user()->company->id);
         return view('products.create', ['products' => $products]);
     }
 
@@ -45,7 +45,7 @@ class ProductController extends \App\Http\Controllers\Controller
 
         $this->form->validate($params);
 
-        $this->service->setCompanyId(user()->company_id);
+        $this->service->setCompanyId(user()->company->id);
 
         $product = $this->service->createProduct($params);
 
@@ -56,7 +56,7 @@ class ProductController extends \App\Http\Controllers\Controller
 
     public function delete(Request $request, int $product_id)
     {
-        $this->repo->deleteMyProduct(user()->company_id, $product_id);
+        $this->repo->deleteMyProduct(user()->company->id, $product_id);
 
         return response()->json(['message' => "產品刪除成功"], 200);
     }

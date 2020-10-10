@@ -50,7 +50,6 @@ class User extends Authenticatable
     protected $attrubutes = [
         'password' => '',
         'phone' => '',
-        'company_id' => 0,
         'identify_id' => '',
         'identify_provider' => '',
         'birth' => null,
@@ -58,6 +57,6 @@ class User extends Authenticatable
 
     public function company()
     {
-        return $this->hasOne('App\Models\Company', 'id', 'company_id');
+        return $this->hasOne('App\Models\Company', 'owner_id');
     }
 }
