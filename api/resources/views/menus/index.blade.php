@@ -12,6 +12,7 @@
 
         </div>
     </div>
+
     @if (\Session::has('alert'))
     <div class="alert alert-{{ \Session::get('alert') }} alert-dismissible fade show" role="alert">
         <span class="alert-text">{{ \Session::get('message') }}</span>
@@ -20,6 +21,7 @@
         </button>
     </div>
     @endif
+
     <div class="card">
         <!-- Card header -->
         <div class="card-header border-0">

@@ -4,20 +4,63 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Repositories\DiscountRepositoy;
+use App\Forms\CompanyForm;
 use App\Models\Company;
 use App\Models\Customer;
 use Socialite;
 
 class CompanyController extends \App\Http\Controllers\Controller
 {
+    public function show()
+    {
+        if ($company = user()->company or $company = Company::where('owner_id', user()->id)->first()) {
+            return view('companies.show', compact('company'));
+        }
+
+        return redirect('/company/create');
+    }
+
+    public function create()
+    {
+        if (user()->company or Company::where('owner_id', user()->id)->first()) {
+            return redirect('/')
+            ->with(['alert' => 'warning', 'message' => '您已經擁有屬於自己的店家']);
+        }
+        return view('companies.create');
+    }
+
+    public function store(Request $request, CompanyForm $form)
+    {
+        $params = $request->only(['name', 'account', 'contact', 'description']);
+        if ($errors = $form->validate($params)) {
+            return redirect()->back()
+            ->with(['alert' => 'warning', 'message' => '新增失敗'])
+            ->withErrors($errors)
+            ->withInput($request->all());
+        }
+
+        $company = Company::create([
+            'owner_id' => user()->id,
+            'name' => $params['name'],
+            'account' => $params['account'],
+            'contact' => $params['contact'] ?? '',
+            'description' => $params['description'] ?? '',
+        ]);
+        user()->update(['company_id' => $company->id]);
+
+        return redirect('/')->with(['alert' => 'success', 'message' => '新增成功，從新增你的 [服務項目] 開始吧']);
+    }
+
+
+    /* Ready for migrating to Customer/Folder */
     public function landing(Request $request, string $en_name)
     {
         if (!$company = Company::where('en_name', $en_name)->first()) {
-
         }
 
         return view('companies.landing', compact('company'));
     }
+
 
     public function register(Request $request, string $en_name)
     {

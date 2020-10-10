@@ -11,13 +11,8 @@ class Company extends Model
     protected $fillable = [
         'name',
         'owner_id',
-        'en_name',
-        'phone',
+        'account',
         'description',
-        'photo',
-        'business_time',
-        'ticket_title',
-        'ticket_start_at',
         'created_at',
         'updated_at',
         'deleted_at'

@@ -27,11 +27,15 @@ class BaseForm
      * @return void
      * @thorws Illuminate\Validation\ValidationException
      */
-    public function validate($input_data)
+    public function validate($input_data, bool $is_throw_exe = false)
     {
         $validator = \Validator::make($input_data, $this->validation_rules);
+
         if ($validator->fails()) {
-            throw new ValidationException($validator, $validator->errors());
+            if ($is_throw_exe) {
+                throw new ValidationException($validator, $validator->errors());
+            }
+            return $validator->errors();
         }
     }
 

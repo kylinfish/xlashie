@@ -57,18 +57,14 @@ class CreateTables extends Migration
             $table->increments('id')->unsigned();
 
             $table->integer('owner_id')->unsigned();
-            $table->string('name', 20);
-            $table->string('en_name', 30);
-            $table->string('phone', 15)->default('');
-            $table->string('description', 256)->default('');
-            $table->string('photo', 256)->default('');
-            $table->string('business_time', 200)->default('');
-            $table->string('ticket_title', 5)->default('');
-            $table->tinyInteger('ticket_start_at')->default(0);
+            $table->string('name', 30);
+            $table->string('account', 30);
+            $table->string('contact', 50)->default('');
+            $table->string('description', 100)->default('');
             $table->timestamps();
 
             // index
-            $table->unique('en_name');
+            $table->unique('account');
             $table->unique('owner_id');
 
         });

@@ -16,9 +16,12 @@ Route::middleware('auth')->group(function () {
         return view('welcome');
     });
 
-    Route::get('/company/', function () {
-        return view('companies.index');
-    });
+    Route::get('/company/', 'CompanyController@show');
+    Route::get('/company/create', 'CompanyController@create');
+    Route::post('/company/', 'CompanyController@store');
+
+
+
     Route::get('/dashboard/', function () {
         return view('dashboard');
     });
@@ -73,7 +76,6 @@ Route::get('/auth/login/', function () {
 })->name('auth.login');
 
 Route::get('/auth/logout/', 'Auth\LoginController@logout');
-
 Route::get('/company/{en_name}/landing', 'CompanyController@landing');
 Route::get('/company/{en_name}/login', 'CompanyController@landing');
 Route::get('/company/{en_name}/register', 'CompanyController@register');

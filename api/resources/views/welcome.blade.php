@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+@include('common.alert')
 
 <h1 class="text-center mt-3 mb-5">主選單</h1>
 
