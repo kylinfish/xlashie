@@ -50,8 +50,7 @@
                                         <div class="invalid-feedback">{{ validation.firstError('selectedQuantity') }}</div>
                                     </td>
                                     <td>
-                                        <input type="number" :class="['form-control text-center', {'is-invalid': validation.hasError('selectedPrice')}]" v-model="selectedPrice">
-                                        <div class="invalid-feedback">{{ validation.firstError('selectedPrice') }}</div>
+                                        <input type="number" :class="['form-control text-center']" v-model="selectedPrice">
                                     </td>
                                     <td>
                                         <input type="number" disabled :class="'form-control text-center'" :value="selectedItemTotal">
@@ -192,10 +191,6 @@ export default {
         selectedQuantity(value) {
             return InputValidator.value(value)
                 .integer().greaterThan(0).required('至少要 1 個');
-        },
-        selectedPrice(value) {
-            return InputValidator.value(value)
-                .integer().greaterThan(0).required('正確的單價必須 > 0 元');
         },
     },
 
