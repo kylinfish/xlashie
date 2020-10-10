@@ -10,6 +10,7 @@ use App\Repositories\CustomerInventoryRepository;
 use App\Models\Menu;
 use App\Models\Ticket;
 use App\Models\Customer;
+use Illuminate\Support\Str;
 use App\Transformers\Customer as Transformer;
 
 class CustomerController extends \App\Http\Controllers\Controller
@@ -58,19 +59,38 @@ class CustomerController extends \App\Http\Controllers\Controller
         return view("customers.show", compact('customer', 'inventories', 'orders', 'menus'));
     }
 
-    public function store(Request $request)
+    public function create(Request $request)
     {
-        $params = $request->only(["name", "phone", "email", "fb", "line", "birth", "note"]);
+        return view("customers.create");
+    }
 
-        $this->form->validate($params);
-
-        $params["user_id"] = auth()->user()->id;
-
-        $customer = $this->service->createCustomer($params);
-
-        return $this->response->item($customer, new Transformer)->setMeta([
-            "message" => "{$customer->name} 新增成功",
+    public function store(Request $request, CustomerForm $form)
+    {
+        $params = $request->only(["name", "phone", "cellphone", "email",
+        "birth", "note_1", "note_2", "gender", "address"]);
+        if ($errors = $form->validate($params)) {
+            return redirect()->back()
+            ->with(['alert' => 'warning', 'message' => '新增失敗'])
+            ->withErrors($errors)
+            ->withInput($request->all());
+        }
+        # XXX: Set default value for Birth/Email fields.
+        $customer = Customer::create([
+            'uuid' => Str::random(18),
+            'user_id' => auth()->user()->id,
+            'name' => $params["name"] ?? '',
+            'phone' => $params["phone"] ?? '',
+            'cellphone' => $params["cellphone"] ?? '',
+            'birth' => empty($params["birth"]) ? null : $params["birth"],
+            'email' => $params["email"] ?? '',
+            'note_1' => $params["note_1"] ?? null,
+            'note_2' => $params["note_2"] ?? null,
+            'gender' => $params["gender"] ?? 0,
+            'address' => $params["address"] ?? '',
         ]);
+
+        return redirect("/customers/{$customer->uuid}")
+        ->with(['alert' => 'success', 'message' => '新增成功，開始記錄客戶歷程吧']);
     }
 
     public function search(Request $request)

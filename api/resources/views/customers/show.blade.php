@@ -1,7 +1,7 @@
 @extends('layouts.nosidebar')
 @section('content')
 <link rel="stylesheet" href="{{ asset('/assets/vendor/quill/dist/quill.core.css') }}" type="text/css">
-
+@include('common.alert')
 <div class="row">
     <div class="col-md-3">
         <a href="/customers/" class="btn btn-block btn-outline-default mt--2 mb-2">回到客戶清單</a>

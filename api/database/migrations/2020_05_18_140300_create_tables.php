@@ -74,17 +74,13 @@ class CreateTables extends Migration
 
             $table->integer('user_id')->unsigned();
             $table->char('uuid', 18);
-            $table->string('name', 20);
+            $table->string('email', 50)->default('');
+            $table->string('name', 20)->default('');
             $table->string('phone', 10)->default('');
             $table->string('cellphone', 10)->default('');
-            $table->string('email', 50);
-            $table->string('tax_number')->default(''); // 統一編號
             $table->date('birth')->nullable();
             $table->tinyInteger('gender')->default(0)->unsigned();
-            $table->tinyInteger('discount_id')->default(0)->unsigned();
             $table->string('avatar', 256)->default('');
-            $table->string('line', 50)->default('');
-            $table->string('fb', 50)->default('');
             $table->string('address', 150)->default('');
             $table->string('identify_provider', 15)->default('');
             $table->string('identify_id', 30)->default('');
@@ -96,7 +92,7 @@ class CreateTables extends Migration
 
             // index
             $table->unique(['user_id', 'uuid']);
-            $table->unique('email');
+            $table->index('email');
             $table->index('phone');
         });
 
