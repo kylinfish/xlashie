@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Forms\CustomerForm;
 use App\Services\CustomerService;
-use App\Repositories\TicketRepository;
-use App\Repositories\CustomerRepository;
-use App\Repositories\CustomerInventoryRepository;
 use App\Models\Menu;
 use App\Models\Ticket;
 use App\Models\Customer;
@@ -15,24 +12,8 @@ use App\Transformers\Customer as Transformer;
 
 class CustomerController extends \App\Http\Controllers\Controller
 {
-    public function __construct(
-        TicketRepository $order_repo,
-        CustomerRepository $customer_repo,
-        CustomerInventoryRepository $ci_repo,
-        CustomerForm $form,
-        CustomerService $service
-    ) {
-        $this->form = $form;
-        $this->service = $service;
-        $this->repo = $customer_repo;
-        $this->ci_repo = $ci_repo;
-        $this->order_repo = $order_repo;
-    }
-
-    public function index(Request $request)
+    public function index(Request $request, CustomerForm $form)
     {
-        $this->form->validate($request->all());
-
         $limit = request('limit', 10);
         $customers = Customer::where("user_id", auth()->user()->id)->orderBy("id", "ASC")->get();
         $customers = $this->paginate($customers, $limit);
@@ -42,14 +23,9 @@ class CustomerController extends \App\Http\Controllers\Controller
 
     public function show(Request $request, string $customer_uuid)
     {
-
-        $this->form->validate(['uuid' => $customer_uuid]);
-
-        $customer = Customer::where(["user_id" => auth()->user()->id, "uuid" => $customer_uuid])->first();
-
-        if ($customer == null) {
-            ### FIXME
-            return redirect()->route("customers.index");
+        if (!$customer = Customer::where(["user_id" => auth()->user()->id, "uuid" => $customer_uuid])->first()) {
+            return redirect()->route("customers.index")
+            ->with(['alert' => 'warning', 'message' => "查無此使用者 - {$customer_uuid}"]);
         }
 
         $inventories = $customer->inventory()->get();
@@ -96,9 +72,8 @@ class CustomerController extends \App\Http\Controllers\Controller
     public function search(Request $request)
     {
         $limit = request('limit', 10);
-        $user_id = user()->id;
         $keyword = $request['q'];
-        $customers = Customer::where('user_id', user()->id)
+        $customers = Customer::where('user_id', auth()->user()->id)
             ->where(function($q) use ($keyword ){
                 $q->where('email', 'like', "%{$keyword}%")
                 ->orWhere('phone', 'like', "%{$keyword}%")
@@ -108,6 +83,9 @@ class CustomerController extends \App\Http\Controllers\Controller
 
         $customers = $this->paginate($customers, $limit);
 
-        return view("customers.index", compact("customers"));
+        return view("customers.index", [
+            'customers' => $customers,
+            'alert' => 'info', 'message' => "查詢: {$keyword}"
+        ]);
     }
 }

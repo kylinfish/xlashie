@@ -8,6 +8,7 @@
         <a href="/customers/create" class="btn btn-primary">新增客戶</a>
     </div>
 </div>
+@include('common.alert')
 <div class="card">
     <!-- Card header -->
     <div class="card-header border-0">
