@@ -1,4 +1,4 @@
-/api/public/js/app.js
+./api/public/js/app.js
 /.idea
 Homestead.json
 Homestead.yaml
