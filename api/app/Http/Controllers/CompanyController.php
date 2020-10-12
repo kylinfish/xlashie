@@ -47,7 +47,7 @@ class CompanyController extends \App\Http\Controllers\Controller
             'description' => $params['description'] ?? '',
         ]);
 
-        return redirect('/')->with(['alert' => 'success', 'message' => '新增成功，從新增你的 [服務項目] 開始吧']);
+        return redirect('/menus/')->with(['alert' => 'success', 'message' => '新增成功，從新增你的 [服務項目] 開始吧']);
     }
 
 

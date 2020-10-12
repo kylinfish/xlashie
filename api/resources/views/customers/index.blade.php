@@ -25,7 +25,7 @@
                     <th class="text-enter">電話 2</th>
                     <th class="text-enter">Email</th>
                     <th class="text-enter">建立時間</th>
-                    <th class="text-enter"></th>
+                    <th class="text-enter">操作</th>
                 </tr>
             </thead>
             <tbody class="list">
@@ -46,7 +46,6 @@
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                 <a class="dropdown-item" href="#" data-toggle="sweet-alert"
                                     data-sweet-alert="confirm">刪除</a>
-                                <a class="dropdown-item" href="#">編輯</a>
                             </div>
                         </div>
                     </td>

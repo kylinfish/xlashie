@@ -4,23 +4,23 @@
         <div class="row">
             <div class="col-sm-12 mb-4">
                 <div class="row">
-                    <div class="form-group col-md-4">
+                    <div class="col-md-4">
                         <label for="">訂單流水號</label>
-                        <input type="text" :class="['form-control', {'is-invalid': validation.hasError('ticket')}]" v-model="ticket" required>
+                        <input type="text" :class="['form-control form-control-sm', {'is-invalid': validation.hasError('ticket')}]" v-model="ticket" required>
                         <div class="invalid-feedback">{{ validation.firstError('ticket') }}</div>
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="col-md-4">
                         <label>付費方式</label>
-                        <select class="form-control" v-model="payment">
+                        <select class="form-control form-control-sm" v-model="payment">
                             <option value="現金">現金</option>
                             <option value="轉帳/匯款">轉帳/匯款</option>
                             <option value="預扣">預扣</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="col-md-4">
                         <label>訂單日期</label>
                         <div class="form-group">
-                            <input class="form-control" id="datetime" type="datetime-local" step="1" v-model="transaction_at">
+                            <input class="form-control form-control-sm" id="datetime" type="datetime-local" step="1" v-model="transaction_at">
                         </div>
                     </div>
                     <div class="form-group col-md">
@@ -58,7 +58,7 @@
                                     </td>
                                     <td class="text-center">
                                         <button class="btn btn-icon btn-outline-success btn-lg" type="button" @click="onAddItem" data-toggle="tooltip" title="選擇品項並新增">
-                                            <i class="fa fa-plus"></i>
+                                            加入
                                         </button>
                                     </td>
                                 </tr>
@@ -66,8 +66,9 @@
                         </table>
                     </div>
                 </div>
-                <div class="form-group" v-show="form.items.length >0">
-                    <table class="table table-bordered">
+                <div class="form-group">
+                <label class="form-control-label">購買清單</label>
+                    <table class="table table-bordered" v-show="form.items.length >0">
                         <thead class="thead-light">
                             <tr>
                                 <th class="text-center" scope="col">品項</th>
@@ -116,17 +117,17 @@
                 </div>
 
                 <div class="form-group"  v-show="form.items.length >0">
-                    <label>消費備註</label>
+                    <label class="form-control-label">消費備註</label>
                     <textarea class="form-control" rows="2" v-model="note"></textarea>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer"  v-show="form.items.length >0">
                     <div class="row float-right">
                         <div class="col-md-12">
                             <a href="#" class="btn btn-icon btn-secondary">
                                 <i class="fa fa-times pr-2"></i>取消
                             </a>
                             <button type="submit" class="btn btn-icon btn-success">
-                                <i class="fa fa-save pr-2"></i>儲存</span>
+                                <i class="fa fa-save pr-2"></i>新增交易</span>
                             </button>
                         </div>
                     </div>

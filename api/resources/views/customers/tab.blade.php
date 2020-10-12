@@ -2,7 +2,7 @@
     <li data-toggle="tab" role="tablist" class="nav-item active">
         <a data-toggle="tab" role="tablist" href="#inventory" class="nav-link active">
             <div>
-                <span><i class="fa fa-shopping-bag pr-2"></i>庫存清單</span>
+                <span><i class="fa fa-shopping-bag pr-2"></i>已購項目</span>
             </div>
         </a>
     </li>
@@ -10,7 +10,7 @@
     <li data-toggle="tab" role="tablist" class="nav-item active">
         <a data-toggle="tab" role="tablist" href="#purchase" class="nav-link">
             <div>
-                <span><i class="ni ni-cart pr-2"></i>購買</span>
+                <span><i class="ni ni-cart pr-2"></i>購買交易</span>
             </div>
         </a>
     </li>

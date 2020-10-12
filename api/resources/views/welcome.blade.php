@@ -20,22 +20,22 @@
                         </a>
                     </div>
                     <div class="col-lg-3">
+                        <a class="card card-lift--hover shadow border-0" href="/menus/">
+                            <div class="card-body py-4 text-center">
+                                <div class="text-primary mb-4">
+                                    <i class="fas fa-4x fa-bars"></i>
+                                </div>
+                                <h4 class="h2 text-primary text-uppercase">營業項目</h4>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3">
                         <a class="card card-lift--hover shadow border-0" href="/customers/">
                             <div class="card-body py-4 text-center">
                                 <div class="text-primary mb-4">
                                     <i class="fas fa-4x fa-users"></i>
                                 </div>
                                 <h4 class="h2 text-primary text-uppercase">客戶管理</h4>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3">
-                        <a class="card card-lift--hover shadow border-0" href="/menus/">
-                            <div class="card-body py-4 text-center">
-                                <div class="text-primary mb-4">
-                                    <i class="fas fa-4x fa-bars"></i>
-                                </div>
-                                <h4 class="h2 text-primary text-uppercase">服務項目</h4>
                             </div>
                         </a>
                     </div>
