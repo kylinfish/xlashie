@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                <label class="form-control-label">購買清單</label>
+                <label class="form-control-label">購買清單: </label>
                     <table class="table table-bordered" v-show="form.items.length >0">
                         <thead class="thead-light">
                             <tr>
@@ -126,7 +126,7 @@
                             <a href="#" class="btn btn-icon btn-secondary">
                                 <i class="fa fa-times pr-2"></i>取消
                             </a>
-                            <button type="submit" class="btn btn-icon btn-success">
+                            <button type="submit" class="btn btn-icon btn-primary">
                                 <i class="fa fa-save pr-2"></i>新增交易</span>
                             </button>
                         </div>

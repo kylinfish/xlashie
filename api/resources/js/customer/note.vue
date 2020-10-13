@@ -77,18 +77,17 @@
       <div v-show="! isShowCreatePanel">
         <div v-if="showContent !== ''" class="col">
           <div class="mb-2">
-
             <button @click="onEdit" class="btn btn-warning btn-sm col-md-2 mt--1 float-right">修改</button>
             <h3>
               {{ showTitle }}
               <span class="badge badge-info mb-1 ml-4">{{ showInventory }}</span>
             </h3>
           </div>
-          <div class="form-group alert alert-secondary">
+          <div class="form-group bg-secondary">
             <span v-html="showContent"></span>
           </div>
         </div>
-        <div v-else class="alert bg-yellow text-center">
+        <div v-else class="jumbotron bg-yellow text-center">
           <span class="alert-icon">
             <i class="fa fa-edit"></i>
           </span>

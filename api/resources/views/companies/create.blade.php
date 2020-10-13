@@ -14,7 +14,7 @@
                 <div class="modal-body">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label class="form-control-label"><span class="text-danger">*</span> 名稱</label>
+                            <label class="form-control-label"><span class="text-danger">*</span> 公司名稱</label>
                             @error('name')
                                 <span class="text-danger float-right">{{ $message }}</span>
                             @enderror
@@ -25,7 +25,11 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label class="form-control-label"><span class="text-danger">*</span> 英文帳號</label>
+                            <label class="form-control-label"><span class="text-danger">*</span> 英文公司帳號</label>
+                            <label class="form-control-label" for="email" data-toggle="tooltip" data-placement="right"
+                                title="帳號之後不能更動">
+                                    <span class="text-info"><i class="fa fa-info-circle"></i></span>
+                                </label>
                             @error('account')
                                 <span class="text-danger float-right">{{ $message }}</span>
                             @enderror
@@ -52,9 +56,7 @@
                                 <span class="text-danger float-right">{{ $message }}</span>
                             @enderror
                             <textarea class="form-control @error('description') is-invalid @enderror"
-                            maxlength="100" rows="3" name="description" placeholder="店家或服務描述 (最多 100 字)"
-                            value="{{ old('description') }}">
-                            </textarea>
+                            maxlength="100" rows="4" name="description" placeholder="店家或服務描述 (最多 100 字)">{{ old('description') }}</textarea>
                         </div>
                     </div>
                 </div>

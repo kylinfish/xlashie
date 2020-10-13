@@ -8,7 +8,7 @@
             <h1>營業項目管理</h1>
         </div>
         <div class="col-lg-6 col-5 text-right">
-            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#create-menu-modal">新增菜單</a>
+            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#create-menu-modal">新增</a>
 
         </div>
     </div>

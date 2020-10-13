@@ -85,7 +85,7 @@
                         <i class="fa fa-pen pr-2"></i>修改檔案</span>
                     </button>
                     <button type="submit" class="btn btn-icon btn-success" v-show="isSubmitShow">
-                        <i class="fa fa-save pr-2"></i>送出</span>
+                        <i class="fa fa-save pr-2"></i>更新</span>
                     </button>
                 </div>
             </div>
