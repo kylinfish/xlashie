@@ -14,7 +14,12 @@ class CustomerResource extends JsonResource
      */
     public function toArray($request)
     {
-        $datetime = new \DateTime($this->birth);
+        $birth = null;
+        if ($this->birth) {
+            $datetime = new \DateTime($this->birth);
+            $birth = date_format($datetime, "Y-m-d");
+        }
+
         return [
             "uuid" => $this->uuid,
             "name" => $this->name,
@@ -23,7 +28,7 @@ class CustomerResource extends JsonResource
             "cellphone" => $this->cellphone,
             "gender" => $this->gender,
             "updated_at" => $this->updated_at->format("Y-m-d H:i:s"),
-            "birth" => date_format($datetime, "Y-m-d"),
+            "birth" => $birth,
             "address" => $this->address,
             "note_1" => $this->note_1,
             "note_2" => $this->note_2,
