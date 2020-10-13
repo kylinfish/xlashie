@@ -77,6 +77,7 @@ class CustomerController extends \App\Http\Controllers\Controller
             ->where(function($q) use ($keyword ){
                 $q->where('email', 'like', "%{$keyword}%")
                 ->orWhere('phone', 'like', "%{$keyword}%")
+                ->orWhere('name', 'like', "%{$keyword}%")
                 ->orWhere('cellphone', 'like', "%{$keyword}%");
 
             })->get();
