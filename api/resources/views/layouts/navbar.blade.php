@@ -1,7 +1,7 @@
 <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <a href="/" class="text-white h2 mr-3 mt-2">Venus CRM </a>
+            <a href="/" class="text-white h2 mr-3 mt-2">Venus SOHO </a>
             <!-- Search form -->
             <form class="navbar-search navbar-search-light form-inline mr-sm-3" action="/customers/search" method="GET">
                 <div class="form-group mb-0">
