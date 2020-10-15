@@ -8,8 +8,9 @@
                 <div class="header-body text-center mb-lg-7 mb-md-3">
                     <div class="row justify-content-center">
                         <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-                            <h1 class="text-white">歡迎 Venus!</h1>
-                            <p class="text-lead text-white">登入開始輕鬆客戶經營之旅</p>
+                            <h1 class="text-white">歡迎 Venus SOHO!</h1>
+                            <h3 class="text-orange">Preview</h3>
+                            <p class="mt-3 text-lead text-white">使用社群登入開始輕鬆經營你的客戶吧</p>
                         </div>
                     </div>
                 </div>
@@ -23,18 +24,18 @@
         </div>
         <!-- Page content -->
 
-        <div class="container mt-lg--8 mt-md--5 pb-5">
+        <div class="container mt-lg--8 mt-md--4 pb-5">
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-7">
                     <div class="card bg-secondary border-0 mb-0">
                         <div class="card-header bg-transparent pb-4">
                             <div class="text-muted text-center mt-2 mb-3"><small>使用第三方登入驗證</small></div>
                             <div class="btn-wrapper text-center">
-                                <a href="/login/facebook" class="btn btn-neutral btn-icon disabled">
+                                <!--<a href="/login/facebook" class="btn btn-neutral btn-icon disabled">
                                     <span class="btn-inner--icon"><img
                                             src="../../assets/img/icons/common/github.svg"></span>
                                     <span class="btn-inner--text">Facebook</span>
-                                </a>
+                                </a>-->
                                 <a href="/login/google?type=user" class="btn btn-neutral btn-icon">
                                     <span class="btn-inner--icon"><img
                                             src="../../assets/img/icons/common/google.svg"></span>
@@ -42,6 +43,7 @@
                                 </a>
                             </div>
                         </div>
+                        <!--
                         <div class="card-body px-lg-5 py-lg-5">
                             <div class="text-center text-muted mb-4">
                                 <small>Preview 尚未開放正式註冊，請先使用社群登入</small>
@@ -88,6 +90,7 @@
                             <a href="/auth/register/" class="text-light"><small>建立新帳號</small></a>
                         </div>
                     </div>
+                -->
                 </div>
             </div>
         </div>
