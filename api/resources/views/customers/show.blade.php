@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{ asset('/assets/vendor/quill/dist/quill.core.css') }}" type="text/css">
 @include('common.alert')
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-lg-3">
         <a href="/customers/" class="btn btn-block btn-outline-default mt--2 mb-2">回到客戶清單</a>
         <div class="card card-profile mb-1">
             <img src="../../assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top">
@@ -49,7 +49,7 @@
         </div>
 
     </div>
-    <div class="col-md-9">
+    <div class="col-lg-9">
         @include('customers.tab')
     </div>
 </div>

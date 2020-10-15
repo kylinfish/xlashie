@@ -74,7 +74,7 @@
             </div>
         </div>
         <div class="card-footer">
-            <p class="h4 float-left pt-2 text-gray">上次修改時間: {{ customer.updated_at }}</p>
+            <p class="h4 float-left pt-2 text-gray d-none d-sm-block">上次修改時間: {{ customer.updated_at }}</p>
             <div class="row float-right">
                 <div class="col-md-12">
                     <span class="text-warning pr-2">{{validatorMsg}}</span>
@@ -84,7 +84,7 @@
                     <button type="button" class="btn btn-icon btn-warning" v-show="isEditShow" @click="toggle('edit')">
                         <i class="fa fa-pen pr-2"></i>修改檔案</span>
                     </button>
-                    <button type="submit" class="btn btn-icon btn-success" v-show="isSubmitShow">
+                    <button type="submit" class="btn btn-icon btn-success btn-xs-block" v-show="isSubmitShow">
                         <i class="fa fa-save pr-2"></i>更新</span>
                     </button>
                 </div>

@@ -1,73 +1,72 @@
 <template>
-<div class="card-body description">
+<div>
     <form method="POST" accept-charset="UTF-8" id="invoice" v-on:submit.prevent="onSubmit">
-        <div class="row">
-            <div class="col-sm-12 mb-4">
-                <div class="row">
-                    <div class="col-md-4">
-                        <label for="">訂單流水號</label>
-                        <input type="text" :class="['form-control form-control-sm', {'is-invalid': validation.hasError('ticket')}]" v-model="ticket" required>
-                        <div class="invalid-feedback">{{ validation.firstError('ticket') }}</div>
-                    </div>
-                    <div class="col-md-4">
-                        <label>付費方式</label>
-                        <select class="form-control form-control-sm" v-model="payment">
-                            <option value="現金">現金</option>
-                            <option value="轉帳/匯款">轉帳/匯款</option>
-                            <option value="預扣">預扣</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label>訂單日期</label>
-                        <div class="form-group">
-                            <input class="form-control form-control-sm" id="datetime" type="datetime-local" step="1" v-model="transaction_at">
+
+        <div class="rounded table-primary pt-3">
+            <div class="container">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="">訂單流水號</label>
+                            <input type="text" :class="['form-control', {'is-invalid': validation.hasError('ticket')}]" v-model="ticket" required>
+                            <div class="invalid-feedback">{{ validation.firstError('ticket') }}</div>
+                        </div>
+                        <div class="col-md-4">
+                            <label>付費方式</label>
+                            <select class="form-control" v-model="payment">
+                                <option value="現金">現金</option>
+                                <option value="轉帳/匯款">轉帳/匯款</option>
+                                <option value="預扣">預扣</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>訂單日期</label>
+                            <div class="form-group">
+                                <input class="form-control" id="datetime" type="datetime-local" step="1" v-model="transaction_at">
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group col-md">
-                        <table class="table table-bordered table-primary">
-                            <thead>
-                                <tr>
-                                    <th class="text-center" scope="col">品項</th>
-                                    <th class="text-center" scope="col">數量</th>
-                                    <th class="text-center" scope="col">單價</th>
-                                    <th class="text-center" scope="col">總計</th>
-                                    <th class="text-center" scope="col">操作</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <select @change="onSelectItem" :class="['form-control', {'is-invalid': validation.hasError('selectedMenuId')}]" v-model="selectedMenuId">
-                                            <option disabled value="">請選擇品項</option>
-                                            <option v-for="(menu) in menus" v-bind:value="menu.value" :value="menu.id" :key="menu.id">
-                                                {{ menu.name }}
-                                            </option>
-                                        </select>
-                                        <div class="invalid-feedback">{{ validation.firstError('selectedMenuId') }}</div>
-                                    </td>
-                                    <td>
-                                        <input type="number" :class="['form-control text-center', {'is-invalid': validation.hasError('selectedQuantity')}]" v-model="selectedQuantity">
-                                        <div class="invalid-feedback">{{ validation.firstError('selectedQuantity') }}</div>
-                                    </td>
-                                    <td>
-                                        <input type="number" :class="['form-control text-center']" v-model="selectedPrice">
-                                    </td>
-                                    <td>
-                                        <input type="number" disabled :class="'form-control text-center'" :value="selectedItemTotal">
-                                        <div class="invalid-feedback">{{ validation.firstError('selectedItemTotal') }}</div>
-                                    </td>
-                                    <td class="text-center">
-                                        <button class="btn btn-icon btn-outline-success btn-lg" type="button" @click="onAddItem" data-toggle="tooltip" title="選擇品項並新增">
-                                            加入
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            <label class="mt-md-2">服務項目</label>
+                            <select @change="onSelectItem" :class="['form-control', {'is-invalid': validation.hasError('selectedMenuId')}]" v-model="selectedMenuId">
+                                <option disabled value="">請選擇品項</option>
+                                <option v-for="(menu) in menus" v-bind:value="menu.value" :value="menu.id" :key="menu.id">
+                                    {{ menu.name }}
+                                </option>
+                            </select>
+                            <div class="invalid-feedback">{{ validation.firstError('selectedMenuId') }}</div>
+                        </div>
+
+                        <div class="col-md-2 form-group">
+                            <label class="mt-md-2">數量</label>
+                            <input type="number" :class="['form-control text-center', {'is-invalid': validation.hasError('selectedQuantity')}]" v-model="selectedQuantity">
+                            <div class="invalid-feedback">{{ validation.firstError('selectedQuantity') }}</div>
+                        </div>
+
+                        <div class="col-md-2 form-group">
+                            <label class="mt-md-2">單價</label>
+                            <input type="number" :class="['form-control text-center']" v-model="selectedPrice">
+
+                        </div>
+
+                        <div class="col-md-2 form-group">
+                            <label class="mt-md-2">總計</label>
+                            <input type="number" disabled :class="'form-control text-center'" :value="selectedItemTotal">
+                            <div class="invalid-feedback">{{ validation.firstError('selectedItemTotal') }}</div>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="mt-md-2">操作</label>
+                            <button class="btn btn-primary btn-block" type="button" @click="onAddItem">加入</button>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row card-body">
+            <div class="col-sm-12">
                 <div class="form-group">
-                <label class="form-control-label">購買清單: </label>
+                    <span class="form-control-label h3">購買清單: </span>
                     <table class="table table-bordered" v-show="form.items.length >0">
                         <thead class="thead-light">
                             <tr>
@@ -116,17 +115,17 @@
                     </table>
                 </div>
 
-                <div class="form-group"  v-show="form.items.length >0">
+                <div class="form-group" v-show="form.items.length >0">
                     <label class="form-control-label">消費備註</label>
                     <textarea class="form-control" rows="2" v-model="note"></textarea>
                 </div>
-                <div class="card-footer"  v-show="form.items.length >0">
+                <div class="card-footer" v-show="form.items.length >0">
                     <div class="row float-right">
                         <div class="col-md-12">
                             <a href="#" class="btn btn-icon btn-secondary">
                                 <i class="fa fa-times pr-2"></i>取消
                             </a>
-                            <button type="submit" class="btn btn-icon btn-primary">
+                            <button type="submit" class="btn btn-icon btn-success">
                                 <i class="fa fa-save pr-2"></i>新增交易</span>
                             </button>
                         </div>
@@ -232,33 +231,33 @@ export default {
             }
 
             axios({
-                method: "POST",
-                url: `/api/customers/${this.uuid}/transactions/`,
-                data: formData,
-                headers: {
-                    //'X-CSRF-TOKEN': window.Laravel.csrfToken,
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then((res) => {
-                this.$swal({
-                    title: "新增成功",
-                    text: "稍後重新整理",
-                    icon: "success",
-                    timer: 900,
-                    showConfirmButton: false
-                }).then(() => {
-                    location.reload();
+                    method: "POST",
+                    url: `/api/customers/${this.uuid}/transactions/`,
+                    data: formData,
+                    headers: {
+                        //'X-CSRF-TOKEN': window.Laravel.csrfToken,
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Content-Type': 'application/json',
+                    }
                 })
-            })
-            .catch((e) => {
-                this.$swal({
-                    title: "新增失敗",
-                    icon: "error",
-                    text: e,
+                .then((res) => {
+                    this.$swal({
+                        title: "新增成功",
+                        text: "稍後重新整理",
+                        icon: "success",
+                        timer: 900,
+                        showConfirmButton: false
+                    }).then(() => {
+                        location.reload();
+                    })
                 })
-            });
+                .catch((e) => {
+                    this.$swal({
+                        title: "新增失敗",
+                        icon: "error",
+                        text: e,
+                    })
+                });
         },
 
         onAddItem() {
