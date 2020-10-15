@@ -10,7 +10,7 @@ use App\Forms\InventoryForm;
 use App\Http\Resources\CustomerInventoryResource;
 use App\Models\InvNote;
 
-class Invnotes extends BaseController
+class InvNotes extends BaseController
 {
 
     public function index(Request $request, string $customer_uuid)
