@@ -4,7 +4,7 @@
     <div class="main-content" id="panel">
         <nav class="navbar fixed-top navbar-expand navbar-dark bg-primary border-bottom">
             <div class="container-fluid">
-                <a href="/" class="text-white h2 mr-3 mt-2">Venus CRM </a>
+                <a href="/" class="text-white h2 mr-3 mt-2">Venus SOHO</a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Navbar links -->
                     <ul class="navbar-nav align-items-center  ml-md-auto ">

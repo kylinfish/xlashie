@@ -101,13 +101,7 @@
 .qleditor {
   height: 400px;
 }
-.min-height-40 {
-  min-height: 40rem;
-}
-.item-scroll {
-  height: 38rem;
-  overflow-y: auto;
-}
+
 </style>
 <script>
 import Vue from "vue";

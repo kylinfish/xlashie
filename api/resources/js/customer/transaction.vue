@@ -1,6 +1,6 @@
 <template>
 <div class="card-body description">
-    <table class="table table-sm table-hover table-bordered">
+    <table class="table table-sm table-hover table-bordered table-responsive-sm">
         <thead class="thead-light">
             <tr>
                 <th class="text-center">#</th>

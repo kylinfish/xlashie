@@ -6,7 +6,7 @@
 
         <img width="30%" class="float-right" src="/assets/images/undraw_business_shop.svg" alt="">
         <div class="card border-0 shadow my-5  col-md-8">
-            <div class="card-body p-5">
+            <div class="card-body">
                 <div class="col-lg-12">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
