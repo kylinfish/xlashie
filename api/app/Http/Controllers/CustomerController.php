@@ -12,6 +12,17 @@ use App\Transformers\Customer as Transformer;
 
 class CustomerController extends \App\Http\Controllers\Controller
 {
+    public function __construct()
+    {
+        // 要先有 Company 才能使用 Menu 功能
+        $this->middleware(function ($request, $next) {
+            if (! auth()->user()->company) {
+                return redirect('/company/create/');
+            }
+            return $next($request);
+        });
+    }
+
     public function index(Request $request, CustomerForm $form)
     {
         $limit = request('limit', 10);
@@ -32,7 +43,11 @@ class CustomerController extends \App\Http\Controllers\Controller
         $orders = Ticket::where(["company_id" => auth()->user()->company->id, "customer_id"=> $customer->id])->ordered();
         $menus = Menu::where("company_id", auth()->user()->company->id)->get();
 
-        return view("customers.show", compact('customer', 'inventories', 'orders', 'menus'));
+        $return_views = view("customers.show", compact('customer', 'inventories', 'orders', 'menus'));
+        if (count($menus) == 0) {
+            return $return_views->with(['alert' => 'warning', 'message' => '請先至營業項目新增商品，開始您的客戶交易紀錄吧']);
+        }
+        return $return_views;
     }
 
     public function create(Request $request)
