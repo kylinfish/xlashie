@@ -6,18 +6,18 @@
     <div class="col-lg-3">
         <a href="/customers/" class="btn btn-block btn-outline-default mt--2 mb-2">回到客戶清單</a>
         <div class="card card-profile mb-1">
-            <img src="../../assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top">
+            <img src="../../assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top d-none d-sm-block">
             <div class="row justify-content-center">
-                <div class="col-lg-3 order-lg-2">
+                <div class="col-lg-3 order-lg-2  d-none d-sm-block">
                     <div class="card-profile-image">
-                        <a href="#">
+                        <a href="#!">
                             <img src="../../assets/img/theme/team-3.jpg" class="rounded-circle">
                         </a>
                     </div>
                 </div>
             </div>
 
-            <div class="card-body pt-7">
+            <div class="card-body pt-md-7">
                 <div class="row">
                     <div class="col">
                         <div class="text-center">
