@@ -43,11 +43,7 @@ class CustomerController extends \App\Http\Controllers\Controller
         $orders = Ticket::where(["company_id" => auth()->user()->company->id, "customer_id"=> $customer->id])->ordered();
         $menus = Menu::where("company_id", auth()->user()->company->id)->get();
 
-        $return_views = view("customers.show", compact('customer', 'inventories', 'orders', 'menus'));
-        if (count($menus) == 0) {
-            return $return_views->with(['alert' => 'warning', 'message' => '請先至營業項目新增商品，開始您的客戶交易紀錄吧']);
-        }
-        return $return_views;
+        return view("customers.show", compact('customer', 'inventories', 'orders', 'menus'));
     }
 
     public function create(Request $request)
