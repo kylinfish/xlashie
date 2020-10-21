@@ -5,6 +5,13 @@
         <nav class="navbar fixed-top navbar-expand navbar-dark bg-primary border-bottom">
             <div class="container-fluid">
                 <a href="/" class="text-white h2 mr-3 mt-2">Venus SOHO</a>
+                <ul class="navbar-nav  mr-auto">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link">
+                            <span class="nav-link-inner--text"><i class="text-pink fa fa-th-large"></i> 主選單</span>
+                        </a>
+                    </li>
+                </ul>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Navbar links -->
                     <ul class="navbar-nav align-items-center  ml-md-auto ">
