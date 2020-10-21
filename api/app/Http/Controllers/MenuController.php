@@ -15,7 +15,7 @@ class MenuController extends Controller
         // 要先有 Company 才能使用 Menu 功能
         $this->middleware(function ($request, $next) {
             if (! auth()->user()->company) {
-                return redirect('/company/create/');
+                return redirect('/company/create/?wizard=1');
             }
             return $next($request);
         });
@@ -23,10 +23,11 @@ class MenuController extends Controller
 
     public function index(Request $request)
     {
-
         $menus = user()->company->menu;
 
-        return view('menus.index', ['menus' => $menus]);
+        $is_wizard = ($request->get('wizard') or $menus->count() < 1) ? true : false;
+
+        return view('menus.index', compact('menus', 'is_wizard'));
     }
 
     public function show(Request $request, String $menu_id)

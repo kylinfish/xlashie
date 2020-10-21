@@ -29,7 +29,9 @@ class CustomerController extends \App\Http\Controllers\Controller
         $customers = Customer::where("user_id", auth()->user()->id)->orderBy("id", "ASC")->get();
         $customers = $this->paginate($customers, $limit);
 
-        return view("customers.index", compact("customers"));
+        $is_wizard = ($request->get('wizard') or $customers->count() < 1) ? true : false;
+
+        return view("customers.index", compact("customers", "is_wizard"));
     }
 
     public function show(Request $request, string $customer_uuid)

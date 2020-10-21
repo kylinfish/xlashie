@@ -3,6 +3,15 @@
 <link rel="stylesheet" href="../../assets/vendor/sweetalert2/dist/sweetalert2.min.css">
 
 <div class="offset-lg-1 col-lg-10">
+
+   @if (request()->get('wizard') or $is_wizard ?? '')
+   <div class="mb-4 btn-group btn-group-sm d-flex" role="group" aria-label="...">
+       <a href="/company/?wizard=1" type="button" class="btn btn-success w-100"><span class="badge badge-lg badge-success mr-1">1</span> 建立店家</a>
+       <button type="button" class="btn btn-default w-100"><span class="badge badge-lg badge-primary mr-1">2</span> 新增營業項目</button>
+       <a href="/customers/?wizard=1" class="btn btn-secondary w-100"><span class="badge badge-lg badge-secondary mr-1">3</span> 新增客戶名單</a>
+   </div>
+   @endif
+
     <div class="row align-items-center mb-3">
         <div class="col-lg-6 col-7">
             <h1>營業項目</h1>

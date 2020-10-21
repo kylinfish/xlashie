@@ -121,7 +121,7 @@ class LoginController extends Controller
             if ($login_user->company) {
                 return redirect('/');
             } else {
-                return redirect('/company/create/');
+                return redirect('/company/create/?wizard=1');
             }
         }
 

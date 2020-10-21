@@ -5,6 +5,14 @@
 
         @include('common.alert')
 
+        @if (request()->get('wizard'))
+        <div class="mb-4 btn-group btn-group-sm d-flex" role="group" aria-label="...">
+            <button type="button" class="btn btn-default w-100 active"><span class="badge badge-lg badge-primary mr-1">1</span> 建立店家</button>
+            <button type="button" class="btn btn-secondary w-100" disabled><span class="badge badge-lg badge-secondary mr-1">2</span> 新增營業項目</button>
+            <button type="button" class="btn btn-secondary w-100" disabled><span class="badge badge-lg badge-secondary mr-1">3</span> 新增客戶名單</button>
+        </div>
+        @endif
+
         <form action="/company/" method="POST">
             @csrf
             <!-- {{ csrf_field() }} -->
