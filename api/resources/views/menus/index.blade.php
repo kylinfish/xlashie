@@ -27,7 +27,7 @@
     <div class="card">
         <!-- Card header -->
         <div class="card-header border-0">
-            <h3 class="mb-0">您的菜單列表 - 營業品項</h3>
+            <h3 class="mb-0">您的產品列表 - 上架您的營業品項</h3>
         </div>
         <div class="table-responsive">
             <table class="table align-items-center table-sm table-flush">

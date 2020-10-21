@@ -12,7 +12,7 @@
 
 <div class="row align-items-center mb-3">
     <div class="col-lg-6 col-7">
-        <h1>客戶清單</h1>
+        <h1>客戶總攬</h1>
     </div>
     <div class="col-lg-6 col-5 text-right">
         <a href="/customers/create" class="btn btn-primary">新增客戶</a>
@@ -24,7 +24,7 @@
 <div class="card">
     <!-- Card header -->
     <div class="card-header border-0">
-        <h3 class="mb-0">客戶列表總覽</h3>
+        <h3 class="mb-0">客戶列表總覽 - 進入客戶頁面開始管理交易紀錄吧</h3>
     </div>
     <div class="table-responsive">
         <table class="table table-sm align-items-center table-flush table-hover">
