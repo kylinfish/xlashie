@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
                 'name' => substr($faker->name, 0, 20),
                 'email' => $faker->email,
                 'birth' => $faker->dateTime,
-                'phone' => $faker->e164PhoneNumber,
+                'phone' => '',
                 'password' => $faker->password,
 
                 'created_at' => Carbon::now(),

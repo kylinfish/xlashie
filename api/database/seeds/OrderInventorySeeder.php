@@ -22,7 +22,6 @@ class OrderInventorySeeder extends Seeder
             'payment' => '現金',
             'discount' => 40,
             'price' => 4000,
-            'note' => '買好買滿',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
@@ -34,7 +33,6 @@ class OrderInventorySeeder extends Seeder
             'payment' => '轉帳',
             'discount' => 0,
             'price' => 1,
-            'note' => 'Richart 測試入帳',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);

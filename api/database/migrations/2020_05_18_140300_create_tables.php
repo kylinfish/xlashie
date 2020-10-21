@@ -35,7 +35,7 @@ class CreateTables extends Migration
             $table->string('uuid', 40);
             $table->string('name', 20);
             $table->char('password', 60);
-            $table->string('phone', 15);
+            $table->string('phone', 10);
             $table->string('email', 50);
             $table->string('avatar', 256)->default('');
             $table->tinyInteger('gender')->default(0)->unsigned();
@@ -129,33 +129,11 @@ class CreateTables extends Migration
             $table->index(['user_id', 'company_id']);
         });
 
-        /* 先不提供巢狀組合設計
-        Schema::create('products', function (Blueprint $table) {
-            $table->increments('id')->unsigned();
-            $table->integer('company_id')->unsigned();
-
-            $table->string('name', 50);
-            $table->string('sku', 30)->default('');
-            $table->string('avatar', 255)->default('');
-            $table->integer('price')->default(0);
-            $table->tinyInteger('status')->default(0)->unsigned(); // 0: 關閉 1:開放 2:封存
-            $table->tinyInteger('category_id')->default(0)->unsigned();
-            $table->integer('quantity')->default(0)->unsigned();
-            $table->text('description')->nullable();
-
-            $table->timestamps();
-            $table->softDeletes();
-
-            $table->index(['company_id', 'name']);
-        });
-        */
-
         Schema::create('menus', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('company_id')->unsigned();
             $table->string('name', 50);
             $table->integer('price')->default(0);
-            $table->string('description')->default('');
             $table->tinyInteger('init_status')->unsigned()->default(0);
 
             $table->timestamps();
@@ -164,21 +142,7 @@ class CreateTables extends Migration
             $table->index(['company_id']);
         });
 
-        /*
-        Schema::create('sub_menus', function (Blueprint $table) {
-            $table->increments('id')->unsigned();
 
-            $table->integer('menu_id')->unsigned();
-            $table->integer('product_id')->unsigned();
-
-            $table->integer('amount');
-            $table->smallInteger('order')->unsigned()->default(0);
-
-            $table->timestamps();
-
-            $table->index(['menu_id', 'product_id']);
-        });
-*/
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('company_id')->unsigned();
@@ -213,7 +177,6 @@ class CreateTables extends Migration
             $table->string('product_name', 50);
             $table->tinyInteger('status')->default(0)->unsigned();
             $table->timestamp('use_at')->nullable();
-            $table->text('note')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
@@ -241,7 +204,6 @@ class CreateTables extends Migration
         Schema::dropIfExists('products');
         Schema::dropIfExists('discounts');
         Schema::dropIfExists('menus');
-        Schema::dropIfExists('sub_menus');
 
         // Orders
         Schema::dropIfExists('orders');

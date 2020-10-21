@@ -44,7 +44,6 @@ class MenuController extends Controller
             'name' => $params['name'],
             'price' => $params['price'],
             'init_status' => $params['init_status'],
-            'description' => $params['description'] ?? '',
         ]);
 
         return redirect('/menus/')->with(['alert' => 'success', 'message' => '更新成功']);
@@ -59,7 +58,6 @@ class MenuController extends Controller
             'name' => $params['name'],
             'price' => $params['price'],
             'init_status' => $params['init_status'],
-            'description' => $params['description'] ?? '',
         ]);
 
         return redirect()->back()->with(['alert' => 'success', 'message' => "{$menu->name} 新增成功"]);
