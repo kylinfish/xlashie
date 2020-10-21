@@ -9,6 +9,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">編輯產品</h5>
+                    <h5 class="float-right"> <span class="text-danger">*</a> 為必填項目</h5>
                 </div>
                 <div class="modal-body">
                     <div class="col-lg-12">
@@ -54,13 +55,6 @@
                                 @endif
                                 ><span>註銷失效</span></option>
                             </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <label class="form-control-label">產品敘述</label>
-                            <textarea maxlength="255" rows="3" class="form-control" placeholder="產品描述(最多 255 字)"
-                                name="description" value="{{ $menu->description }}"></textarea>
                         </div>
                     </div>
                 </div>

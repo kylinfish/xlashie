@@ -8,23 +8,20 @@
                     <th scope="col" class="text-center">產品名稱</th>
                     <th scope="col" class="text-center">狀態</th>
                     <th scope="col" class="text-center">購買日期</th>
-                    <th scope="col" class="text-center">動作</th>
-                    <th scope="col" class="text-center">備註</th>
-
+                    <th scope="col" class="text-center">操作</th>
                 </tr>
             </thead>
             <tbody class="list">
                 <tr v-for="inventory, index in inventories">
-                    <td class="text-center">{{ index + 1 }}</td>
+                    <td class="text-center w-5">{{ index + 1 }}</td>
                     <td class="text-center">{{ inventory.product_name }}</td>
                     <td class="text-center">
                         <span :class="['form-badge badge-pill', inventory.badgeStyle]">{{ inventory.status_str }}</span>
                     </td>
-                    <td class="text-center">{{ inventory.created_at }}</td>
+                    <td class="text-center w-10">{{ inventory.created_at }}</td>
                     <td class=" text-center">
-                        <a href="#" role="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#inventory-status-modal" @click="fillModal(inventory.id)"><span class="btn-inner--icon"><i class="ni ni-settings-gear-65"></i></span> 核銷</a>
+                        <a href="#" role="button" class="btn btn-sm btn-outline-warning" data-toggle="modal" data-target="#inventory-status-modal" @click="fillModal(inventory.id)"><span class="btn-inner--icon"><i class="ni ni-settings-gear-65"></i></span> 核銷</a>
                     </td>
-                    <td class="text-center"><i class="ni ni-book-bookmark" v-show="inventory.note"></i></td>
                 </tr>
             </tbody>
         </table>
@@ -69,10 +66,6 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group-sm">
-                                    <label class="form-control-label">備註說明</label>
-                                    <textarea class="form-control" rows="3" maxlength="255" placeholder="最多 255 個字" v-model="selectedItem.note"></textarea>
-                                </div>
                                 <div class="offset-md-5 mt-3">
                                     <button type="submit" class="btn btn-primary my-4">送出</button>
                                 </div>

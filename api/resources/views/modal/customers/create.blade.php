@@ -7,6 +7,7 @@
                     <div class="row align-items-center">
                         <div class="col-8">
                             <h3 class="mb-0">新增客戶</h3>
+                            <h5 class="float-right"> <span class="text-danger">*</a> 為必填項目</h5>
                         </div>
                     </div>
                 </div>

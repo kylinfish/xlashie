@@ -7,12 +7,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">新增銷售項目</h5>
+
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="col-lg-12">
+                        <h5 class="float-right"> <span class="text-warning">*</a> 為必填</h5>
                         <div class="form-group">
                             <label class="form-control-label"><span class="text-danger">*</span> 產品名稱</label>
                             <input type="text" class="form-control" name="name" required>
@@ -32,13 +34,6 @@
                                 <option value="1"><span>已發放</span></option>
                                 <option value="2"><span>已使用</span></option>
                             </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <label class="form-control-label">產品敘述</label>
-                            <textarea maxlength="255" rows="3" class="form-control" placeholder="產品描述(最多 255 字)"
-                                name="description"></textarea>
                         </div>
                     </div>
                 </div>

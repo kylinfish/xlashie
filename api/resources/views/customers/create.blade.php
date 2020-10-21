@@ -16,7 +16,8 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            <div class="form-group-sm">
+                            <div class="form-group">
+                                <h5 class="float-right"> <span class="text-warning">*</a> 名字為必填</h5>
                                 <label class="form-control-label" for="name"><span class="text-danger">*</span> 名字</label>
                                 @error('name')
                                 <span class="text-danger float-right">{{ $message }}</span>
@@ -27,10 +28,10 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="form-group-sm">
+                            <div class="form-group">
                                 <label class="form-control-label" for="email" data-toggle="tooltip" data-placement="right"
                                 title="開放顧客查詢資料必須綁定 Email，您也可以之後再進行修改">
-                                    <span class="text-info"><i class="fa fa-info-circle"></i></span> Email
+                                    <!--<span class="text-info"><i class="fa fa-info-circle"></i></span>--> Email
                                 </label>
                                 @error('email')
                                 <span class="text-danger float-right">{{ $message }}</span>
@@ -40,8 +41,8 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="form-group-sm">
-                                <label class="form-control-label" for="phone"><span class="text-danger">*</span> 電話</label>
+                            <div class="form-group">
+                                <label class="form-control-label" for="phone">電話</label>
                                 @error('phone')
                                 <span class="text-danger float-right">{{ $message }}</span>
                                 @enderror
@@ -50,7 +51,7 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="form-group-sm">
+                            <div class="form-group">
                                 <label class="form-control-label" for="cellphone">手機</label>
                                 @error('cellphone')
                                 <span class="text-danger float-right">{{ $message }}</span>
@@ -60,7 +61,7 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="form-group-sm">
+                            <div class="form-group">
                                 <label class="form-control-label" for="gender">性別</label>
                                 @error('gender')
                                 <span class="text-danger float-right">{{ $message }}</span>
@@ -74,7 +75,7 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="form-group-sm">
+                            <div class="form-group">
                                 <label class="form-control-label" for="birth">生日</label>
                                 @error('birth')
                                 <span class="text-danger float-right">{{ $message }}</span>
@@ -85,7 +86,7 @@
                         </div>
 
                         <div class="col-lg-12">
-                            <div class="form-group-sm">
+                            <div class="form-group">
                                 <label class="form-control-label" for="address">地址</label>
                                 @error('address')
                                 <span class="text-danger float-right">{{ $message }}</span>
@@ -96,26 +97,22 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="form-group-sm">
+                            <div class="form-group">
                                 <label class="form-control-label">備註 1:</label>
                                 @error('note_1')
                                 <span class="text-danger float-right">{{ $message }}</span>
                                 @enderror
-                                <textarea class="form-control @error('description') is-invalid @enderror" name="note_1"
-                                value="{{ old('note_1') }}">
-                                </textarea>
+                                <textarea class="form-control @error('description') is-invalid @enderror" name="note_1">{{ old('note_1') }}</textarea>
                             </div>
                         </div>
 
                         <div class="col-lg-6">
-                            <div class="form-group-sm">
+                            <div class="form-group">
                                 <label class="form-control-label">備註 2:</label>
                                 @error('note_2')
                                 <span class="text-danger float-right">{{ $message }}</span>
                                 @enderror
-                                <textarea class="form-control" name="note_2"
-                                value="{{ old('note_2') }}">
-                                </textarea>
+                                <textarea class="form-control @error('description') is-invalid @enderror" name="note_2">{{ old('note_2') }}</textarea>
                             </div>
                         </div>
                     </div>

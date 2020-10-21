@@ -28,7 +28,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4 form-group">
-                            <label class="mt-md-2">服務項目</label>
+                            <label class="mt-md-2">營業項目</label>
                             <select @change="onSelectItem" :class="['form-control', {'is-invalid': validation.hasError('selectedMenuId')}]" v-model="selectedMenuId">
                                 <option disabled value="">請選擇品項</option>
                                 <option v-for="(menu) in menus" v-bind:value="menu.value" :value="menu.id" :key="menu.id">
@@ -63,11 +63,17 @@
                 </div>
             </div>
         </div>
+
         <div class="row card-body">
-            <div class="col-sm-12">
+            <div v-show="form.items.length <= 0">
+                <p class="lead">選擇您的「營業項目」並點擊 <button class="btn btn-outline-primary btn-sm" disabled>加入</button> 按鈕來新增訂單吧!</p>
+            </div>
+            <div class="col-sm-12" v-show="form.items.length >0">
+
                 <div class="form-group">
                     <span class="form-control-label h3">購買清單: </span>
-                    <table class="table table-bordered" v-show="form.items.length >0">
+
+                    <table class="table table-bordered">
                         <thead class="thead-light">
                             <tr>
                                 <th class="text-center" scope="col">品項</th>
@@ -115,21 +121,22 @@
                     </table>
                 </div>
 
-                <div class="form-group" v-show="form.items.length >0">
+                <div class="form-group">
                     <label class="form-control-label">消費備註</label>
                     <textarea class="form-control" rows="2" v-model="note"></textarea>
                 </div>
-                <div class="card-footer" v-show="form.items.length >0">
-                    <div class="row float-right">
-                        <div class="col-md-12">
-                            <a href="#" class="btn btn-icon btn-secondary">
-                                <i class="fa fa-times pr-2"></i>取消
-                            </a>
-                            <button type="submit" class="btn btn-icon btn-success">
-                                <i class="fa fa-save pr-2"></i>新增交易</span>
-                            </button>
-                        </div>
-                    </div>
+
+            </div>
+        </div>
+        <div class="modal-footer table-primary" v-show="form.items.length >0">
+            <div class="row float-right">
+                <div class="col-md-12">
+                    <!--<a href="#" class="btn btn-icon btn-secondary">
+                        <i class="fa fa-times pr-2"></i>取消
+                    </a>-->
+                    <button type="submit" class="btn btn-icon btn-success">
+                        <i class="fa fa-save pr-2"></i>新增交易</span>
+                    </button>
                 </div>
             </div>
         </div>

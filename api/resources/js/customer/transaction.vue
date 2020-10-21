@@ -12,10 +12,10 @@
         </thead>
         <tbody>
             <tr v-for="transaction, index in transactions">
-                <td class="text-center">
+                <td class="text-center w-5">
                     <a href="#">{{ index + 1 }}</a>
                 </td>
-                <td class="text-center w-50">
+                <td class="text-center">
                     <a href="#" role="button" data-toggle="modal" data-target="#transaction-modal" @click="fillModal(transaction.id)">
                         <span class="btn-inner--icon">
                             <i class="ni ni-settings-gear-65"></i>
@@ -25,7 +25,7 @@
                 </td>
                 <td class="text-center">{{ transaction.price }}</td>
                 <td class="text-center">{{ transaction.payment }}</td>
-                <td class="text-center w-15">{{ transaction.created_at }}</td>
+                <td class="text-center w-10">{{ transaction.created_at }}</td>
             </tr>
         </tbody>
     </table>
