@@ -47,7 +47,7 @@
                                 <span class="text-danger float-right">{{ $message }}</span>
                                 @enderror
                                 <input type="text" name="phone" maxlength="10" class="form-control @error('phone') is-invalid @enderror"
-                                value="{{ old('phone') }}" placeholder="數字 10 碼" required>
+                                value="{{ old('phone') }}" placeholder="數字 10 碼">
                             </div>
                         </div>
                         <div class="col-lg-6">

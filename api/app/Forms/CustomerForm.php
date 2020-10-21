@@ -7,7 +7,7 @@ class CustomerForm extends BaseForm
 {
     protected $store = [
         'name' => 'required|string|max:20',
-        'phone' => 'required|string|size:10',
+        'phone' => 'string|size:10',
         'cellphone' => 'nullable|string|size:10',
         'email' => 'nullable|string|email|unique:customers,email|max:50',
         'gender' => 'numeric|max:2',
