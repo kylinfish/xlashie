@@ -28,7 +28,7 @@ class Inventories extends BaseController
      */
     public function update(Request $request, InventoryForm $form, string $customer_uuid)
     {
-        $params = $request->only(["id", "note", "status", "use_at"]);
+        $params = $request->only(["id", "status", "use_at"]);
 
         if (! $customer = u_customer($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);
