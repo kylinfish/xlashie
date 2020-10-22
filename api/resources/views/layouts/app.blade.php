@@ -1,8 +1,9 @@
 @include('layouts.head')
 
 <body class="g-navbar-search-show g-navbar-search-shown">
+    @include('layouts.navbar')
     <div class="main-content" id="panel">
-        @include('layouts.navbar')
+
         <div class="container-fluid mt-3">
             @yield('content')
         </div>

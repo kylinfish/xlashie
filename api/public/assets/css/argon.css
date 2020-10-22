@@ -21572,9 +21572,6 @@ textarea[resize='horizontal']
     }
     .navbar-horizontal .navbar-nav .nav-link
     {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-
         border-radius: .375rem;
     }
     .navbar-horizontal .navbar-nav .nav-link i
