@@ -73,7 +73,7 @@
                 <div class="form-group">
                     <span class="form-control-label h3">購買清單: </span>
 
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-responsive">
                         <thead class="thead-light">
                             <tr>
                                 <th class="text-center" scope="col">品項</th>
