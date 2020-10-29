@@ -1,19 +1,20 @@
 <ul role="tablist" class="mt--3 nav nav-pills nav-pills-primary nav-fill flex-column flex-sm-row nav-wrapper">
     <li data-toggle="tab" role="tablist" class="nav-item active">
-        <a data-toggle="tab" role="tablist" href="#inventory" class="nav-link active">
+        <a data-toggle="tab" role="tablist" href="#purchase" class="nav-link active">
+            <div>
+                <span><i class="ni ni-cart pr-2"></i>購買交易</span>
+            </div>
+        </a>
+    </li>
+
+    <li data-toggle="tab" role="tablist" class="nav-item active">
+        <a data-toggle="tab" role="tablist" href="#inventory" class="nav-link">
             <div>
                 <span><i class="fa fa-shopping-bag pr-2"></i>已購項目</span>
             </div>
         </a>
     </li>
 
-    <li data-toggle="tab" role="tablist" class="nav-item active">
-        <a data-toggle="tab" role="tablist" href="#purchase" class="nav-link">
-            <div>
-                <span><i class="ni ni-cart pr-2"></i>購買交易</span>
-            </div>
-        </a>
-    </li>
     <li data-toggle="tab" role="tablist" class="nav-item active">
         <a data-toggle="tab" role="tablist" href="#transaction" class="nav-link ">
             <div>
@@ -41,7 +42,7 @@
     <div id="profile" class="tab-pane">
         <profile-page></profile-page>
     </div>
-    <div id="inventory" class="tab-pane active">
+    <div id="inventory" class="tab-pane">
         <inventory-page></inventory-page>
     </div>
     <div id="transaction" class="tab-pane">
@@ -50,7 +51,7 @@
     <div id="note" class="tab-pane">
         <note-page></note-page>
     </div>
-    <div id="purchase" class="tab-pane">
+    <div id="purchase" class="tab-pane active">
         <purchase-page></purchase-page>
     </div>
 </div>

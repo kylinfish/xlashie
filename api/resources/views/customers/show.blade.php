@@ -1,4 +1,4 @@
-@extends('layouts.nosidebar')
+@extends('layouts.app')
 @section('content')
 <link rel="stylesheet" href="{{ asset('/assets/vendor/quill/dist/quill.core.css') }}" type="text/css">
 @include('common.alert')

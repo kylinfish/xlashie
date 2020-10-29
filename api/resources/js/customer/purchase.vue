@@ -3,6 +3,7 @@
     <form method="POST" accept-charset="UTF-8" id="invoice" v-on:submit.prevent="onSubmit">
 
         <div class="rounded table-primary pt-3">
+            <h3 class="px-4 text-primary">訂單基本資料</h3>
             <div class="container">
                 <div class="col-sm-12">
                     <div class="row">
@@ -28,7 +29,9 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4 form-group">
-                            <label class="mt-md-2">營業項目</label>
+                            <label class="mt-md-2">營業項目 <i class="fa fa-hand-point-down text-warning"
+                            data-toggle="tooltip" data-placement="right"  title="可至營業項目頁面設定您的商品清單"
+                            ></i></label>
                             <select @change="onSelectItem" :class="['form-control', {'is-invalid': validation.hasError('selectedMenuId')}]" v-model="selectedMenuId">
                                 <option disabled value="">請選擇品項</option>
                                 <option v-for="(menu) in menus" v-bind:value="menu.value" :value="menu.id" :key="menu.id">
@@ -57,7 +60,7 @@
                         </div>
                         <div class="col-md-2">
                             <label class="mt-md-2">操作</label>
-                            <button class="btn btn-primary btn-block" type="button" @click="onAddItem">加入</button>
+                            <button class="btn btn-success btn-block" type="button" @click="onAddItem">加入</button>
                         </div>
                     </div>
                 </div>
@@ -65,22 +68,23 @@
         </div>
 
         <div class="row card-body">
+            <div class="col-md-12">
             <div v-show="form.items.length <= 0">
-                <p class="lead">選擇您的「營業項目」並點擊 <button class="btn btn-outline-primary btn-sm" disabled>加入</button> 按鈕來新增訂單吧!</p>
+                <p class="lead text-center">選擇您的<b class="text-warning">「營業項目」</b> 下拉選單並點擊 <button class="btn btn-success btn-sm" disabled>加入</button> 按鈕來新增購買訂單吧!</p>
             </div>
-            <div class="col-sm-12" v-show="form.items.length >0">
+            <div v-show="form.items.length >0">
 
                 <div class="form-group">
-                    <span class="form-control-label h3">購買清單: </span>
+                    <span class="h3 text-primary">購買清單: </span>
 
-                    <table class="table table-bordered table-responsive">
+                    <table class="table table-bordered table-hover table-responsive-sm">
                         <thead class="thead-light">
                             <tr>
-                                <th class="text-center" scope="col">品項</th>
-                                <th class="text-center" scope="col">數量</th>
-                                <th class="text-center" scope="col">單價</th>
-                                <th class="text-center" scope="col">總計</th>
-                                <th class="text-center" scope="col">刪除</th>
+                                <th class="text-center">品項</th>
+                                <th class="text-center">數量</th>
+                                <th class="text-center">單價</th>
+                                <th class="text-center">總計</th>
+                                <th class="text-center">刪除</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -122,10 +126,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label">消費備註</label>
+                    <label class="h3 text-primary">消費備註</label>
                     <textarea class="form-control" rows="2" v-model="note"></textarea>
                 </div>
 
+            </div>
             </div>
         </div>
         <div class="modal-footer table-primary" v-show="form.items.length >0">
@@ -134,7 +139,7 @@
                     <!--<a href="#" class="btn btn-icon btn-secondary">
                         <i class="fa fa-times pr-2"></i>取消
                     </a>-->
-                    <button type="submit" class="btn btn-icon btn-success">
+                    <button type="submit" class="btn btn-icon btn-primary">
                         <i class="fa fa-save pr-2"></i>新增交易</span>
                     </button>
                 </div>
