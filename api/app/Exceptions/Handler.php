@@ -134,7 +134,7 @@ class Handler extends ExceptionHandler
         return parent::render($request, $e);
     }
 
-    private function renderWitthApi($requestt, $e)
+    private function renderWitthApi($request, $e)
     {
         if (isset($_GET['e']) and env('APP_DEBUG')) {
             if ($e instanceof ValidationException) {
