@@ -12,7 +12,7 @@
 
 <div class="row align-items-center mb-3">
     <div class="col-lg-6 col-7">
-        <h1>客戶總攬</h1>
+        <h1>客戶清單</h1>
     </div>
     <div class="col-lg-6 col-5 text-right">
         <a href="/customers/create" class="btn btn-primary">新增客戶</a>

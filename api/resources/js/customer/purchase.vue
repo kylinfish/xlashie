@@ -107,7 +107,7 @@
                                 <td class="text-center border-bottom-0 long-texts">{{ totalPrice }}</td>
                                 <td></td>
                             </tr>
-                            <tr id="tr-discount">
+                            <tr id="tr-discount" class="d-none">
                                 <td colspan="3" class="text-right border-right-0 border-bottom-0">
                                     <a href="#" disabled data-toggle="tooltip" title="尚未開放"><strong>新增折扣</strong></a>
                                 </td>
