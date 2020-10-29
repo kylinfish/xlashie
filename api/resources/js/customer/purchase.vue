@@ -3,30 +3,9 @@
     <form method="POST" accept-charset="UTF-8" id="invoice" v-on:submit.prevent="onSubmit">
 
         <div class="rounded table-primary pt-3">
-            <h3 class="px-4 text-primary">訂單基本資料</h3>
+            <h3 class="px-4">購買項目</h3>
             <div class="container">
                 <div class="col-sm-12">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label for="">訂單流水號</label>
-                            <input type="text" :class="['form-control', {'is-invalid': validation.hasError('ticket')}]" v-model="ticket" required>
-                            <div class="invalid-feedback">{{ validation.firstError('ticket') }}</div>
-                        </div>
-                        <div class="col-md-4">
-                            <label>付費方式</label>
-                            <select class="form-control" v-model="payment">
-                                <option value="現金">現金</option>
-                                <option value="轉帳/匯款">轉帳/匯款</option>
-                                <option value="預扣">預扣</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label>訂單日期</label>
-                            <div class="form-group">
-                                <input class="form-control" id="datetime" type="datetime-local" step="1" v-model="transaction_at">
-                            </div>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-md-4 form-group">
                             <label class="mt-md-2">營業項目 <i class="fa fa-hand-point-down text-warning"
@@ -50,7 +29,6 @@
                         <div class="col-md-2 form-group">
                             <label class="mt-md-2">單價</label>
                             <input type="number" :class="['form-control text-center']" v-model="selectedPrice">
-
                         </div>
 
                         <div class="col-md-2 form-group">
@@ -75,9 +53,9 @@
             <div v-show="form.items.length >0">
 
                 <div class="form-group">
-                    <span class="h3 text-primary">購買清單: </span>
+                    <span class="h3 text-primary">訂單品項</span>
 
-                    <table class="table table-bordered table-hover table-responsive-sm">
+                    <table class="table table-bordered table-sm table-hover table-responsive-sm">
                         <thead class="thead-light">
                             <tr>
                                 <th class="text-center">品項</th>
@@ -90,9 +68,9 @@
                         <tbody>
                             <tr v-for="(row, index) in form.items" :index="index">
                                 <td class="text-center">{{ row.itemName }}</td>
-                                <td class="text-center">{{ row.quantity }}</td>
-                                <td class="text-center">{{ row.price }}</td>
-                                <td class="text-center">{{ row.itemTotal }}</td>
+                                <td class="text-center">{{ row.quantity | formatNumber }}</td>
+                                <td class="text-center">{{ row.price | formatNumber}}</td>
+                                <td class="text-center">{{ row.itemTotal | formatNumber}}</td>
                                 <td class="text-center">
                                     <button class="btn btn-icon btn-outline-danger btn-sm" type="button" @click="onDeleteItem(index)" data-toggle="tooltip" title="刪除項目">
                                         <i class="fa fa-trash"></i>
@@ -104,7 +82,7 @@
                                 <td colspan="3" class="text-right border-right-0 border-bottom-0">
                                     <strong>小計</strong>
                                 </td>
-                                <td class="text-center border-bottom-0 long-texts">{{ totalPrice }}</td>
+                                <td class="text-center border-bottom-0 long-texts">{{ totalPrice | formatNumber }}</td>
                                 <td></td>
                             </tr>
                             <tr id="tr-discount" class="d-none">
@@ -118,7 +96,7 @@
                                 <td colspan="3" class="text-right border-right-0 border-bottom-0">
                                     <strong>購買金額總計</strong>
                                 </td>
-                                <td class="text-center">{{ finalPrice }}</td>
+                                <td class="text-center bg-yellow"><span class="text-black-50">{{ finalPrice | formatNumber }}</span></td>
                                 <td></td>
                             </tr>
                         </tbody>
@@ -126,14 +104,38 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="h3 text-primary">消費備註</label>
+                    <label class="h3 text-primary">訂單資訊</label>
+                     <div class="row">
+                        <div class="col-md-4">
+                            <label for="">流水號</label>
+                            <input type="text" :class="['form-control', {'is-invalid': validation.hasError('ticket')}]" v-model="ticket" required>
+                            <div class="invalid-feedback">{{ validation.firstError('ticket') }}</div>
+                        </div>
+                        <div class="col-md-4">
+                            <label>付費方式</label>
+                            <select class="form-control" v-model="payment">
+                                <option value="現金">現金</option>
+                                <option value="轉帳/匯款">轉帳/匯款</option>
+                                <option value="預扣">預扣</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>日期</label>
+                            <div class="form-group">
+                                <input class="form-control" id="datetime" type="datetime-local" step="1" v-model="transaction_at">
+                            </div>
+                        </div>
+                    </div>
+                    <label for="">備註</label>
                     <textarea class="form-control" rows="2" v-model="note"></textarea>
+
                 </div>
 
             </div>
             </div>
         </div>
         <div class="modal-footer table-primary" v-show="form.items.length >0">
+
             <div class="row float-right">
                 <div class="col-md-12">
                     <!--<a href="#" class="btn btn-icon btn-secondary">
@@ -157,6 +159,10 @@ import VueSweetalert2 from 'vue-sweetalert2';
 const InputValidator = SimpleVueValidation.Validator;
 Vue.use(SimpleVueValidation);
 Vue.use(VueSweetalert2);
+
+Vue.filter("formatNumber", (v) => {
+    return new Intl.NumberFormat().format(v)
+})
 
 export default {
     data: function () {
