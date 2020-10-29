@@ -28,11 +28,13 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label class="form-control-label"><span class="text-danger">*</span> 購買後預設狀態</label>
+                            <label class="form-control-label">預設狀態 <i class="fa fa-info-circle text-info" data-toggle="tooltip" data-placement="right"
+                                title="如果您的商品需提供顧客消費後核銷，可以選擇不同的預設狀態，客戶購買後可以在使用時針對產品做狀態改變。"></i></label>
                             <select class="form-control" name="init_status">
-                                <option value="0"><span>未使用</span></option>
-                                <option value="1"><span>已發放</span></option>
-                                <option value="2"><span>已使用</span></option>
+                                <option value="0"><span></span></option>
+                                <option value="1"><span>未使用</span></option>
+                                <option value="2"><span>已發放</span></option>
+                                <option value="3"><span>已使用</span></option>
                             </select>
                         </div>
                     </div>

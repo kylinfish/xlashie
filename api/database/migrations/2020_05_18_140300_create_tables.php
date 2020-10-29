@@ -134,7 +134,7 @@ class CreateTables extends Migration
             $table->integer('company_id')->unsigned();
             $table->string('name', 50);
             $table->integer('price')->default(0);
-            $table->tinyInteger('init_status')->unsigned()->default(0);
+            $table->tinyInteger('init_status')->default(-1);
 
             $table->timestamps();
             $table->softDeletes();
@@ -175,7 +175,7 @@ class CreateTables extends Migration
             $table->integer('customer_id')->unsigned();
 
             $table->string('product_name', 50);
-            $table->tinyInteger('status')->default(0)->unsigned();
+            $table->tinyInteger('status')->default(-1);
             $table->timestamp('use_at')->nullable();
 
             $table->timestamps();

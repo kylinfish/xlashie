@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CustomerInventory extends Model
 {
+    const STATUS_DEFAULT = -1; // 未使用
     const STATUS_UNUSED = 0; // 未使用
     const STATUS_DONE = 1; // 已發放
     const STATUS_USED = 2;  // 已使用
@@ -44,6 +45,7 @@ class CustomerInventory extends Model
     public static function getStatusWording(int $status)
     {
         $status_map = [
+            CustomerInventory::STATUS_DEFAULT => "",
             CustomerInventory::STATUS_UNUSED => "未使用",
             CustomerInventory::STATUS_DONE => "已發放",
             CustomerInventory::STATUS_USED => "已使用",
