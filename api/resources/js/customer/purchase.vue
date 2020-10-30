@@ -150,7 +150,6 @@
     </form>
 </div>
 </template>
-
 <script>
 import Form from './../plugins/form';
 import SimpleVueValidation from 'simple-vue-validator';

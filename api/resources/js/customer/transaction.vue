@@ -1,5 +1,5 @@
 <template>
-<div class="card-body description">
+<div class="card-body">
     <table class="table table-sm table-hover table-bordered table-responsive-sm">
         <thead class="thead-light">
             <tr>
