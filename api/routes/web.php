@@ -12,9 +12,7 @@
 */
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    Route::get('/','IndexController@index');
 
     Route::get('/company/', 'CompanyController@show');
     Route::get('/company/create', 'CompanyController@create');

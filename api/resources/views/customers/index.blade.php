@@ -19,6 +19,8 @@
     </div>
 </div>
 
+@include('common.search')
+
 @include('common.alert')
 
 <div class="card">
@@ -26,6 +28,7 @@
     <div class="card-header border-0">
         <h3 class="mb-0">客戶列表總覽 - 進入客戶頁面開始管理交易紀錄吧</h3>
     </div>
+
     <div class="table-responsive">
         <table class="table table-sm align-items-center table-flush table-hover">
             <thead class="thead-light">
