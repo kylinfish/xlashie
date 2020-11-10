@@ -33,11 +33,11 @@
         <table class="table table-sm align-items-center table-flush table-hover">
             <thead class="thead-light">
                 <tr>
-                    <th class="text-enter">名字</th>
-                    <th class="text-enter">電話</th>
-                    <th class="text-enter">最後交易日期</th>
-                    <th class="text-enter">建立時間</th>
-                    <th class="text-enter">操作</th>
+                    <th>名字</th>
+                    <th>電話</th>
+                    <th>最後交易日期</th>
+                    <th>建立時間</th>
+                    <th>操作</th>
                 </tr>
             </thead>
             <tbody class="list">
