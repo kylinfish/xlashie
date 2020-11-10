@@ -80,6 +80,7 @@ Route::get('/company/{en_name}/register', 'CompanyController@register');
 Route::post('/company/{en_name}/register', 'CompanyController@register');
 Route::get('/company/{en_name}/done', 'CompanyController@done');
 
+/*
 Route::prefix('customer/register')->group(function () {
     Route::get('facebook/{id}', [
         'uses' => 'CompanyController@facebook'
@@ -94,3 +95,4 @@ Route::prefix('customer/register')->group(function () {
         'uses' => 'CompanyController@googleCallback'
     ]);
 });
+ */
