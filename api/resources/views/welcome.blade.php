@@ -21,7 +21,7 @@
                             <ul class="list-group">
                                 @foreach ($recently_tickets as $ticket)
                                 <li class="list-group-item">
-                                    <span class="float-left">金額: {{ $ticket->price }}</span>
+                                    <span class="float-left">金額: {{ number_format($ticket->price) }}</span>
                                     <span class="float-right">{{ $ticket->created_at }}</span></li>
                                 @endforeach
                             </ul>
