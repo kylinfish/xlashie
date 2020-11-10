@@ -4,10 +4,10 @@
         <thead class="thead-light">
             <tr>
                 <th class="text-center">#</th>
-                <th class="text-center">訂單編號</th>
+                <th class="text-center">消費日期</th>
                 <th class="text-center">消費金額</th>
                 <th class="text-center">付款方式</th>
-                <th class="text-center">消費日期</th>
+                <th class="text-center">操作</th>
             </tr>
         </thead>
         <tbody>
@@ -15,17 +15,17 @@
                 <td class="text-center w-5">
                     <a href="#">{{ index + 1 }}</a>
                 </td>
+                <td class="text-center w-10">{{ transaction.created_at }}</td>
+                <td class="text-center">{{ transaction.price | formatNumber }}</td>
+                <td class="text-center">{{ transaction.payment }}</td>
                 <td class="text-center">
-                    <a href="#" role="button" data-toggle="modal" data-target="#transaction-modal" @click="fillModal(transaction.id)">
+                    <a href="#" class="btn btn-outline-default btn-sm" data-toggle="modal" data-target="#transaction-modal" @click="fillModal(transaction.id)">
                         <span class="btn-inner--icon">
                             <i class="ni ni-settings-gear-65"></i>
                         </span>
-                        {{ transaction.ticket }}
+                        細節
                     </a>
                 </td>
-                <td class="text-center">{{ transaction.price }}</td>
-                <td class="text-center">{{ transaction.payment }}</td>
-                <td class="text-center w-10">{{ transaction.created_at }}</td>
             </tr>
         </tbody>
     </table>
@@ -41,7 +41,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <label class="col-md-3">付款方式:</label> <p class="col-md-3">{{ selectedItem.payment }}</p>
-                        <label class="col-md-3">繳款金額:</label> <p class="col-md-3">{{ selectedItem.price }}</p>
+                        <label class="col-md-3">繳款金額:</label> <p class="col-md-3">{{ selectedItem.price | formatNumber }}</p>
                         <label class="col-md-3">折扣金額:</label> <p class="col-md-3">{{ selectedItem.discount }}</p>
 
                         <table class="table align-items-center table-striped table-bordered table-hover">
@@ -53,8 +53,8 @@
                             <tbody>
                             <tr v-for="detail in tDetail">
                                 <td> {{ detail.product_name }}</td>
-                                <td> {{ detail.quantity }}</td>
-                                <td> {{ detail.unit_price }}</td>
+                                <td> {{ detail.quantity | formatNumber }}</td>
+                                <td> {{ detail.unit_price | formatNumber }}</td>
                             </tr>
                             </tbody>
 
@@ -71,6 +71,9 @@
 </template>
 
 <script>
+Vue.filter("formatNumber", (v) => {
+    return new Intl.NumberFormat().format(v)
+})
 export default {
     data: function () {
         let url = new URL(window.location.href);

@@ -106,28 +106,30 @@
                 <div class="form-group">
                     <label class="h3 text-primary">訂單資訊</label>
                      <div class="row">
-                        <div class="col-md-4">
+                        <!--<div class="col-md-4">
                             <label for="">流水號</label>
                             <input type="text" :class="['form-control', {'is-invalid': validation.hasError('ticket')}]" v-model="ticket" required>
                             <div class="invalid-feedback">{{ validation.firstError('ticket') }}</div>
-                        </div>
-                        <div class="col-md-4">
+                        </div> -->
+                        <div class="col-md-6">
                             <label>付費方式</label>
-                            <select class="form-control" v-model="payment">
-                                <option value="現金">現金</option>
-                                <option value="轉帳/匯款">轉帳/匯款</option>
-                                <option value="預扣">預扣</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
+                            <div class="form-group-sm">
+                                <select class="form-control" v-model="payment">
+                                    <option value="現金">現金</option>
+                                    <option value="轉帳/匯款">轉帳/匯款</option>
+                                    <option value="預扣">預扣</option>
+                                </select>
+                            </div>
                             <label>日期</label>
-                            <div class="form-group">
+                            <div class="form-group-sm">
                                 <input class="form-control" id="datetime" type="datetime-local" step="1" v-model="transaction_at">
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <label for="">備註</label>
+                            <textarea class="form-control" rows="5" v-model="note"></textarea>
+                        </div>
                     </div>
-                    <label for="">備註</label>
-                    <textarea class="form-control" rows="2" v-model="note"></textarea>
 
                 </div>
 
