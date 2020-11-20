@@ -36,4 +36,9 @@ class Ticket extends Model
     {
         return $query->orderBy('created_at', 'desc')->get();
     }
+
+    public function customer()
+    {
+        return $this->belongsTo('App\Models\Customer', 'customer_id');
+    }
 }

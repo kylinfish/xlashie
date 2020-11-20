@@ -21,8 +21,24 @@
                             <ul class="list-group">
                                 @foreach ($recently_tickets as $ticket)
                                 <li class="list-group-item">
-                                    <span class="float-left">金額: {{ number_format($ticket->price) }}</span>
-                                    <span class="float-right">{{ $ticket->created_at }}</span></li>
+                                  <div class="row align-items-center">
+                                    <div class="col">
+                                      <h4 class="mb-0 text-gray">
+                                            <a href="/customers/{{ $ticket->customer->uuid }}">
+                                                 {{ $ticket->customer->name }} <i class="pl-1 fa fa-external-link-alt"></i>
+                                            </a>
+                                      </h4>
+                                    </div>
+                                    <div class="col-5">
+                                        <i class="text-primary fa fa-dollar-sign"></i>
+                                        金額: {{ number_format($ticket->price) }}
+                                    </div>
+                                    <div class="col-2">
+                                      <i class="text-success ni ni-calendar-grid-58"></i>
+                                      <small>{{ $ticket->created_at->diffForHumans() }}</small>
+                                    </div>
+                                  </div>
+                                </li>
                                 @endforeach
                             </ul>
                         @else
