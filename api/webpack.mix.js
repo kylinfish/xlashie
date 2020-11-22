@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-
+const webpack = require('webpack');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -16,3 +16,18 @@ mix
     .js('resources/js/customer/app.js', 'public/js/customers/')
 
     .sass('resources/sass/app.scss', 'public/css');
+
+
+
+
+module.exports = {
+    configureWebpack: {
+        plugins: [
+            new webpack.ProvidePlugin({
+                $: 'jquery',
+                jQuery: 'jquery',
+                'windows.jQuery': 'jquery',
+            }),
+        ],
+    },
+};
