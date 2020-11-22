@@ -173,6 +173,7 @@ class CreateTables extends Migration
             $table->increments('id')->unsigned();
             $table->integer('company_id')->unsigned();
             $table->integer('customer_id')->unsigned();
+            $table->integer('note_id')->unsigned();
 
             $table->string('product_name', 50);
             $table->tinyInteger('status')->default(-1);

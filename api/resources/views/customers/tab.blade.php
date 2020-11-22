@@ -22,13 +22,7 @@
             </div>
         </a>
     </li>
-    <li data-toggle="tab" role="tablist" class="nav-item active">
-        <a data-toggle="tab" role="tablist" href="#note" class="nav-link">
-            <div>
-                <span><i class="ni ni-single-copy-04 pr-2"></i>消費筆記</span>
-            </div>
-        </a>
-    </li>
+
     <li data-toggle="tab" role="tablist" class="nav-item active">
         <a data-toggle="tab" role="tablist" href="#profile" class="nav-link">
             <div>
@@ -47,9 +41,6 @@
     </div>
     <div id="transaction" class="tab-pane">
         <transaction-page></transaction-page>
-    </div>
-    <div id="note" class="tab-pane">
-        <note-page></note-page>
     </div>
     <div id="purchase" class="tab-pane active">
         <purchase-page></purchase-page>

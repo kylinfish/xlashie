@@ -38,12 +38,14 @@ class InvNotes extends BaseController
         if (! $customer = u_customer($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
-        InvNote::create([
+
+        $invnote = InvNote::create([
             'company_id' => auth()->user()->company->id,
             'customer_id' => $customer->id,
             'note' => $params['note'],
             'inventory_id' => $params['inventory_id'] ?? 0,
         ]);
+        $customer->inventory->find($params['inventory_id'])->update(['note_id' => $invnote->id]);
 
         return response()->json(["message" => "ok"], 200);
     }
@@ -62,11 +64,15 @@ class InvNotes extends BaseController
 
     public function delete(Request $request, string $customer_uuid, string $note_id)
     {
+        $params = $request->only(["inventory_id"]);
+
         if (! $customer = u_customer($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
 
         $customer->notes()->find($note_id)->delete();
+        $customer->inventory->find($params['inventory_id'])->update(['note_id' => null]);
+
         return response()->json(["message" => "ok"], 200);
     }
 }

@@ -19,11 +19,11 @@
                 <td class="text-center">{{ transaction.price | formatNumber }}</td>
                 <td class="text-center">{{ transaction.payment }}</td>
                 <td class="text-center">
-                    <a href="#" class="btn btn-outline-default btn-sm" data-toggle="modal" data-target="#transaction-modal" @click="fillModal(transaction.id)">
+                    <a href="#" class="btn btn-default btn-sm" data-toggle="modal" data-target="#transaction-modal" @click="fillModal(transaction.id)">
                         <span class="btn-inner--icon">
                             <i class="ni ni-settings-gear-65"></i>
                         </span>
-                        細節
+                        檢視
                     </a>
                 </td>
             </tr>

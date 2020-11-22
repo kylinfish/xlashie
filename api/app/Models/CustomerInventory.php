@@ -19,6 +19,7 @@ class CustomerInventory extends Model
     protected $fillable = [
         'customer_id',
         'company_id',
+        'note_id',
         'product_name',
         'status',
         'create_at',
@@ -60,4 +61,8 @@ class CustomerInventory extends Model
         return is_null($date) ? null : Carbon::parse($date);
     }
 
+    public function note()
+    {
+        return $this->hasOne('App\Models\InvNote', 'note_id');
+    }
 }

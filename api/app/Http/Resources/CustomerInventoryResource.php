@@ -18,7 +18,7 @@ class CustomerInventoryResource extends JsonResource
         $use_at = is_null($this->use_at) ? null : $this->use_at->format("Y-m-d\TH:i");
         return [
             "id" => $this->id,
-            "note" => $this->note,
+            "note_id" => $this->note_id,
             "product_name" => $this->product_name,
             "status" => $this->status,
             "status_str" => CustomerInventory::getStatusWording($this->status),
