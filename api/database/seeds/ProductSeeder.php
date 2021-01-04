@@ -51,6 +51,7 @@ class ProductSeeder extends Seeder
 
         DB::table('menus')->insert([
             'company_id' => 1,
+            'price' => "1500",
             'name' => "日本凝膠指甲 - 璀璨凝膠",
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
@@ -58,7 +59,7 @@ class ProductSeeder extends Seeder
 
         DB::table('menus')->insert([
             'company_id' => 1,
-            'price' => "1200",
+            'price' => 5000,
             'name' => "日本凝膠指甲 - 透明凝膠 x 5",
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
