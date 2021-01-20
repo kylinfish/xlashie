@@ -8,20 +8,11 @@ use App\Models\Ticket;
 use App\Models\OrderItem;
 use App\Models\Customer;
 use App\Models\CustomerInventory;
-use App\Repositories\TicketRepository;
 use App\Repositories\CustomerInventoryRepository;
 
 
 class TicketService
 {
-    public function __construct(
-        TicketRepository $ticket_repo,
-        CustomerInventoryRepository $c_inv_repo
-    ) {
-        $this->ticket_repo = $ticket_repo;
-        $this->c_inv_repo = $c_inv_repo;
-    }
-
     public function createOrder($company_id, array $data)
     {
         $data["customer_id"] = Customer::where('uuid', $data['customer_uuid'])->first()->id;
@@ -57,6 +48,6 @@ class TicketService
                 ];
             }
         }
-        $this->c_inv_repo->insert($inventories);
+        CustomerInventory::insert($inventories);
     }
 }

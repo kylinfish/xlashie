@@ -23,7 +23,7 @@ class Transactions extends BaseController
             return response()->json(["message" => "查無此使用者"], 422);
         }
 
-        return TicketResource::collection($customer->ticket()->orderby("id", "desc")->get());
+        return TicketResource::collection($customer->ticket()->orderby("created_at", "desc")->get());
     }
 
     public function store(Request $request, string $customer_uuid)

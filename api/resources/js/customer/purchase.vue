@@ -118,6 +118,8 @@
                                     <option value="現金">現金</option>
                                     <option value="轉帳/匯款">轉帳/匯款</option>
                                     <option value="預扣">預扣</option>
+                                    <option value="電子支付">電子支付</option>
+                                    <option value="信用卡">信用卡</option>
                                 </select>
                             </div>
                             <label>日期</label>
