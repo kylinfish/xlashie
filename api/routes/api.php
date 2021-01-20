@@ -47,4 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Products
     Route::get('products', 'Products@index');
     Route::get('products/{product_id}', 'Products@show');
+
+    // Report / Dashboard
+    Route::get('reports/', 'Reports@index');
 });

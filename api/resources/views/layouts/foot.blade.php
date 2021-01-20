@@ -3,15 +3,7 @@
 <script src="{{ asset('assets/vendor/js-cookie/js.cookie.js') }}"></script>
 <script src="{{ asset('assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
-
-
-<!-- dashboard -->
-<script src="{{ asset('assets/vendor/chart.js/dist/Chart.min.js') }}"></script>
-<script src="{{ asset('assets/vendor/chart.js/dist/Chart.extension.js') }}"></script>
-
-<!-- calendar -->
-<script src="{{ asset('assets/vendor/moment/min/moment.min.js') }}"></script>
-<script src="{{ asset('assets/vendor/fullcalendar/dist/fullcalendar.min.js') }}"></script>
+@stack('footer-scripts')
 <script src="{{ asset('assets/vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 <script>
 $(".alert").fadeTo(2000, 500).slideUp(500, function(){
@@ -19,6 +11,4 @@ $(".alert").fadeTo(2000, 500).slideUp(500, function(){
 });
 </script>
 
-
-<script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
 <script src="/assets/js/demo.min.js"></script>

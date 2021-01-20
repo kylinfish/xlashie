@@ -13,75 +13,76 @@
             <div class="col-lg-6">
                 <div class="table-default p-3 rounded shadow-sm mb-4">
                     @if ($customer_count == 0)
-                        <h3>請先進行 <a class="text-primary" href="/customers/?wizard=1">客戶新增</a>，方可瀏覽近期交易紀錄</h3>
+                    <h3>請先進行 <a class="text-primary" href="/customers/?wizard=1">客戶新增</a>，方可瀏覽近期交易紀錄</h3>
                     @else
-                        <h3>近期交易紀錄</h3>
-                        <div>
+                    <h3>近期交易紀錄</h3>
+                    <div>
                         @if ($recently_tickets)
-                            <ul class="list-group">
-                                @foreach ($recently_tickets as $ticket)
-                                <li class="list-group-item">
-                                  <div class="row align-items-center">
+                        <ul class="list-group">
+                            @foreach ($recently_tickets as $ticket)
+                            <li class="list-group-item">
+                                <div class="row align-items-center">
                                     <div class="col">
-                                      <h4 class="mb-0 text-gray">
+                                        <h4 class="mb-0 text-gray">
                                             <a href="/customers/{{ $ticket->customer->uuid }}">
-                                                 {{ $ticket->customer->name }} <i class="pl-1 fa fa-external-link-alt"></i>
+                                                {{ $ticket->customer->name }} <i
+                                                    class="pl-1 fa fa-external-link-alt"></i>
                                             </a>
-                                      </h4>
+                                        </h4>
                                     </div>
-                                    <div class="col-5">
+                                    <div class="col-4">
                                         <i class="text-primary fa fa-dollar-sign"></i>
                                         金額: {{ number_format($ticket->price) }}
                                     </div>
-                                    <div class="col-2">
-                                      <i class="text-success ni ni-calendar-grid-58"></i>
-                                      <small>{{ $ticket->created_at->diffForHumans() }}</small>
+                                    <div class="col-3 text-center">
+                                        <i class="text-success ni ni-calendar-grid-58"></i>
+                                        <small>{{ $ticket->created_at->diffForHumans() }}</small>
                                     </div>
-                                  </div>
-                                </li>
-                                @endforeach
-                            </ul>
+                                </div>
+                            </li>
+                            @endforeach
+                        </ul>
                         @else
                         <p class="pl-5 pt-2">最近沒有新的交易紀錄</p>
                         @endif
-                        </div>
+                    </div>
                     @endif
                 </div>
             </div>
             <div class="col-lg-6 ">
                 <div class="table-primary p-3 rounded shadow-sm mb-4">
-                <h3>功能選單</h3>
-                <div class="row">
-                    <div class="col-6">
-                        <a class="card shadow border-0" href="/company/">
-                            <div class="card-body text-center">
-                                <h4 class="h2 text-primary text-uppercase"> <i class="fas fa-store"></i> 店家資訊</h4>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6">
-                        <a class="card shadow border-0" href="/menus/">
-                            <div class="card-body text-center">
-                                <h4 class="h2 text-primary text-uppercase"><i class="fas fa-bars"></i> 營業項目</h4>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6">
-                        <a class="card shadow border-0" href="/customers/">
-                            <div class="card-body text-center">
-                                <h4 class="h2 text-primary text-uppercase"><i class="fas fa-users"></i> 客戶管理</h4>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6">
-                        <a class="card shadow border-0" href="/dashboard/">
-                            <div class="card-body text-center">
-                                <h4 class="h2 text-gray text-uppercase"> <i class="fas fa-chart-line"></i> 報表 <small>(預覽)</small></h4>
-                            </div>
-                        </a>
+                    <h3>功能選單</h3>
+                    <div class="row">
+                        <div class="col-6">
+                            <a class="card shadow border-0" href="/company/">
+                                <div class="card-body text-center">
+                                    <h4 class="h2 text-primary text-uppercase"> <i class="fas fa-store"></i> 店家資訊</h4>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a class="card shadow border-0" href="/menus/">
+                                <div class="card-body text-center">
+                                    <h4 class="h2 text-primary text-uppercase"><i class="fas fa-bars"></i> 營業項目</h4>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a class="card shadow border-0" href="/customers/">
+                                <div class="card-body text-center">
+                                    <h4 class="h2 text-primary text-uppercase"><i class="fas fa-users"></i> 客戶管理</h4>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a class="card shadow border-0" href="/dashboard/">
+                                <div class="card-body text-center">
+                                    <h4 class="h2 text-primary text-uppercase"> <i class="fas fa-tachometer-alt"></i> 圖表總覽</h4>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
     </div>
