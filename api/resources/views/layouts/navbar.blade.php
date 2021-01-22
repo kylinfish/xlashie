@@ -29,12 +29,12 @@
             <ul class="navbar-nav  mr-auto">
                 <li class="nav-item">
                     <a href="/" class="nav-link">
-                        <span class="nav-link-inner--text"><i class="text-pink fa fa-th-large"></i> 主選單</span>
+                        <span class="nav-link-inner--text"><i class="text-pink fa fa-th-large"></i> 首頁</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="/menus/" class="nav-link">
-                        <span class="nav-link-inner--text"><i class="text-info fas fa-bars"></i> 營業項目</span>
+                        <span class="nav-link-inner--text"><i class="text-info fas fa-cube"></i> 營業項目</span>
                     </a>
                 </li>
                 <li class="nav-item">

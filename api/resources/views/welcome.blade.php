@@ -10,6 +10,44 @@
                 @include('common.search')
             </div>
             @endif
+
+            <div class="col-lg-6 ">
+                <div class="table-primary p-3 rounded shadow-sm mb-4">
+                    <h3>選單</h3>
+
+                    <div class="col">
+                        <a class="card shadow border-0" href="/menus/">
+                            <div class="card-body text-center">
+                                <h4 class="h2 text-primary text-uppercase"><i class="fas fa-cube"></i> 營業項目</h4>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a class="card shadow border-0" href="/customers/">
+                            <div class="card-body text-center">
+                                <h4 class="h2 text-primary text-uppercase"><i class="fas fa-users"></i> 客戶管理</h4>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col">
+                        <a class="card shadow border-0" href="/orders/">
+                            <div class="card-body text-center">
+                                <h4 class="h2 text-primary text-uppercase"> <i class="fas fa-bars"></i> 歷史訂單</h4>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a class="card shadow border-0" href="/dashboard/">
+                            <div class="card-body text-center">
+                                <h4 class="h2 text-primary text-uppercase"> <i class="fas fa-tachometer-alt"></i> 圖表總覽
+                                </h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-lg-6">
                 <div class="table-default p-3 rounded shadow-sm mb-4">
                     @if ($customer_count == 0)
@@ -47,41 +85,6 @@
                         @endif
                     </div>
                     @endif
-                </div>
-            </div>
-            <div class="col-lg-6 ">
-                <div class="table-primary p-3 rounded shadow-sm mb-4">
-                    <h3>功能選單</h3>
-                    <div class="row">
-                        <div class="col-6">
-                            <a class="card shadow border-0" href="/company/">
-                                <div class="card-body text-center">
-                                    <h4 class="h2 text-primary text-uppercase"> <i class="fas fa-store"></i> 店家資訊</h4>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-6">
-                            <a class="card shadow border-0" href="/menus/">
-                                <div class="card-body text-center">
-                                    <h4 class="h2 text-primary text-uppercase"><i class="fas fa-bars"></i> 營業項目</h4>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-6">
-                            <a class="card shadow border-0" href="/customers/">
-                                <div class="card-body text-center">
-                                    <h4 class="h2 text-primary text-uppercase"><i class="fas fa-users"></i> 客戶管理</h4>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-6">
-                            <a class="card shadow border-0" href="/dashboard/">
-                                <div class="card-body text-center">
-                                    <h4 class="h2 text-primary text-uppercase"> <i class="fas fa-tachometer-alt"></i> 圖表總覽</h4>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

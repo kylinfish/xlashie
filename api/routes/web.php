@@ -12,7 +12,7 @@
 */
 
 Route::middleware('auth')->group(function () {
-    Route::get('/','IndexController@index');
+    Route::get('/', 'IndexController@index');
 
     Route::get('/company/', 'CompanyController@show');
     Route::get('/company/create', 'CompanyController@create');
@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('products', 'ProductController');
     Route::get('products/create', 'ProductController@create');
     Route::resource('menus', 'MenuController');
-
+    Route::get('/orders/', 'OrderController@index');
 });
 
 /*

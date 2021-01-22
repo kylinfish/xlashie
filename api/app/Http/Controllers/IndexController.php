@@ -16,10 +16,9 @@ class IndexController extends \App\Http\Controllers\Controller
         $recently_tickets = [];
         if (auth()->user()->company) {
             $recently_tickets = Ticket::where("company_id", auth()->user()->company->id)->with("customer")
-                ->orderBy("created_at", "DESC")->limit(5)->get();
+                ->orderBy("created_at", "DESC")->limit(8)->get();
         }
 
         return view("welcome", compact("customer_count", "recently_tickets"));
     }
-
 }
