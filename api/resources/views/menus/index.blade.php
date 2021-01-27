@@ -52,7 +52,7 @@
                         <td>{{ \App\Models\CustomerInventory::getStatusWording($menu->init_status) }}</td>
                         <td>{{ $menu->created_at}}</td>
                         <td class="text-right form-inline">
-                            <a href="/menus/{{ $menu->id }}" class="btn btn-outline-default">瀏覽</a>
+                            <a href="/menus/{{ $menu->id }}" class="btn btn-outline-default">編輯</a>
                             <form action="/menus/{{ $menu->id }}" method="POST">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}

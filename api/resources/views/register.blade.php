@@ -9,7 +9,7 @@
                 <div class="header-body text-center mb-7">
                     <div class="row justify-content-center">
                         <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-                            <h1 class="text-white">加入 Venus</h1>
+                            <h1 class="text-white">加入 xlashie</h1>
                         </div>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                 <div class="col-lg-6 col-md-8">
                     <div class="card bg-secondary border-0">
                         <div class="card-header bg-transparent pb-5">
-                            <div class="text-muted text-center mt-2 mb-4"><small>使用第三方註冊，開始你的 Venus 使用體驗吧</small></div>
+                            <div class="text-muted text-center mt-2 mb-4"><small>使用第三方註冊，開始你的 xlashie 使用體驗吧</small></div>
                             <div class="text-center">
                                 <a href="/" class="btn btn-neutral btn-icon mr-4">
                                     <span class="btn-inner--icon"><img

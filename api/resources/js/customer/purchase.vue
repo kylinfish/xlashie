@@ -48,7 +48,10 @@
         <div class="row card-body">
             <div class="col-md-12">
             <div v-show="form.items.length <= 0">
-                <p class="lead text-center">選擇您的<b class="text-warning">「營業項目」</b> 下拉選單並點擊 <button class="btn btn-success btn-sm" disabled>加入</button> 按鈕來新增購買訂單吧!</p>
+                <a href="/menus" v-if="this.menus.length == 0"><p class="text-center text-indigo">請先新增您的營業項目，讓系統幫您自動帶入設定 [點擊前往] <i class="fa fa-arrow-right"></i></p></a>
+
+                <p v-else class="lead text-center">選擇您的<b class="text-warning">「營業項目」</b> 下拉選單並點擊 <button class="btn btn-success btn-sm" disabled>加入</button> 按鈕來新增購買訂單吧!</p>
+
             </div>
             <div v-show="form.items.length >0">
 

@@ -1,9 +1,9 @@
 <nav id="navbar-main" class="navbar navbar-horizontal navbar-main navbar-expand-lg navbar-dark bg-primary">
     <div class="container col-md-12">
-        {{-- <a class="navbar-brand" href="./pages/dashboards/dashboard.html">
-            <img src="/assets/img/brand/white.png">
-        </a> --}}
-        <a href="/" class="text-white h2 mr-3 mt-2">Venus SOHO </a>
+        <a class="navbar-brand" href="/">
+            <img class="mt-n2" src="/assets/img/brand/logo.png">
+            xlashie
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse"
             aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -67,6 +67,7 @@
                         <div class="dropdown-header noti-title  d-none d-lg-block">
                             <h6 class="text-overflow m-0">今天好嗎!</h6>
                         </div>
+                        <!--
                         <a href="#!" class="dropdown-item disabled">
                             <i class="ni ni-single-02"></i>
                             <span>帳號資料</span>
@@ -74,7 +75,7 @@
                         <a href="#!" class="dropdown-item disabled">
                             <i class="ni ni-settings-gear-65"></i>
                             <span>設定</span>
-                        </a>
+                        </a>-->
                         <div class="dropdown-divider"></div>
                         <a href="/auth/logout" class="dropdown-item">
                             <i class="ni ni-user-run"></i>

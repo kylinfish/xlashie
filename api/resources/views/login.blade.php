@@ -8,7 +8,7 @@
                 <div class="header-body text-center mb-lg-7 mb-md-3">
                     <div class="row justify-content-center">
                         <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-                            <h1 class="text-white">歡迎 Venus SOHO!</h1>
+                            <h1 class="text-white">歡迎 xlashie!</h1>
                             <h3 class="text-orange">Preview</h3>
                             <p class="mt-3 text-lead text-white">使用社群登入開始輕鬆經營你的客戶吧</p>
                         </div>

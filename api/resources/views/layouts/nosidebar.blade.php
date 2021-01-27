@@ -4,7 +4,7 @@
     <div class="main-content" id="panel">
         <nav class="navbar fixed-top navbar-expand navbar-dark bg-primary border-bottom">
             <div class="container-fluid">
-                <a href="/" class="text-white h2 mr-3 mt-2">Venus SOHO</a>
+                <a href="/" class="text-white h2 mr-3 mt-2">Xlashie</a>
                 <ul class="navbar-nav  mr-auto">
                     <li class="nav-item">
                         <a href="/" class="nav-link">

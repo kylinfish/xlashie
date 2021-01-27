@@ -12,8 +12,11 @@
     <!-- Card header -->
     <div class="card-header border-0">
     </div>
-
+    @if (count($orders) == 0)
+        <div class="badge badge-warning"><h3>從建立您的第一筆訂單開始吧</h3></div>
+    @else
     <div class="table-responsive">
+
         <table class="table table-sm align-items-center table-flush table-hover">
             <thead class="thead-light">
                 <tr>
@@ -38,6 +41,7 @@
 
             </tbody>
         </table>
+
     </div>
 
     <div class="card-footer py-4 table-action">
@@ -45,6 +49,7 @@
             {{ $orders->withPath(request()->url())->links() }}
         </div>
     </div>
+    @endif
 </div>
 
 </div>
