@@ -24,7 +24,7 @@ class CompanyController extends \App\Http\Controllers\Controller
     {
         if (user()->company or Company::where('owner_id', user()->id)->first()) {
             return redirect('/')
-            ->with(['alert' => 'warning', 'message' => '您已經擁有屬於自己的店家']);
+                ->with(['alert' => 'warning', 'message' => '您已經擁有屬於自己的店家']);
         }
         return view('companies.create');
     }
@@ -34,18 +34,20 @@ class CompanyController extends \App\Http\Controllers\Controller
         $params = $request->only(['name', 'account', 'contact', 'description']);
         if ($errors = $form->validate($params)) {
             return redirect()->back()
-            ->with(['alert' => 'warning', 'message' => '新增失敗'])
-            ->withErrors($errors)
-            ->withInput($request->all());
+                ->with(['alert' => 'warning', 'message' => '新增失敗'])
+                ->withErrors($errors)
+                ->withInput($request->all());
         }
 
         $company = Company::create([
             'owner_id' => user()->id,
             'name' => $params['name'],
-            'account' => $params['account'],
+            'account' => $params['account'] ?? '',
             'contact' => $params['contact'] ?? '',
             'description' => $params['description'] ?? '',
         ]);
+
+        user()->update(['company_id' => $company->id]);
 
         return redirect('/menus/?wizard=1')->with(['alert' => 'success', 'message' => '新增成功，從新增你的 [服務項目] 開始吧']);
     }

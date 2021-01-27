@@ -28,7 +28,7 @@ class CreateTables extends Migration
             $table->timestamp('failed_at')->useCurrent();
         });
 
-        Schema::create('users', function($table) {
+        Schema::create('users', function ($table) {
             $table->increments('id')->unsigned();
 
             $table->integer('company_id')->unsigned()->default(0);
@@ -53,23 +53,21 @@ class CreateTables extends Migration
             $table->index('phone');
         });
 
-        Schema::create('companies', function($table) {
+        Schema::create('companies', function ($table) {
             $table->increments('id')->unsigned();
 
             $table->integer('owner_id')->unsigned();
             $table->string('name', 30);
-            $table->string('account', 30);
+            $table->string('account', 30)->default('');
             $table->string('contact', 50)->default('');
             $table->string('description', 100)->default('');
             $table->timestamps();
 
             // index
             $table->unique('account');
-            $table->unique('owner_id');
-
         });
 
-        Schema::create('customers', function($table) {
+        Schema::create('customers', function ($table) {
             $table->increments('id')->unsigned();
 
             $table->integer('user_id')->unsigned();
@@ -96,7 +94,7 @@ class CreateTables extends Migration
             $table->index('phone');
         });
 
-        Schema::create('customer_notes', function($table) {
+        Schema::create('customer_notes', function ($table) {
             $table->increments('id')->unsigned();
             $table->integer('company_id')->unsigned();
             $table->integer('customer_id')->unsigned();
@@ -211,6 +209,5 @@ class CreateTables extends Migration
         Schema::dropIfExists('order_items');
         Schema::dropIfExists('customer_inventories');
         Schema::dropIfExists('customer_notes');
-
     }
 }

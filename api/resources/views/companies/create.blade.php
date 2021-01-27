@@ -18,13 +18,13 @@
             <!-- {{ csrf_field() }} -->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">從建立你的專屬公司/店家開始吧</h5>
+                    <h5 class="modal-title">建立您的事業與店家吧！</h5>
                     <h5 class="float-right"> <span class="text-warning">*</a> 為必填</h5>
                 </div>
                 <div class="modal-body">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label class="form-control-label"><span class="text-danger">*</span> 公司名稱</label>
+                            <label class="form-control-label"><span class="text-danger">*</span> 店家名稱</label>
                             @error('name')
                             <span class="text-danger float-right">{{ $message }}</span>
                             @enderror
@@ -32,6 +32,7 @@
                                 name="name" placeholder="公司/店家名稱" value="{{ old('name') }}" required>
                         </div>
                     </div>
+                    <!--
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label"><span class="text-danger">*</span> 英文公司帳號</label>
@@ -69,6 +70,7 @@
                                 placeholder="店家或服務描述 (最多 100 字)">{{ old('description') }}</textarea>
                         </div>
                     </div>
+                -->
                 </div>
                 <div class="modal-footer">
                     <a href="/" class="btn btn-secondary" data-dismiss="modal">取消</a>

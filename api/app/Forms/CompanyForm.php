@@ -7,7 +7,7 @@ class Companyform extends BaseForm
 {
     protected $store = [
         'name' => 'required|string|max:30',
-        'account' => 'required|string|max:30|unique:companies,account',
+        'account' => 'string|max:30|unique:companies,account',
         'contact' => 'nullable|string|max:50',
         'description' => 'nullable|string|max:100',
     ];

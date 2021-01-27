@@ -23,10 +23,10 @@ class UserService
     public function getOrCreate(SocialUser $auth_user, $identify_provider)
     {
         if (empty($auth_user->email)) {
-            throw new InvalidArgumentException('使帳號缺乏帳戶辨識使用的 Eamil');
+            throw new InvalidArgumentException('此帳號缺乏辨識使用的 Eamil');
         }
         $user = \App\Models\User::where(['identify_id' => $auth_user->id])->first();
-        if (! empty($user)) {
+        if (!empty($user)) {
             return $user;
         }
 
