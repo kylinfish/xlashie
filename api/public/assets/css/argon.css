@@ -5766,7 +5766,7 @@ input[type='button'].btn-block
 
     display: flex;
 
-    padding: 1rem 1rem;
+    padding: .6rem 1rem;
 
     flex-wrap: wrap;
     align-items: center;
@@ -6200,7 +6200,7 @@ input[type='button'].btn-block
 
 .navbar-dark .navbar-brand
 {
-    color: rgba(255, 255, 255, .65);
+    color: white;
 }
 .navbar-dark .navbar-brand:hover,
 .navbar-dark .navbar-brand:focus
@@ -21516,7 +21516,7 @@ textarea[resize='horizontal']
 
 .navbar-horizontal .navbar-nav .nav-link
 {
-    font-size: .875rem;
+    font-size: 1rem;
     font-weight: 500;
 
     letter-spacing: 0;
@@ -21529,12 +21529,11 @@ textarea[resize='horizontal']
 
 .navbar-horizontal .navbar-brand
 {
-    font-size: .875rem;
-    font-size: .875rem;
-    font-weight: 600;
+    font-size: 1.1rem;
+    font-weight: 650;
 
-    letter-spacing: .05px;
-    text-transform: uppercase;
+    letter-spacing: 4px;
+    #text-transform: uppercase;
 }
 .navbar-horizontal .navbar-brand img
 {
@@ -21560,7 +21559,7 @@ textarea[resize='horizontal']
 {
     .navbar-horizontal .navbar-nav .nav-item
     {
-        margin-right: .5rem;
+        margin-right: .3rem;
     }
     .navbar-horizontal .navbar-nav .nav-item [data-toggle='dropdown']::after
     {
