@@ -23,10 +23,10 @@ class Ticket extends Model
 
     protected $guarded = [];
 
-    protected $attrubutes = [];
+    protected $attributes = [];
 
     protected $dateFormat = 'Y-m-d H:i:s';
-    
+
     public function order_items()
     {
         return $this->hasMany('App\Models\OrderItem', 'order_id', 'id');

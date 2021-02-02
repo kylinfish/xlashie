@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use Cache;
@@ -23,24 +24,35 @@ class UserService
     public function getOrCreate(SocialUser $auth_user, $identify_provider)
     {
         if (empty($auth_user->email)) {
-            throw new InvalidArgumentException('此帳號缺乏辨識使用的 Eamil');
+            throw new \InvalidArgumentException('此帳號缺乏辨識使用的 Eamil');
         }
         $user = \App\Models\User::where(['identify_id' => $auth_user->id])->first();
         if (!empty($user)) {
             return $user;
         }
 
-        return \App\Models\User::create([
+        $user = \App\Models\User::create([
             'uuid' => Str::random(18),
             'name' => $auth_user->name ?? explode('@', $auth_user->email)[0],
             'email' => $auth_user->email,
             'avatar' => $auth_user->avatar ?? config('user.default_avatar'),
             'password' => '',
             'phone' => '',
-            'company_id' => 0,
             'identify_id' => $auth_user->id,
             'identify_provider' => $identify_provider,
             'birth' => null,
         ]);
+
+        $company = \App\Models\Company::create([
+            'owner_id' => $user->id,
+            'name' => '',
+            'account' => '',
+            'contact' => '',
+            'description' => '',
+        ]);
+
+        $user->update(["company_id" => $company->id]);
+
+        return $user;
     }
 }

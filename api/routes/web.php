@@ -30,10 +30,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/customers/search', 'CustomerController@search');
     Route::resource('customers', 'CustomerController');
-    Route::resource('products', 'ProductController');
-    Route::get('products/create', 'ProductController@create');
     Route::resource('menus', 'MenuController');
-    Route::get('/orders/', 'OrderController@index');
+    Route::get('/orders/', 'TicketController@index');
 });
 
 /*

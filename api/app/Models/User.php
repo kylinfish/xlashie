@@ -47,7 +47,7 @@ class User extends Authenticatable
 
     protected $guarded = [];
 
-    protected $attrubutes = [
+    protected $attributes = [
         'password' => '',
         'phone' => '',
         'identify_id' => '',

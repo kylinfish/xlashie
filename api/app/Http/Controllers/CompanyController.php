@@ -1,9 +1,9 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Repositories\DiscountRepositoy;
 use App\Forms\CompanyForm;
 use App\Models\Company;
 use App\Models\Customer;
@@ -13,7 +13,7 @@ class CompanyController extends \App\Http\Controllers\Controller
 {
     public function show()
     {
-        if ($company = user()->company or $company = Company::where('owner_id', user()->id)->first()) {
+        if ($company = my_comp()) {
             return view('companies.show', compact('company'));
         }
 
@@ -22,7 +22,7 @@ class CompanyController extends \App\Http\Controllers\Controller
 
     public function create()
     {
-        if (user()->company or Company::where('owner_id', user()->id)->first()) {
+        if ($company = my_comp()) {
             return redirect('/')
                 ->with(['alert' => 'warning', 'message' => '您已經擁有屬於自己的店家']);
         }
@@ -131,10 +131,9 @@ class CompanyController extends \App\Http\Controllers\Controller
      */
     public function googleCallback(Request $request)
     {
-        dd(session('company_id'));
         $auth_user = Socialite::driver('google')->user();
         if (empty($auth_user->email)) {
-            throw new InvalidArgumentException('使帳號缺乏帳戶辨識使用的 Eamil');
+            throw new \InvalidArgumentException('使帳號缺乏帳戶辨識使用的 Eamil');
         }
 
         $customer = Customer::create([

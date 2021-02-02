@@ -17,7 +17,7 @@ class Menu extends Model
 
     protected $guarded = [];
 
-    protected $attrubutes = [];
+    protected $attributes = [];
 
     protected $dateFormat = 'Y-m-d H:i:s';
 

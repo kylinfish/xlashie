@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -11,13 +12,11 @@ class IndexController extends \App\Http\Controllers\Controller
 
     public function index(Request $request)
     {
-        $customer_count = Customer::where("user_id", auth()->user()->id)->count();
+        $customer_count = my_customer()->count();
 
         $recently_tickets = [];
-        if (auth()->user()->company) {
-            $recently_tickets = Ticket::where("company_id", auth()->user()->company->id)->with("customer")
-                ->orderBy("created_at", "DESC")->limit(8)->get();
-        }
+        $recently_tickets = my_comp()->ticket()->with("customer")
+            ->orderBy("created_at", "DESC")->limit(8)->get();
 
         return view("welcome", compact("customer_count", "recently_tickets"));
     }

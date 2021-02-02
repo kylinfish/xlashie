@@ -25,6 +25,16 @@ class Company extends Model
 
     public function menu()
     {
-        return $this->hasMany('App\Models\Menu', 'company_id', 'id')->orderBy('id', 'asc');
+        return $this->hasMany('App\Models\Menu', 'company_id', 'id');
+    }
+
+    public function customer()
+    {
+        return $this->hasMany('App\Models\Customer', 'company_id', 'id');
+    }
+
+    public function ticket()
+    {
+        return $this->hasMany('App\Models\Ticket', 'company_id', 'id');
     }
 }

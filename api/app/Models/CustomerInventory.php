@@ -12,7 +12,7 @@ class CustomerInventory extends Model
     const STATUS_DONE = 1; // 已發放
     const STATUS_USED = 2;  // 已使用
     const STATUS_OWED = 3; // 積欠
-    const STATUS_CANCLED = 4; // 註銷
+    const STATUS_CANCELED = 4; // 註銷
 
     protected $table = "customer_inventories";
 
@@ -30,7 +30,7 @@ class CustomerInventory extends Model
 
     protected $guarded = [];
 
-    protected $attrubutes = [];
+    protected $attributes = [];
 
 
     public function customer()
@@ -51,7 +51,7 @@ class CustomerInventory extends Model
             CustomerInventory::STATUS_DONE => "已發放",
             CustomerInventory::STATUS_USED => "已使用",
             CustomerInventory::STATUS_OWED => "積欠未發",
-            CustomerInventory::STATUS_CANCLED => "註銷失效",
+            CustomerInventory::STATUS_CANCELED => "註銷失效",
         ];
         return $status_map[$status];
     }

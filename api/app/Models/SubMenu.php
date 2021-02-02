@@ -16,10 +16,10 @@ class SubMenu extends Model
 
     protected $guarded = [];
 
-    protected $attrubutes = [];
+    protected $attributes = [];
 
     protected $dateFormat = 'Y-m-d H:i:s';
-    
+
     public function product()
     {
         return $this->hasOne('App\Models\Product', 'id', 'product_id');

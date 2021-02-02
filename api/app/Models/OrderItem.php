@@ -11,7 +11,7 @@ class OrderItem extends Model
     protected $fillable = [
         'order_id',
         'product_name',
-        'qnantity',
+        'quantity',
         'unit_price',
     ];
 
@@ -19,10 +19,10 @@ class OrderItem extends Model
 
     protected $guarded = [];
 
-    protected $attrubutes = [];
+    protected $attributes = [];
 
     protected $dateFormat = 'Y-m-d H:i:s';
-    
+
     public function ticket()
     {
         return $this->hasOne('App\Models\Ticket', 'order_id', 'id');

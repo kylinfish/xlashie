@@ -29,7 +29,7 @@ class Product extends Model
 
     protected $guarded = [];
 
-    protected $attrubutes = [
+    protected $attributes = [
         'name'   => '',
         'avatar' => '',
     ];

@@ -11,33 +11,23 @@ if (!function_exists('user')) {
         return auth()->user();
     }
 }
-
-if (!function_exists('u_customer')) {
-    /**
-     * Get the customer who belongs to Auth User
-     *
-     * @return \App\Models\Customer
-     */
-    function u_customer(string $uuid)
+if (!function_exists('my_comp')) {
+    function my_comp()
     {
-        return \App\Models\Customer::where([
-            "user_id" => auth()->user()->id,
-            "uuid" => $uuid
-        ])->first();
+        return \App\Models\Company::find(user()->company_id);
     }
 }
 
-if (!function_exists('u_menu_elo')) {
-    /**
-     * Get the customer who belongs to Auth User
-     *
-     * @return \App\Models\Menu
-     */
-    function u_menu_elo(int $menu_id)
+if (!function_exists('my_customer')) {
+    function my_customer()
     {
-        return \App\Models\Menu::where([
-            "id" => $menu_id,
-            "company_id" => auth()->user()->company_id,
-        ]);
+        return my_comp()->customer();
+    }
+}
+
+if (!function_exists('my_customer_by_uuid')) {
+    function my_customer_by_uuid(string $uuid)
+    {
+        return my_comp()->customer()->where(["uuid" => $uuid])->first();
     }
 }

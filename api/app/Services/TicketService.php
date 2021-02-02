@@ -1,21 +1,18 @@
 <?php
+
 namespace App\Services;
 
-use Cache;
 use Carbon\Carbon;
-use App\Models\Menu;
 use App\Models\Ticket;
 use App\Models\OrderItem;
 use App\Models\Customer;
 use App\Models\CustomerInventory;
-use App\Repositories\CustomerInventoryRepository;
-
 
 class TicketService
 {
     public function createOrder($company_id, array $data)
     {
-        $data["customer_id"] = Customer::where('uuid', $data['customer_uuid'])->first()->id;
+        $data["customer_id"] = my_customer_by_uuid($data['customer_uuid'])->id;
         $data["company_id"] = $company_id;
         $data["created_at"] = Carbon::parse($data["transaction_at"]);
 
@@ -41,6 +38,7 @@ class TicketService
                 $inventories[] = [
                     "customer_id" => $data["customer_id"],
                     "company_id" => $company_id,
+                    "note_id" => 0,
                     "product_name" => $item["itemName"],
                     "status" => $item["initStatus"],
                     "created_at" => $data["created_at"],

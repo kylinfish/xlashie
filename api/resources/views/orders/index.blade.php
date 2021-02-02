@@ -17,13 +17,13 @@
     @else
     <div class="table-responsive">
 
-        <table class="table table-sm align-items-center table-flush table-hover">
+        <table class="table align-items-center table-flush table-hover">
             <thead class="thead-light">
                 <tr>
                     <th class="text-center">客戶名稱</th>
                     <th class="text-center">訂單金額</th>
                     <th class="text-center">付款方式</th>
-                    <th class="text-center">細目數量</th>
+                    <th class="text-center">品項數量</th>
                     <th class="text-center">訂單時間</th>
                 </tr>
             </thead>

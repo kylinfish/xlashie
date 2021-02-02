@@ -13,7 +13,7 @@
                 <div class="col-lg-6">
                     <div class="form-group-sm">
                         <label class="form-control-label" for="email">Email</label>
-                        <input type="email" id="email" :class="['form-control', {'is-invalid': validation.hasError('customer.email')}]" v-model="customer.email" disabled required>
+                        <input type="email" id="email" :class="['form-control', {'is-invalid': validation.hasError('customer.email')}]" v-model="customer.email" :disabled="!isSubmitShow">
                         <div class="invalid-feedback">{{ validation.firstError('customer.email') }}</div>
                     </div>
                 </div>

@@ -16,7 +16,7 @@ class CustomerSeeder extends Seeder
         $faker = Faker\Factory::create();
 
         DB::table('customers')->insert([
-            'user_id' => 1,
+            'company_id' => 1,
             'uuid' => 'abc123456789012345',
             'gender' => random_int(0, 3),
             'name' => substr($faker->name, 0, 20),
@@ -34,8 +34,8 @@ class CustomerSeeder extends Seeder
 
         for ($i = 0; $i < 50; $i++) {
             DB::table('customers')->insert([
-                #'user_id' => random_int(1, 4),
-                'user_id' => 1,
+                #'company_id' => random_int(1, 4),
+                'company_id' => 1,
                 'uuid' => Str::random(18),
                 'gender' => random_int(0, 3),
                 'name' => substr($faker->name, 0, 20),

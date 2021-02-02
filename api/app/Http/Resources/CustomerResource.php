@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Resources;
 
 use Illuminate\Support\Carbon;
@@ -35,4 +36,3 @@ class CustomerResource extends JsonResource
         ];
     }
 }
-

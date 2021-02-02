@@ -47,5 +47,7 @@
     </div>
 </div>
 
-
+@push('footer-scripts')
+<script src="{{ asset('/assets/vendor/quill/dist/quill.min.js') }}"></script>
 <script src="{{ mix('js/customers/app.js') }}"></script>
+@endpush

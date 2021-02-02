@@ -5,30 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-use App\Forms\TicketForm;
-use App\Services\TicketService;
-use App\Repositories\TicketRepository;
-use App\Models\Company;
-
 class TicketController extends Controller
 {
-    public function __construct(TicketRepository $order_repo, TicketForm $form, TicketService $service)
+    public function index(Request $request)
     {
-        $this->company_id = user()->company->first()->id;
-        $this->form = $form;
-        $this->repo = $order_repo;
-        $this->service = $service;
-        $this->service->setCompanyId($this->company_id);
-    }
+        $limit = request('limit', 20);
+        $orders = my_comp()->ticket()->orderBy('id', 'desc')->with('customer')->get();
+        $orders = $this->paginate($orders, $limit);
 
-    public function store(Request $request)
-    {
-        $params = $request->only(["customer_id", "ticket", "pay_type", "purchase_price", "discount", "note", "order_items"]);
-        #TODO: order_items should be verified by the form.
-        $this->form->validate($params);
-
-        $this->service->createOrder($params);
-
-        return response()->json(["message" => "okay"]);
+        return view("orders.index", compact("orders"));
     }
 }

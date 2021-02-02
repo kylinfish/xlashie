@@ -36,7 +36,7 @@
                                 <option value="1"><span>已發放</span></option>
                                 <option value="2"><span>已使用</span></option>
                             </select>
-                            <p class="pt-2 text-gray"><i class="fa fa-info-circle text-info"></i>如果您的商品需提供顧客消費後核銷，可以選擇不同的預設狀態，客戶購買後可以在使用時針對產品做狀態改變。</p>
+                            <p class="pt-2 text-gray"><i class="fa fa-info-circle text-info"></i>如果您的商品需提供顧客消費後核銷，可以選擇不同的預設狀態，等客戶購買後可再對產品狀態做改變。</p>
                             <ul class="list-group pl-3">
                                 <li><span class="badge pr-1">空</span> <small>不使用狀態標記</small></li>
                                 <li><span class="badge badge-secondary pr-1">未使用</span> <small>服務售後需要提供客戶核銷，可以選擇初始狀態為<b>未使用</b></small></li>

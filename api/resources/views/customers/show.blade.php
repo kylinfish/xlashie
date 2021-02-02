@@ -25,17 +25,14 @@
                         </div>
                         <div class="card-profile-stats d-flex justify-content-center">
                             <div>
-                                <span class="heading">22</span>
-                                <span class="description">消費次數</span>
+                                <span class="heading">{{ $order_count }}</span>
+                                <span class="description">訂單數目</span>
                             </div>
                             <div>
-                                <span class="heading">10</span>
-                                <span class="description">庫存清單</span>
+                                <span class="heading">{{ $inventory_count }}</span>
+                                <span class="description">已購產品</span>
                             </div>
-                            <div>
-                                <span class="heading">89</span>
-                                <span class="description">預收金</span>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -55,6 +52,5 @@
 </div>
 
 @include('modal.customers.inventory_mark')
-<script src="{{ asset('/assets/vendor/quill/dist/quill.min.js') }}"></script>
 
 @endsection

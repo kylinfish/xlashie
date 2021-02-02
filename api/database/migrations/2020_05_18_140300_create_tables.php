@@ -62,15 +62,12 @@ class CreateTables extends Migration
             $table->string('contact', 50)->default('');
             $table->string('description', 100)->default('');
             $table->timestamps();
-
-            // index
-            $table->unique('account');
         });
 
         Schema::create('customers', function ($table) {
             $table->increments('id')->unsigned();
 
-            $table->integer('user_id')->unsigned();
+            $table->integer('company_id')->unsigned();
             $table->char('uuid', 18);
             $table->string('email', 50)->default('');
             $table->string('name', 20)->default('');
@@ -89,7 +86,7 @@ class CreateTables extends Migration
             $table->softDeletes();
 
             // index
-            $table->unique(['user_id', 'uuid']);
+            $table->unique(['company_id', 'uuid']);
             $table->index('email');
             $table->index('phone');
         });

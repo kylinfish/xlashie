@@ -1,11 +1,11 @@
 <?php
+
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller as BaseController;
 
-use App\Models\Customer;
 use App\Forms\InventoryForm;
 use App\Http\Resources\CustomerInventoryResource;
 
@@ -14,7 +14,7 @@ class Inventories extends BaseController
 {
     public function index(Request $request, string $customer_uuid)
     {
-        if (! $customer = u_customer($customer_uuid)) {
+        if (!$customer = my_customer_by_uuid($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
 
@@ -30,7 +30,7 @@ class Inventories extends BaseController
     {
         $params = $request->only(["id", "status", "use_at"]);
 
-        if (! $customer = u_customer($customer_uuid)) {
+        if (!$customer = my_customer_by_uuid($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
         $customer->inventory()->find($params["id"])->update($params);

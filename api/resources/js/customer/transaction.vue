@@ -33,17 +33,41 @@
         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title">{{ selectedItem.created_at }} - 交易紀錄</h6>
+                    <h6 class="modal-title">交易紀錄 - {{ selectedItem.created_at }}</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <label class="col-md-3">付款方式:</label> <p class="col-md-3">{{ selectedItem.payment }}</p>
-                        <label class="col-md-3">繳款金額:</label> <p class="col-md-3">{{ selectedItem.price | formatNumber }}</p>
-                        <label class="col-md-3">折扣金額:</label> <p class="col-md-3">{{ selectedItem.discount }}</p>
+                        <div class="col-lg-6">
+                            <div class="form-group row">
+                                <label class="col-6">支付金額:</label>
+                                <p class="col-6">{{ selectedItem.price | formatNumber }}</p>
+                            </div>
+                        </div>
 
+                        <div class="col-lg-6">
+                            <div class="form-group row">
+                                <label class="col-6">付款方式:</label>
+                                <p class="col-6">{{ selectedItem.payment }}</p>
+                            </div>
+                        </div>
+
+                        <!--
+                        <div class="col-lg-6">
+                            <div class="form-group row">
+                                <label class="col-6">折扣金額:</label>
+                                <p class="col-6">{{ selectedItem.discount }}</p>
+                            </div>
+                        </div>
+                        -->
+                        <div class="col-lg-12">
+                            <div class="form-group row">
+                                <label class="col-12">訂單備註:</label>
+                                <textarea class="form-control" rows="2" v-model="selectedItem.note"></textarea>
+                            </div>
+                        </div>
                         <table class="table align-items-center table-striped table-bordered table-hover">
                             <thead class="text-white bg-gradient-light">
                                 <th>產品</th>
@@ -51,11 +75,11 @@
                                 <th>單價</th>
                             </thead>
                             <tbody>
-                            <tr v-for="detail in tDetail">
-                                <td> {{ detail.product_name }}</td>
-                                <td> {{ detail.quantity | formatNumber }}</td>
-                                <td> {{ detail.unit_price | formatNumber }}</td>
-                            </tr>
+                                <tr v-for="detail in tDetail">
+                                    <td> {{ detail.product_name }}</td>
+                                    <td> {{ detail.quantity | formatNumber }}</td>
+                                    <td> {{ detail.unit_price | formatNumber }}</td>
+                                </tr>
                             </tbody>
 
                         </table>

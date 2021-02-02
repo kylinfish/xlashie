@@ -15,7 +15,8 @@ class Reports extends \App\Http\Controllers\Controller
         $from = date('2019-11-01');
         $to = date('Y/m/d H:i:s');
 
-        $group_by_date = Ticket::where(["company_id" => user()->company->id])->whereBetween('created_at', [$from, $to])->groupBy('date')
+        $group_by_date = my_comp()->ticket()
+            ->whereBetween('created_at', [$from, $to])->groupBy('date')
             ->orderBy('date', 'asc')
             ->get(array(
                 DB::raw('Date(created_at) as date'),
@@ -27,7 +28,7 @@ class Reports extends \App\Http\Controllers\Controller
         $payments = [];
         $customer_unique_list = [];
 
-        $tickets = Ticket::where(["company_id" => user()->company->id])->whereBetween('created_at', [$from, $to])->orderBy('created_at', 'desc')->get();
+        $tickets = my_comp()->ticket()->whereBetween('created_at', [$from, $to])->orderBy('created_at', 'desc')->get();
         foreach ($tickets as $ticket) {
             $t_ids[] = $ticket->id;
             $total_expense += $ticket->price;

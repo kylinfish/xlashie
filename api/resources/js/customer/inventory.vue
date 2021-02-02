@@ -129,9 +129,6 @@ import VueQuillEditor from "vue-quill-editor";
 
 Vue.use(VueQuillEditor /* { default global options } */ );
 
-import VueSweetalert2 from 'vue-sweetalert2';
-import JQuery from 'jquery'
-window.$ = JQuery
 export default {
     data: function () {
         let url = new URL(window.location.href)
@@ -243,9 +240,7 @@ export default {
         },
 
         fillNoteModal(iid) {
-            console.log(window.$);
-            console.log(window.$('#note-modal'))
-            window.$('#note-modal').modal('hide')
+            $('#note-modal').modal('hide')
             let inventory = this.inventories.filter(inventory => inventory.id == iid)[0];
             this.selectedInventoryId = inventory.id;
             this.selectedNoteId = inventory.note_id;

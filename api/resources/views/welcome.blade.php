@@ -33,7 +33,7 @@
                     <div class="col">
                         <a class="card shadow border-0" href="/orders/">
                             <div class="card-body text-center">
-                                <h4 class="h2 text-primary text-uppercase"> <i class="fas fa-bars"></i> 歷史訂單</h4>
+                                <h4 class="h2 text-primary text-uppercase"> <i class="fas fa-list"></i> 歷史訂單</h4>
                             </div>
                         </a>
                     </div>
@@ -50,8 +50,8 @@
 
             <div class="col-lg-6">
                 <div class="table-default p-3 rounded shadow-sm mb-4">
-                    @if ($customer_count == 0)
-                    <h3>請先進行 <a class="text-primary" href="/customers/?wizard=1">客戶新增</a>，方可瀏覽近期交易紀錄</h3>
+                    @if ($recently_tickets->count() == 0)
+                    <h3>前往<a class="text-primary" href="/customers/">客戶資料頁</a>，開始你新的交易吧!</h3>
                     @else
                     <h3>近期交易紀錄</h3>
                     <div>

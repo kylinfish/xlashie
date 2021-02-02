@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class InvNotes extends BaseController
 
     public function index(Request $request, string $customer_uuid)
     {
-        if (! $customer = u_customer($customer_uuid)) {
+        if (!$customer = my_customer_by_uuid($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
 
@@ -24,7 +25,7 @@ class InvNotes extends BaseController
 
     public function show(Request $request, string $customer_uuid, string $note_id)
     {
-        if (! $customer = u_customer($customer_uuid)) {
+        if (!$customer = my_customer_by_uuid($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
         $note = $customer->notes()->find($note_id);
@@ -35,12 +36,12 @@ class InvNotes extends BaseController
     {
         $params = $request->only(["customer_id", "title", "inventory_id", "note"]);
 
-        if (! $customer = u_customer($customer_uuid)) {
+        if (!$customer = my_customer_by_uuid($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
 
         $invnote = InvNote::create([
-            'company_id' => auth()->user()->company->id,
+            'company_id' => auth()->user()->company_id,
             'customer_id' => $customer->id,
             'note' => $params['note'],
             'inventory_id' => $params['inventory_id'] ?? 0,
@@ -54,7 +55,7 @@ class InvNotes extends BaseController
     {
         $params = $request->only(["customer_id", "inventory_id", "note"]);
 
-        if (! $customer = u_customer($customer_uuid)) {
+        if (!$customer = my_customer_by_uuid($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
 
@@ -66,7 +67,7 @@ class InvNotes extends BaseController
     {
         $params = $request->only(["inventory_id"]);
 
-        if (! $customer = u_customer($customer_uuid)) {
+        if (!$customer = my_customer_by_uuid($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
 
