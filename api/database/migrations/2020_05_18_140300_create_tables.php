@@ -168,16 +168,29 @@ class CreateTables extends Migration
             $table->increments('id')->unsigned();
             $table->integer('company_id')->unsigned();
             $table->integer('customer_id')->unsigned();
-            $table->integer('note_id')->unsigned();
+            $table->integer('order_id')->unsigned();
 
             $table->string('product_name', 50);
             $table->tinyInteger('status')->default(-1);
+            $table->integer('note_id')->unsigned();
             $table->timestamp('use_at')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
 
             $table->index(['company_id', 'customer_id']);
+        });
+
+        Schema::create('op_logs', function (Blueprint $table) {
+            $table->increments('id')->unsigned();
+            $table->integer('company_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->tinyInteger('controller')->unsigned();
+            $table->tinyInteger('action')->unsigned();
+            $table->string('sth')->default('');
+            $table->timestamps();
+
+            $table->index(['company_id', 'user_id']);
         });
     }
 
@@ -206,5 +219,6 @@ class CreateTables extends Migration
         Schema::dropIfExists('order_items');
         Schema::dropIfExists('customer_inventories');
         Schema::dropIfExists('customer_notes');
+        Schema::dropIfExists('op_logs');
     }
 }

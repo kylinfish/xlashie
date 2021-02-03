@@ -3,10 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Controller as BaseController;
 
-use App\Models\Customer;
 use App\Forms\CustomerForm;
 use App\Http\Resources\CustomerResource;
 
@@ -40,6 +37,8 @@ class Customers extends \App\Http\Controllers\Controller
         }
 
         $customer->update($params);
+
+        $this->logging($request, $customer->id);
 
         return response()->json(["message" => "ok"], 200);
     }

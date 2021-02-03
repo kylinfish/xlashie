@@ -1,6 +1,6 @@
 <nav id="navbar-main" class="navbar navbar-horizontal navbar-main navbar-expand-lg navbar-dark bg-primary">
     <div class="container col-md-12">
-        <a class="navbar-brand ml-5" href="/">
+        <a class="navbar-brand ml-5 mr--1" href="/">
             <img class="mt-n2" src="{{ asset('/assets/img/brand/logo.png') }}">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse"

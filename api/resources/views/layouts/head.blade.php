@@ -11,27 +11,28 @@
 
     <title>XLASHIE 思瑞 - Easy to be Slashie, SOHO</title>
 
-    <link rel="icon" href="{{ asset('/img/brand/favicon.png') }}" type="image/png">
-    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('/img/brand/apple-icon-57x57.png') }}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('/img/brand/apple-icon-60x60.png') }}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('/img/brand/apple-icon-72x72.png') }}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('/img/brand/apple-icon-76x76.png') }}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('/img/brand/apple-icon-114x114.png') }}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('/img/brand/apple-icon-120x120.png') }}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('/img/brand/apple-icon-144x144.png') }}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('/img/brand/apple-icon-152x152.png') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('/img/brand/apple-icon-180x180.png') }}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('/img/brand/android-icon-192x192.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('/img/brand/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('/img/brand/favicon-96x96.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/img/brand/favicon-16x16.png') }}">
-    <link rel="manifest" href="{{ asset('/img/brand/manifest.json') }}">
+    <link rel="icon" href="{{ asset('/img/brand/logo.png') }}" type="image/png">
+    <link rel="apple-touch-icon" sizes="57x57" href="/assets/img/brand/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/assets/img/brand/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/assets/img/brand/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/brand/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/assets/img/brand/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/assets/img/brand/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/assets/img/brand/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/assets/img/brand/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/brand/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/brand/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/brand/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/assets/img/brand/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/brand/favicon-16x16.png">
+    <link rel="manifest" href="/assets/img/brand/manifest.json">
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/nucleo/css/nucleo.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('assets/css/argon.css?v=1.3.0') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('assets/css/loading.css') }}" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/nucleo/css/nucleo.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}"
+    type="text/css">
     <link rel="stylesheet" href="{{ asset('assets/vendor/sweetalert2/dist/sweetalert2.min.css') }}">
     <script type="text/javascript"><!--
         window.Laravel = <?php echo json_encode([

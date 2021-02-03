@@ -3,15 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Controller as BaseController;
 
-use App\Models\Customer;
-use App\Forms\InventoryForm;
-use App\Http\Resources\CustomerInventoryResource;
 use App\Models\InvNote;
 
-class InvNotes extends BaseController
+class InvNotes extends \App\Http\Controllers\Controller
 {
 
     public function index(Request $request, string $customer_uuid)
@@ -48,6 +43,8 @@ class InvNotes extends BaseController
         ]);
         $customer->inventory->find($params['inventory_id'])->update(['note_id' => $invnote->id]);
 
+        $this->logging($request, $params["inventory_id"]);
+
         return response()->json(["message" => "ok"], 200);
     }
 
@@ -60,19 +57,24 @@ class InvNotes extends BaseController
         }
 
         $customer->notes()->find($note_id)->update($params);
+
+        $this->logging($request, $note_id);
+
         return response()->json(["message" => "ok"], 200);
     }
 
-    public function delete(Request $request, string $customer_uuid, string $note_id)
+    public function destroy(Request $request, string $customer_uuid, string $note_id)
     {
-        $params = $request->only(["inventory_id"]);
+        $inventory_id = $request->get("inventory_id");
 
         if (!$customer = my_customer_by_uuid($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
 
         $customer->notes()->find($note_id)->delete();
-        $customer->inventory->find($params['inventory_id'])->update(['note_id' => null]);
+        $customer->inventory->find($inventory_id)->update(['note_id' => 0]);
+
+        $this->logging($request);
 
         return response()->json(["message" => "ok"], 200);
     }

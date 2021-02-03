@@ -6,7 +6,7 @@ use Carbon\Carbon;
 class ReportSeeder extends Seeder
 {
     const PRODUCT_MAP =  [
-        1=> [
+        1 => [
             'name' => "手部護理組合",
             'price' => 2300,
         ],
@@ -43,17 +43,15 @@ class ReportSeeder extends Seeder
 
         $faker = Faker\Factory::create();
 
-        $order_id = 1;
 
         for ($order_id = 1; $order_id <= 100; $order_id++) {
-            $created_date = $faker->dateTimeInInterval($startDate = '-35 days', $interval = '+ 5 days', $timezone ='Asia/Taipei');
+            $created_date = $faker->dateTimeInInterval($startDate = '-35 days', $interval = '+ 5 days', $timezone = 'Asia/Taipei');
             $customer_id = rand(1, 30);
 
             list($items, $total_count) = $this->apenndAndGetBuyItems($order_id, $customer_id, $created_date);
             DB::table('order_items')->insert($items);
 
             DB::table('orders')->insert([
-                'id' => $order_id,
                 'ticket' => '',
                 'company_id' => 1,
                 'customer_id' => $customer_id,
@@ -85,6 +83,7 @@ class ReportSeeder extends Seeder
                 "company_id" => 1,
                 "customer_id" => $customer_id,
                 "product_name" => $product["name"],
+                "order_id" => 2,
                 "created_at" => $created_date,
                 "updated_at" => $created_date,
                 "note_id" => 0,
@@ -94,5 +93,3 @@ class ReportSeeder extends Seeder
         return [$dict, $total_count];
     }
 }
-
-

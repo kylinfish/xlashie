@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Forms\CustomerForm;
-use App\Models\Ticket;
-use App\Models\Customer;
 
 class IndexController extends \App\Http\Controllers\Controller
 {

@@ -3,7 +3,7 @@
     <table class="table table-sm table-hover table-bordered table-responsive-sm">
         <thead class="thead-light">
             <tr>
-                <th class="text-center">#</th>
+                <th class="text-center">訂單編號</th>
                 <th class="text-center">消費日期</th>
                 <th class="text-center">消費金額</th>
                 <th class="text-center">付款方式</th>
@@ -12,9 +12,7 @@
         </thead>
         <tbody>
             <tr v-for="transaction, index in transactions">
-                <td class="text-center w-5">
-                    <a href="#">{{ index + 1 }}</a>
-                </td>
+                <td class="text-center w-5">{{ transaction.id }}</td>
                 <td class="text-center w-10">{{ transaction.created_at }}</td>
                 <td class="text-center">{{ transaction.price | formatNumber }}</td>
                 <td class="text-center">{{ transaction.payment }}</td>

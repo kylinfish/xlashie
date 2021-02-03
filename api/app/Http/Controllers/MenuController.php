@@ -34,6 +34,8 @@ class MenuController extends Controller
             'init_status' => $params['init_status'],
         ]);
 
+        $this->logging($request, $menu_id);
+
         return redirect('/menus/')->with(['alert' => 'success', 'message' => '更新成功']);
     }
 
@@ -48,6 +50,8 @@ class MenuController extends Controller
             'init_status' => $params['init_status'],
         ]);
 
+        $this->logging($request, $menu->id);
+
         return redirect()->back()->with(['alert' => 'success', 'message' => "{$menu->name} 新增成功"]);
     }
 
@@ -58,6 +62,9 @@ class MenuController extends Controller
         }
 
         $menu->delete();
+
+        $this->logging($request);
+
         return redirect()->back()->with(['alert' => 'success', 'message' => "項目 {$menu->name} 刪除成功"]);
     }
 }

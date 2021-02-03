@@ -3,14 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Controller as BaseController;
 
-use App\Models\Menu;
 use App\Services\MenuService;
 use App\Http\Resources\MenuResource;
 
-class Menus extends BaseController
+class Menus extends \App\Http\Controllers\Controller
 {
     public function __construct(MenuService $service)
     {

@@ -3,14 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Controller as BaseController;
 
 use App\Services\TicketService;
 use App\Http\Resources\TicketResource;
-use App\Models\OrderItem;
 
-class Transactions extends BaseController
+class Transactions extends \App\Http\Controllers\Controller
 {
     public function __construct(TicketService $service)
     {
@@ -33,7 +30,10 @@ class Transactions extends BaseController
         //$this->form->validate($params);
 
         $params["customer_uuid"] = $customer_uuid;
+
         $this->service->createOrder(user()->company_id, $params);
+
+        $this->logging($request);
 
         return response()->json(["message" => "ok"], 200);
     }

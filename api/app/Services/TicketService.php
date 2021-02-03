@@ -38,6 +38,7 @@ class TicketService
                 $inventories[] = [
                     "customer_id" => $data["customer_id"],
                     "company_id" => $company_id,
+                    "order_id" => $order->id,
                     "note_id" => 0,
                     "product_name" => $item["itemName"],
                     "status" => $item["initStatus"],

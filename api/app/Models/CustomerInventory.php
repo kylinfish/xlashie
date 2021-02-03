@@ -19,6 +19,7 @@ class CustomerInventory extends Model
     protected $fillable = [
         'customer_id',
         'company_id',
+        'order_id',
         'note_id',
         'product_name',
         'status',

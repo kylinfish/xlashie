@@ -4,22 +4,24 @@
         <table class="table table-hover table-bordered align-items-center table-sm">
             <thead class="thead-light">
                 <tr>
-                    <th scope="col" class="text-center">#</th>
-                    <th scope="col" class="text-center">購買日期</th>
-                    <th scope="col" class="text-center">產品名稱</th>
-                    <th scope="col" class="text-center">狀態</th>
-                    <th scope="col" class="text-center">操作</th>
-                    <th scope="col" class="text-center">筆記</th>
+                    <th class="text-center">訂單編號</th>
+                    <th class="text-center">消費日期</th>
+                    <th class="text-center">產品名稱</th>
+                    <th class="text-center">狀態</th>
+                    <th class="text-center">核銷日期</th>
+                    <th class="text-center">操作</th>
+                    <th class="text-center">筆記</th>
                 </tr>
             </thead>
             <tbody class="list">
                 <tr v-for="inventory, index in inventories">
-                    <td class="text-center w-5">{{ index + 1 }}</td>
+                    <td class="text-center w-5">{{ inventory.order_id }}</td>
                     <td class="text-center w-10">{{ inventory.created_at }}</td>
                     <td class="text-center">{{ inventory.product_name }}</td>
                     <td class="text-center">
                         <span :class="['form-badge badge-pill', inventory.badgeStyle]">{{ inventory.status_str }}</span>
                     </td>
+                    <td class="text-center">{{ inventory.use_at | formatISOStr }}</td>
                     <td class="text-center w-10">
                         <button v-show="inventory.use_at == null" class="btn btn-sm btn-outline-warning" data-toggle="modal" data-target="#inventory-status-modal" @click="fillInventoryModal(inventory.id)"><i class="ni ni-settings-gear-65"></i> 核銷</button>
 
@@ -128,7 +130,9 @@
 import VueQuillEditor from "vue-quill-editor";
 
 Vue.use(VueQuillEditor /* { default global options } */ );
-
+Vue.filter("formatISOStr", (v) => {
+    return (v ? v.replace("T", " ") : v);
+})
 export default {
     data: function () {
         let url = new URL(window.location.href)

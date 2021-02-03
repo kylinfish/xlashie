@@ -13,8 +13,6 @@
 
             <div class="col-lg-6 ">
                 <div class="table-primary p-3 rounded shadow-sm mb-4">
-                    <h3>選單</h3>
-
                     <div class="col">
                         <a class="card shadow border-0" href="/menus/">
                             <div class="card-body text-center">
@@ -49,41 +47,40 @@
             </div>
 
             <div class="col-lg-6">
-                <div class="table-default p-3 rounded shadow-sm mb-4">
+                <div class="card p-3 rounded shadow-sm mb-4">
                     @if ($recently_tickets->count() == 0)
                     <h3>前往<a class="text-primary" href="/customers/">客戶資料頁</a>，開始你新的交易吧!</h3>
                     @else
                     <h3>近期交易紀錄</h3>
                     <div>
                         @if ($recently_tickets)
-                        <ul class="list-group">
+                        <div class="timeline timeline-one-side" data-timeline-content="axis" data-timeline-axis-style="dashed">
                             @foreach ($recently_tickets as $ticket)
-                            <li class="list-group-item">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h4 class="mb-0 text-gray">
-                                            <a href="/customers/{{ $ticket->customer->uuid }}">
-                                                {{ $ticket->customer->name }} <i
-                                                    class="pl-1 fa fa-external-link-alt"></i>
-                                            </a>
-                                        </h4>
+
+                            <div class="timeline-block">
+                                <span class="timeline-step badge-success">
+                                    <i class="fa fa-dollar-sign"></i>
+                                </span>
+                                <div class="timeline-content">
+                                    <div class="d-flex justify-content-between pt-1">
+                                        <div>
+                                        <a href="/customers/{{ $ticket->customer->uuid}}"><span class="text-muted font-weight-bold"> {{ $ticket->customer->name }}</span></a>
+                                        </div>
+                                        <div class="text-right">
+                                            <small class="text-muted"><i class="fas fa-clock mr-1"></i>{{ $ticket->created_at->diffForHumans() }}</small>
+                                        </div>
                                     </div>
-                                    <div class="col-4">
-                                        <i class="text-primary fa fa-dollar-sign"></i>
-                                        金額: {{ number_format($ticket->price) }}
-                                    </div>
-                                    <div class="col-3 text-center">
-                                        <i class="text-success ni ni-calendar-grid-58"></i>
-                                        <small>{{ $ticket->created_at->diffForHumans() }}</small>
-                                    </div>
+                                    <h6 class="text-sm mt-1 mb-0 pl-1">進帳金額:  {{ number_format($ticket->price) }}</h6>
                                 </div>
-                            </li>
+                            </div>
+
                             @endforeach
-                        </ul>
+                        </div>
                         @else
                         <p class="pl-5 pt-2">最近沒有新的交易紀錄</p>
                         @endif
                     </div>
+
                     @endif
                 </div>
             </div>

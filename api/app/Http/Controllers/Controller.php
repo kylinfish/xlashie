@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -11,10 +12,12 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+use \App\Models\OpLog;
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    
+
     /**
      * Generate a pagination collection.
      *
@@ -34,5 +37,19 @@ class Controller extends BaseController
         $items = $items instanceof Collection ? $items : Collection::make($items);
 
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+    }
+
+    public function logging(Request $request, $message = '')
+    {
+        $route_name = explode(__NAMESPACE__ . "\\", $request->route()->getAction()["controller"])[1];
+        list($controller, $action) = explode('@', $route_name);
+
+        OpLog::create([
+            'company_id' => user()->company_id,
+            'user_id' => user()->id,
+            'controller' => OpLog::CONTROL_MAP[$controller],
+            'action' => OpLog::ACTION_MAP[$action],
+            'sth' => $message,
+        ]);
     }
 }

@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('customers/{customer_uuid}/notes/{note_id}', 'InvNotes@show');
     Route::post('customers/{customer_uuid}/notes/', 'InvNotes@store');
     Route::put('customers/{customer_uuid}/notes/{note_id}', 'InvNotes@update');
-    Route::delete('customers/{customer_uuid}/notes/{note_id}', 'InvNotes@delete');
+    Route::delete('customers/{customer_uuid}/notes/{note_id}', 'InvNotes@destroy');
 
     // Transactions
     Route::get('customers/{customer_uuid}/transactions', 'Transactions@index');

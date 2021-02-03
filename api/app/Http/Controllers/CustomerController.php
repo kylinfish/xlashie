@@ -4,12 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Forms\CustomerForm;
-use App\Services\CustomerService;
-use App\Models\Menu;
-use App\Models\Ticket;
 use App\Models\Customer;
 use Illuminate\Support\Str;
-use App\Transformers\Customer as Transformer;
 
 class CustomerController extends \App\Http\Controllers\Controller
 {
@@ -66,6 +62,8 @@ class CustomerController extends \App\Http\Controllers\Controller
             'gender' => $params["gender"] ?? 0,
             'address' => $params["address"] ?? '',
         ]);
+
+        $this->logging($request, $customer->id);
 
         return redirect("/customers/{$customer->uuid}")
             ->with(['alert' => 'success', 'message' => '新增成功，開始記錄客戶歷程吧']);
