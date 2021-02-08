@@ -1,4 +1,6 @@
 {
-    "/js/customers/app.js": "/js/customers/app.js",
-    "/css/app.css": "/css/app.css"
+    "/js/customers/app.js": "/js/customers/app.js?id=0acaa02a768b50659abe",
+    "/css/app.css": "/css/app.css?id=d41d8cd98f00b204e980",
+    "/css/landing.css": "/css/landing.css?id=ee26cfe1bf1a53076528",
+    "/css/main.css": "/css/main.css?id=bc845b2122684229612a"
 }

@@ -62,8 +62,8 @@
                         -->
                         <div class="col-lg-12">
                             <div class="form-group row">
-                                <label class="col-12">訂單備註:</label>
-                                <textarea class="form-control" rows="2" v-model="selectedItem.note"></textarea>
+                                <label class="col-3">訂單備註:</label>
+                                <p>{{ selectedItem.note }}</p>
                             </div>
                         </div>
                         <table class="table align-items-center table-striped table-bordered table-hover">

@@ -1,7 +1,7 @@
 <nav id="navbar-main" class="navbar navbar-horizontal navbar-main navbar-expand-lg navbar-dark bg-primary">
     <div class="container col-md-12">
-        <a class="navbar-brand ml-5 mr--1" href="/">
-            <img class="mt-n2" src="{{ asset('/assets/img/brand/logo.png') }}">
+        <a class="navbar-brand ml-5 mr--1" href="/home">
+            <img src="{{ asset('/assets/img/brand/ico.png') }}">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse"
             aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,7 +11,7 @@
             <div class="navbar-collapse-header">
                 <div class="row">
                     <div class="col-6 collapse-brand">
-                        <a href="/" class="navbar-brand text-dark">XLASHIE 思瑞</a>
+                        <a href="/home" class="navbar-brand text-dark">XLASHIE</a>
                     </div>
                     <div class="col-6 collapse-close">
                         <button type="button" class="navbar-toggler" data-toggle="collapse"
@@ -25,7 +25,7 @@
             </div>
             <ul class="navbar-nav  mr-auto">
                 <li class="nav-item">
-                    <a href="/" class="nav-link">
+                    <a href="/home" class="nav-link">
                         <span class="nav-link-inner--text">首頁</span>
                     </a>
                 </li>

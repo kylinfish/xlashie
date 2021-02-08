@@ -1,16 +1,48 @@
-@include('layouts.head')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ asset('/img/brand/ms-icon-144x144.png') }}">
+    <meta name="theme-color" content="#ffffff">
+
+    <title>XLASHIE</title>
+
+    <link rel="icon" href="{{ asset('/img/brand/logo.png') }}" type="image/png">
+    <link rel="apple-touch-icon" sizes="57x57" href="/assets/img/brand/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/assets/img/brand/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/assets/img/brand/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/brand/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/assets/img/brand/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/assets/img/brand/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/assets/img/brand/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/assets/img/brand/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/brand/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/brand/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/brand/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/assets/img/brand/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/brand/favicon-16x16.png">
+    <link rel="manifest" href="/assets/img/brand/manifest.json">
+
+    <link rel="stylesheet" href="{{ mix('css/main.css') }}" type="text/css">
+    @include('common.ga')
+</head>
 
 <body class="bg-default">
     <div class="main-content">
         <!-- Header -->
-        <div class="header bg-gradient-primary py-lg-7">
+        <div class="header bg-gradient-primary py-lg-5 py-md-4">
             <div class="container">
-                <div class="header-body text-center mb-lg-7 mb-md-3">
+                <div class="header-body text-center mb-lg-6 mb-md-3">
                     <div class="row justify-content-center">
-                        <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-                            <h1 class="text-white">歡迎 xlashie!</h1>
-                            <h3 class="text-orange">Preview</h3>
-                            <p class="mt-3 text-lead text-white">使用社群登入開始輕鬆經營你的客戶吧</p>
+                        <div class="col-xl-5 col-lg-6 col-md-8 py-4">
+                            <h1 class="text-white">
+                                <a href="/" class="text-yellow"> <b>XLASHIE</b></a>
+                            </h1>
+                            <img class="mx-auto d-block" src="/assets/img/brand/logo-white.png" width="25%">
+                            <p class="mt-4 text-white">經營客戶就是動動手指這麼簡單</p>
                         </div>
                     </div>
                 </div>
@@ -91,8 +123,10 @@
                         </div>
                     </div>
                 -->
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </body>
+
+</html>

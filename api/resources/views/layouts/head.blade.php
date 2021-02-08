@@ -9,9 +9,9 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>XLASHIE 思瑞 - Easy to be Slashie, SOHO</title>
+    <title>XLASHIE</title>
 
-    <link rel="icon" href="{{ asset('/img/brand/logo.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('/img/brand/ico.png') }}" type="image/png">
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/img/brand/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/assets/img/brand/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/assets/img/brand/apple-icon-72x72.png">
@@ -27,13 +27,15 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/brand/favicon-16x16.png">
     <link rel="manifest" href="/assets/img/brand/manifest.json">
 
-    <link rel="stylesheet" href="{{ asset('assets/css/argon.css?v=1.3.0') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('assets/css/loading.css') }}" type="text/css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/nucleo/css/nucleo.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}"
-    type="text/css">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/sweetalert2/dist/sweetalert2.min.css') }}">
+    <link rel="preload" as="style" href="{{ asset('assets/vendor/nucleo/css/nucleo.css') }}" type="text/css" onload="this.rel='stylesheet'">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" onload="this.rel='stylesheet'">
+    <link rel="preload" as="style" href="{{ asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" type="text/css"onload="this.rel='stylesheet'">
+
+
+    <link rel="stylesheet" href="{{ mix('css/main.css') }}" type="text/css">
+
+    @include('common.ga')
+
     <script type="text/javascript"><!--
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),

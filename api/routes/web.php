@@ -10,9 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', 'IndexController@landing');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', 'IndexController@index');
+    Route::get('/home', 'IndexController@index');
 
     Route::get('/company/', 'CompanyController@show');
     Route::get('/company/create', 'CompanyController@create');

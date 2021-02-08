@@ -1,7 +1,6 @@
 <template>
 <div>
     <form method="POST" accept-charset="UTF-8" id="invoice" v-on:submit.prevent="onSubmit">
-
         <div class="rounded table-primary pt-3">
             <h3 class="px-4">購買項目</h3>
             <div class="container">
@@ -48,10 +47,9 @@
         <div class="row card-body">
             <div class="col-md-12">
             <div v-show="form.items.length <= 0">
-                <a href="/menus" v-if="this.menus.length == 0"><p class="text-center text-indigo">請先新增您的營業項目，讓系統幫您自動帶入設定 [點擊前往] <i class="fa fa-arrow-right"></i></p></a>
+                <a href="/menus" v-if="this.menus.length == 0"><b class="text-warning">請先新增您的營業項目，讓系統幫您自動帶入設定 [點擊前往] <i class="fa fa-arrow-right"></i></b></a>
 
                 <p v-else class="lead text-center">選擇您的<b class="text-warning">「營業項目」</b> 下拉選單並點擊 <button class="btn btn-success btn-sm" disabled>加入</button> 按鈕來新增購買訂單吧!</p>
-
             </div>
             <div v-show="form.items.length >0">
 
@@ -174,7 +172,6 @@ export default {
     data: function () {
         let url = new URL(window.location.href),
             uuid = url.pathname.split('/')[2]
-
         return {
             email: '',
             ticket: 'INV-003',
@@ -186,7 +183,7 @@ export default {
             selectedQuantity: '',
             selectedInitStatus: 0,
 
-            menus: [],
+            menus: JSON.parse(document.querySelector("input[name=menu]").value),
             uuid: uuid,
             inventories: {},
             form: {},
@@ -203,7 +200,6 @@ export default {
     },
 
     mounted() {
-        this.loadMenus();
         this.form = new Form('invoice');
         this.form.items = [];
     },
@@ -223,17 +219,6 @@ export default {
             let d = new Date();
             d.setUTCHours(offset);
             return d.toISOString().split('.')[0]
-        },
-
-        loadMenus: function () {
-            axios
-                .get(`/api/menus/`)
-                .then((res) => {
-                    this.menus = res.data.data;
-                })
-                .catch((res) => {
-                    console.log("Menus load failed.")
-                });
         },
 
         onSubmit() {

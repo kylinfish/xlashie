@@ -33,7 +33,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = "/";
+    protected $redirectTo = "/home";
 
     /**
      * Create a new controller instance.
@@ -58,7 +58,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         auth()->logout();
-        return redirect('/auth/login/');
+        return redirect('/');
     }
 
     /**
@@ -117,12 +117,7 @@ class LoginController extends Controller
             $login_user = $service->getOrCreate($google_user, 'google');
 
             auth()->login($login_user, true);
-
-            if ($login_user->company) {
-                return redirect('/');
-            } else {
-                return redirect('/company/create/?wizard=1');
-            }
+            return redirect('/home');
         }
 
         if ($type == 'customer') {
@@ -143,6 +138,6 @@ class LoginController extends Controller
 
             return redirect("/company/{$company->en_name}/register?uuid={$customer->uuid}");
         }
-        return redirect('/');
+        return redirect('/home');
     }
 }

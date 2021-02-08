@@ -27,8 +27,13 @@ class CustomerController extends \App\Http\Controllers\Controller
 
         $inventory_count = $customer->inventory()->count();
         $order_count = my_comp()->ticket()->where(["customer_id" => $customer->id])->count();
+        $menus = my_comp()->menu()->get()->toJson();
 
-        return view("customers.show", compact('customer', 'order_count', 'inventory_count'));
+        $return_view = view("customers.show", compact('customer', 'order_count', 'inventory_count', 'menus'));
+        if (my_comp()->menu()->count() == 0) {
+            return $return_view->with(['alert' => 'warning', 'message' => '尚無營業項目可以新增訂單，請由 [首頁] -> [營業項目] 進行新增']);
+        }
+        return $return_view;
     }
 
     public function create()

@@ -51,7 +51,7 @@
                     @if ($recently_tickets->count() == 0)
                     <h3>前往<a class="text-primary" href="/customers/">客戶資料頁</a>，開始你新的交易吧!</h3>
                     @else
-                    <h3>近期交易紀錄</h3>
+                    <h3 class="text-center">近期交易紀錄</h3>
                     <div>
                         @if ($recently_tickets)
                         <div class="timeline timeline-one-side" data-timeline-content="axis" data-timeline-axis-style="dashed">

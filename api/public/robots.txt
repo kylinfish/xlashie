@@ -1,2 +1,4 @@
+#xlashie.com
+#www.xlashie.com
 User-agent: *
-Disallow:
+Allow: /

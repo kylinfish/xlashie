@@ -12,12 +12,28 @@ const webpack = require('webpack');
  */
 
 mix
-    // Customer
-    .js('resources/js/customer/app.js', 'public/js/customers/')
+    // Landing page
+    .styles([
+        'resources/css/landing.css',
+    ], 'public/css/landing.css').version()
 
-    .sass('resources/sass/app.scss', 'public/css');
+    // Main Theme
+    .styles([
+        'resources/css/argon.css',
+        'resources/css/loading.css',
+    ], 'public/css/main.css').version()
 
 
+    // Vue - Customer
+    .js('resources/js/customer/app.js', 'public/js/customers/').version()
+
+
+
+    .sass('resources/sass/app.scss', 'public/css').version();
+
+if (mix.inProduction()) {
+    mix.version();
+}
 
 
 module.exports = {
