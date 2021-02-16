@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Forms\CompanyForm;
 use App\Models\Company;
 use App\Models\Customer;
 use Socialite;
@@ -29,15 +28,17 @@ class CompanyController extends \App\Http\Controllers\Controller
         return view('companies.create');
     }
 
-    public function store(Request $request, CompanyForm $form)
+    public function store(Request $request)
     {
         $params = $request->only(['name', 'account', 'contact', 'description']);
+        /*
         if ($errors = $form->validate($params)) {
             return redirect()->back()
                 ->with(['alert' => 'warning', 'message' => '新增失敗'])
                 ->withErrors($errors)
                 ->withInput($request->all());
         }
+         */
 
         $company = Company::create([
             'owner_id' => user()->id,
