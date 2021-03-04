@@ -114,7 +114,6 @@ class Handler extends ExceptionHandler
     public function report(Exception $e)
     {
         parent::report($e);
-        \Log::notice(json_encode($_REQUEST) . '  ' . $e->getMessage());
     }
 
     /**
