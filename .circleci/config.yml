@@ -23,7 +23,6 @@ jobs:
       - checkout:
           path: ~/xlashie
 
-
       - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
       - run: sudo docker-php-ext-install zip
 
@@ -50,6 +49,14 @@ jobs:
           key: node-v1-{{ checksum "package.json" }}
           paths:
             - node_modules
+  deploy-prod:
+    steps:
+      - checkout
+      - run:
+        name: rsync
+        command: rsync -aL --deploy-updates --delete  --exclude 'Makefile' --exclude 'composer.lock' --exclude 'debug.php' --exclude '.git' --exclude '*.core' --exclude '%.swap' --delete-excluded -e 'ssh -p @HOST_PORT' . rsync@$HOST_IP:api
+
+
 
 # Orchestrate our job run sequence
 workflows:
@@ -57,14 +64,11 @@ workflows:
   deploy-pipline:
     jobs:
       - build
-      - test:
-          requires:
-            - build
-      - hold:
+      - deploy-prod-approval:
           type: approval
           requires:
             - build
-            - test
+
       - deploy:
           requires:
-            - hold
+            - deploy-prod-approval
