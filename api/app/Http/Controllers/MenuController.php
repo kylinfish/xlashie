@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Menu;
-use App\Forms\MenuForm;
-use App\Services\MenuService;
 
 class MenuController extends Controller
 {
@@ -39,7 +37,7 @@ class MenuController extends Controller
         return redirect('/menus/')->with(['alert' => 'success', 'message' => '更新成功']);
     }
 
-    public function store(Request $request, MenuService $service)
+    public function store(Request $request)
     {
         $params = $request->only(['name', 'price', 'description', 'init_status']);
 

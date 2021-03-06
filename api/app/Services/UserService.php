@@ -5,14 +5,9 @@ namespace App\Services;
 use Cache;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Two\User as SocialUser;
-use App\Repositories\UserRepository;
 
 class UserService
 {
-    public function __construct(UserRepository $repo)
-    {
-        $this->repo = $repo;
-    }
 
     /**
      * getOrCreate
