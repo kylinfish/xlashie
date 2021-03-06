@@ -50,3 +50,23 @@ jobs:
           key: node-v1-{{ checksum "package.json" }}
           paths:
             - node_modules
+
+workflows:
+  version: 2
+  deploy-pipeline:
+    jobs:
+      - deploy-prod-approval:
+        type: approval
+        filters: &workflow_deploy_filters
+          branches:
+            ignore: /.*/
+          tags:
+            # {yyyymmdd}.{2-digit-no}
+            # 20201212.00
+            only: /(20\d{2})(\d{2})(\d{2})\.\d{2}/
+      - deploy-prod:
+        requires:
+          - deploy-prod-approval
+        filters: *workflow_deploy_filters
+
+
