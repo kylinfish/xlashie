@@ -51,22 +51,20 @@ jobs:
           paths:
             - node_modules
 
+# Orchestrate our job run sequence
 workflows:
   version: 2
-  deploy-pipeline:
+  deploy-pipline:
     jobs:
-      - deploy-prod-approval:
-        type: approval
-        filters: &workflow_deploy_filters
-          branches:
-            ignore: /.*/
-          tags:
-            # {yyyymmdd}.{2-digit-no}
-            # 20201212.00
-            only: /(20\d{2})(\d{2})(\d{2})\.\d{2}/
-      - deploy-prod:
-        requires:
-          - deploy-prod-approval
-        filters: *workflow_deploy_filters
-
-
+      - build
+      - test:
+          requires:
+            - build
+      - hold:
+          type: approval
+          requires:
+            - build
+            - test
+      - deploy:
+          requires:
+            - hold
