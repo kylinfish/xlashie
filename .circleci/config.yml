@@ -49,14 +49,27 @@ jobs:
           key: node-v1-{{ checksum "package.json" }}
           paths:
             - node_modules
+
   deploy-prod:
+    working_directory: ~/xlashie/api
+    docker:
+      - image: cibuilds/hugo:latest
+    environment:
+      HUGO_BUILD_DIR: ~/hugo/public
     steps:
+      - run: apk update && apk add git
       - checkout
-      - run:
-        name: rsync
-        command: rsync -aL --deploy-updates --delete  --exclude 'Makefile' --exclude 'composer.lock' --exclude 'debug.php' --exclude '.git' --exclude '*.core' --exclude '%.swap' --delete-excluded -e 'ssh -p @HOST_PORT' . rsync@$HOST_IP:api
-
-
+      - run: git submodule sync && git submodule update --init
+      - run: HUGO_ENV=production hugo -v -d $HUGO_BUILD_DIR
+      - run: htmlproofer $HUGO_BUILD_DIR --allow-hash-href --check-html --empty-alt-ignore --disable-external
+      - add_ssh_keys:
+          fingerprints:
+            - "xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx"
+      - run: echo $REMOTE_HOSTKEY >> ~/.ssh/known_hosts
+      - deploy:
+          name: deploy
+          command: |
+            rsync -aL --deploy-updates --delete  --exclude 'Makefile' --exclude 'composer.lock' --exclude 'debug.php' --exclude '.git' --exclude '*.core' --exclude '%.swap' --delete-excluded -e 'ssh -p @HOST_PORT' . rsync@$HOST_IP:api
 
 # Orchestrate our job run sequence
 workflows:
