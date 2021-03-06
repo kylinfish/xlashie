@@ -53,19 +53,12 @@ jobs:
   deploy-prod:
     working_directory: ~/xlashie/api
     docker:
-      - image: cibuilds/hugo:latest
+      - image: circleci/php:7.4-node-browsers
     environment:
       HUGO_BUILD_DIR: ~/hugo/public
     steps:
-      - run: apk update && apk add git
+      - run: sudo apt update && sudo apt install rsync
       - checkout
-      - run: git submodule sync && git submodule update --init
-      - run: HUGO_ENV=production hugo -v -d $HUGO_BUILD_DIR
-      - run: htmlproofer $HUGO_BUILD_DIR --allow-hash-href --check-html --empty-alt-ignore --disable-external
-      - add_ssh_keys:
-          fingerprints:
-            - "xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx"
-      - run: echo $REMOTE_HOSTKEY >> ~/.ssh/known_hosts
       - deploy:
           name: deploy
           command: |
