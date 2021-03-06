@@ -5,7 +5,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/xlashie/api
+    working_directory: ~/xlashie/
     docker:
       # Specify the version you desire here
       - image: circleci/php:7.4-node-browsers
@@ -51,18 +51,20 @@ jobs:
             - node_modules
 
   deploy-prod:
-    working_directory: ~/xlashie/api
+    working_directory: ~/xlashie/
     docker:
       - image: circleci/php:7.4-node-browsers
     environment:
-      HUGO_BUILD_DIR: ~/hugo/public
+      HOST_IP: HOST_IP
+      HOST_POART: HOST_PORT
     steps:
       - run: sudo apt update && sudo apt install rsync
       - checkout
       - deploy:
           name: deploy
           command: |
-            rsync -aL --deploy-updates --delete  --exclude 'Makefile' --exclude 'composer.lock' --exclude 'debug.php' --exclude '.git' --exclude '*.core' --exclude '%.swap' --delete-excluded -e 'ssh -p @HOST_PORT' . rsync@$HOST_IP:api
+            rsync -aLz --deploy-updates --delete  --exclude 'Makefile' --exclude 'composer.lock' --exclude 'debug.php' --exclude '.git' --exclude '*.core' --exclude '%.swap' \
+            --delete-excluded -e 'ssh -p $HOST_PORT' ./api/ rsync@$HOST_IP:api
 
 # Orchestrate our job run sequence
 workflows:
