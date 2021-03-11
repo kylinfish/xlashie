@@ -98,7 +98,71 @@ class CustomerController extends \App\Http\Controllers\Controller
         return view("customers.import");
     }
 
-    public function upload()
+    public function upload(Request $request, CustomerForm $form)
     {
+        if ($errors = $form->validate($request->only(['file', 'skip_head_line']))) {
+            return redirect()->back()
+                ->with(['alert' => 'warning', 'message' => '上傳失敗'])
+                ->withErrors($errors)
+                ->withInput($request->all());
+        }
+
+        $file = fopen($request->file('file')->getPathname(), 'r');
+        $line = 0;
+
+        if ($request->has('skip_head_line')) {
+            fgetcsv($file);
+            $line += 1;
+        }
+
+        $form->setRules($form->getStoreRules());
+
+        $customers = [];
+        $error_lines = [];
+        while ($row = fgetcsv($file)) {
+            $line += 1;
+            $params = [
+                'email' => $row[0] ?? '',
+                'name' => $row[1] ?? '',
+                'phone' => $row[2] ?? '',
+                'cellphone'  => $row[3] ?? '',
+                'birth' => date('Y-m-d', strtotime($row[4])) ?? null,
+                'gender' => $row[5] ?? 0,
+                'address' => $row[6] ?? '',
+                'note_1' => $row[7] ?? null,
+                'note_2' => $row[8] ?? null,
+            ];
+
+            if ($errors = $form->validate($params)) {
+                $error_lines[$line] = $errors;
+                continue;
+            }
+
+            $customers[] = array_merge([
+                'uuid' => Str::random(18),
+                'company_id' => user()->company_id,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ], $params);
+        }
+
+        $before_insert_count = my_customer()->count();
+
+        Customer::insert($customers);
+
+        $after_insert_count = my_customer()->count();
+
+        $this->logging($request, $after_insert_count - $before_insert_count);
+
+        if (0 < count($error_lines)) {
+            return redirect(route('customers/import'))
+                ->with(['alert' => 'warning', 'message' => '上傳成功！但部分新增失敗！'])
+                ->withErrors([
+                    'error_lines' => $error_lines,
+                ]);
+        }
+
+        return redirect('/customers')
+            ->with(['alert' => 'success', 'message' => '上傳成功！']);
     }
 }
