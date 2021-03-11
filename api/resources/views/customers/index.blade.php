@@ -15,6 +15,7 @@
         <h1>客戶清單</h1>
     </div>
     <div class="col-lg-6 col-5 text-right">
+        <a href="{{ route('customers/import') }}" class="btn btn-primary">匯入</a>
         <a href="/customers/create" class="btn btn-primary">新增客戶</a>
     </div>
 </div>

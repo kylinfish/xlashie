@@ -1,5 +1,7 @@
 <?php
 
+use \App\Http\Controllers\CustomerController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +32,8 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/customers/search', 'CustomerController@search');
+    Route::get('customers/import', [CustomerController::class, 'import'])->name('customers/import');
+    Route::post('customers/import/upload', [CustomerController::class, 'upload'])->name('customers/import/upload');
     Route::resource('customers', 'CustomerController');
     Route::resource('menus', 'MenuController');
     Route::get('/orders/', 'TicketController@index');

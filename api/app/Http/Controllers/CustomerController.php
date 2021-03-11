@@ -92,4 +92,13 @@ class CustomerController extends \App\Http\Controllers\Controller
             'alert' => 'info', 'message' => "查詢: {$keyword}"
         ]);
     }
+
+    public function import(Request $request)
+    {
+        return view("customers.import");
+    }
+
+    public function upload()
+    {
+    }
 }
