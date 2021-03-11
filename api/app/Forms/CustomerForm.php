@@ -36,4 +36,14 @@ class CustomerForm extends BaseForm
     protected $show = [
         'uuid'    => 'required|string|size:18',
     ];
+
+    protected $upload = [
+        'file' => 'required|file|max:1024', // 10 MB
+        'skip_head_line' => 'sometimes|boolean',
+    ];
+
+    public function getStoreRules()
+    {
+        return $this->store;
+    }
 }
