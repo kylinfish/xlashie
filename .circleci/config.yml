@@ -5,7 +5,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/xlashie/
+    working_directory: ~/xlashie/api
     docker:
       # Specify the version you desire here
       - image: circleci/php:7.4-node-browsers
@@ -51,7 +51,7 @@ jobs:
             - node_modules
 
   deploy-prod:
-    working_directory: ~/xlashie/
+    working_directory: ~/xlashie/api
     docker:
       - image: circleci/php:7.4-node-browsers
     environment:
