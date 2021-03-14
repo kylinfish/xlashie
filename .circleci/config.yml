@@ -45,14 +45,15 @@ jobs:
       - image: circleci/php:7.4-node-browsers
     environment:
       HOST_PORT: 7002
+      FQDN: staging.xlashie.com
     steps: &deploy_steps
       - checkout:
           path: ~/xlashie
-
+      - run: cd .. &&  ./build_env.sh
       - run: sudo apt update && sudo apt install rsync
       - run: sudo docker-php-ext-install zip
       - run: composer install -n --prefer-dist
-      - run: npm install
+      - run: npm install && npm run prod
       - deploy:
           name: deploy
           command: |
@@ -60,11 +61,12 @@ jobs:
             --delete-excluded -e "ssh -o 'StrictHostKeyChecking no' -p $HOST_PORT" ./ rsync@$HOST_IP:api
 
   deploy-prod:
-    working_directory: ~/xlashie/
+    working_directory: ~/xlashie/api/
     docker:
       - image: circleci/php:7.4-node-browsers
     environment:
       HOST_PORT: 7001
+      FQDN: xlashie.com
     steps: *deploy_steps
 
 # Orchestrate our job run sequence
