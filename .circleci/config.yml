@@ -63,7 +63,7 @@ jobs:
       - deploy:
           name: deploy
           command: |
-            rsync -aLz --deploy-updates --delete  --exclude 'Makefile' --exclude 'composer.lock' --exclude 'debug.php' --exclude '.git' --exclude '*.core' --exclude '%.swap' \
+            rsync -aLz --delete  --exclude 'Makefile' --exclude 'composer.lock' --exclude 'debug.php' --exclude '.git' --exclude '*.core' --exclude '%.swap' \
             --delete-excluded -e 'ssh -p $HOST_PORT' ./api/ rsync@$HOST_IP:api
 
 # Orchestrate our job run sequence
