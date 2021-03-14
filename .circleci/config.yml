@@ -5,7 +5,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/xlashie/
+    working_directory: ~/xlashie/api/
     docker:
       - image: circleci/php:7.4-node-browsers
     steps:
@@ -40,28 +40,31 @@ jobs:
             - node_modules
 
   deploy-stg:
-    working_directory: ~/xlashie/
+    working_directory: ~/xlashie/api/
     docker:
       - image: circleci/php:7.4-node-browsers
     environment:
-      HOST_IP: $HOST_IP
-      HOST_PORT: $HOST_PORT_STG
+      HOST_PORT: 7002
     steps: &deploy_steps
-      - build
+      - checkout:
+          path: ~/xlashie
+
       - run: sudo apt update && sudo apt install rsync
+      - run: sudo docker-php-ext-install zip
+      - run: composer install -n --prefer-dist
+      - run: npm install
       - deploy:
           name: deploy
           command: |
-            rsync -aLz --delete  --exclude 'Makefile' --exclude 'composer.lock' --exclude 'debug.php' --exclude '.git' --exclude '*.core' --exclude '%.swap' \
-            --delete-excluded -e 'ssh -p $HOST_PORT' ./api/ rsync@$HOST_IP:api
+            rsync -aLz --delete --exclude "composer.lock" --exclude ".git" --exclude "*.core" --exclude "%.swap" \
+            --delete-excluded -e "ssh -o 'StrictHostKeyChecking no' -p $HOST_PORT" ./ rsync@$HOST_IP:api
 
   deploy-prod:
     working_directory: ~/xlashie/
     docker:
       - image: circleci/php:7.4-node-browsers
     environment:
-      HOST_IP: $HOST_IP
-      HOST_PORT: $HOST_PORT_PROD
+      HOST_PORT: 7001
     steps: *deploy_steps
 
 # Orchestrate our job run sequence
@@ -69,8 +72,8 @@ workflows:
   version: 2
   commit-pipline:
     jobs:
-      - checkout
       - build
+
   deploy-pipline:
     jobs:
       - deploy-stg-approval:
@@ -79,16 +82,19 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              # deploy/20200304.000
-              only: /^deploy+\/.+%/
+              only: /^deploy-.*/
+
       - deploy-prod-approval:
           type: approval
           filters: *workflow_deploy_filters
-              
+
       - deploy-stg:
           requires:
             - deploy-stg-approval
+          filters: *workflow_deploy_filters
 
       - deploy-prod:
           requires:
+            - deploy-stg
             - deploy-prod-approval
+          filters: *workflow_deploy_filters
