@@ -25,7 +25,7 @@ class Transactions extends \App\Http\Controllers\Controller
 
     public function store(Request $request, string $customer_uuid)
     {
-        $params = $request->only(["items", "ticket", "payment", "price", "transaction_at", "note"]);
+        $params = $request->only(["items", "ticket", "payment", "price", "transaction_at", "note", "discount"]) ;
         #TODO: order_items should be verified by the form.
         //$this->form->validate($params);
 

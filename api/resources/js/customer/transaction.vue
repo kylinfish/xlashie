@@ -52,14 +52,13 @@
                             </div>
                         </div>
 
-                        <!--
                         <div class="col-lg-6">
                             <div class="form-group row">
                                 <label class="col-6">折扣金額:</label>
                                 <p class="col-6">{{ selectedItem.discount }}</p>
                             </div>
                         </div>
-                        -->
+
                         <div class="col-lg-12">
                             <div class="form-group row">
                                 <label class="col-3">訂單備註:</label>

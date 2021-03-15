@@ -21,8 +21,8 @@
 
                         <div class="col-md-2 form-group">
                             <label class="mt-md-2">數量</label>
-                            <input type="number" :class="['form-control text-center', {'is-invalid': validation.hasError('selectedQuantity')}]" v-model="selectedQuantity">
-                            <div class="invalid-feedback">{{ validation.firstError('selectedQuantity') }}</div>
+                            <input type="number" :class="['form-control text-center', {'is-invalid': validation.hasError('selectedQuantity')}]" v-model="selectedQuantity" min="1">
+                            <div class="invalid-feedback">至少要一個</div>
                         </div>
 
                         <div class="col-md-2 form-group">
@@ -83,21 +83,54 @@
                                 <td colspan="3" class="text-right border-right-0 border-bottom-0">
                                     <strong>小計</strong>
                                 </td>
-                                <td class="text-center border-bottom-0 long-texts">{{ totalPrice | formatNumber }}</td>
+                                <td class="text-center border-bottom-0 long-texts">{{ subtotal | formatNumber }}</td>
                                 <td></td>
                             </tr>
-                            <tr id="tr-discount" class="d-none">
+                            <tr id="tr-discount">
                                 <td colspan="3" class="text-right border-right-0 border-bottom-0">
-                                    <a href="#" disabled data-toggle="tooltip" title="尚未開放"><strong>新增折扣</strong></a>
+
+                                    <div class="row float-right mt-2">
+                                        <div class="container form-inline">
+                                            <div class="col-md-10 col-sm-12" v-show="isDiscount">
+                                            <select class="form-control form-control-sm col-md-5 col-sm-12"
+                                                    @change="onUpdateDiscount"
+                                                    v-model="selectDiscountType">
+                                                    <option value="price" selected>折扣金額 ($)</option>
+                                                    <option value="percent">折扣百分比 (%)</option>
+                                                </select>
+                                                <input :class="['form-control form-control-sm text-center col-md-5 col-sm-12', {'is-invalid': hasDiscountNumError }]"
+                                                 type="number" v-model="discountNum" @change="onUpdateDiscount" min="0">
+                                                <div class="invalid-feedback">
+                                                    <span v-show="selectDiscountType == 'percent'">百分比介於 0 ~ 100 之間</span>
+                                                    <span v-show="selectDiscountType == 'price'">不可為 0 且需小於 {{ subtotal }}</span>
+                                                </div>
+                                            </div>
+
+                                            <button class="btn btn-outline-default btn-sm col-12" type="button"
+                                                v-show="isDiscount === false" @click="isDiscount = !isDiscount; selectDiscountType='price'">
+                                                <strong>新增折扣</strong>
+                                            </button>
+                                            <button class="btn btn-outline-warning btn-sm col-md-2 col-sm-10" type="button"
+                                                v-show="isDiscount === true" @click="resetDiscount">
+                                                <strong>取消折扣</strong>
+                                            </button>
+                                        </div>
+                                        <div class="container">
+                                            <b v-show="totalPrice == 0" class="text-danger text-right">提醒您，該單入帳金額為 $0 喔!</b>
+                                        </div>
+                                    </div>
+
                                 </td>
-                                <td class="text-center"></td>
+                                <td :class="['text-center align-middle', {'bg-pink': discount != 0}]" >
+                                    <span class="text-black-50">{{ discount | formatNumber }}</span>
+                                </td>
                                 <td></td>
                             </tr>
-                            <tr id="tr-total">
+                            <tr>
                                 <td colspan="3" class="text-right border-right-0 border-bottom-0">
                                     <strong>購買金額總計</strong>
                                 </td>
-                                <td class="text-center bg-yellow"><span class="text-black-50">{{ finalPrice | formatNumber }}</span></td>
+                                <td class="text-center bg-yellow"><span class="text-black-50">{{ totalPrice | formatNumber }}</span></td>
                                 <td></td>
                             </tr>
                         </tbody>
@@ -160,7 +193,8 @@ import Form from './../plugins/form';
 import SimpleVueValidation from 'simple-vue-validator';
 import VueSweetalert2 from 'vue-sweetalert2';
 
-const InputValidator = SimpleVueValidation.Validator;
+const ItemValidator = SimpleVueValidation.Validator;
+const DiscountValidator = SimpleVueValidation.Validator;
 Vue.use(SimpleVueValidation);
 Vue.use(VueSweetalert2);
 
@@ -182,21 +216,25 @@ export default {
             selectedPrice: '',
             selectedQuantity: '',
             selectedInitStatus: 0,
+            selectDiscountType: 0,
+            discountNum: 0,
+            isDiscount: false, // 是否要使用折扣
+            hasDiscountNumError: false,
 
             menus: JSON.parse(document.querySelector("input[name=menu]").value),
             uuid: uuid,
             inventories: {},
             form: {},
             inputErrs: {},
+            subtotal: 0,
             totalPrice: 0,
             note: '',
+            discount: 0,
         };
     },
 
     computed: {
         selectedItemTotal: vm => vm.selectedQuantity * vm.selectedPrice,
-
-        finalPrice: vm => vm.totalPrice,
     },
 
     mounted() {
@@ -206,11 +244,11 @@ export default {
 
     validators: {
         selectedMenuId: function (value) {
-            return InputValidator.value(value).required('請選擇購買產品');
+            return ItemValidator.value(value).required('請選擇購買產品');
         },
         selectedQuantity(value) {
-            return InputValidator.value(value)
-                .integer().greaterThan(0).required('至少要 1 個');
+            return ItemValidator.value(value)
+                .integer().greaterThan(0).required();
         },
     },
 
@@ -221,7 +259,11 @@ export default {
             return d.toISOString().split('.')[0]
         },
 
-        onSubmit() {
+        onSubmit(e) {
+            if (this.hasDiscountNumError) {
+                e.preventDefault();
+                return;
+            }
             if (this.form.items.length < 1) {
                 this.$swal({
                     title: "本次交易沒有購買項目",
@@ -230,13 +272,15 @@ export default {
                 })
                 return
             }
+
             let formData = {
                 "ticket": this.ticket,
                 "payment": this.payment,
                 "transaction_at": this.transaction_at,
                 "items": this.form.items,
-                "price": this.totalPrice,
+                "price": Math.abs(this.totalPrice),
                 "note": this.note,
+                "discount": Math.abs(this.discount),
             }
 
             axios({
@@ -290,11 +334,8 @@ export default {
 
                     self.form.items.push(buyItem);
                     self.updateTotalPrice();
-                    self.inputErrs = {};
-                    self.selectedMenuId = '';
-                    self.selectedMenuItem = {};
-                    self.selectedPrice = '';
-                    self.selectedQuantity = '';
+                    self.inputErrs = self.selectedMenuItem = {};
+                    self.selectedMenuId = self.selectedPrice = self.selectedQuantity = '';
                     self.selectedItemTotal = '';
 
                     self.validation.reset();
@@ -318,12 +359,53 @@ export default {
             this.selectedInitStatus = item.init_status;
         },
 
-        updateTotalPrice() {
-            this.totalPrice = 0;
-            this.form.items.forEach(element => {
-                this.totalPrice += element.itemTotal;
-            });
+        onUpdateDiscount(index) {
+            if (this.discountNum != 0) {
+                this.discountNum = this.discountNum.replace(/^0+/, '')
+            }
+
+            if (! this.validateDiscount()) {
+                this.discountNum = this.discount = 0;
+                return;
+            }
+
+            if (this.selectDiscountType == "percent") {
+                this.discount = Math.ceil(this.subtotal * this.discountNum / 100)
+            } else {
+                this.discount = this.discountNum;
+            }
+
+            let updatePrice = this.subtotal - this.discount;
+            this.totalPrice = (updatePrice > 0) ? updatePrice : 0;
+            this.discount = (this.discount > 0) ? (this.discount * -1) : this.discount;; // for display, must be back when form submit
         },
+
+        resetDiscount() {
+            this.totalPrice = this.subtotal;
+            this.discount = this.discountNum = 0;
+            this.isDiscount = !this.isDiscount;
+        },
+
+        updateTotalPrice() {
+            this.subtotal = 0;
+            this.form.items.forEach(element => {
+                this.subtotal += element.itemTotal;
+            });
+            this.totalPrice = this.subtotal;
+        },
+
+        validateDiscount() {
+            // #FIXME, better to set two unique validator for verification
+            let isValid = false;
+            if (this.selectDiscountType == "percent") {
+                isValid = (this.discountNum >= 0 && this.discountNum <= 100);
+            } else {
+                isValid = (this.discountNum > 0 && this.discountNum <= this.subtotal);
+            }
+
+            this.hasDiscountNumError = !isValid
+            return isValid;
+        }
     }
 };
 </script>
