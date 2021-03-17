@@ -11,6 +11,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">匯入顧客資料</h5>
+                    <a href="{{ asset('import_sample.csv') }}" target="_blank">查看範例</a>
                 </div>
                 <div class="modal-body">
                     <div class="row">

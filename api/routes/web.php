@@ -48,7 +48,7 @@ Route::prefix('login')->group(function () {
     Route::post('/', [
         'as' => 'login.general',
         'uses' => 'Auth\LoginController@login'
-    ]);
+    ])->name('login');
 
     Route::get('facebook', [
         'as' => 'login.facebook',
