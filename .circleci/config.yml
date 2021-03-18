@@ -46,10 +46,14 @@ jobs:
     environment:
       HOST_PORT: 7002
       FQDN: staging.xlashie.com
+      DB_DATABASE: xlashie-staging
+      G_CLIENT_ID: G_CLIENT_ID_STG
+      G_CLIENT_SECRET: G_CLIENT_SECRET_STG
     steps: &deploy_steps
       - checkout:
           path: ~/xlashie
-      - run: cd .. &&  ./build_env.sh
+      - run: cd .. &&  ./build_env.sh && cat ./api/.env
+      - run: printenv
       - run: sudo apt update && sudo apt install rsync
       - run: sudo docker-php-ext-install zip
       - run: composer install -n --prefer-dist
@@ -65,8 +69,12 @@ jobs:
     docker:
       - image: circleci/php:7.4-node-browsers
     environment:
+      ENV: prod
       HOST_PORT: 7001
       FQDN: xlashie.com
+      DB_DATABASE: xlashie
+      G_CLIENT_ID: G_CLIENT_ID_PROD
+      G_CLIENT_SECRET: G_CLIENT_SECRET_PROD
     steps: *deploy_steps
 
 # Orchestrate our job run sequence
