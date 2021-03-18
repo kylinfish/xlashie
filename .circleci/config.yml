@@ -46,6 +46,9 @@ jobs:
     environment:
       HOST_PORT: 7002
       FQDN: staging.xlashie.com
+      DB_DATABASE: macarame
+      G_CLIENT_ID: G_CLIENT_ID_STG
+      G_CLIENT_SECRET: G_CLIENT_SECRET_STG
     steps: &deploy_steps
       - checkout:
           path: ~/xlashie
@@ -65,8 +68,12 @@ jobs:
     docker:
       - image: circleci/php:7.4-node-browsers
     environment:
+      ENV: prod
       HOST_PORT: 7001
       FQDN: xlashie.com
+      DB_DATABASE: xlashie
+      G_CLIENT_ID: G_CLIENT_ID_PROD
+      G_CLIENT_SECRET: G_CLIENT_SECRET_PROD
     steps: *deploy_steps
 
 # Orchestrate our job run sequence
