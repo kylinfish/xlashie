@@ -46,6 +46,7 @@ jobs:
     environment:
       HOST_PORT: 7002
       FQDN: staging.xlashie.com
+      DB_DATABASE: xlashie-staging
     steps: &deploy_steps
       - checkout:
           path: ~/xlashie
@@ -67,6 +68,7 @@ jobs:
     environment:
       HOST_PORT: 7001
       FQDN: xlashie.com
+      DB_DATABASE: xlashie
     steps: *deploy_steps
 
 # Orchestrate our job run sequence
