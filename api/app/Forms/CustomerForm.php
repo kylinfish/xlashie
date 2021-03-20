@@ -10,9 +10,10 @@ class CustomerForm extends BaseForm
         'phone' => 'string|size:10',
         'cellphone' => 'nullable|string|size:10',
         'email' => 'nullable|string|email|unique:customers,email|max:50',
-        'gender' => 'numeric|max:2',
+        'gender' => 'integer|min:0|max:2',
         'birth' => 'nullable|date',
         'avatar' => 'nullable|string|max:100',
+        'address' => 'nullable|string|max:150',
         'note_1' => 'nullable|string',
         'note_2' => 'nullable|string',
     ];
@@ -22,8 +23,10 @@ class CustomerForm extends BaseForm
         'phone' => 'required|string|size:10',
         'cellphone' => 'nullable|string|size:10',
         'gender' => 'numeric|max:2',
+        'gender' => 'integer|min:0|max:2',
         'birth' => 'nullable|date',
         'avatar' => 'nullable|string|max:100',
+        'address' => 'nullable|string|max:150',
         'note_1' => 'nullable|string',
         'note_2' => 'nullable|string',
     ];
