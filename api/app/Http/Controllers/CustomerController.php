@@ -127,7 +127,7 @@ class CustomerController extends \App\Http\Controllers\Controller
                 'phone' => $row[2] ?? '',
                 'cellphone'  => $row[3] ?? '',
                 'birth' => date('Y-m-d', strtotime($row[4])) ?? null,
-                'gender' => $row[5] ?? 0,
+                'gender' => (int) $row[5] ?? 0,
                 'address' => $row[6] ?? '',
                 'note_1' => $row[7] ?? null,
                 'note_2' => $row[8] ?? null,
