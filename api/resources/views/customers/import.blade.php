@@ -11,11 +11,23 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">匯入顧客資料</h5>
-                    <a href="{{ asset('import_sample.csv') }}" target="_blank">查看範例</a>
+                    <a href="{{ asset('import_sample.csv') }}" target="_blank">下載 CSV 範例檔</a>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-12">
+                            <label>欄位填寫說明：</label>
+                            <ul>
+                                <li>電子郵件(Email): 選填，但不可與已新增客戶重複，至多 50 字。</li>
+                                <li>姓名(Name): 必填，至多 20 字。</li>
+                                <li>家電(Phone): 選填，數字 10 碼，例如： 0212345789。</li>
+                                <li>手機(Cellphone): 選填，數字 10 碼，例如： 0987654321。</li>
+                                <li>生日(Birth): 選填，請符合日期格式 YYYY-MM-DD，例如： 1968-06-05。</li>
+                                <li>性別(Gender): 選填，未指定 0, 男生 1, 女生 2。</li>
+                                <li>地址(Address): 選填，至多 150 字。</li>
+                                <li>備註1(Note1): 選填。</li>
+                                <li>備註2(Note2): 選填。</li>
+                            </ul>
                             <div>
                                 請選擇匯入的 csv 檔案，檔案上限 10MB，單次匯入筆數限制為 1,000 筆。
                             </div>
