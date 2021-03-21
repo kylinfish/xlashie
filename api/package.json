@@ -21,6 +21,7 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
+        "@creative-tim-official/argon-dashboard-free": "^1.2.0",
         "jquery": "3.1.0",
         "package.json": "^2.0.1",
         "simple-vue-validator": "^0.16.0",
