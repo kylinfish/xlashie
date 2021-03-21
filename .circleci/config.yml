@@ -67,6 +67,10 @@ jobs:
           command: |
             rsync -aLz --delete --exclude "composer.lock" --exclude ".git" --exclude "*.core" --exclude "%.swap" \
             --delete-excluded -e "ssh -o 'StrictHostKeyChecking no' -p $HOST_PORT" ./ rsync@$HOST_IP:api
+      - run: 
+          name: symlink css framework
+          command: |
+            cd api/node_modules && ls -s \@creative-tim-official/argon-dashboard-free/assets/vendor/ ./vendor
 
   deploy-prod:
     working_directory: ~/xlashie/api/
