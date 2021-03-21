@@ -62,6 +62,10 @@ jobs:
       - run: sudo docker-php-ext-install zip
       - run: composer install -n --prefer-dist
       - run: npm install && npm run prod
+      - run:
+          name: symlink Argon theme CSS framework
+          command: |
+            ln -s node_modules/\@creative-tim-official/argon-dashboard-free/assets/vendor/ ./public/assets/vendor
       - deploy:
           name: deploy
           command: |
