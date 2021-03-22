@@ -220,7 +220,9 @@ export default {
             menus: JSON.parse(document.querySelector("input[name=menu]").value),
             uuid: uuid,
             inventories: {},
-            form: {},
+            form: {
+                items: [],
+            },
             inputErrs: {},
             subtotal: 0,
             totalPrice: 0,
