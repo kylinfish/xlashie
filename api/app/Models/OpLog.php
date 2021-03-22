@@ -30,6 +30,7 @@ class OpLog extends Model
         "destroy" => 7,
         "search" => 8,
         "detail" => 9,
+        "upload" => 10,
     ];
 
     protected $table = "op_logs";
