@@ -29,11 +29,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('customers/{customer_uuid}/inventories/status', 'Inventories@update');
 
     // Note
-    Route::get('customers/{customer_uuid}/notes', 'InvNotes@index');
-    Route::get('customers/{customer_uuid}/notes/{note_id}', 'InvNotes@show');
-    Route::post('customers/{customer_uuid}/notes/', 'InvNotes@store');
-    Route::put('customers/{customer_uuid}/notes/{note_id}', 'InvNotes@update');
-    Route::delete('customers/{customer_uuid}/notes/{note_id}', 'InvNotes@destroy');
+    Route::get('customers/{customer_uuid}/notes', 'Invnotes@index');
+    Route::get('customers/{customer_uuid}/notes/{note_id}', 'Invnotes@show');
+    Route::post('customers/{customer_uuid}/notes/', 'Invnotes@store');
+    Route::put('customers/{customer_uuid}/notes/{note_id}', 'Invnotes@update');
+    Route::delete('customers/{customer_uuid}/notes/{note_id}', 'Invnotes@destroy');
 
     // Transactions
     Route::get('customers/{customer_uuid}/transactions', 'Transactions@index');

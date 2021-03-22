@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\InvNote;
 
-class InvNotes extends \App\Http\Controllers\Controller
+class Invnotes extends \App\Http\Controllers\Controller
 {
 
     public function index(Request $request, string $customer_uuid)

@@ -15,7 +15,7 @@ class OpLog extends Model
         "Api\Menus" => 6,
         "TicketController" => 7,
         "Api\Transactions" => 8,
-        "Api\InvNotes" => 9,
+        "Api\Invnotes" => 9,
         "Api\Inventories" => 10,
     ];
 
