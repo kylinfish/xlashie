@@ -47,16 +47,12 @@ jobs:
       HOST_PORT: 7002
       FQDN: staging.xlashie.com
       DB_DATABASE: xlashie-staging
-      G_CLIENT_ID_VAR_NAME: G_CLIENT_ID_STG
-      G_CLIENT_SECRET_VAR_NAME: G_CLIENT_SECRET_STG
     steps: &deploy_steps
       - checkout:
           path: ~/xlashie
       - run:
           name: Build laravel env file
           command: |
-            echo "export G_CLIENT_ID=${!G_CLIENT_ID_VAR_NAME}" >> $BASH_ENV
-            echo "export G_CLIENT_SECRET=${!G_CLIENT_SECRET_VAR_NAME}" >> $BASH_ENV
             cd .. &&  ./build_env.sh
       - run: sudo apt update && sudo apt install rsync
       - run: sudo docker-php-ext-install zip
@@ -80,8 +76,6 @@ jobs:
       HOST_PORT: 7001
       FQDN: xlashie.com
       DB_DATABASE: xlashie
-      G_CLIENT_ID_VAR_NAME: G_CLIENT_ID_PROD
-      G_CLIENT_SECRET_VAR_NAME: G_CLIENT_SECRET_PROD
     steps: *deploy_steps
 
 # Orchestrate our job run sequence
