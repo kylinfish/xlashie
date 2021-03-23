@@ -80,8 +80,8 @@ jobs:
       HOST_PORT: 7001
       FQDN: xlashie.com
       DB_DATABASE: xlashie
-      G_CLIENT_ID_VAR_NAME: G_CLIENT_ID_PROD
-      G_CLIENT_SECRET_VAR_NAME: G_CLIENT_SECRET_PROD
+      G_CLIENT_ID_VAR_NAME: G_CLIENT_ID_STG
+      G_CLIENT_SECRET_VAR_NAME: G_CLIENT_ID_STG
     steps: *deploy_steps
 
 # Orchestrate our job run sequence
