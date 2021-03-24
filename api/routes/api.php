@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('customers/{customer_uuid}/transactions', 'Transactions@index');
     Route::get('customers/{customer_uuid}/transactions/{id}/', 'Transactions@detail');
     Route::post('customers/{customer_uuid}/transactions/', 'Transactions@store');
+    Route::delete('customers/{customer_uuid}/transactions/{id}/', 'Transactions@delete');
 
     // Menus
     Route::get('menus', 'Menus@index');
