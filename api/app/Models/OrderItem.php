@@ -23,13 +23,13 @@ class OrderItem extends Model
 
     protected $dateFormat = 'Y-m-d H:i:s';
 
-    public function ticket()
-    {
-        return $this->hasOne('App\Models\Ticket', 'order_id', 'id');
-    }
-
     public function scopeOrdered($query)
     {
         return $query->orderBy('created_at', 'desc')->get();
+    }
+
+    public function ticket()
+    {
+        return $this->hasOne(Ticket::class, 'order_id', 'id');
     }
 }

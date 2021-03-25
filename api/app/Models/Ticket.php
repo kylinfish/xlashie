@@ -27,23 +27,23 @@ class Ticket extends Model
 
     protected $dateFormat = 'Y-m-d H:i:s';
 
-    public function order_items()
-    {
-        return $this->hasMany('App\Models\OrderItem', 'order_id', 'id');
-    }
-
     public function scopeOrdered($query)
     {
         return $query->orderBy('created_at', 'desc')->get();
     }
 
+    public function order_items()
+    {
+        return $this->hasMany(OrderItem::class, 'order_id', 'id');
+    }
+
     public function customer()
     {
-        return $this->belongsTo('App\Models\Customer', 'customer_id');
+        return $this->belongsTo(Customer::class, 'customer_id');
     }
 
     public function customer_inventory()
     {
-        return $this->hasMany('App\Models\CustomerInventory', 'order_id', 'id');
+        return $this->hasMany(CustomerInventory::class, 'order_id', 'id');
     }
 }

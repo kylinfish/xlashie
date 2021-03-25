@@ -20,21 +20,21 @@ class Company extends Model
 
     public function owner()
     {
-        return $this->belongsTo('App\Models\User', 'owner_id', 'id');
+        return $this->belongsTo(User::class, 'owner_id', 'id');
     }
 
     public function menu()
     {
-        return $this->hasMany('App\Models\Menu', 'company_id', 'id');
+        return $this->hasMany(Menu::class, 'company_id', 'id');
     }
 
     public function customer()
     {
-        return $this->hasMany('App\Models\Customer', 'company_id', 'id');
+        return $this->hasMany(Customer::class, 'company_id', 'id');
     }
 
     public function ticket()
     {
-        return $this->hasMany('App\Models\Ticket', 'company_id', 'id');
+        return $this->hasMany(Ticket::class, 'company_id', 'id');
     }
 }
