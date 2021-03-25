@@ -20,16 +20,16 @@ class Customer extends Model
 
     public function inventory()
     {
-        return $this->hasMany('App\Models\CustomerInventory', 'customer_id', 'id');
+        return $this->hasMany(CustomerInventory::class, 'customer_id', 'id');
     }
 
     public function ticket()
     {
-        return $this->hasMany('App\Models\Ticket', 'customer_id', 'id');
+        return $this->hasMany(Ticket::class, 'customer_id', 'id');
     }
 
     public function notes()
     {
-        return $this->hasMany('App\Models\InvNote', 'customer_id', 'id');
+        return $this->hasMany(InvNote::class, 'customer_id', 'id');
     }
 }

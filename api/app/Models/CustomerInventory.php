@@ -33,12 +33,6 @@ class CustomerInventory extends Model
 
     protected $attributes = [];
 
-
-    public function customer()
-    {
-        return $this->hasOne('App\Models\Customer', 'id', 'customer_id');
-    }
-
     public function scopeOrdered($query)
     {
         return $query->orderBy('created_at', 'desc')->get();
@@ -64,11 +58,16 @@ class CustomerInventory extends Model
 
     public function note()
     {
-        return $this->hasOne('App\Models\InvNote', 'note_id');
+        return $this->hasOne(InvNote::class, 'note_id');
     }
 
     public function ticket()
     {
-        return $this->belongsTo('App\Models\Ticket', 'order_id');
+        return $this->belongsTo(Ticket::class, 'order_id');
+    }
+
+    public function customer()
+    {
+        return $this->hasOne(Customer::class, 'id', 'customer_id');
     }
 }
