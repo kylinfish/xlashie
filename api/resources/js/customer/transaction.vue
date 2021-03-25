@@ -7,7 +7,8 @@
                 <th class="text-center">消費日期</th>
                 <th class="text-center">消費金額</th>
                 <th class="text-center">付款方式</th>
-                <th class="text-center">操作</th>
+                <th class="text-center">檢視</th>
+                <th class="text-center" width="10%">刪除</th>
             </tr>
         </thead>
         <tbody>
@@ -19,10 +20,15 @@
                 <td class="text-center">
                     <a href="#" class="btn btn-default btn-sm" data-toggle="modal" data-target="#transaction-modal" @click="fillModal(transaction.id)">
                         <span class="btn-inner--icon">
-                            <i class="ni ni-settings-gear-65"></i>
+                            <i class="fa fa-file-alt"></i>
                         </span>
                         檢視
                     </a>
+                </td>
+                <td class="text-center">
+                    <button class="btn btn-outline-danger btn-sm" @click="deleteModal(transaction.id)">
+                        <i class="fa fa-trash"></i> 刪除
+                    </button>
                 </td>
             </tr>
         </tbody>
@@ -124,7 +130,6 @@ export default {
                 });
         },
         fillModal(i_id) {
-
             let inventory = this.transactions.filter((inventory) => inventory.id == i_id)[0];
 
             this.selectedItem = Object.assign({}, inventory);
@@ -139,6 +144,37 @@ export default {
                 .catch((res) => {
                     console.log("something is wrong", res);
                 });
+        },
+        deleteModal(t_id) {
+            this.$swal({
+                title: `確定要刪除該訂單 #${t_id} 嗎?`,
+                text: "該筆訂單會連同 `已購庫存` 內的子項目一併刪除並無法復原",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#f5365c",
+                confirmButtonText: "刪除",
+                cancelButtonText: "取消",
+            }).then((result) => {
+                if (!result.value) {
+                    return;
+                }
+                axios
+                    .delete(`/api/customers/${this.uuid}/transactions/${t_id}`)
+                    .then((res) => {
+                        this.$swal({
+                            title: "刪除成功",
+                            text: "稍後重新整理",
+                            icon: "success",
+                            timer: 500,
+                            showConfirmButton: false,
+                        }).then(() => {
+                            location.reload();
+                        });
+                    })
+                    .catch((res) => {
+                        console.log("something is wrong", res);
+                    });
+            });
         },
     },
 };

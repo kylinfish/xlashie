@@ -41,4 +41,9 @@ class Ticket extends Model
     {
         return $this->belongsTo('App\Models\Customer', 'customer_id');
     }
+
+    public function customer_inventory()
+    {
+        return $this->hasMany('App\Models\CustomerInventory', 'order_id', 'id');
+    }
 }

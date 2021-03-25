@@ -66,4 +66,9 @@ class CustomerInventory extends Model
     {
         return $this->hasOne('App\Models\InvNote', 'note_id');
     }
+
+    public function ticket()
+    {
+        return $this->belongsTo('App\Models\Ticket', 'order_id');
+    }
 }
