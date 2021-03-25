@@ -52,6 +52,9 @@ class Transactions extends \App\Http\Controllers\Controller
         if (!$customer = my_customer_by_uuid($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);
         }
+
+        $log_msg = json_encode($customer->ticket()->find($id)->get());
+
         # XXX: Better do deletion with worker job
         $inventory_ids = $customer->ticket()->find($id)->customer_inventory()->pluck('id')->toArray();
 
@@ -59,6 +62,8 @@ class Transactions extends \App\Http\Controllers\Controller
         $customer->ticket()->find($id)->customer_inventory()->delete();
         $customer->ticket()->find($id)->order_items()->delete();
         $customer->ticket()->find($id)->delete();
+
+        $this->logging($request, $log_msg);
 
         return response()->json(["message" => "ok"], 200);
     }
