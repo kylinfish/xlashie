@@ -4,25 +4,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="個人工作室、斜槓族、開店創業者的最佳幫手，客戶管理、會員經營、智慧儀表雲端系統。Slashie, SOHO, Xlashie">
-    <title>XLASHIE</title>
-    <meta name="keywords" content="XLASHIE, Slashie, CRM, Dashboard, Excel, ERP, 斜槓事業的最佳幫手, 客戶管理, 會員經營, 智慧儀表">
-    <meta name="description" content="個人工作室、斜槓族、開店創業者的最佳幫手，客戶管理、會員經營、智慧儀表雲端系統。Slashie, SOHO, Xlashie">
+    <meta name="description" content="微型企業CRM，個人工作室、斜槓族、開店創業者的經營最佳幫手，客戶管理、會員經營、智慧儀表雲端系統。Slashie, SOHO, Xlashie">
+    <title>XLASHIE 微圈 - 微型企業 CRM</title>
+    <meta name="keywords" content="微型企業, XLASHIE, Slashie, CRM, Dashboard, Excel, ERP, 斜槓事業的最佳幫手, 客戶管理, 會員經營, 智慧儀表">
+    <meta name="description" content="微型企業CRM，個人工作室、斜槓族、開店創業者的經營最佳幫手，客戶管理、會員經營、智慧儀表雲端系統。Slashie, SOHO, Xlashie">
     <!-- Schema.org markup for Google+ -->
-    <meta itemprop="name" content="XLASHIE - 斜槓族的最佳幫手">
-    <meta itemprop="description" content="個人工作室、斜槓族、開店創業者的最佳幫手，客戶管理、會員經營、智慧儀表雲端系統。Slashie, SOHO, Xlashie">
+    <meta itemprop="name" content="XLASHIE 微圈 - 微型企業 CRM">
+    <meta itemprop="description" content="微型企業CRM，個人工作室、斜槓族、開店創業者的經營最佳幫手，客戶管理、會員經營、智慧儀表雲端系統。Slashie, SOHO, Xlashie">
     <meta itemprop="image" content="assets/img/theme/landing-0.png">
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="product">
-    <meta name="twitter:title" content="XLASHIE - 斜槓族的最佳幫手">
-    <meta name="twitter:description" content="個人工作室、斜槓族、開店創業者的最佳幫手，客戶管理、會員經營、智慧儀表雲端系統。Slashie, SOHO, Xlashie">
+    <meta name="twitter:title" content="XLASHIE 微圈 - 微型企業 CRM">
+    <meta name="twitter:description" content="微型企業CRM，個人工作室、斜槓族、開店創業者的經營最佳幫手，客戶管理、會員經營、智慧儀表雲端系統。Slashie, SOHO, Xlashie">
     <meta itemprop="twitter:image" content="assets/img/theme/landing-0.png">
     <!-- Open Graph data -->
-    <meta property="og:title" content="XLASHIE - 斜槓族的最佳幫手" />
+    <meta property="og:title" content="XLASHIE 微圈 - 微型企業 CRM" />
     <meta property="og:type" content="article" />
 
-    <meta property="og:description" content="個人工作室、斜槓族、開店創業者的最佳幫手，客戶管理、會員經營、智慧儀表雲端系統。Slashie, SOHO, Xlashie" />
-    <meta property="og:site_name" content="XLASHIE - 斜槓族的最佳幫手" />
+    <meta property="og:description" content="微型企業CRM，個人工作室、斜槓族、開店創業者的經營最佳幫手，客戶管理、會員經營、智慧儀表雲端系統。Slashie, SOHO, Xlashie" />
+    <meta property="og:site_name" content="XLASHIE 微圈 - 微型企業 CRM" />
     <link rel="icon" href="./assets/img/brand/ico.png" type="image/png">
 
     <link rel="preload" as="style" href="./assets/vendor/nucleo/css/nucleo.css" type="text/css" onload="this.rel='stylesheet'">
@@ -44,10 +44,12 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6">
                             <div class="pr-5">
-                                <h1 class="display-2 text-white font-weight-bold mb-0"><b
-                                        class="text-yellow display-1">X</b>LASHIE</h1>
+                                <h1 class="display-2 text-white font-weight-bold mb-0">
+                                    <b class="text-yellow display-1">X</b>LASHIE 微圈
+                                </h1>
 
-                                <h2 class="display-4 text-white font-weight-light">斜槓事業的最佳幫手</h2>
+                                <h3 class="display-4 text-white font-weight-light text-right">－ 打造微型企業共榮圈</h3>
+                                <h2 class="text-white pt-3">微型企業 CRM</h2>
                                 <p class="text-white mt-4">
                                     專為 <b>個人工作室</b>、<b>斜槓族</b>、<b>開店創業者</b> 而生，
                                     經營品牌與事業的最佳輔助工具。協助您管理客戶資源，同時掌握自己的收支業績，讓會員經營更是那麼輕鬆簡單。
@@ -57,7 +59,7 @@
                                     <!--遍尋市面上各大軟體平台卻還是找不到想要的? 不是功能太複雜或者是費用太高昂，造成剛起步的創業者步步為難。 捲起袖子動手才知道，原來小蝦米要對抗大財團的經營模式根本艱難。發現原來夢想擁有自己的小店以及事業並非容易，讓 Xlashie 一起幫您-->
                                     <div class="mt-5">
                                         <a href="/home" class="btn btn-neutral my-2"><i class="fas fa-sign-in-alt"></i>
-                                            建立帳號，免費開始</a>
+                                            建立帳號，免費使用 (Free)</a>
                                         <a href="/home" class="btn btn-default my-2 px-4">登入</a>
                                     </div>
                             </div>
@@ -127,18 +129,15 @@
                     <div class="col-md-8">
                         <h2 class="display-3 text-white">斜槓族 <i><b class="text-yellow">S</b>LASHIE</i> 的事業利器 — <strong
                                 class="text-yellow">X</strong>LASHIE</h3>
-                            <p class="lead text-white pb-5">
-                                您還在使用紙本做客戶紀錄嗎? 常常忘了帶自己的客戶資料而造成不便嗎？又或者想使用 Excel 做報表卻又很苦惱嗎? 想輕鬆紀錄客戶的歷程資訊或消費習慣卻又不知從何開始嗎?
-                                想建立會員制度卻又無法輕鬆達成嗎?
+
+                            <blockquote class="text-gray py-2 display-5">
+                                微型企業是中小型企業的其中一種亦或是「5 名員工人數以下」的中小型企業，其中包含個人工作室，自立品牌等。
+                            </blockquote>
+                            <p class="text-white pb-5">
+                                結合微型企業彼此的力量打造一個屬於微型企業的會員管理經營平台。輕鬆開始管理自己的會員名單，進階參與互助計畫有效行銷曝光個人品牌。
+                                <b>免費開始使用</b>，登入後功能所見即所得，同時也提供多筆匯入幫您快速建造自己的會員資料庫</p>
+                            <p class="text-white display-4">微圈的共榮力量，就用 <strong class="text-yellow">X</strong>LASHIE 來當您的最佳輔手
                             </p>
-                            <p class="text-white display-4">想更了解自己的客戶，就用 <strong class="text-yellow">X</strong>LASHIE
-                            </p>
-                            <p class="text-orange"><b>適用族群:</b></p>
-                            <span class="badge badge-primary badge-lg mb-2">美甲 / 美容護膚 / 美髮</span>、
-                            <span class="badge badge-primary badge-lg mb-2">健身教練</span>、
-                            <span class="badge badge-primary badge-lg mb-2">治療師</span>、<span
-                                class="badge badge-primary badge-lg mb-2">家教老師</span>、<span
-                                class="badge badge-primary badge-lg mb-2">接案族</span>
                     </div>
                 </div>
             </div>
@@ -220,6 +219,18 @@
                                         </div>
                                     </div>
                                     <div>
+                                        <h4 class="mb-0">CSV 快速匯入建立資料</h4>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="py-2">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <div class="badge badge-circle badge-success mr-3">
+                                            <i class="ni ni-bold-right"></i>
+                                        </div>
+                                    </div>
+                                    <div>
                                         <h4 class="mb-0">銷售產品/服務自訂化</h4>
                                     </div>
                                 </div>
@@ -244,7 +255,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <h4 class="mb-0">預售產品課程庫存查詢</h4>
+                                        <h4 class="mb-0">預售產品/課程查詢</h4>
                                     </div>
                                 </div>
                             </li>
@@ -276,7 +287,6 @@
                     <div class="pr-md-5">
                         <h1>營業收支/智慧儀表</h1>
                         <p>熱門銷售項目，業績單量總覽以及整體營收數字圖表化。透過統計及儀表板一覽無遺。</p>
-
                     </div>
                 </div>
             </div>
@@ -305,12 +315,18 @@
             <div class="row align-items-center justify-content-xl-between">
                 <div class="col-xl-6">
                     <div class="copyright text-center text-xl-left text-muted">
-                        &copy; 2021 <a href="#" class="font-weight-bold ml-1">XLASHIE</a>
+                        &copy; 2021 <a href="#" class="font-weight-bold ml-1">XLASHIE 微圈</a>
                     </div>
 
                     <div class="copyright text-center text-xl-left text-muted">
                         <a href="https://www.facebook.com/groups/1333227597028522" target="_blank">
                             <i class="fab fa-facebook-square"></i> Facebook 社團討論區
+                        </a>
+                    </div>
+
+                    <div class="copyright text-center text-xl-left text-muted">
+                        <a href="mailto:support@xlashie.com">
+                            <i class="fa fa-envelope"></i> 歡迎來信合作
                         </a>
                     </div>
                 </div>

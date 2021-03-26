@@ -4,11 +4,32 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="微型企業CRM，個人工作室、斜槓族、開店創業者的經營最佳幫手，客戶管理、會員經營、智慧儀表雲端系統。Slashie, SOHO, Xlashie">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="{{ asset('/img/brand/ms-icon-144x144.png') }}">
     <meta name="theme-color" content="#ffffff">
 
-    <title>XLASHIE</title>
+    <title>XLASHIE 微圈 - 會員登入</title>
+
+    <meta name="keywords" content="微型企業, XLASHIE, Slashie, CRM, Dashboard, Excel, ERP, 斜槓事業的最佳幫手, 客戶管理, 會員經營, 智慧儀表">
+    <meta name="description" content="微型企業CRM，個人工作室、斜槓族、開店創業者的經營最佳幫手，客戶管理、會員經營、智慧儀表雲端系統。Slashie, SOHO, Xlashie">
+    <!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="XLASHIE 微圈 - 微型企業 CRM">
+    <meta itemprop="description" content="微型企業CRM，個人工作室、斜槓族、開店創業者的經營最佳幫手，客戶管理、會員經營、智慧儀表雲端系統。Slashie, SOHO, Xlashie">
+    <meta itemprop="image" content="assets/img/theme/landing-0.png">
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="product">
+    <meta name="twitter:title" content="XLASHIE 微圈 - 微型企業 CRM">
+    <meta name="twitter:description" content="微型企業CRM，個人工作室、斜槓族、開店創業者的經營最佳幫手，客戶管理、會員經營、智慧儀表雲端系統。Slashie, SOHO, Xlashie">
+    <meta itemprop="twitter:image" content="assets/img/theme/landing-0.png">
+    <!-- Open Graph data -->
+    <meta property="og:title" content="XLASHIE 微圈 - 微型企業 CRM" />
+    <meta property="og:type" content="article" />
+
+    <meta property="og:description" content="微型企業CRM，個人工作室、斜槓族、開店創業者的經營最佳幫手，客戶管理、會員經營、智慧儀表雲端系統。Slashie, SOHO, Xlashie" />
+    <meta property="og:site_name" content="XLASHIE 微圈 - 微型企業 CRM" />
+    <link rel="icon" href="./assets/img/brand/ico.png" type="image/png">
+
 
     <link rel="icon" href="{{ asset('/img/brand/logo.png') }}" type="image/png">
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/img/brand/apple-icon-57x57.png">

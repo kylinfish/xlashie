@@ -9,7 +9,7 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>XLASHIE</title>
+    <title>XLASHIE 微圈</title>
 
     <link rel="icon" href="{{ asset('/img/brand/ico.png') }}" type="image/png">
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/img/brand/apple-icon-57x57.png">
