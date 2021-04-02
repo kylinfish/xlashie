@@ -21,8 +21,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/company/create', 'CompanyController@create');
     Route::post('/company/', 'CompanyController@store');
 
-
-
     Route::get('/dashboard/', function () {
         return view('dashboard');
     });
@@ -34,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/customers/search', 'CustomerController@search');
     Route::get('customers/import', [CustomerController::class, 'import'])->name('customers/import');
     Route::post('customers/import/upload', [CustomerController::class, 'upload'])->name('customers/import/upload');
+    Route::resource('oplogs', 'OplogController');
     Route::resource('customers', 'CustomerController');
     Route::resource('menus', 'MenuController');
     Route::get('/orders/', 'TicketController@index');

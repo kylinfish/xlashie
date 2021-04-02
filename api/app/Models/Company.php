@@ -37,4 +37,9 @@ class Company extends Model
     {
         return $this->hasMany(Ticket::class, 'company_id', 'id');
     }
+
+    public function oplog()
+    {
+        return $this->hasMany(OpLog::class, 'company_id', 'id');
+    }
 }
