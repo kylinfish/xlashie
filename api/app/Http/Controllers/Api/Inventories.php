@@ -26,6 +26,7 @@ class Inventories extends \App\Http\Controllers\Controller
     public function update(Request $request, string $customer_uuid)
     {
         $params = $request->only(["id", "status", "use_at"]);
+        $params["labeled_by"] = user()->id;
 
         if (!$customer = my_customer_by_uuid($customer_uuid)) {
             return response()->json(["message" => "查無此使用者"], 422);

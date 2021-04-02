@@ -25,6 +25,8 @@ class CustomerInventory extends Model
         'status',
         'create_at',
         'use_at',
+        'created_by',
+        'labeled_by',
     ];
 
     protected $hidden = [];

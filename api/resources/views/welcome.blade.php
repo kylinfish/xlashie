@@ -43,6 +43,14 @@
                             </div>
                         </a>
                     </div>
+                    <div class="col">
+                        <a class="card shadow border-0" href="/oplogs/">
+                            <div class="card-body text-center">
+                                <h4 class="h2 text-primary text-uppercase"> <i class="fa fa-history"></i> 操作記錄
+                                </h4>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
 
