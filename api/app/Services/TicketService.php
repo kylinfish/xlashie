@@ -41,6 +41,8 @@ class TicketService
                     "order_id" => $order->id,
                     "note_id" => 0,
                     "product_name" => $item["itemName"],
+                    "created_by" => user()->id,
+                    "labeled_by" => 0,
                     "status" => $item["initStatus"],
                     "created_at" => $data["created_at"],
                     "updated_at" => Carbon::now(),

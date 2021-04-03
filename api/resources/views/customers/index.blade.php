@@ -1,22 +1,12 @@
 @extends('layouts.app')
 @section('content')
 <div class="offset-lg-1 col-lg-10">
-    @if (request()->get('wizard') or $is_wizard ?? '')
-    <div class="mb-4 btn-group btn-group-sm d-flex border" role="group" aria-label="...">
-        <a href="/company/?wizard=1" type="button" class="btn btn-success w-100" disabled><span class="badge badge-lg badge-success mr-1">1</span> 建立店家</button>
-        <a href="/menus/?wizard=1" type="button" class="btn btn-success w-100"><span class="badge badge-lg badge-success mr-1">2</span> 新增營業項目</a>
-        <button type="button" class="btn btn-default w-100"><span class="badge badge-lg badge-primary mr-1">3</span> 新增客戶名單</button>
-    </div>
-    @endif
 
-
-<div class="row align-items-center mb-3">
-    <div class="col-lg-6 col-7">
+    <div class="row align-items-center mb-3">
+    <div class="col-12">
+        <a href="/customers/create" class="btn btn-primary float-right ml-2">新增客戶</a>
+        <a href="{{ route('customers/import') }}" class="btn btn-outline-primary float-right">匯入</a>
         <h1>客戶清單</h1>
-    </div>
-    <div class="col-lg-6 col-5 text-right">
-        <a href="{{ route('customers/import') }}" class="btn btn-outline-primary">匯入</a>
-        <a href="/customers/create" class="btn btn-primary">新增客戶</a>
     </div>
 </div>
 

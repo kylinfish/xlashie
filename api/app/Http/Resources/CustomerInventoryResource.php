@@ -24,6 +24,8 @@ class CustomerInventoryResource extends JsonResource
             "status" => $this->status,
             "status_str" => CustomerInventory::getStatusWording($this->status),
             "use_at" => $use_at,
+            "created_by" => $this->created_by,
+            "labeled_by" => $this->labeled_by,
             "created_at" => $this->created_at->toDatetimeString(),
             "updated_at" => $this->updated_at->toDatetimeString(),
         ];
