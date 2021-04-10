@@ -8,7 +8,7 @@ class Customer extends Model
 {
     protected $table = "customers";
 
-    protected $fillable = ['company_id', 'uuid', "name", "phone", "cellphone", "gender", "address", "birth", "note_1", "note_2", "email", "avatar", "identify_id", "identify_provider"];
+    protected $fillable = ['company_id', 'uuid', "name", "phone", "cellphone", "gender", "address", "birth", "note_1", "note_2", "email", "avatar", "identify_id", "identify_provider", "charged_by"];
 
     protected $hidden = ['id', 'password'];
 
@@ -31,5 +31,10 @@ class Customer extends Model
     public function notes()
     {
         return $this->hasMany(InvNote::class, 'customer_id', 'id');
+    }
+
+    public function charged_by_user()
+    {
+        return $this->belongsTo(User::class, 'charged_by', 'id');
     }
 }
