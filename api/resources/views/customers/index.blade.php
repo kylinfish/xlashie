@@ -26,18 +26,22 @@
                 <tr>
                     <th>名字</th>
                     <th>電話</th>
+                    @if ($is_group)
+                    <th>負責人</th>
+                    @endif
                     <th>最後交易日期</th>
                     <th>建立時間</th>
                     <th>操作</th>
                 </tr>
             </thead>
             <tbody class="list">
-
                 @foreach ($customers as $customer)
                 <tr>
                     <td><a href="/customers/{{ $customer->uuid }}">{{ $customer->name }}</a></td>
-
                     <td>{{ $customer->phone }}</td>
+                    @if ($is_group)
+                    <td>{{ $customer->charged_by_user->name ?? '' }}</td>
+                    @endif
                     <td>{{ $customer->created_at }}</td>
                     <td>{{ $customer->created_at }}</td>
                     <td class="text-right form-inline">

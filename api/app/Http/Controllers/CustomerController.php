@@ -12,10 +12,11 @@ class CustomerController extends \App\Http\Controllers\Controller
     public function index(Request $request, CustomerForm $form)
     {
         $limit = request('limit', 10);
-        $customers = my_customer()->orderBy("id", "DESC")->get();
+        $customers = my_customer()->with('charged_by_user')->orderBy("id", "DESC")->get();
         $customers = $this->paginate($customers, $limit);
 
-        return view("customers.index", compact("customers"));
+        $is_group = my_comp()->is_group;
+        return view("customers.index", compact("customers", "is_group"));
     }
 
     public function show(Request $request, string $customer_uuid)
@@ -27,9 +28,12 @@ class CustomerController extends \App\Http\Controllers\Controller
 
         $inventory_count = $customer->inventory()->count();
         $order_count = my_comp()->ticket()->where(["customer_id" => $customer->id])->count();
-        $menus = my_comp()->menu()->get()->toJson();
 
-        $return_view = view("customers.show", compact('customer', 'order_count', 'inventory_count', 'menus'));
+        $menus = my_comp()->menu()->get(['id', 'name', 'price', 'init_status'])->toJson();
+        $is_group = my_comp()->is_group;
+        $user_list = my_comp()->user()->get(['id', 'name'])->toJson();
+
+        $return_view = view("customers.show", compact('customer', 'order_count', 'inventory_count', 'menus', 'is_group', 'user_list'));
         if (my_comp()->menu()->count() == 0) {
             return $return_view->with(['alert' => 'warning', 'message' => '尚無營業項目可以新增訂單，請由 [首頁] -> [營業項目] 進行新增']);
         }
@@ -38,13 +42,16 @@ class CustomerController extends \App\Http\Controllers\Controller
 
     public function create()
     {
-        return view("customers.create");
+        $user_list = my_comp()->user()->get(['id', 'name']);
+        $is_group = my_comp()->is_group;
+
+        return view("customers.create", compact('is_group', 'user_list'));
     }
 
     public function store(Request $request, CustomerForm $form)
     {
         $params = $request->only([
-            "name", "phone", "cellphone", "email",
+            "name", "phone", "cellphone", "email", "charged_by",
             "birth", "note_1", "note_2", "gender", "address"
         ]);
         if ($errors = $form->validate($params)) {
@@ -66,6 +73,7 @@ class CustomerController extends \App\Http\Controllers\Controller
             'note_2' => $params["note_2"] ?? null,
             'gender' => $params["gender"] ?? 0,
             'address' => $params["address"] ?? '',
+            'charged_by' => $params["charged_by"] ?? 0,
         ]);
 
         $this->logging($request, $customer->id);

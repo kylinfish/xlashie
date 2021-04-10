@@ -28,7 +28,7 @@ class Customers extends \App\Http\Controllers\Controller
 
     public function update(Request $request, CustomerForm $form, string $customer_uuid)
     {
-        $params = $request->only(["name", "email", "phone", "cellphone", "gender", "address", "birth", "note_1", "note_2"]);
+        $params = $request->only(["name", "email", "phone", "cellphone", "gender", "address", "charged_by", "birth", "note_1", "note_2"]);
 
         $form->validate($params);
 
