@@ -50,11 +50,22 @@
                     </div>
                 </div>
 
-                <div class="col-lg-12">
+                <div v-bind:class="getAddressClass()">
                     <div class="form-group-sm">
                         <label class="form-control-label" for="address">地址</label>
                         <input type="text" id="address" :class="['form-control', {'is-invalid': validation.hasError('customer.address')}]" v-model="customer.address" :disabled="!isSubmitShow">
                         <div class="invalid-feedback">{{ validation.firstError('customer.address') }}</div>
+                    </div>
+                </div>
+                <div class="col-6" v-show="isGroup == 1">
+                    <div class="form-group-sm">
+                        <label class="form-control-label" for="charged_by">負責人</label>
+                        <select id="charged_by" :class="['form-control', {'is-invalid': validation.hasError('customer.charged_by')}]" v-model="customer.charged_by" :disabled="!isSubmitShow">>
+                            <option value="0">不指定</option>
+                            <option v-for="(user) in users" v-bind:value="user.value" :value="user.id" :key="user.id">
+                                    {{ user.name }}
+                            </option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -111,6 +122,8 @@ export default {
             uuid: uuid,
             customer: {},
             validatorMsg: '',
+            isGroup: JSON.parse(document.querySelector("input[name=isGroup]").value),
+            users: JSON.parse(document.querySelector("input[name=users]").value),
         };
     },
 
@@ -189,6 +202,10 @@ export default {
                         })
                     });
                 })
+        },
+
+        getAddressClass() {
+            return (this.isGroup == 0) ? "col-12" : "col-6"
         }
     }
 };

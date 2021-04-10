@@ -27,6 +27,25 @@
 
                             </div>
                         </div>
+
+                        @if ($is_group)
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="gender">負責人</label>
+                                @error('charged_by')
+                                <span class="text-danger float-right">{{ $message }}</span>
+                                @enderror
+                                <select name="charged_by" class="form-control @error('description') is-invalid @enderror"
+                                value="{{ old('charged_by') }}">>
+                                    <option value="0">不指定</option>
+                                    @foreach ($user_list as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        @endif
+
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="email" data-toggle="tooltip" data-placement="right"
@@ -85,7 +104,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-12">
+                        <div class="{{ $is_group ? 'col-lg-6' : 'col-md-12' }}">
                             <div class="form-group">
                                 <label class="form-control-label" for="address">地址</label>
                                 @error('address')
@@ -96,6 +115,7 @@
 
                             </div>
                         </div>
+
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label">備註 1:</label>

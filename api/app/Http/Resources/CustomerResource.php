@@ -27,6 +27,7 @@ class CustomerResource extends JsonResource
             "phone" => $this->phone,
             "email" => $this->email,
             "cellphone" => $this->cellphone,
+            "charged_by" => $this->charged_by,
             "gender" => $this->gender,
             "updated_at" => $this->updated_at->format("Y-m-d H:i:s"),
             "birth" => $birth,

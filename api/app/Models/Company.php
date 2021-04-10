@@ -13,6 +13,7 @@ class Company extends Model
         'owner_id',
         'account',
         'description',
+        'is_group',
         'created_at',
         'updated_at',
         'deleted_at'
@@ -41,5 +42,10 @@ class Company extends Model
     public function oplog()
     {
         return $this->hasMany(OpLog::class, 'company_id', 'id');
+    }
+
+    public function user()
+    {
+        return $this->hasMany(User::class, 'company_id', 'id');
     }
 }

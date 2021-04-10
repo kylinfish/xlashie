@@ -3,6 +3,8 @@
 <link rel="preload" href="{{ asset('/assets/vendor/quill/dist/quill.core.css') }}" type="text/css" as="style">
 @include('common.alert')
 <input type="hidden" name="menu" value="{{ $menus }}">
+<input type="hidden" name="isGroup" value="{{ $is_group }}">
+<input type="hidden" name="users" value="{{ $user_list }}">
 <div class="row">
     <div class="col-lg-3">
         <a href="/customers/" class="btn btn-block btn-outline-default mt--2 mb-2">回到客戶清單</a>
