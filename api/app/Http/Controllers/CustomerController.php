@@ -95,7 +95,9 @@ class CustomerController extends \App\Http\Controllers\Controller
 
         $customers = $this->paginate($customers, $limit);
 
+        $is_group = my_comp()->is_group;
         return view("customers.index", [
+            'is_group' => $is_group,
             'customers' => $customers,
             'alert' => 'info', 'message' => "查詢: {$keyword}"
         ]);
