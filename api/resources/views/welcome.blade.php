@@ -35,6 +35,16 @@
                             </div>
                         </a>
                     </div>
+
+                    <div class="col">
+                        <a class="card shadow border-0" href="/finance/">
+                            <div class="card-body text-center">
+                                <h4 class="h2 text-primary text-uppercase"> <i class="ni ni-collection"></i> 營收報表</h4>
+                            </div>
+                        </a>
+                    </div>
+
+
                     <div class="col">
                         <a class="card shadow border-0" href="/dashboard/">
                             <div class="card-body text-center">

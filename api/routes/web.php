@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('customers', 'CustomerController');
     Route::resource('menus', 'MenuController');
     Route::get('/orders/', 'TicketController@index');
+    Route::get('/finance/', 'FreportController@index');
 });
 
 /*
