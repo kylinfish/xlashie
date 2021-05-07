@@ -46,6 +46,7 @@ jobs:
     environment:
       HOST_PORT: 7002
       FQDN: staging.xlashie.com
+      APP_ENV: staging
       DB_DATABASE: xlashie-staging
     steps: &deploy_steps
       - checkout:
@@ -75,6 +76,7 @@ jobs:
     environment:
       HOST_PORT: 7001
       FQDN: xlashie.com
+      APP_ENV: production
       DB_DATABASE: xlashie
     steps: *deploy_steps
 

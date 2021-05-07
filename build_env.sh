@@ -2,7 +2,7 @@
 
 cp api/.env.example .env
 
-sed -i -e "s/APP_ENV=local/APP_ENV=production/g" .env
+sed -i -e "s/APP_ENV=local/APP_ENV=${APP_ENV}/g" .env
 sed -i -e "s/APP_DEBUG=true/APP_DEBUG=false/g" .env
 sed -i -e "s/{DB_HOST_IP}/${DB_HOST_IP}/g" .env
 sed -i -e "s/{DB_DATABASE}/${DB_DATABASE}/g" .env
