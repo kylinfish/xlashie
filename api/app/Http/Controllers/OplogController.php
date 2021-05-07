@@ -11,7 +11,7 @@ class OplogController extends Controller
     public function index(Request $request)
     {
         if (auth()->user()->is_demo) {
-            return redirec('/home');
+            return redirect('/home');
         }
 
         $limit = request('limit', 20);

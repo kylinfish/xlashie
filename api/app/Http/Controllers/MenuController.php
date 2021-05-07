@@ -41,8 +41,7 @@ class MenuController extends Controller
     {
         $params = $request->only(['name', 'price', 'description', 'init_status']);
 
-        $menu = Menu::create([
-            'company_id' => user()->company_id,
+        $menu = my_comp()->menu()->create([
             'name' => $params['name'],
             'price' => $params['price'],
             'init_status' => $params['init_status'],

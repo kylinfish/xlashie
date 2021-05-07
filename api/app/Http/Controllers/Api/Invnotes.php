@@ -35,9 +35,8 @@ class Invnotes extends \App\Http\Controllers\Controller
             return response()->json(["message" => "查無此使用者"], 422);
         }
 
-        $invnote = InvNote::create([
-            'company_id' => auth()->user()->company_id,
-            'customer_id' => $customer->id,
+        $invnote = $customer->notes()->create([
+            'company_id' => my_comp()->id,
             'note' => $params['note'],
             'inventory_id' => $params['inventory_id'] ?? 0,
         ]);
