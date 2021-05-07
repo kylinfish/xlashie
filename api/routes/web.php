@@ -12,10 +12,13 @@ use \App\Http\Controllers\CustomerController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', 'IndexController@landing');
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', 'IndexController@index');
+
+    Route::post('/user/demo', 'UserController@demo');
 
     Route::get('/company/', 'CompanyController@show');
     Route::get('/company/create', 'CompanyController@create');

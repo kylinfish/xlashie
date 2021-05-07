@@ -53,6 +53,7 @@
                             </div>
                         </a>
                     </div>
+                    @if (!auth()->user()->is_demo)
                     <div class="col">
                         <a class="card shadow border-0" href="/oplogs/">
                             <div class="card-body text-center">
@@ -61,6 +62,7 @@
                             </div>
                         </a>
                     </div>
+                    @endif
                 </div>
             </div>
 
