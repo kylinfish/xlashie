@@ -31,7 +31,7 @@ class Transactions extends \App\Http\Controllers\Controller
 
         $params["customer_uuid"] = $customer_uuid;
 
-        $this->service->createOrder(user()->company_id, $params);
+        $this->service->createOrder(my_comp()->id, $params);
 
         $this->logging($request);
 

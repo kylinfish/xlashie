@@ -61,7 +61,7 @@ class CustomerController extends \App\Http\Controllers\Controller
                 ->withInput($request->all());
         }
         # XXX: Set default value for Birth/Email fields.
-        $customer = Customer::create([
+        $customer = my_customer()->create([
             'uuid' => Str::random(18),
             'company_id' => user()->company_id,
             'name' => $params["name"] ?? '',

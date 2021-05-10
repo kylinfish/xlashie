@@ -12,7 +12,7 @@ class Reports extends \App\Http\Controllers\Controller
 {
     public function index(Request $request)
     {
-        $from = date('2019-11-01');
+        $from = date('2021-01-01');
         $to = date('Y/m/d H:i:s');
 
         $group_by_date = my_comp()->ticket()

@@ -10,6 +10,10 @@ class OplogController extends Controller
 {
     public function index(Request $request)
     {
+        if (auth()->user()->is_demo) {
+            return redirect('/home');
+        }
+
         $limit = request('limit', 20);
         $oplogs = my_comp()->oplog()->orderBy('id', 'desc')
             ->with('user')

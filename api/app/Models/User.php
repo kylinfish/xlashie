@@ -18,6 +18,7 @@ class User extends Authenticatable
         'company_id',
         'identify_provider',
         'identify_id',
+        'is_demo',
         'password',
         'phone',
         'email',

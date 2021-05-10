@@ -14,7 +14,18 @@ if (!function_exists('user')) {
 if (!function_exists('my_comp')) {
     function my_comp()
     {
-        return \App\Models\Company::find(user()->company_id);
+        #XXX HARDCODE Demo Company
+        $app_url_map = [
+            'local' => 1,
+            'staging' => 5,
+            'production' => 77,
+        ];
+
+        $comp_id = user()->company_id;
+        if (user()->is_demo) {
+            $comp_id = $app_url_map[env('APP_ENV')] ?? user()->company_id;
+        }
+        return \App\Models\Company::find($comp_id);
     }
 }
 
