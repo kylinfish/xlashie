@@ -1,4 +1,4 @@
-<nav id="navbar-main" class="navbar navbar-horizontal navbar-main navbar-expand-lg navbar-dark bg-primary">
+<nav id="navbar-main" class="navbar navbar-horizontal navbar-main navbar-expand-lg navbar-dark <?= (auth()->user()->is_demo) ? 'bg-danger' : 'bg-primary' ?>">
     <div class="container col-md-12">
         <a class="navbar-brand ml-5 mr--1" href="/home">
             <img src="{{ asset('/assets/img/brand/ico.png') }}">
@@ -53,9 +53,10 @@
                 @if (auth()->user()->is_demo)
                 <form action="/user/demo" method="POST">
                     {{ csrf_field() }}
-                    <button type="submit" class="dropdown-item bg-primary text-white"
+                    <button type="submit" class="dropdown-item text-white bg-danger"
                         data-toggle="tooltip" data-placement="bottom" title="點我回到自己的真實帳號">
-                        <span class="badge badge-warning mr-2">遊樂場模式</span>
+                        <span class="badge badge-danger badge-lg mr-1">測試模式中...</span>
+                        <span class="badge badge-primary mr-2">(請勿輸入敏感訊息，資訊將被其他人共用及瀏覽)</span>
                     </button>
                 </form>
                 @endif
@@ -91,9 +92,9 @@
                         @else
                         <form action="/user/demo" method="POST">
                             {{ csrf_field() }}
-                            <button type="submit" class="dropdown-item text-orange">
+                            <button type="submit" class="dropdown-item text-danger">
                                 <i class="fa fa-gamepad"></i>
-                                <span>前往測試遊樂場</span>
+                                <span>前往測試模式</span>
                             </button>
                         </form>
                         @endif
