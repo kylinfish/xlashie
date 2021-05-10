@@ -81,23 +81,21 @@
                         <div class="dropdown-header noti-title  d-none d-lg-block">
                             <h6 class="text-overflow m-0">今天好嗎!</h6>
                         </div>
-                        @if (auth()->user()->is_demo)
+
                         <form action="/user/demo" method="POST">
                             {{ csrf_field() }}
+                            @if (auth()->user()->is_demo)
                             <button type="submit" class="dropdown-item bg-primary text-white">
                                 <i class="ni ni-single-02"></i>
                                 <b>回個人帳號</b>
                             </button>
-                        </form>
-                        @else
-                        <form action="/user/demo" method="POST">
-                            {{ csrf_field() }}
+                            @else
                             <button type="submit" class="dropdown-item text-danger">
                                 <i class="fa fa-gamepad"></i>
                                 <span>前往測試模式</span>
                             </button>
+                            @endif
                         </form>
-                        @endif
                         <!---
                         <a href="#!" class="dropdown-item disabled">
                             <i class="ni ni-settings-gear-65"></i>

@@ -68,6 +68,20 @@
 
             <div class="col-lg-6">
                 @if ($recently_tickets->count() == 0)
+                <div class="card bg-gradient-danger text-white text-center border-0 p-3">
+                    <h2 class="text-yellow"><i class="fa fa-sign-language text-yellow"></i> 測試模式 (Demo)</h2>
+                    <p>前往 測試資料區 看看大家怎麼玩??<br>
+                    放心，您可以從右上角頭像處回來你的世界。</p>
+                    <form action="/user/demo" method="POST">
+                        {{ csrf_field() }}
+                        <button type="submit" class="dropdown-item btn btn-block">
+                            <i class="fa fa-gamepad"></i>
+                            <span>點擊模式切換</span>
+                        </button>
+                    </form>
+
+                </div>
+
                 <div class="card bg-gradient-primary text-white border-0 p-3">
                     <h2 class="text-white text-center py-3"><i class="fa fa-bell text-yellow"></i> 歡迎使用，系統導引如下</h2>
                     @if ($menu_count == 0)
