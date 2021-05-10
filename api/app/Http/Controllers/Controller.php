@@ -45,7 +45,7 @@ class Controller extends BaseController
         list($controller, $action) = explode('@', $route_name);
 
         OpLog::create([
-            'company_id' => user()->company_id,
+            'company_id' => my_comp()->id,
             'user_id' => user()->id,
             'controller' => OpLog::CONTROL_MAP[$controller],
             'action' => OpLog::ACTION_MAP[$action],
