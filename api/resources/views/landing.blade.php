@@ -60,7 +60,7 @@
                                     <div class="mt-5">
                                         <a href="/home" class="btn btn-neutral my-2"><i class="fas fa-sign-in-alt"></i>
                                             建立帳號，免費使用 (Free)</a>
-                                        <a href="/home" class="btn btn-default my-2 px-4">登入</a>
+                                        <a href="/login/google?type=user" class="btn btn-default my-2 px-4">登入</a>
                                     </div>
                             </div>
                         </div>
