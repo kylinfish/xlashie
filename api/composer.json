@@ -22,7 +22,8 @@
         "beyondcode/laravel-query-detector": "^1.5",
         "facade/ignition": "^1.4",
         "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^3.0"
+        "nunomaduro/collision": "^3.0",
+        "squizlabs/php_codesniffer": "*"
     },
     "config": {
         "optimize-autoloader": true,
