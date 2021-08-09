@@ -25,6 +25,8 @@ jobs:
 
       - run: composer install -n --prefer-dist
 
+      - run: make lint-check
+
       - save_cache:
           key: v1-dependencies-{{ checksum "composer.json" }}
           paths:
