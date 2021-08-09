@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-
 use App\Http\Resources\CustomerInventoryResource;
-
 
 class Inventories extends \App\Http\Controllers\Controller
 {

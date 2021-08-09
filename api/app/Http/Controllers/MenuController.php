@@ -15,14 +15,14 @@ class MenuController extends Controller
         return view('menus.index', compact('menus'));
     }
 
-    public function show(Request $request, String $menu_id)
+    public function show(Request $request, string $menu_id)
     {
         $menu = my_comp()->menu()->where('id', $menu_id)->first();
 
         return view('menus.show', ['menu' => $menu]);
     }
 
-    public function update(Request $request, String $menu_id)
+    public function update(Request $request, string $menu_id)
     {
         $params = $request->only(['name', 'price', 'description', 'init_status']);
 
@@ -52,7 +52,7 @@ class MenuController extends Controller
         return redirect()->back()->with(['alert' => 'success', 'message' => "{$menu->name} 新增成功"]);
     }
 
-    public function destroy(Request $request, String $menu_id)
+    public function destroy(Request $request, string $menu_id)
     {
         if (!$menu = my_comp()->menu()->where('id', $menu_id)->first()) {
             return redirect('/menus/')->with(['alert' => 'warning', 'message' => '你指定的商品 id 不存在']);

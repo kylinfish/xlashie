@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OpLog extends Model
 {
-    const CONTROL_MAP = [
+    public const CONTROL_MAP = [
         "IndexController" => 1,
         "CompanyController" => 2,
         "CustomerController" => 3,
@@ -19,7 +19,7 @@ class OpLog extends Model
         "Api\Inventories" => 10,
     ];
 
-    const CONTROL_MAP_FOR_HUMAN = [
+    public const CONTROL_MAP_FOR_HUMAN = [
         1 => "首頁",
         2 => "公司",
         3 => "客戶",
@@ -33,7 +33,7 @@ class OpLog extends Model
     ];
 
 
-    const ACTION_MAP = [
+    public const ACTION_MAP = [
         "index" => 0,
         "show" => 1,
         "create" => 2,
@@ -47,7 +47,7 @@ class OpLog extends Model
         "upload" => 10,
     ];
 
-    const ACTION_MAP_FOR_HUMAN = [
+    public const ACTION_MAP_FOR_HUMAN = [
         0 => "瀏覽",
         1 => "查看",
         2 => "建立",

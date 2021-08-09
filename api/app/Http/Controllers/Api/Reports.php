@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Ticket;
 use App\Models\OrderItem;
 
-
 class Reports extends \App\Http\Controllers\Controller
 {
     public function index(Request $request)
@@ -18,10 +17,10 @@ class Reports extends \App\Http\Controllers\Controller
         $group_by_date = my_comp()->ticket()
             ->whereBetween('created_at', [$from, $to])->groupBy('date')
             ->orderBy('date', 'asc')
-            ->get(array(
+            ->get([
                 DB::raw('Date(created_at) as date'),
                 DB::raw('COUNT(*) as "views"')
-            ));
+            ]);
 
         $t_ids = [];
         $total_expense = 0;

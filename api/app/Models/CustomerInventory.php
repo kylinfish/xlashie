@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class CustomerInventory extends Model
 {
-    const STATUS_DEFAULT = -1; // 未使用
-    const STATUS_UNUSED = 0; // 未使用
-    const STATUS_DONE = 1; // 已發放
-    const STATUS_USED = 2;  // 已使用
-    const STATUS_OWED = 3; // 積欠
-    const STATUS_CANCELED = 4; // 註銷
+    public const STATUS_DEFAULT = -1; // 未使用
+    public const STATUS_UNUSED = 0; // 未使用
+    public const STATUS_DONE = 1; // 已發放
+    public const STATUS_USED = 2;  // 已使用
+    public const STATUS_OWED = 3; // 積欠
+    public const STATUS_CANCELED = 4; // 註銷
 
     protected $table = "customer_inventories";
 

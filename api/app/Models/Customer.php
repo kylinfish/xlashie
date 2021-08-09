@@ -8,7 +8,23 @@ class Customer extends Model
 {
     protected $table = "customers";
 
-    protected $fillable = ['company_id', 'uuid', "name", "phone", "cellphone", "gender", "address", "birth", "note_1", "note_2", "email", "avatar", "identify_id", "identify_provider", "charged_by"];
+    protected $fillable = [
+        'company_id',
+        'uuid',
+        "name",
+        "phone",
+        "cellphone",
+        "gender",
+        "address",
+        "birth",
+        "note_1",
+        "note_2",
+        "email",
+        "avatar",
+        "identify_id",
+        "identify_provider",
+        "charged_by"
+    ];
 
     protected $hidden = ['id', 'password'];
 
@@ -33,6 +49,7 @@ class Customer extends Model
         return $this->hasMany(InvNote::class, 'customer_id', 'id');
     }
 
+    // phpcs:disable PSR1.Methods.CamelCapsMethodName
     public function charged_by_user()
     {
         return $this->belongsTo(User::class, 'charged_by', 'id');

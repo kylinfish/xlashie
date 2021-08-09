@@ -32,6 +32,7 @@ class Ticket extends Model
         return $query->orderBy('created_at', 'desc')->get();
     }
 
+    // phpcs:disable PSR1.Methods.CamelCapsMethodName
     public function order_items()
     {
         return $this->hasMany(OrderItem::class, 'order_id', 'id');
@@ -42,6 +43,7 @@ class Ticket extends Model
         return $this->belongsTo(Customer::class, 'customer_id');
     }
 
+    // phpcs:disable PSR1.Methods.CamelCapsMethodName
     public function customer_inventory()
     {
         return $this->hasMany(CustomerInventory::class, 'order_id', 'id');

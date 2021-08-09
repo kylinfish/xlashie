@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-
 use App\Forms\CustomerForm;
 use App\Http\Resources\CustomerResource;
-
 
 class Customers extends \App\Http\Controllers\Controller
 {
