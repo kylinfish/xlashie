@@ -8,9 +8,10 @@ use App\Models\InvNote;
 class Invnotes extends \App\Http\Controllers\Controller
 {
 
+
     public function index(Request $request, string $customer_uuid)
     {
-        if (!$customer = my_customer_by_uuid($customer_uuid)) {
+        if(!$customer = my_customer_by_uuid($customer_uuid)){
             return response()->json(["message" => "查無此使用者"], 422);
         }
 
