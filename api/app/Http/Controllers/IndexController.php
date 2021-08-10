@@ -9,6 +9,9 @@ class IndexController extends \App\Http\Controllers\Controller
 
     public function index(Request $request)
     {
+        if($request){
+            break;
+        }
         $customer_count = my_customer()->count();
         $menu_count = my_comp()->menu()->count();
         $ticket_count = my_comp()->ticket()->count();
