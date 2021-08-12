@@ -1,0 +1,31 @@
+name: PHP Lint
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+defaults:
+  run:
+    shell: bash
+    working-directory: api
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+        extensions: :opcache
+        ini-values: post_max_size=256M, max_execution_time=180
+        tools: phpcs, phpunit
+
+    - name: Lint Check
+      run: phpcs --standard=phpcs.xml -n
