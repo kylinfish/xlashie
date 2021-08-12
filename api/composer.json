@@ -55,6 +55,10 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
+        "lint": "phpcs --standard=phpcs.xml",
+        "lint-check": "phpcs --standard=phpcs.xml -n",
+        "lint-summary": "phpcs --standard=phpcs.xml --report=summary",
+        "lint-fix": "phpcbf --standard=phpcs.xml",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
