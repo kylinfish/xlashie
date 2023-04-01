@@ -12,7 +12,6 @@ jobs:
       - checkout:
           path: ~/xlashie
 
-      - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
       - run: sudo docker-php-ext-install zip
 
       # Download and cache dependencies
@@ -44,7 +43,7 @@ jobs:
   deploy-stg:
     working_directory: ~/xlashie/api/
     docker:
-      - image: circleci/php:7.4-node-browsers
+      - image: cimg/php:7.4.26
     environment:
       HOST_PORT: 7002
       FQDN: staging.xlashie.net
@@ -53,12 +52,12 @@ jobs:
     steps: &deploy_steps
       - checkout:
           path: ~/xlashie
+      - run: php --version
       - run:
           name: Build laravel env file
           command: |
             cd .. &&  ./build_env.sh
-      - run: sudo apt update && sudo apt install rsync
-      - run: sudo docker-php-ext-install zip
+      - run: sudo docker-php-ext-install zip iconv
       - run: composer install -n --prefer-dist
       - run: npm install && npm run prod
       - run:
@@ -74,7 +73,7 @@ jobs:
   deploy-prod:
     working_directory: ~/xlashie/api/
     docker:
-      - image: circleci/php:7.4-node-browsers
+      - image: circleci/php:7.4.9-zts-buster
     environment:
       HOST_PORT: 7001
       FQDN: xlashie.net
