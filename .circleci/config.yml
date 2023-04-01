@@ -12,9 +12,6 @@ jobs:
       - checkout:
           path: ~/xlashie
 
-      - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
-      - run: sudo docker-php-ext-install zip
-
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -53,12 +50,11 @@ jobs:
     steps: &deploy_steps
       - checkout:
           path: ~/xlashie
+      - run: sudo apt install rsync
       - run:
           name: Build laravel env file
           command: |
             cd .. &&  ./build_env.sh
-      - run: sudo apt update && sudo apt install rsync
-      - run: sudo docker-php-ext-install zip
       - run: composer install -n --prefer-dist
       - run: npm install && npm run prod
       - run:
