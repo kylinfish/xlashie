@@ -325,7 +325,7 @@
                     </div>
 
                     <div class="copyright text-center text-xl-left text-muted">
-                        <a href="mailto:support@xlashie.com">
+                        <a href="mailto:support@xlashie.net">
                             <i class="fa fa-envelope"></i> 歡迎來信合作
                         </a>
                     </div>

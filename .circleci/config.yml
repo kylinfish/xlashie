@@ -47,7 +47,7 @@ jobs:
       - image: circleci/php:7.4-node-browsers
     environment:
       HOST_PORT: 7002
-      FQDN: staging.xlashie.com
+      FQDN: staging.xlashie.net
       APP_ENV: staging
       DB_DATABASE: xlashie-staging
     steps: &deploy_steps
@@ -77,7 +77,7 @@ jobs:
       - image: circleci/php:7.4-node-browsers
     environment:
       HOST_PORT: 7001
-      FQDN: xlashie.com
+      FQDN: xlashie.net
       APP_ENV: production
       DB_DATABASE: xlashie
     steps: *deploy_steps
